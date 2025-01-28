@@ -1,0 +1,1738 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="计算机网络第4章（网络层）, 小小舒的爪哇天地">
+    <meta name="description" content="4.1、网络层概述简介
+网络层的主要任务是实现网络互连，进而实现数据包在各网络之间的传输
+
+
+
+这些异构型网络N1~N7如果只是需要各自内部通信，他们只要实现各自的物理层和数据链路层即可
+但是如果要将这些异构型网络互连起来，形成一个更大的互">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>计算机网络第4章（网络层） | 小小舒的爪哇天地</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    
+
+
+    <!-- bg-cover style     -->
+
+
+
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" type="text/css" href="/css/matery.css">
+<link rel="stylesheet" type="text/css" href="/css/my.css">
+<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+
+
+
+
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/css/post.css">
+
+
+
+
+    
+        <link rel="stylesheet" type="text/css" href="/css/reward.css">
+    
+
+
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">小小舒的爪哇天地</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>Index</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>Tags</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>Categories</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>Archives</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>About</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>Contact</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>Friends</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="Search" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <li>
+    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
+      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">小小舒的爪哇天地</div>
+        <div class="logo-desc">
+            
+            Life is coding, I will debug it.
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			Index
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			Tags
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			Categories
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			Archives
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			About
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			Contact
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			Friends
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/9.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">计算机网络第4章（网络层）</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
+                                <span class="chip bg-color">计算机网络</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-category">
+                                学习笔记
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
+                    2024-06-15
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="4-1、网络层概述"><a href="#4-1、网络层概述" class="headerlink" title="4.1、网络层概述"></a>4.1、网络层概述</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><ul>
+<li>网络层的主要任务是<strong>实现网络互连</strong>，进而<strong>实现数据包在各网络之间的传输</strong></li>
+</ul>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618331.png" alt="image-20201017134630948"></p>
+<blockquote>
+<p>这些异构型网络N1~N7如果只是需要各自内部通信，他们只要实现各自的物理层和数据链路层即可</p>
+<p>但是如果要将这些异构型网络互连起来，形成一个更大的互联网，就需要实现网络层设备路由器</p>
+<p>有时为了简单起见，可以不用画出这些网络，图中N1~N7，而将他们看做是一条链路即可</p>
+</blockquote>
+<ul>
+<li><p>要实现网络层任务，需要解决一下主要问题：</p>
+<ul>
+<li>网络层向运输层提供怎样的服务（“可靠传输”还是“不可靠传输”）</li>
+</ul>
+<p>在数据链路层那课讲过的可靠传输，详情可以看那边的笔记：网络层对以下的<strong>分组丢失</strong>、<strong>分组失序</strong>、<strong>分组重复</strong>的传输错误采取措施，使得接收方能正确接受发送方发送的数据，就是<strong>可靠传输</strong>，反之，如果什么措施也不采取，则是<strong>不可靠传输</strong></p>
+<ul>
+<li>网络层寻址问题</li>
+</ul>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618332.png" alt="image-20201017135644630"></p>
+<ul>
+<li>路由选择问题</li>
+</ul>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618333.png" alt="image-20201017135710478"></p>
+<blockquote>
+<p>路由器收到数据后，是依据什么来决定将数据包从自己的哪个接口转发出去？</p>
+<p><strong>依据数据包的目的地址和路由器中的路由表</strong></p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618334.png" alt="image-20201017135914985"></p>
+<p>但在实际当中，路由器是怎样知道这些路由记录？</p>
+<ul>
+<li>由用户或网络管理员进行人工配置，这种方法只适用于规模较小且网络拓扑不改变的小型互联网</li>
+<li><strong>另一种是实现各种路由选择协议，由路由器执行路由选择协议中所规定的路由选择算法，而自动得出路由表中的路有记录，这种方法更适合规模较大且网络拓扑经常改变的大型互联网</strong></li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618335.png" alt="image-20201017142545630"></p>
+<blockquote>
+<p>补充 <strong>网络层（网际层）</strong>除了 <strong>IP协议</strong>外，还有之前介绍过的<strong>地址解析协议ARP</strong>，还有<strong>网际控制报文协议ICMP</strong>，<strong>网际组管理协议IGMP</strong></p>
+</blockquote>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><img src="http://img-md-js.linjsblog.top/img/202406151618336.png" alt="image-20201017140623851"></p>
+<hr>
+<h1 id="4-2、网络层提供的两种服务"><a href="#4-2、网络层提供的两种服务" class="headerlink" title="4.2、网络层提供的两种服务"></a>4.2、网络层提供的两种服务</h1><ul>
+<li>在计算机网络领域，网络层应该向运输层提供怎样的服务（“<strong>面向连接</strong>”还是“<strong>无连接</strong>”）曾引起了长期的争论。</li>
+<li>争论焦点的实质就是：<strong>在计算机通信中，可靠交付应当由谁来负责</strong>？是<strong>网络</strong>还是<strong>端系统</strong>？</li>
+</ul>
+<h2 id="面向连接的虚电路服务"><a href="#面向连接的虚电路服务" class="headerlink" title="面向连接的虚电路服务"></a>面向连接的虚电路服务</h2><p><strong>一种观点：让网络负责可靠交付</strong></p>
+<ul>
+<li>这种观点认为，应借助于电信网的成功经验，让网络负责可靠交付，计算机网络应模仿电信网络，使用<strong>面向连接</strong>的通信方式。</li>
+<li>通信之前先建立<strong>虚电路</strong> (Virtual Circuit)，以保证双方通信所需的一切网络资源。</li>
+<li>如果再使用可靠传输的网络协议，就可使所发送的分组无差错按序到达终点，不丢失、不重复。</li>
+</ul>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618337.png" alt="image-20201017141425892"></p>
+<p><strong>发送方</strong> 发送给 <strong>接收方</strong> 的所有分组都沿着同一条虚电路传送</p>
+<blockquote>
+<ul>
+<li>虚电路表示这只是一条逻辑上的连接，分组都沿着这条逻辑连接按照存储转发方式传送，而并不是真正建立了一条物理连接。</li>
+<li>请注意，电路交换的电话通信是先建立了一条真正的连接。</li>
+<li>因此分组交换的虚连接和电路交换的连接只是类似，但并不完全一样</li>
+</ul>
+</blockquote>
+<h2 id="无连接的数据报服务"><a href="#无连接的数据报服务" class="headerlink" title="无连接的数据报服务"></a>无连接的数据报服务</h2><p><strong>另一种观点：网络提供数据报服务</strong></p>
+<ul>
+<li>互联网的先驱者提出了一种崭新的网络设计思路。</li>
+<li>网络层向上只提供简单灵活的、<strong>无连接的</strong>、<strong>尽最大努力交付</strong>的<strong>数据报服务</strong>。</li>
+<li>网络在发送分组时不需要先建立连接。每一个分组（即 IP 数据报）独立发送，与其前后的分组无关（不进行编号）。</li>
+<li><strong>网络层不提供服务质量的承诺</strong>。即所传送的分组可能出错、丢失、重复和失序（不按序到达终点），当然也不保证分组传送的时限。</li>
+</ul>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618338.png" alt="image-20201017141851030"></p>
+<p><strong>发送方</strong> 发送给 <strong>接收方</strong> 的分组可能沿着不同路径传送</p>
+<blockquote>
+<p><strong>尽最大努力交付</strong></p>
+<ul>
+<li>如果主机（即端系统）中的进程之间的通信需要是可靠的，那么就由网络的<strong>主机中的运输层负责可靠交付（包括差错处理、流量控制等）</strong> 。</li>
+<li><strong>采用这种设计思路的好处是</strong>：网络的造价大大降低，运行方式灵活，能够适应多种应用。</li>
+<li>互连网能够发展到今日的规模，充分证明了当初采用这种设计思路的正确性。</li>
+</ul>
+</blockquote>
+<h2 id="虚电路服务与数据报服务的对比"><a href="#虚电路服务与数据报服务的对比" class="headerlink" title="虚电路服务与数据报服务的对比"></a>虚电路服务与数据报服务的对比</h2><p><strong>对比的方面</strong></p>
+<p><strong>虚电路服务</strong></p>
+<p><strong>数据报服务</strong></p>
+<p><strong>思路</strong></p>
+<p><strong>可靠通信应当由网络来保证</strong></p>
+<p><strong>可靠通信应当由用户主机来保证</strong></p>
+<p><strong>连接的建立</strong></p>
+<p><strong>必须有</strong></p>
+<p><strong>不需要</strong></p>
+<p><strong>终点地址</strong></p>
+<p><strong>仅在连接建立阶段使用，每个分组使用短的虚电路号</strong></p>
+<p><strong>每个分组都有终点的完整地址</strong></p>
+<p><strong>分组的转发</strong></p>
+<p><strong>属于同一条虚电路的分组均按照同一路由进行转发</strong></p>
+<p><strong>每个分组独立选择路由进行转发</strong></p>
+<p><strong>当结点出故障时</strong></p>
+<p><strong>所有通过出故障的结点的虚电路均不能工作</strong></p>
+<p><strong>出故障的结点可能会丢失分组，一些路由可能会发生变化</strong></p>
+<p><strong>分组的顺序</strong></p>
+<p><strong>总是按发送顺序到达终点</strong></p>
+<p><strong>到达终点时不一定按发送顺序</strong></p>
+<p><strong>端到端的差错处理和流量控制</strong></p>
+<p><strong>可以由网络负责，也可以由用户主机负责</strong></p>
+<p><strong>由用户主机负责</strong></p>
+<hr>
+<h1 id="4-3、IPv4"><a href="#4-3、IPv4" class="headerlink" title="4.3、IPv4"></a>4.3、IPv4</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p><img src="http://img-md-js.linjsblog.top/img/202406151618339.png" alt="image-20201017143206060"></p>
+<h2 id="分类编制的IPv4地址"><a href="#分类编制的IPv4地址" class="headerlink" title="分类编制的IPv4地址"></a>分类编制的IPv4地址</h2><h3 id="简介-1"><a href="#简介-1" class="headerlink" title="简介"></a>简介</h3><p><img src="http://img-md-js.linjsblog.top/img/202406151618340.png" alt="image-20201017144317166"></p>
+<ul>
+<li>每一类地址都由两个固定长度的字段组成，其中一个字段是<strong>网络号 net-id</strong>，它标志主机（或路由器）所连接到的网络，而另一个字段则是<strong>主机号 host-id</strong>，它标志该主机（或路由器）。</li>
+<li>主机号在它前面的网络号所指明的网络范围内必须是唯一的。</li>
+<li>由此可见，<strong>一个 IP 地址在整个互联网范围内是唯一的</strong>。</li>
+</ul>
+<p><strong>A类地址</strong></p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618341.png" alt="image-20201017145210533"></p>
+<p><strong>B类地址</strong></p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618342.png" alt="image-20201017145508001"></p>
+<p><strong>C类地址</strong></p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618343.png" alt="image-20201017150204774"></p>
+<p><strong>练习</strong></p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618344.png" alt="image-20201017150543386"></p>
+<h3 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h3><p><strong>IP 地址的指派范围</strong></p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618345.png" alt="image-20201017152911541"></p>
+<p><strong>一般不使用的特殊的 IP 地址</strong></p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618346.png" alt="image-20201017152959586"></p>
+<p><strong>IP 地址的一些重要特点</strong></p>
+<p>(1) <strong>IP 地址是一种分等级的地址结构</strong>。分两个等级的好处是：</p>
+<ul>
+<li><strong>第一</strong>，IP 地址管理机构在分配 IP 地址时只分配网络号，而剩下的主机号则由得到该网络号的单位自行分配。这样就方便了 IP 地址的管理。</li>
+<li><strong>第二</strong>，路由器仅根据目的主机所连接的网络号来转发分组（而不考虑目的主机号），这样就可以使路由表中的项目数大幅度减少，从而减小了路由表所占的存储空间。</li>
+</ul>
+<p>(2) <strong>实际上 IP 地址是标志一个主机（或路由器）和一条链路的接口</strong>。</p>
+<ul>
+<li>当一个主机同时连接到两个网络上时，该主机就必须同时具有两个相应的 IP 地址，其网络号 net-id 必须是不同的。这种主机称为<strong>多归属主机</strong> (multihomed host)。</li>
+<li>由于一个路由器至少应当连接到两个网络（这样它才能将 IP 数据报从一个网络转发到另一个网络），因此<strong>一个路由器至少应当有两个不同的 IP 地址</strong>。</li>
+</ul>
+<p>(3) <strong>用转发器或网桥连接起来的若干个局域网仍为一个网络</strong>，因此这些局域网都具有同样的网络号 net-id。</p>
+<p>(4) <strong>所有分配到网络号 net-id 的网络，无论是范围很小的局域网，还是可能覆盖很大地理范围的广域网，都是平等的。</strong></p>
+<h2 id="划分子网的IPv4地址"><a href="#划分子网的IPv4地址" class="headerlink" title="划分子网的IPv4地址"></a>划分子网的IPv4地址</h2><h3 id="为什么要划分子网"><a href="#为什么要划分子网" class="headerlink" title="为什么要划分子网"></a>为什么要划分子网</h3><p>在 ARPANET 的早期，IP 地址的设计确实不够合理：</p>
+<ul>
+<li>IP 地址空间的利用率有时很低。</li>
+<li>给每一个物理网络分配一个网络号会使路由表变得太大因而使网络性能变坏。</li>
+<li>两级的 IP 地址不够灵活。</li>
+</ul>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618347.png" alt="image-20201017154645198"></p>
+<p>如果想要将原来的网络划分成三个独立的网路</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618348.png" alt="image-20201017154852896"></p>
+<p>所以是否可以从主机号部分借用一部分作为子网号</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618349.png" alt="image-20201017155026814"></p>
+<blockquote>
+<p>但是如果未在图中标记子网号部分，那么我们和计算机又如何知道分类地址中主机号有多少比特被用作子网号了呢？</p>
+<p>所以就有了划分子网的工具：<strong>子网掩码</strong></p>
+<ul>
+<li>从 1985 年起在 IP 地址中又增加了一个“<strong>子网号字段</strong>”，使两级的 IP 地址变成为<strong>三级的 IP 地址</strong>。</li>
+<li>这种做法叫做<strong>划分子网</strong> (subnetting) 。</li>
+<li>划分子网已成为互联网的正式标准协议。</li>
+</ul>
+</blockquote>
+<h3 id="如何划分子网"><a href="#如何划分子网" class="headerlink" title="如何划分子网"></a>如何划分子网</h3><p>基本思路</p>
+<ul>
+<li>划分子网纯属一个<strong>单位内部的事情</strong>。单位对外仍然表现为没有划分子网的网络。</li>
+<li>从主机号<strong>借用</strong>若干个位作为<strong>子网号</strong> subnet-id，而主机号 host-id 也就相应减少了若干个位。</li>
+</ul>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618350.png" alt="image-20201017155930011"></p>
+<ul>
+<li>凡是从其他网络发送给本单位某个主机的 IP 数据报，仍然是根据 IP 数据报的<strong>目的网络号</strong> net-id，先找到连接在本单位网络上的路由器。</li>
+<li>然后<strong>此路由器</strong>在收到 IP 数据报后，再按<strong>目的网络号</strong> net-id 和<strong>子网号</strong> subnet-id 找到目的子网。</li>
+<li>最后就将 IP 数据报直接交付目的主机。</li>
+</ul>
+<p>划分为三个子网后对外仍是一个网络</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618351.png" alt="image-20201017160116239"></p>
+<blockquote>
+<ul>
+<li><strong>优点</strong><ol>
+<li>减少了 IP 地址的浪费</li>
+<li>使网络的组织更加灵活</li>
+<li>更便于维护和管理</li>
+</ol>
+</li>
+<li><strong>划分子网纯属一个单位内部的事情，对外部网络透明</strong>，对外仍然表现为没有划分子网的一个网络。</li>
+</ul>
+</blockquote>
+<h3 id="子网掩码"><a href="#子网掩码" class="headerlink" title="子网掩码"></a>子网掩码</h3><p><img src="http://img-md-js.linjsblog.top/img/202406151618352.png" alt="image-20201017160252066"></p>
+<blockquote>
+<p><strong>(IP 地址) AND (子网掩码) &#x3D; 网络地址</strong> 重要，下面很多相关知识都会用到</p>
+</blockquote>
+<p>举例</p>
+<p>例子1</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618353.png" alt="image-20201017161651058"></p>
+<p>例子2</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618354.png" alt="image-20201017161719339"></p>
+<p><strong>默认子网掩码</strong></p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618355.png" alt="image-20201017162807076"></p>
+<h3 id="总结-2"><a href="#总结-2" class="headerlink" title="总结"></a>总结</h3><p><img src="http://img-md-js.linjsblog.top/img/202406151618356.png" alt="image-20201017162938612"></p>
+<blockquote>
+<ul>
+<li>子网掩码是一个网络或一个子网的重要属性。</li>
+<li>路由器在和相邻路由器交换路由信息时，必须把自己所在网络（或子网）的子网掩码告诉相邻路由器。</li>
+<li>路由器的路由表中的每一个项目，除了要给出目的网络地址外，还必须同时给出该网络的子网掩码。</li>
+<li>若一个路由器连接在两个子网上，就拥有两个网络地址和两个子网掩码。</li>
+</ul>
+</blockquote>
+<h2 id="无分类编址的IPv4地址"><a href="#无分类编址的IPv4地址" class="headerlink" title="无分类编址的IPv4地址"></a>无分类编址的IPv4地址</h2><h3 id="为什么使用无分类编址"><a href="#为什么使用无分类编址" class="headerlink" title="为什么使用无分类编址"></a>为什么使用无分类编址</h3><p><strong>无分类域间路由选择 CIDR</strong> (Classless Inter-Domain Routing)。</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618357.png" alt="image-20201017164031532"></p>
+<blockquote>
+<p><strong>CIDR 最主要的特点</strong></p>
+<ul>
+<li>CIDR使用各种长度的“<strong>网络前缀</strong>”(network-prefix)来代替分类地址中的网络号和子网号。</li>
+<li><strong>IP 地址从三级编址（使用子网掩码）又回到了两级编址</strong>。</li>
+</ul>
+</blockquote>
+<h3 id="如何使用无分类编址"><a href="#如何使用无分类编址" class="headerlink" title="如何使用无分类编址"></a>如何使用无分类编址</h3><p><img src="http://img-md-js.linjsblog.top/img/202406151618358.png" alt="image-20201017165037268"></p>
+<p>举例</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618359.png" alt="image-20201017165113442"></p>
+<h3 id="路由聚合（构造超网）"><a href="#路由聚合（构造超网）" class="headerlink" title="路由聚合（构造超网）"></a>路由聚合（构造超网）</h3><p><img src="http://img-md-js.linjsblog.top/img/202406151618360.png" alt="image-20201017165615915"></p>
+<h3 id="总结-3"><a href="#总结-3" class="headerlink" title="总结"></a>总结</h3><p><img src="http://img-md-js.linjsblog.top/img/202406151618361.png" alt="image-20201017170552495"></p>
+<h2 id="IPv4地址的应用规划"><a href="#IPv4地址的应用规划" class="headerlink" title="IPv4地址的应用规划"></a>IPv4地址的应用规划</h2><p>给定一个IPv4地址快，如何将其划分成几个更小的地址块，并将这些地址块分配给互联网中不同网络，进而可以给各网络中的主机和路由器接口分配IPv4地址</p>
+<h3 id="定长的子网掩码FLSM（Fixed-Length-Subnet-Mask）"><a href="#定长的子网掩码FLSM（Fixed-Length-Subnet-Mask）" class="headerlink" title="定长的子网掩码FLSM（Fixed Length Subnet Mask）"></a>定长的子网掩码FLSM（Fixed Length Subnet Mask）</h3><p><img src="http://img-md-js.linjsblog.top/img/202406151618362.png" alt="image-20201018143550103"></p>
+<p><strong>划分子网的IPv4就是定长的子网掩码</strong></p>
+<p>举例</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618363.png" alt="image-20201018140809079"></p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618364.png" alt="image-20201018140916631"></p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618365.png" alt="image-20201018141132446"></p>
+<blockquote>
+<p>通过上面步骤分析，就可以从子网1<del>8中任选5个分配给左图中的N1</del>N5</p>
+<p><strong>采用定长的子网掩码划分，只能划分出2^n个子网，其中n是从主机号部分借用的用来作为子网号的比特数量，每个子网所分配的IP地址数量相同</strong></p>
+<p><strong>但是也因为每个子网所分配的IP地址数量相同，不够灵活，容易造成IP地址的浪费</strong></p>
+</blockquote>
+<h3 id="变长的子网掩码VLSM（Variable-Length-Subnet-Mask）"><a href="#变长的子网掩码VLSM（Variable-Length-Subnet-Mask）" class="headerlink" title="变长的子网掩码VLSM（Variable Length Subnet Mask）"></a>变长的子网掩码VLSM（Variable Length Subnet Mask）</h3><p><img src="http://img-md-js.linjsblog.top/img/202406151618366.png" alt="image-20201018143632352"></p>
+<p><strong>无分类编址的IPv4就是变长的子网掩码</strong></p>
+<p>举例</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618367.png" alt="image-20201018142333145"></p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618368.png" alt="image-20201018143344440"></p>
+<hr>
+<h1 id="4-4、IP数据报的发送和转发过程"><a href="#4-4、IP数据报的发送和转发过程" class="headerlink" title="4.4、IP数据报的发送和转发过程"></a>4.4、IP数据报的发送和转发过程</h1><p><img src="http://img-md-js.linjsblog.top/img/202406151618369.png" alt="image-20201018144335297"></p>
+<p>举例</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618370.png" alt="image-20201018151314019"></p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618372.png" alt="image-20201018150151171"></p>
+<p>源主机如何知道目的主机是否与自己在同一个网络中，是直接交付，还是间接交付？</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618373.png" alt="image-20201018150223497"></p>
+<blockquote>
+<p>可以通过<strong>目的地址IP</strong>和<strong>源地址的子网掩码</strong>进行<strong>逻辑与运算</strong>得到<strong>目的网络地址</strong></p>
+<ul>
+<li>如果<strong>目的网络地址</strong>和<strong>源网络地址</strong> <strong>相同</strong>，就是<strong>在同一个网络</strong>中，属于<strong>直接交付</strong></li>
+<li>如果<strong>目的网络地址</strong>和<strong>源网络地址</strong> <strong>不相同</strong>，就<strong>不在同一个网络</strong>中，属于<strong>间接交付</strong>，传输给主机所在网络的<strong>默认网关</strong>（路由器——下图会讲解）,由默认网关帮忙转发</li>
+</ul>
+</blockquote>
+<p>主机C如何知道路由器R的存在？</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618374.png" alt="image-20201018145501063"></p>
+<blockquote>
+<p>用户为了让本网络中的主机能和其他网络中的主机进行通信，就必须给其指定本网络的一个路由器的接口，由该路由器帮忙进行转发，<strong>所指定的路由器</strong>，也被称为<strong>默认网关</strong></p>
+<p>例如。路由器的接口0的IP地址192.168.0.128做为左边网络的默认网关</p>
+</blockquote>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618375.png" alt="image-20201018150029179"></p>
+<blockquote>
+<p>主机A会将该IP数据报传输给自己的默认网关，也就是图中所示的路由器接口0</p>
+</blockquote>
+<p>路由器收到IP数据报后如何转发？</p>
+<ul>
+<li>检查IP数据报首部是否出错：<ul>
+<li>若出错，则直接丢弃该IP数据报并通告源主机</li>
+<li>若没有出错，则进行转发</li>
+</ul>
+</li>
+<li>根据IP数据报的目的地址在路由表中查找匹配的条目：<ul>
+<li>若找到匹配的条目，则转发给条目中指示的吓一跳</li>
+<li>若找不到，则丢弃该数据报并通告源主机</li>
+</ul>
+</li>
+</ul>
+<p>假设IP数据报首部没有出错，路由器取出IP数据报首部各地址字段的值</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618376.png" alt="image-20201018151108989"></p>
+<p>接下来路由器对该IP数据报进行查表转发</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618377.png" alt="image-20201018151528027"></p>
+<blockquote>
+<p>逐条检查路由条目，将目的地址与路由条目中的地址掩码进行逻辑与运算得到目的网络地址，然后与路由条目中的目的网络进行比较，如果相同，则这条路由条目就是匹配的路由条目，按照它的下一条指示，图中所示的也就是接口1转发该IP数据报</p>
+</blockquote>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618378.png" alt="image-20201018151956275"></p>
+<p>路由器是隔离广播域的</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618379.png" alt="image-20201018152040610"></p>
+<hr>
+<h1 id="4-5、静态路由配置及其可能产生的路由环路问题"><a href="#4-5、静态路由配置及其可能产生的路由环路问题" class="headerlink" title="4.5、静态路由配置及其可能产生的路由环路问题"></a>4.5、静态路由配置及其可能产生的路由环路问题</h1><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p><img src="http://img-md-js.linjsblog.top/img/202406151618380.png" alt="image-20201018155702081"></p>
+<h2 id="多种情况举例"><a href="#多种情况举例" class="headerlink" title="多种情况举例"></a>多种情况举例</h2><p><strong>静态路由配置</strong></p>
+<p>举例</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618381.png" alt="image-20201018160349375"></p>
+<p><strong>默认路由</strong></p>
+<p>举例</p>
+<p>默认路由可以被所有网络匹配，但路由匹配有优先级，默认路由是优先级最低的</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618382.png" alt="image-20201018160906284"></p>
+<p><strong>特定主机路由</strong></p>
+<p>举例</p>
+<p>有时候，我们可以给路由器添加针对某个主机的特定主机路由条目</p>
+<p>一般用于网络管理人员对网络的管理和测试</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618383.png" alt="image-20201018161440257"></p>
+<blockquote>
+<p>多条路由可选，匹配路由最具体的</p>
+</blockquote>
+<p><strong>静态路由配置错误导致路由环路</strong></p>
+<p>举例</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618384.png" alt="image-20201018161542579"></p>
+<p>假设将R2的路由表中第三条目录配置错了下一跳</p>
+<p>这导致R2和R3之间产生了路由环路</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618385.png" alt="image-20201018162041966"></p>
+<p><strong>聚合了不存在的网络而导致路由环路</strong></p>
+<p>举例</p>
+<p>正常情况</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618386.png" alt="image-20201018162333671"></p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618387.png" alt="image-20201018162759562"></p>
+<p>错误情况</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618388.png" alt="image-20201018163323343"></p>
+<p>解决方法</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618389.png" alt="image-20201018163933715"></p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618390.png" alt="image-20201018164453398"></p>
+<blockquote>
+<p>黑洞路由的下一跳为null0，这是路由器内部的虚拟接口，IP数据报进入它后就被丢弃</p>
+</blockquote>
+<p><strong>网络故障而导致路由环路</strong></p>
+<p>举例</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618391.png" alt="image-20201018164811811"></p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618392.png" alt="image-20201018164913684"></p>
+<p>解决方法</p>
+<p>添加故障的网络为黑洞路由</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618393.png" alt="image-20201018165122023"></p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618394.png" alt="image-20201018165153517"></p>
+<p>假设。一段时间后故障网络恢复了</p>
+<p>R1又自动地得出了其接口0的直连网络的路由条目</p>
+<p>针对该网络的黑洞网络会自动失效</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618395.png" alt="image-20201018165328319"></p>
+<p>如果又故障</p>
+<p>则生效该网络的黑洞网络</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618396.png" alt="image-20201018165521938"></p>
+<h2 id="总结-4"><a href="#总结-4" class="headerlink" title="总结"></a>总结</h2><p><img src="http://img-md-js.linjsblog.top/img/202406151618397.png" alt="image-20201018165709294"></p>
+<hr>
+<h1 id="4-6、路由选择协议"><a href="#4-6、路由选择协议" class="headerlink" title="4.6、路由选择协议"></a>4.6、路由选择协议</h1><h2 id="概述-1"><a href="#概述-1" class="headerlink" title="概述"></a>概述</h2><p><img src="http://img-md-js.linjsblog.top/img/202406151618398.png" alt="image-20201019134827343"></p>
+<p><strong>因特网所采用的路由选择协议的主要特点</strong></p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618399.png" alt="image-20201019134946971"></p>
+<p><strong>因特网采用分层次的路由选择协议</strong></p>
+<ul>
+<li><strong>自治系统 AS</strong>：在单一的技术管理下的一组路由器，而这些路由器使用一种 AS 内部的路由选择协议和共同的度量以确定分组在该 AS 内的路由，同时还使用一种 AS 之间的路由选择协议用以确定分组在 AS之间的路由。</li>
+</ul>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618400.png" alt="image-20201019135122326"></p>
+<blockquote>
+<p>自治系统之间的路由选择简称为域间路由选择，自治系统内部的路由选择简称为域内路由选择</p>
+</blockquote>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618401.png" alt="image-20201019135328925"></p>
+<blockquote>
+<p>域间路由选择使用外部网关协议EGP这个类别的路由选择协议</p>
+<p>域内路由选择使用内部网关协议IGP这个类别的路由选择协议</p>
+<p><strong>网关协议</strong>的名称可称为<strong>路由协议</strong></p>
+</blockquote>
+<p><strong>常见的路由选择协议</strong></p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618402.png" alt="image-20201019140009740"></p>
+<p><strong>路由器的基本结构</strong></p>
+<p>路由器是一种具有多个输入端口，和输出端口的专用计算机，其任务是转发分组</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618403.png" alt="image-20201019140234652"></p>
+<p>路由器结构可划分为两大部分：</p>
+<p>1、<strong>分组转发部分</strong></p>
+<p>由三部分构成</p>
+<ul>
+<li><p>交换结构</p>
+</li>
+<li><p>一组输入端口：</p>
+<p>信号从某个输入端口进入路由器</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618404.png" alt="image-20201019141149194"></p>
+<p>物理层将信号转换成比特流，送交数据链路层处理</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618405.png" alt="image-20201019141210774"></p>
+<p>数据链路层识别从比特流中识别出帧，去掉帧头和帧尾后，送交网络层处理</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618406.png" alt="image-20201019141242246"></p>
+<p>如果送交网络层的分组是普通待转发的数据分组</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618407.png" alt="image-20201019141305650"></p>
+<p>则根据分组首部中的目的地址进行查表转发</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618408.png" alt="image-20201019141327380"></p>
+<p>若找不到匹配的转发条目，则丢弃该分组，否则，按照匹配条目中所指示的端口进行转发</p>
+</li>
+<li><p>一组输出端口</p>
+<p>网络层更新数据分组首部中某些字段的值，例如将数据分组的生存时间减1，然后送交数据链路层进行封装</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618409.png" alt="image-20201019141745375"></p>
+<p>数据链路层将数据分组封装成帧，交给物理层处理</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618410.png" alt="image-20201019141838032"></p>
+<p>物理层将帧看成比特流将其变换成相应的电信号进行发送</p>
+</li>
+</ul>
+<blockquote>
+<p>路由器的各端口还会有输入缓冲区和输出缓冲区</p>
+<ul>
+<li><p>输入缓冲区用来暂存新进入路由器但还来不及处理的分组</p>
+</li>
+<li><p>输出缓冲区用来暂存已经处理完毕但还来不及发送的分组</p>
+</li>
+</ul>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618411.png" alt="image-20201019143040253"></p>
+<p><strong>路由器的端口一般都具有输入和输出功能</strong>，这些实例分出了输入端口和输出端口是更好演示路由基本工作过程</p>
+</blockquote>
+<p>2、<strong>路由选择部分</strong></p>
+<ul>
+<li><p>路由选择部分的核心构件是路由选择处理机，它的任务是根据所使用的路由选择协议。周期性地与其他路由器 进行路由信息的交互，来更新路由表</p>
+<p>如果送交给输入端口的网络层的分组是路由器之间交换路由信息的路由报文，则把这种分组送交给路由选择处理机</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618412.png" alt="image-20201019142228360"></p>
+<p>路由选择处理机根据分组的内容来更新自己的<strong>路由表</strong></p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618413.png" alt="image-20201019142415055"></p>
+<p>路由选择处理机还会周期性地给其他路由器发送自己所知道的路由信息</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618414.png" alt="image-20201019142924889"></p>
+</li>
+</ul>
+<h2 id="路由信息协议RIP"><a href="#路由信息协议RIP" class="headerlink" title="路由信息协议RIP"></a>路由信息协议RIP</h2><p><img src="http://img-md-js.linjsblog.top/img/202406151618415.png" alt="image-20201019144915687"></p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618416.png" alt="image-20201019145247606"></p>
+<p><strong>RIP的基本工作过程</strong></p>
+<p>举例</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618417.png" alt="image-20201019145510947"></p>
+<p><strong>RIP的路由条目的更新规则</strong></p>
+<p>举例1</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618418.png" alt="image-20201019145627339"></p>
+<blockquote>
+<p>路由器C的表到达各目的网络的下一条都记为问号，可以理解为路由器D并不需要关心路由器C的这些内容</p>
+<p>假设路由器C的RIP更新报文发送周期到了，则路由器C将自己路由表中的相关路由信息封装到RIP更新报文中发送给路由器D</p>
+</blockquote>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618419.png" alt="image-20201019150120900"></p>
+<blockquote>
+<p>路由器C能到达这些网络，说明路由器C的相邻路由器也能到达，只是比路由器C的距离大1，于是根据距离的对比，路由器D更新自己的路由表</p>
+</blockquote>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618420.png" alt="image-20201019150412666"></p>
+<p>举例2</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618421.png" alt="image-20201019150525711"></p>
+<p><strong>RIP存在“坏消息传播得慢”的问题</strong></p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618422.png" alt="image-20201019151041492"></p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618423.png" alt="image-20201019151135255"></p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618424.png" alt="image-20201019151332767"></p>
+<p>解决方法</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618425.png" alt="image-20201019151639181"></p>
+<blockquote>
+<p>但是，这些方法也不能完全解决“坏消息传播得慢”的问题，这是距离向量的本质决定</p>
+</blockquote>
+<p><strong>总结</strong></p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618426.png" alt="image-20201019152526098"></p>
+<blockquote>
+<p>RIP 协议的优缺点</p>
+<p>优点：</p>
+<ol>
+<li>实现简单，开销较小。</li>
+</ol>
+<p>缺点：</p>
+<ol>
+<li><p>RIP 限制了网络的规模，它能使用的最大距离为 15（16 表示不可达）。</p>
+</li>
+<li><p>路由器之间交换的路由信息是路由器中的完整路由表，因而随着网络规模的扩大，开销也就增加。</p>
+</li>
+<li><p>“坏消息传播得慢”，使更新过程的收敛时间过长。</p>
+</li>
+</ol>
+</blockquote>
+<h2 id="开放最短路径优先OSPF"><a href="#开放最短路径优先OSPF" class="headerlink" title="开放最短路径优先OSPF"></a>开放最短路径优先OSPF</h2><p><strong>开放最短路径优先 OSPF (Open Shortest Path First)</strong></p>
+<p><strong>注意</strong>：OSPF 只是一个协议的名字，它并不表示其他的路由选择协议不是“最短路径优先”。</p>
+<p><strong>概念</strong></p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618427.png" alt="image-20201019161841695"></p>
+<p><strong>问候（Hello）分组</strong></p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618429.png" alt="image-20201019161653875"></p>
+<blockquote>
+<p>IP数据报首部中协议号字段的取值应为89，来表明IP数据报的数据载荷为OSPF分组</p>
+</blockquote>
+<p><strong>发送链路状态通告LSA</strong></p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618430.png" alt="image-20201019162341151"></p>
+<blockquote>
+<p>洪泛法有点类似于广播，就是从一个接口进来，从其他剩余所有接口出去</p>
+</blockquote>
+<p><strong>链路状态数据库同步</strong></p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618431.png" alt="image-20201019162933483"></p>
+<p><strong>使用SPF算法计算出各自路由器到达其他路由器的最短路径</strong></p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618432.png" alt="image-20201019163148068"></p>
+<p><strong>OSPF五种分组类型</strong></p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618433.png" alt="image-20201019163250129"></p>
+<p><strong>OSPF的基本工作过程</strong></p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618434.png" alt="image-20201019163746254"></p>
+<p><strong>OSPF在多点接入网络中路由器邻居关系建立</strong></p>
+<p>如果不采用其他机制，将会产生大量的多播分组</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618435.png" alt="image-20201019164657606"></p>
+<blockquote>
+<p>若DR出现问题，则由BDR顶替DR</p>
+</blockquote>
+<p><strong>为了使OSPF能够用于规模很大的网络，OSPF把一个自治系统再划分为若干个更小的范围，叫做区域（Area）</strong></p>
+<ul>
+<li><p>在该自治系统内，所有路由器都使用OSPF协议，OSPF将该自治系统再划分成4个更小的区域</p>
+</li>
+<li><p>每个区域都有一个32比特的区域标识符</p>
+</li>
+<li><p>主干区域的区域标识符必须为0，主干区域用于连通其他区域</p>
+</li>
+<li><p>其他区域的区域标识符不能为0且不相同</p>
+</li>
+<li><p>每个区域一般不应包含路由器超过200个</p>
+</li>
+<li><p>划分区域的好处就是，利用洪泛法交换链路状态信息局限于每一个区域而不是自治系统，这样减少整个网络上的通信量</p>
+</li>
+</ul>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618436.png" alt="image-20201019170100568"></p>
+<p><strong>总结</strong></p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618437.png" alt="image-20201019170217622"></p>
+<h2 id="边界网关协议BGP"><a href="#边界网关协议BGP" class="headerlink" title="边界网关协议BGP"></a>边界网关协议BGP</h2><p>BGP（Border Gateway Protocol） 是<strong>不同自治系统的路由器之间</strong>交换路由信息的协议</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618438.png" alt="image-20201019191438399"></p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618439.png" alt="image-20201019191718506"></p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618440.png" alt="image-20201019191836397"></p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618441.png" alt="image-20201019192031087"></p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618442.png" alt="image-20201019192059962"></p>
+<p><strong>总结</strong></p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618443.png" alt="image-20201019192840368"></p>
+<h2 id="直接封装RIP、OSPF和BGP报文的协议"><a href="#直接封装RIP、OSPF和BGP报文的协议" class="headerlink" title="直接封装RIP、OSPF和BGP报文的协议"></a>直接封装RIP、OSPF和BGP报文的协议</h2><p><img src="http://img-md-js.linjsblog.top/img/202406151618444.png" alt="image-20201019192800829"></p>
+<hr>
+<h1 id="4-7、IPv4数据报的首部格式"><a href="#4-7、IPv4数据报的首部格式" class="headerlink" title="4.7、IPv4数据报的首部格式"></a>4.7、IPv4数据报的首部格式</h1><h2 id="各字段的作用"><a href="#各字段的作用" class="headerlink" title="各字段的作用"></a>各字段的作用</h2><ul>
+<li>一个 IP 数据报由<strong>首部</strong>和<strong>数据</strong>两部分组成。</li>
+<li><strong>首部的前一部分是固定长度，共 20 字节，是所有 IP 数据报必须具有的。</strong></li>
+<li>在首部的固定部分的后面是一些可选字段，其长度是可变的。</li>
+</ul>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618445.png" alt="image-20201019205931748"></p>
+<p>图中的每一行都由32个比特（也就是4个字节）构成，每个小格子称为字段或者域，每个字段或某些字段的组合用来表达IP协议的相关功能</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618446.png" alt="image-20201019211719880"></p>
+<blockquote>
+<p><strong>IP数据报的首部长度一定是4字节的整数倍</strong></p>
+<p>因为首部中的可选字段的长度从1个字节到40个字节不等，那么，当20字节的固定部分加上1到40个字节长度不等的可变部分，<strong>会造成首部长度不是4字节整数倍时，就用取值为全0的填充字段填充相应个字节</strong>，以确保IP数据报的首部长度是4字节的整数倍</p>
+</blockquote>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618447.png" alt="image-20201019212617006"></p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618448.png" alt="image-20201019220435415"></p>
+<p><strong>对IPv4数据报进行分片</strong></p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618449.png" alt="image-20201019221021157"></p>
+<p>​ 现在假定分片2的IP数据报经过某个网络时还需要进行分片</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618450.png" alt="image-20201019221246870"></p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618451.png" alt="image-20201019222512112"></p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618452.png" alt="image-20201019222552444"></p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618453.png" alt="image-20201019222729797"></p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618454.png" alt="image-20201019223101434"></p>
+<h2 id="总结-5"><a href="#总结-5" class="headerlink" title="总结"></a>总结</h2><p><img src="http://img-md-js.linjsblog.top/img/202406151618455.png" alt="image-20201019225141559"></p>
+<hr>
+<h1 id="4-8、网际控制报文协议ICMP"><a href="#4-8、网际控制报文协议ICMP" class="headerlink" title="4.8、网际控制报文协议ICMP"></a>4.8、网际控制报文协议ICMP</h1><h2 id="概念-1"><a href="#概念-1" class="headerlink" title="概念"></a>概念</h2><p>架构IP网络时需要特别注意两点：</p>
+<ul>
+<li>确认网络是否正常工作</li>
+<li>遇到异常时进行问题诊断</li>
+</ul>
+<p><strong>而ICMP就是实现这些问题的协议</strong></p>
+<p>ICMP的主要功能包括：</p>
+<ul>
+<li>确认IP包是否成功送达目标地址</li>
+<li>通知在发送过程当中IP包被废弃的具体原因</li>
+<li>改善网络设置等</li>
+</ul>
+<p><strong>有了这些功能以后，就可以获得网络是否正常，设置是否有误以及设备有何异常等信息，从而便于进行网络上的问题诊断</strong></p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618456.png" alt="image-20201019232539898"></p>
+<p><strong>ICMP 不是高层协议（看起来好像是高层协议，因为 ICMP 报文是装在 IP 数据报中，作为其中的数据部分），而是 IP 层的协议</strong></p>
+<p>ICMP 报文的格式</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618457.png" alt="image-20201020001035813"></p>
+<h2 id="ICMP差错报告报文"><a href="#ICMP差错报告报文" class="headerlink" title="ICMP差错报告报文"></a>ICMP差错报告报文</h2><h3 id="终点不可达"><a href="#终点不可达" class="headerlink" title="终点不可达"></a>终点不可达</h3><p><img src="http://img-md-js.linjsblog.top/img/202406151618458.png" alt="image-20201019230838587"></p>
+<h3 id="源点抑制"><a href="#源点抑制" class="headerlink" title="源点抑制"></a>源点抑制</h3><p><img src="http://img-md-js.linjsblog.top/img/202406151618459.png" alt="image-20201019231022291"></p>
+<h3 id="时间超过"><a href="#时间超过" class="headerlink" title="时间超过"></a>时间超过</h3><p><img src="http://img-md-js.linjsblog.top/img/202406151618460.png" alt="image-20201019231230798"></p>
+<h3 id="参数问题"><a href="#参数问题" class="headerlink" title="参数问题"></a>参数问题</h3><p><img src="http://img-md-js.linjsblog.top/img/202406151618461.png" alt="image-20201019231355471"></p>
+<h3 id="改变路由（重定向）"><a href="#改变路由（重定向）" class="headerlink" title="改变路由（重定向）"></a>改变路由（重定向）</h3><p><img src="http://img-md-js.linjsblog.top/img/202406151618462.png" alt="image-20201019231553990"></p>
+<h3 id="不应发送ICMP差错报告报文情况"><a href="#不应发送ICMP差错报告报文情况" class="headerlink" title="不应发送ICMP差错报告报文情况"></a>不应发送ICMP差错报告报文情况</h3><p><img src="http://img-md-js.linjsblog.top/img/202406151618463.png" alt="image-20201019231733673"></p>
+<h2 id="ICMP应用举例"><a href="#ICMP应用举例" class="headerlink" title="ICMP应用举例"></a>ICMP应用举例</h2><h3 id="分组网间探测PING（Packet-InterNet-Groper）"><a href="#分组网间探测PING（Packet-InterNet-Groper）" class="headerlink" title="分组网间探测PING（Packet InterNet Groper）"></a>分组网间探测PING（Packet InterNet Groper）</h3><p><img src="http://img-md-js.linjsblog.top/img/202406151618464.png" alt="image-20201019233817921"></p>
+<h3 id="跟踪路由（traceroute）"><a href="#跟踪路由（traceroute）" class="headerlink" title="跟踪路由（traceroute）"></a>跟踪路由（traceroute）</h3><p><img src="http://img-md-js.linjsblog.top/img/202406151618465.png" alt="image-20201019234123026"></p>
+<p><strong>tracert命令的实现原理</strong></p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618466.png" alt="image-20201019234718107"></p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618467.png" alt="image-20201019234741268"></p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618468.png" alt="image-20201019234758693"></p>
+<h2 id="总结-6"><a href="#总结-6" class="headerlink" title="总结"></a>总结</h2><p><img src="http://img-md-js.linjsblog.top/img/202406151618469.png" alt="image-20201019234909146"></p>
+<hr>
+<h1 id="4-9、虚拟专用网VPN与网络地址转换NAT"><a href="#4-9、虚拟专用网VPN与网络地址转换NAT" class="headerlink" title="4.9、虚拟专用网VPN与网络地址转换NAT"></a>4.9、虚拟专用网VPN与网络地址转换NAT</h1><h2 id="虚拟专用网VPN（Virtual-Private-Network）"><a href="#虚拟专用网VPN（Virtual-Private-Network）" class="headerlink" title="虚拟专用网VPN（Virtual Private Network）"></a>虚拟专用网VPN（Virtual Private Network）</h2><ul>
+<li>由于 <strong>IP 地址的紧缺</strong>，一个机构能够申请到的IP地址数往往远小于本机构所拥有的主机数。</li>
+<li>考虑到<strong>互联网并不很安全</strong>，一个机构内也并不需要把所有的主机接入到外部的互联网。</li>
+<li>假定在一个机构内部的计算机通信也是采用 TCP&#x2F;IP 协议，那么从原则上讲，对于这些仅在<strong>机构内部使用</strong>的计算机就可以由本机构<strong>自行分配其 IP 地址</strong>。</li>
+</ul>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618470.png" alt="image-20201019235534728"></p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618471.png" alt="image-20201019235631474"></p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618472.png" alt="image-20201019235718010"></p>
+<blockquote>
+<p>上图是因特网数字分配机构IANA官网查看IPv4地址空间中特殊地址的分配方案</p>
+<p>用粉红色标出来的地址就是无需申请的、可自由分配的专用地址，或称私有地址</p>
+</blockquote>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618473.png" alt="image-20201020000136443"></p>
+<blockquote>
+<p>私有地址只能用于一个机构的内部通信，而不能用于和因特网上的主机通信</p>
+<p>私有地址只能用作本地地址而不能用作全球地址</p>
+<p>因特网中所有路由器对目的地址是私有地址的IP数据报一律不进行转发</p>
+<p><strong>本地地址与全球地址</strong></p>
+<ul>
+<li><strong>本地地址</strong>——仅在机构内部使用的 IP 地址，可以由本机构自行分配，而不需要向互联网的管理机构申请。</li>
+<li><strong>全球地址</strong>——全球唯一的 IP 地址，必须向互联网的管理机构申请。</li>
+<li><strong>问题</strong>：在内部使用的本地地址就有可能和互联网中某个 IP 地址重合，这样就会出现地址的二义性问题。</li>
+</ul>
+</blockquote>
+<p>所以部门A和部门B至少需要一个 路由器具有合法的全球IP地址，这样各自的专用网才能利用公用的因特网进行通信</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618474.png" alt="image-20201020000618797"></p>
+<p>部门A向部门B发送数据流程</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618475.png" alt="image-20201020001107425"></p>
+<blockquote>
+<p>两个专用网内的主机间发送的数据报是通过了公用的因特网，但在效果上就好像是在本机构的专用网上传送一样</p>
+<p>数据报在因特网中可能要经过多个网络和路由器，但从逻辑上看，R1和R2之间好像是一条直通的点对点链路</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618476.png" alt="image-20201020001528569"></p>
+<p>因此也被称为IP隧道技术</p>
+</blockquote>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618477.png" alt="image-20201020001935801"></p>
+<h2 id="网络地址转换NAT（Network-Address-Translation）"><a href="#网络地址转换NAT（Network-Address-Translation）" class="headerlink" title="网络地址转换NAT（Network Address Translation）"></a>网络地址转换NAT（Network Address Translation）</h2><p><img src="http://img-md-js.linjsblog.top/img/202406151618478.png" alt="image-20201020002020607"></p>
+<p>举例</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618479.png" alt="image-20201020002439942"></p>
+<blockquote>
+<p>使用私有地址的主机，如何才能与因特网上使用全球IP地址的主机进行通信？</p>
+<p>这需要在专用网络连接到因特网的路由器上安装NAT软件</p>
+</blockquote>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618480.png" alt="image-20201020002734192"></p>
+<blockquote>
+<p>专有NAT软件的路由器叫做NAT路由器</p>
+<p>它至少有一个有效的外部全球IP地址</p>
+<p>这样，所有使用私有地址的主机在和外界通信时，都要在NAT路由器上将其私有地址转换为全球IP地址</p>
+</blockquote>
+<p>假设，使用私有地址的主机要给因特网上使用全球IP地址的另一台主机发送IP数据报</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618481.png" alt="image-20201020003238729"></p>
+<p>因特网上的这台主机给源主机发回数据报</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618482.png" alt="image-20201020003411024"></p>
+<p>当专用网中的这两台使用私有地址的主机都要给因特网使用全球地址的另一台主机发送数据报时，在NAT路由器的NAT转换表中就会产生两条记录，分别记录两个私有地址与全球地址的对应关系</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618483.png" alt="image-20201020003658349"></p>
+<p>这种基本转换存在一个问题</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618484.png" alt="image-20201020003733863"></p>
+<p>解决方法</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618485.png" alt="image-20201020003840584"></p>
+<blockquote>
+<p>我们现在用的很多家用路由器都是这种NART路由器</p>
+</blockquote>
+<p>内网主机与外网主机的通信，是否能由外网主机首先发起？</p>
+<p>否定</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618486.png" alt="image-20201020004159360"></p>
+<p><img src="http://img-md-js.linjsblog.top/img/202406151618487.png" alt="image-20201020004312942"></p>
+<h2 id="总结-7"><a href="#总结-7" class="headerlink" title="总结"></a>总结</h2><p><img src="http://img-md-js.linjsblog.top/img/202406151618488.png" alt="image-20201020004447021"></p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        Author:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">qwq小小舒</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        Link:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://js6288.github.io/2024/06/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AC%AC4%E7%AB%A0%EF%BC%88%E7%BD%91%E7%BB%9C%E5%B1%82%EF%BC%89/">https://js6288.github.io/2024/06/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AC%AC4%E7%AB%A0%EF%BC%88%E7%BD%91%E7%BB%9C%E5%B1%82%EF%BC%89/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        Reprint policy:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    All articles in this blog are used except for special statements
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    reprint policy. If reproduced, please indicate source
+                    <a href="/about" target="_blank">qwq小小舒</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>Copied successfully, please follow the reprint policy of this article</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">more</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
+                                    <span class="chip bg-color">计算机网络</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
+            <div class="card">
+                <a href="/2024/06/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AC%AC5%E7%AB%A0%EF%BC%88%E8%BF%90%E8%BE%93%E5%B1%82%EF%BC%89/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="计算机网络第5章（运输层）">
+                        
+                        <span class="card-title">计算机网络第5章（运输层）</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2024-06-15
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-category">
+                                    学习笔记
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
+                        <span class="chip bg-color">计算机网络</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                Next&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2024/06/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AC%AC3%E7%AB%A0%EF%BC%88%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%EF%BC%89/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="计算机网络第3章（数据链路层）">
+                        
+                        <span class="card-title">计算机网络第3章（数据链路层）</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-06-15
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-category">
+                                    学习笔记
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
+                        <span class="chip bg-color">计算机网络</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;TOC</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="/libs/aplayer/Meting.min.js"></script>
+
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2019-2025</span>
+            
+            <a href="/about" target="_blank">qwq小小舒</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            
+            <br>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;Total visits:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;Total visitors:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/blinkfox" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:1181062873@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1181062873" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1181062873" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;Search</span>
+            <input type="search" id="searchInput" name="s" placeholder="Please enter a search keyword"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 白天和黑夜主题 -->
+<div class="stars-con">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>  
+</div>
+
+<script>
+    function switchNightMode() {
+        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
+        setTimeout(function () {
+            $('body').hasClass('DarkMode') 
+            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
+            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
+            
+            setTimeout(function () {
+            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
+                $(this).remove()
+            })
+            }, 2e3)
+        })
+    }
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+    
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

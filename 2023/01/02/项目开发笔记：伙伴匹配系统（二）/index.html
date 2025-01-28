@@ -1,0 +1,1552 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="项目开发笔记：伙伴匹配系统（二）, 小小舒的爪哇天地">
+    <meta name="description" content="笔记本次计划
+上次的标签接口调试 √
+前端整合路由 √
+前端开发（搜索页面、用户信息页、用户信息修改页） √
+后端整合 Swagger + Knife4j 接口文档
+存量用户信息导入及同步（爬虫）
+
+Java 8
+stream &amp;#x2F;">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>项目开发笔记：伙伴匹配系统（二） | 小小舒的爪哇天地</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    
+
+
+    <!-- bg-cover style     -->
+
+
+
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" type="text/css" href="/css/matery.css">
+<link rel="stylesheet" type="text/css" href="/css/my.css">
+<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+
+
+
+
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/css/post.css">
+
+
+
+
+    
+        <link rel="stylesheet" type="text/css" href="/css/reward.css">
+    
+
+
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">小小舒的爪哇天地</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>Index</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>Tags</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>Categories</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>Archives</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>About</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>Contact</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>Friends</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="Search" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <li>
+    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
+      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">小小舒的爪哇天地</div>
+        <div class="logo-desc">
+            
+            Life is coding, I will debug it.
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			Index
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			Tags
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			Categories
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			Archives
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			About
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			Contact
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			Friends
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/14.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">项目开发笔记：伙伴匹配系统（二）</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Java/">
+                                <span class="chip bg-color">Java</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE/" class="post-category">
+                                个人项目
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
+                    2023-01-02
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="笔记"><a href="#笔记" class="headerlink" title="笔记"></a>笔记</h2><h3 id="本次计划"><a href="#本次计划" class="headerlink" title="本次计划"></a>本次计划</h3><ol>
+<li><strong>上次的标签接口调试</strong> √</li>
+<li>前端整合路由 √</li>
+<li>前端开发（搜索页面、用户信息页、用户信息修改页） √</li>
+<li>后端整合 Swagger + Knife4j 接口文档</li>
+<li>存量用户信息导入及同步（爬虫）</li>
+</ol>
+<h3 id="Java-8"><a href="#Java-8" class="headerlink" title="Java 8"></a>Java 8</h3><ol>
+<li>stream &#x2F; parallelStream 流失处理</li>
+<li>Optional 可选类</li>
+</ol>
+<h3 id="前端整合路由"><a href="#前端整合路由" class="headerlink" title="前端整合路由"></a>前端整合路由</h3><p>Vue-Router：<a target="_blank" rel="noopener" href="https://router.vuejs.org/zh/guide/#html%EF%BC%8C%E7%9B%B4%E6%8E%A5%E7%9C%8B%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3%E5%BC%95%E5%85%A5">https://router.vuejs.org/zh/guide/#html，直接看官方文档引入</a> Vue-Router 其实就是帮助你根据不同的 url 来展示不同的页面（组件），不用自己写 if &#x2F; else 路由配置影响整个项目，所以建议单独用 config 目录、单独的配置文件去集中定义和管理。 有些组件库可能自带了和 Vue-Router 的整合，所以尽量先看组件文档、省去自己写的时间。</p>
+<h2 id="项目开始"><a href="#项目开始" class="headerlink" title="项目开始"></a>项目开始</h2><h3 id="一、上次的标签接口调试"><a href="#一、上次的标签接口调试" class="headerlink" title="一、上次的标签接口调试"></a>一、上次的标签接口调试</h3><h4 id="1-更改代码"><a href="#1-更改代码" class="headerlink" title="1.更改代码"></a>1.更改代码</h4><p>上次的searchUsersByTags方法里写了两种查询方式，这次就把它们分开，写成两个方法 整理如下</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
+ * 根据标签搜索用户(内存过滤)
+ *
+ * @param tagNameList 用户拥有的标签
+ * @return
+ */</span>
+<span class="token annotation punctuation">@Override</span>
+<span class="token keyword">public</span> <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">></span></span> <span class="token function">searchUsersByTags</span><span class="token punctuation">(</span><span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span> tagNameList<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token class-name">CollectionUtils</span><span class="token punctuation">.</span><span class="token function">isEmpty</span><span class="token punctuation">(</span>tagNameList<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">BusinessException</span><span class="token punctuation">(</span><span class="token class-name">ErrorCode</span><span class="token punctuation">.</span><span class="token constant">PARAMS_ERROR</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token comment">//1.先查询所有用户</span>
+    <span class="token class-name">QueryWrapper</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">></span></span> queryWrapper <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">QueryWrapper</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">></span></span> userList <span class="token operator">=</span> userMapper<span class="token punctuation">.</span><span class="token function">selectList</span><span class="token punctuation">(</span>queryWrapper<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token class-name">Gson</span> gson <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Gson</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">//2.在内存中判断是否包含要求的标签</span>
+    <span class="token keyword">return</span> userList<span class="token punctuation">.</span><span class="token function">stream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span>user <span class="token operator">-></span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">String</span> tagsStr <span class="token operator">=</span> user<span class="token punctuation">.</span><span class="token function">getTags</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">Set</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span> tempTagNameSet <span class="token operator">=</span> gson<span class="token punctuation">.</span><span class="token function">fromJson</span><span class="token punctuation">(</span>tagsStr<span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">TypeToken</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Set</span><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">.</span><span class="token function">getType</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        tempTagNameSet <span class="token operator">=</span> <span class="token class-name">Optional</span><span class="token punctuation">.</span><span class="token function">ofNullable</span><span class="token punctuation">(</span>tempTagNameSet<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">orElse</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">HashSet</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">String</span> tagName <span class="token operator">:</span> tagNameList<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>tempTagNameSet<span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span>tagName<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token operator">::</span><span class="token function">getSafetyUser</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">collect</span><span class="token punctuation">(</span><span class="token class-name">Collectors</span><span class="token punctuation">.</span><span class="token function">toList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
+    * 根据标签搜索用户(SQL查询)
+    * @param tagNameList
+    * @return
+    */</span>
+   <span class="token annotation punctuation">@Deprecated</span>
+   <span class="token keyword">private</span> <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">></span></span> <span class="token function">searchUsersByTagsBySQL</span><span class="token punctuation">(</span><span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span> tagNameList<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+       <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token class-name">CollectionUtils</span><span class="token punctuation">.</span><span class="token function">isEmpty</span><span class="token punctuation">(</span>tagNameList<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+           <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">BusinessException</span><span class="token punctuation">(</span><span class="token class-name">ErrorCode</span><span class="token punctuation">.</span><span class="token constant">PARAMS_ERROR</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token punctuation">&#125;</span>
+       <span class="token class-name">QueryWrapper</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">></span></span> queryWrapper <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">QueryWrapper</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token comment">//拼接 and 查询</span>
+       <span class="token comment">//like '%Java%' and like '%Python%'</span>
+       <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">String</span> tagName <span class="token operator">:</span> tagNameList<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+           queryWrapper <span class="token operator">=</span> queryWrapper<span class="token punctuation">.</span><span class="token function">like</span><span class="token punctuation">(</span><span class="token string">"tags"</span><span class="token punctuation">,</span> tagName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token punctuation">&#125;</span>
+       <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">></span></span> userList <span class="token operator">=</span> userMapper<span class="token punctuation">.</span><span class="token function">selectList</span><span class="token punctuation">(</span>queryWrapper<span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token keyword">return</span> userList<span class="token punctuation">.</span><span class="token function">stream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token operator">::</span><span class="token function">getSafetyUser</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">collect</span><span class="token punctuation">(</span><span class="token class-name">Collectors</span><span class="token punctuation">.</span><span class="token function">toList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="2-测试接口"><a href="#2-测试接口" class="headerlink" title="2.测试接口"></a>2.测试接口</h4><p>按照上次的测试方法，打断点debug 结果如下，成功查询到 <img src="http://img-md-js.linjsblog.top/img/202301021951440.png" alt="image.png"></p>
+<h3 id="二、前端整合路由"><a href="#二、前端整合路由" class="headerlink" title="二、前端整合路由"></a>二、前端整合路由</h3><p>vue 路由组件库地址：</p>
+<h4 id="1-安装命令"><a href="#1-安装命令" class="headerlink" title="1.安装命令"></a>1.安装命令</h4><pre class="line-numbers language-none"><code class="language-none">yarn add vue-router@4<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>我这边没有权限报错，如果有，就删掉node_modules和yarn-error.log。再次输入安装命令，成功安装 package里的依赖要存在vue-router <img src="http://img-md-js.linjsblog.top/img/202301021952257.png" alt="image.png"></p>
+<h4 id="2-路由引入"><a href="#2-路由引入" class="headerlink" title="2.路由引入"></a>2.路由引入</h4><p>看文档，按着步骤引用</p>
+<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F; 1. 定义路由组件.
+&#x2F;&#x2F; 也可以从其他文件导入
+const Home &#x3D; &#123; template: &#39;&lt;div&gt;Home&lt;&#x2F;div&gt;&#39; &#125;
+const About &#x3D; &#123; template: &#39;&lt;div&gt;About&lt;&#x2F;div&gt;&#39; &#125;
+
+&#x2F;&#x2F; 2. 定义一些路由
+&#x2F;&#x2F; 每个路由都需要映射到一个组件。
+&#x2F;&#x2F; 我们后面再讨论嵌套路由。
+const routes &#x3D; [
+  &#123; path: &#39;&#x2F;&#39;, component: Home &#125;,
+  &#123; path: &#39;&#x2F;about&#39;, component: About &#125;,
+]
+
+&#x2F;&#x2F; 3. 创建路由实例并传递 &#96;routes&#96; 配置
+&#x2F;&#x2F; 你可以在这里输入更多的配置，但我们在这里
+&#x2F;&#x2F; 暂时保持简单
+const router &#x3D; VueRouter.createRouter(&#123;
+  &#x2F;&#x2F; 4. 内部提供了 history 模式的实现。为了简单起见，我们在这里使用 hash 模式。
+  history: VueRouter.createWebHashHistory(),
+  routes, &#x2F;&#x2F; &#96;routes: routes&#96; 的缩写
+&#125;)
+
+&#x2F;&#x2F; 5. 创建并挂载根实例
+const app &#x3D; Vue.createApp(&#123;&#125;)
+&#x2F;&#x2F;确保 _use_ 路由实例使
+&#x2F;&#x2F;整个应用支持路由。
+app.use(router)
+
+app.mount(&#39;#app&#39;)
+
+&#x2F;&#x2F; 现在，应用已经启动了！<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>复制到main.ts中并修改，整理如下</p>
+<pre class="line-numbers language-none"><code class="language-none">import &#123; createApp &#125; from &#39;vue&#39;
+import App from &#39;.&#x2F;App.vue&#39;
+import &#123;Button, Icon, NavBar, Tabbar, TabbarItem&#125; from &#39;vant&#39;;
+import Index from &quot;.&#x2F;pages&#x2F;Index.vue&quot;;
+import Team from &quot;.&#x2F;pages&#x2F;Team.vue&quot;;
+import * as VueRouter from &#39;vue-router&#39;;
+
+const app &#x3D; createApp(App);
+app.use(Button);
+app.use(NavBar);
+app.use(Icon);
+app.use(Tabbar);
+app.use(TabbarItem);
+
+&#x2F;&#x2F;定义一些路由
+const routes &#x3D; [
+    &#123; path: &#39;&#x2F;&#39;, component: Index &#125;,
+    &#123; path: &#39;&#x2F;about&#39;, component: Team &#125;,
+]
+
+const router &#x3D; VueRouter.createRouter(&#123;
+    &#x2F;&#x2F; 4. 内部提供了 history 模式的实现。为了简单起见，我们在这里使用 hash 模式。
+    history: VueRouter.createWebHashHistory(),
+    routes, &#x2F;&#x2F; &#96;routes: routes&#96; 的缩写
+&#125;)
+
+app.use(router)
+
+app.mount(&#39;#app&#39;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>定义的路由，即跳转的规则是全局性的，尽量提取出来，不要全部写在main.ts中 在src目录下，建立config目录和route文件，把路由的定义移动到里面，注意！不是复制！ route文件代码如下</p>
+<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F;定义一些路由
+import Index from &quot;..&#x2F;pages&#x2F;Index.vue&quot;;
+import Team from &quot;..&#x2F;pages&#x2F;Team.vue&quot;;
+import User from &quot;..&#x2F;pages&#x2F;User.vue&quot;;
+
+const routes &#x3D; [
+    &#123; path: &#39;&#x2F;&#39;, component: Index &#125;,
+    &#123; path: &#39;&#x2F;Team&#39;, component: Team &#125;,
+    &#123; path: &#39;&#x2F;User&#39;, component: User &#125;,
+]
+
+export default routes;&#x2F;&#x2F;导出<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>回到main.ts文件中，把routes引入。选中routes按alt+anter，或者手动导入 <img src="http://img-md-js.linjsblog.top/img/202301021952293.png" alt="image.png"> 找到BasicLayout.vue文件，原先是利用v-if进行改变，跳转的，现在引入router-view，根据不同的页面展示不同的内容，个人理解：原先是单页面跳转，就是利用js重新渲染页面，而利用router-view后，是在多个页面里面进行跳转。 div 里的内容修改为如下 <img src="http://img-md-js.linjsblog.top/img/202301021952810.png" alt="image.png"> 搭配route-link创建链接，进行测试 <img src="http://img-md-js.linjsblog.top/img/202301021952987.png" alt="image.png"> 启动项目，测试一下，点击链接，发现路径是跳转的 <img src="http://img-md-js.linjsblog.top/img/202301021953426.png" alt="image.png"><img src="http://img-md-js.linjsblog.top/img/202301021953195.png" alt="image.png"> 这些表明框架结构已经成功搭建，vant3标签栏已经支持路由模式（正好是vue-route） <img src="http://img-md-js.linjsblog.top/img/202301021953098.png" alt="image.png"> 上次创建页面少创建了个人页面，现在依葫芦画瓢，创建个人页面（这个比较简单就不演示了），注意：别忘了到route.ts中引入这个页面 <img src="http://img-md-js.linjsblog.top/img/202301021953935.png" alt="image.png"> 继续修改BasicLayout.vue如下 <img src="http://img-md-js.linjsblog.top/img/202301021953157.png" alt="image.png"> 删除route-link（现在没用了，可通过标签栏跳转了） 测试一下，结果如下 <img src="http://img-md-js.linjsblog.top/img/202301021954274.png" alt="image.png"><img src="http://img-md-js.linjsblog.top/img/202301021954067.png" alt="image.png"><img src="http://img-md-js.linjsblog.top/img/202301021954780.png" alt="image.png"></p>
+<h4 id="三、前端开发"><a href="#三、前端开发" class="headerlink" title="三、前端开发"></a>三、前端开发</h4><h4 id="1-准备工作"><a href="#1-准备工作" class="headerlink" title="1.准备工作"></a>1.准备工作</h4><p>首先把原先的页面名称修改下，有些会与自带的起冲突，添加searchpage页面 ，并修改其他页面名称修改如下 <img src="http://img-md-js.linjsblog.top/img/202301021954394.png" alt="image.png"><img src="http://img-md-js.linjsblog.top/img/202301021954642.png" alt="image.png"> 为了编写代码中的便利，把按需引入改为全部引路，在main.ts中修改代码</p>
+<pre class="line-numbers language-none"><code class="language-none">import &#123; createApp &#125; from &#39;vue&#39;
+import App from &#39;.&#x2F;App.vue&#39;
+import * as VueRouter from &#39;vue-router&#39;;
+import routes from &quot;.&#x2F;config&#x2F;route&quot;;
+import Vant from &#39;vant&#39;;
+import &#39;vant&#x2F;lib&#x2F;index.css&#39;
+
+const app &#x3D; createApp(App);
+app.use(Vant);
+
+const router &#x3D; VueRouter.createRouter(&#123;
+    &#x2F;&#x2F; 4. 内部提供了 history 模式的实现。为了简单起见，我们在这里使用 hash 模式。
+    history: VueRouter.createWebHashHistory(),
+    routes, &#x2F;&#x2F; &#96;routes: routes&#96; 的缩写
+&#125;)
+
+app.use(router);
+app.mount(&#39;#app&#39;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="2-添加搜索框"><a href="#2-添加搜索框" class="headerlink" title="2.添加搜索框"></a>2.添加搜索框</h4><p>在vant文档里找到合适的组件如下 <img src="http://img-md-js.linjsblog.top/img/202301021954239.png" alt="image.png"> 将其复制到searchpage页面里，并修改整理</p>
+<pre class="line-numbers language-none"><code class="language-none">&lt;template&gt;
+  &lt;form action&#x3D;&quot;&#x2F;&quot;&gt;
+    &lt;van-search
+        v-model&#x3D;&quot;searchText&quot;
+        show-action
+        placeholder&#x3D;&quot;请输入搜索关键词&quot;
+        @search&#x3D;&quot;onSearch&quot;
+        @cancel&#x3D;&quot;onCancel&quot;
+    &#x2F;&gt;
+  &lt;&#x2F;form&gt;
+&lt;&#x2F;template&gt;
+
+&lt;script setup&gt;
+import &#123; ref &#125; from &#39;vue&#39;;
+import &#123; Toast &#125; from &#39;vant&#39;;
+
+const searchText &#x3D; ref(&#39;&#39;);
+const onSearch &#x3D; (val) &#x3D;&gt; Toast(val);
+const onCancel &#x3D; () &#x3D;&gt; Toast(&#39;取消&#39;);
+
+&lt;&#x2F;script&gt;
+
+&lt;style scoped&gt;
+
+&lt;&#x2F;style&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>然后做一个点击搜索按钮，跳转到搜索页面，在vue router 官方文档里有此内容，复制到BsaicLayout.vue中修改，顺便把左边的返回页面按钮也写了，使其跳转到主页 <img src="http://img-md-js.linjsblog.top/img/202301021954516.png" alt="image.png"> <img src="http://img-md-js.linjsblog.top/img/202301021955073.png" alt="image.png"> 测试一下，按搜索按钮 <img src="http://img-md-js.linjsblog.top/img/202301021955888.png" alt="image.png"><img src="http://img-md-js.linjsblog.top/img/202301021955026.png" alt="image.png"><img src="http://img-md-js.linjsblog.top/img/202301021955116.png" alt="image.png"> 按左边返回按钮 <img src="http://img-md-js.linjsblog.top/img/202301021955127.png" alt="image.png"><img src="http://img-md-js.linjsblog.top/img/202301021955822.png" alt="image.png"></p>
+<h4 id="3-添加，搜索，删除标签"><a href="#3-添加，搜索，删除标签" class="headerlink" title="3.添加，搜索，删除标签"></a>3.添加，搜索，删除标签</h4><p>目标是实现标签显示，包括可选标签和已选标签，所以我们要引入分割线去区分</p>
+<pre class="line-numbers language-none"><code class="language-none">&lt;van-divider
+  :style&#x3D;&quot;&#123; color: &#39;#1989fa&#39;, borderColor: &#39;#1989fa&#39;, padding: &#39;0 16px&#39; &#125;&quot;
+&gt;
+  文字
+&lt;&#x2F;van-divider&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>同时我们需要在点击搜索后，让页面显示已选标签，所以要引入tag标签</p>
+<pre class="line-numbers language-none"><code class="language-none">&lt;van-tag :show&#x3D;&quot;show&quot; closeable size&#x3D;&quot;medium&quot; type&#x3D;&quot;primary&quot; @close&#x3D;&quot;close&quot;&gt;
+  标签
+&lt;&#x2F;van-tag&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>标签需要我们手动选择，所以也要引入选择标签组件，这边我们使用TreeSelect</p>
+<pre class="line-numbers language-none"><code class="language-none">import &#123; ref &#125; from &#39;vue&#39;;
+
+export default &#123;
+  setup() &#123;
+    const activeId &#x3D; ref(1);
+    const activeIndex &#x3D; ref(0);
+    const items &#x3D; [
+      &#123;
+        text: &#39;浙江&#39;,
+        children: [
+          &#123; text: &#39;杭州&#39;, id: 1 &#125;,
+          &#123; text: &#39;温州&#39;, id: 2 &#125;,
+        ],
+      &#125;,
+      &#123;
+        text: &#39;江苏&#39;,
+        children: [
+          &#123; text: &#39;南京&#39;, id: 5 &#125;,
+          &#123; text: &#39;无锡&#39;, id: 6 &#125;,
+        ],
+      &#125;,
+    ];
+
+    return &#123;
+      items,
+      activeId,
+      activeIndex,
+    &#125;;
+  &#125;,
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>已选标签之间是挤在一起，为了美观，我们来选择Layout布局来设置间距</p>
+<pre class="line-numbers language-none"><code class="language-none">&lt;van-row gutter&#x3D;&quot;20&quot;&gt;
+  &lt;van-col span&#x3D;&quot;8&quot;&gt;span: 8&lt;&#x2F;van-col&gt;
+  &lt;van-col span&#x3D;&quot;8&quot;&gt;span: 8&lt;&#x2F;van-col&gt;
+  &lt;van-col span&#x3D;&quot;8&quot;&gt;span: 8&lt;&#x2F;van-col&gt;
+&lt;&#x2F;van-row&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>将上面的组件复制到SearchPage.vue并整理修改</p>
+<pre class="line-numbers language-none"><code class="language-none">&lt;template&gt;
+  &lt;form action&#x3D;&quot;&#x2F;&quot;&gt;
+    &lt;van-search
+        v-model&#x3D;&quot;searchText&quot;
+        show-action
+        placeholder&#x3D;&quot;请输入搜索关键词&quot;
+        @search&#x3D;&quot;onSearch&quot;
+        @cancel&#x3D;&quot;onCancel&quot;
+    &#x2F;&gt;
+  &lt;&#x2F;form&gt;
+  &lt;van-divider content-position&#x3D;&quot;left&quot;&gt;已选标签&lt;&#x2F;van-divider&gt;
+  &lt;div v-if&#x3D;&quot;activeIds.length&#x3D;&#x3D;&#x3D;0&quot;&gt;请选择标签&lt;&#x2F;div&gt;
+  &lt;van-row gutter&#x3D;&quot;16&quot; style&#x3D;&quot;padding: 0 16px&quot;&gt;
+    &lt;van-col v-for&#x3D;&quot;tag in activeIds&quot;&gt;
+      &lt;van-tag closeable size&#x3D;&quot;small&quot; type&#x3D;&quot;primary&quot;&gt;
+        &#123;&#123;tag&#125;&#125;
+      &lt;&#x2F;van-tag&gt;
+    &lt;&#x2F;van-col&gt;
+  &lt;&#x2F;van-row&gt;
+  &lt;van-tree-select
+      v-model:active-id&#x3D;&quot;activeIds&quot;
+      v-model:main-active-index&#x3D;&quot;activeIndex&quot;
+      :items&#x3D;&quot;tagList&quot;
+  &#x2F;&gt;
+&lt;&#x2F;template&gt;
+
+&lt;script setup&gt;
+import &#123; ref &#125; from &#39;vue&#39;;
+import &#123; Toast &#125; from &#39;vant&#39;;
+
+const searchText &#x3D; ref(&#39;&#39;);
+const onSearch &#x3D; (val) &#x3D;&gt; Toast(val);
+const onCancel &#x3D; () &#x3D;&gt; Toast(&#39;取消&#39;);
+
+&#x2F;&#x2F;已选中的标签
+const activeIds &#x3D; ref([]);
+const activeIndex &#x3D; ref(0);
+const tagList &#x3D; [
+  &#123;
+    text: &#39;性别&#39;,
+    children: [
+      &#123; text: &#39;男&#39;, id: &#39;男&#39; &#125;,
+      &#123; text: &#39;女&#39;, id: &#39;女&#39; &#125;,
+    ],
+  &#125;,
+  &#123;
+    text: &#39;年级&#39;,
+    children: [
+      &#123; text: &#39;大一&#39;, id: &#39;大一&#39; &#125;,
+      &#123; text: &#39;大二&#39;, id: &#39;大二&#39; &#125;,
+    ],
+  &#125;,
+];
+
+&lt;&#x2F;script&gt;
+
+&lt;style scoped&gt;
+
+&lt;&#x2F;style&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>看看现在页面是什么样的 <img src="http://img-md-js.linjsblog.top/img/202301021955418.png" alt="image.png"> 但是点击×删不掉已选标签，这是因为我们没写移除标签函数，添加函数！</p>
+<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F;移除标签
+const doClose &#x3D; (tag) &#x3D;&gt;&#123;
+  activeIds.value&#x3D;activeIds.value.filter(item &#x3D;&gt;&#123;
+    return item !&#x3D;&#x3D; tag;
+  &#125;)
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>别忘了在tag里面添加@close&#x3D;”doClose(tag)”！ <img src="http://img-md-js.linjsblog.top/img/202301021956738.png" alt="image.png"> 不出意外的话就可以删除已选标签了 最后就要进行关键字查询，来去过滤标签了（可以直接在前端里面过滤，因为标签的数据量不大，没必要向后台发送请求） <img src="http://img-md-js.linjsblog.top/img/202301021956602.png" alt="image.png"><img src="http://img-md-js.linjsblog.top/img/202301021956573.png" alt="image.png"> 现在要将数据扁平化，原来是嵌套结构，将数据扁平之后（打平）再进行过滤 <img src="http://img-md-js.linjsblog.top/img/202301021956444.png" alt="image.png"><img src="http://img-md-js.linjsblog.top/img/202301021956958.png" alt="image.png"> 踩坑注意：画红线框处我这边是必须要这样写，@炎大佬的笔记里两个都是花括号，照着写我这边就会显示Uncaught TypeError: tempChildren.filter is not a function 测试：选中性别，搜索男，点击取消，选中年级，搜索大一 显示结果如下 <img src="http://img-md-js.linjsblog.top/img/202301021956142.png" alt="image.png"><img src="http://img-md-js.linjsblog.top/img/202301021956581.png" alt="image.png"><img src="http://img-md-js.linjsblog.top/img/202301021956042.png" alt="image.png"></p>
+<h4 id="4-创建用户信息页"><a href="#4-创建用户信息页" class="headerlink" title="4.创建用户信息页"></a>4.创建用户信息页</h4><p>在vant文档里寻找到适合的组件来编写用户信息页面，这里选择了cell单元格，将其黏贴到UserPage.vue中 <img src="http://img-md-js.linjsblog.top/img/202301021957472.png" alt="image.png"> 我们现在要定义一下后台用户数据的类别，在用户中心中我们曾经写过这个规范 在src目录下建立models目录，并创建user.d.ts文件，将规范粘贴进去并适当修改如下</p>
+<pre class="line-numbers language-none"><code class="language-none">&#x2F;**
+ * 用户类别
+ *&#x2F;
+export type CurrentUser &#x3D; &#123;
+    id: number;
+    username: string;
+    userAccount: string;
+    avatarUrl?: string;
+    gender: number;
+    phone: string;
+    email: string;
+    userStatus: number;
+    userRole: number;
+    planetCode: string;
+    tags: string[];
+    createTime: Date;
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>在UserPage.vue中引入，自己写点假数据</p>
+<pre class="line-numbers language-none"><code class="language-none">&lt;template&gt;
+  &lt;van-cell title&#x3D;&quot;昵称&quot; is-link to&#x3D;&#39;&#x2F;user&#x2F;edit&#39; :value&#x3D;&quot;user.username&quot;&#x2F;&gt;
+  &lt;van-cell title&#x3D;&quot;账号&quot; is-link to&#x3D;&#39;&#x2F;user&#x2F;edit&#39; :value&#x3D;&quot;user.userAccount&quot; &#x2F;&gt;
+  &lt;van-cell title&#x3D;&quot;头像&quot; is-link to&#x3D;&#39;&#x2F;user&#x2F;edit&#39;&gt;
+    &lt;img style&#x3D;&quot;height: 48px&quot; :src&#x3D;&quot;user.avatarUrl&quot;&#x2F;&gt;
+  &lt;&#x2F;van-cell&gt;
+  &lt;van-cell title&#x3D;&quot;性别&quot; is-link to&#x3D;&#39;&#x2F;user&#x2F;edit&#39; :value&#x3D;&quot;user.gender&quot; &#x2F;&gt;
+  &lt;van-cell title&#x3D;&quot;电话&quot; is-link to&#x3D;&#39;&#x2F;user&#x2F;edit&#39; :value&#x3D;&quot;user.phone&quot; &#x2F;&gt;
+  &lt;van-cell title&#x3D;&quot;邮箱&quot; is-link to&#x3D;&#39;&#x2F;user&#x2F;edit&#39; :value&#x3D;&quot;user.email&quot; &#x2F;&gt;
+  &lt;van-cell title&#x3D;&quot;星球编号&quot; :value&#x3D;&quot;user.planetCode&quot; &#x2F;&gt;
+  &lt;van-cell title&#x3D;&quot;注册时间&quot; :value&#x3D;&quot;user.createTime.toISOString()&quot; &#x2F;&gt;
+&lt;&#x2F;template&gt;
+
+&lt;script setup&gt;
+const user &#x3D; &#123;
+  id: 1,
+  username: &#39;鱼皮&#39;,
+  userAccount: &#39;dogYupi&#39;,
+  avatarUrl: &#39;https:&#x2F;&#x2F;img1.baidu.com&#x2F;it&#x2F;u&#x3D;1645832847,2375824523&amp;fm&#x3D;253&amp;fmt&#x3D;auto&amp;app&#x3D;138&amp;f&#x3D;JPEG?w&#x3D;480&amp;h&#x3D;480&#39;,
+  gender: &#39;男&#39;,
+  phone: &#39;121311313&#39;,
+  email: &#39;23432@qq.com&#39;,
+  planetCode: &#39;123&#39;,
+  createTime: new Date(),
+&#125;;
+&lt;&#x2F;script&gt;
+
+&lt;style scoped&gt;
+
+&lt;&#x2F;style&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>显示如下 <img src="http://img-md-js.linjsblog.top/img/202301021957535.png" alt="image.png"></p>
+<h4 id="5-创建用户信息修改页"><a href="#5-创建用户信息修改页" class="headerlink" title="5.创建用户信息修改页"></a>5.创建用户信息修改页</h4><p>点击&gt;可进入到修改页 <img src="http://img-md-js.linjsblog.top/img/202301021957544.png" alt="image.png"> 新建一个用户编辑页,命名为UserEditPage.vue 在route.ts添加新路由 <img src="http://img-md-js.linjsblog.top/img/202301021957092.png" alt="image.png"> 对UserPage.vue和UserEditPage.vue进行修改 UserPage.vue： <img src="http://img-md-js.linjsblog.top/img/202301021957859.png" alt="image.png"><img src="http://img-md-js.linjsblog.top/img/202301021957277.png" alt="image.png"> UserEditPage.vue： <img src="http://img-md-js.linjsblog.top/img/202301022000615.png" alt="image.png"> 测试获取参数 <img src="http://img-md-js.linjsblog.top/img/202301021957797.png" alt="image.png"><img src="http://img-md-js.linjsblog.top/img/202301021957430.png" alt="image.png"> 现在可以开始写编辑方法了，从组件库获取相应的表单 <img src="http://img-md-js.linjsblog.top/img/202301022000784.png" alt="image.png"> 代码如下：</p>
+<pre class="line-numbers language-none"><code class="language-none">&lt;van-form @submit&#x3D;&quot;onSubmit&quot;&gt;
+  &lt;van-cell-group inset&gt;
+    &lt;van-field
+      v-model&#x3D;&quot;username&quot;
+      name&#x3D;&quot;用户名&quot;
+      label&#x3D;&quot;用户名&quot;
+      placeholder&#x3D;&quot;用户名&quot;
+      :rules&#x3D;&quot;[&#123; required: true, message: &#39;请填写用户名&#39; &#125;]&quot;
+    &#x2F;&gt;
+    &lt;van-field
+      v-model&#x3D;&quot;password&quot;
+      type&#x3D;&quot;password&quot;
+      name&#x3D;&quot;密码&quot;
+      label&#x3D;&quot;密码&quot;
+      placeholder&#x3D;&quot;密码&quot;
+      :rules&#x3D;&quot;[&#123; required: true, message: &#39;请填写密码&#39; &#125;]&quot;
+    &#x2F;&gt;
+  &lt;&#x2F;van-cell-group&gt;
+  &lt;div style&#x3D;&quot;margin: 16px;&quot;&gt;
+    &lt;van-button round block type&#x3D;&quot;primary&quot; native-type&#x3D;&quot;submit&quot;&gt;
+      提交
+    &lt;&#x2F;van-button&gt;
+  &lt;&#x2F;div&gt;
+&lt;&#x2F;van-form&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>复制粘贴到UserEditPage.vue修改整理如下</p>
+<pre class="line-numbers language-none"><code class="language-none">&lt;template&gt;
+  &lt;van-form @submit&#x3D;&quot;onSubmit&quot;&gt;
+      &lt;van-field
+          v-model&#x3D;&quot;editUser.currentValue&quot;
+          :name&#x3D;&quot;editUser.editKey&quot;
+          :label&#x3D;&quot;editUser.editName&quot;
+          :placeholder&#x3D;&quot;&#39;请输入$&#123;editUser.editName&#125;&#39;&quot;
+      &#x2F;&gt;
+    &lt;div style&#x3D;&quot;margin: 16px;&quot;&gt;
+      &lt;van-button round block type&#x3D;&quot;primary&quot; native-type&#x3D;&quot;submit&quot;&gt;
+        提交
+      &lt;&#x2F;van-button&gt;
+    &lt;&#x2F;div&gt;
+  &lt;&#x2F;van-form&gt;
+&lt;&#x2F;template&gt;
+
+&lt;script setup lang&#x3D;&quot;ts&quot;&gt;
+import &#123;useRoute&#125; from &quot;vue-router&quot;;
+import &#123;ref&#125; from &quot;vue&quot;;
+const route &#x3D; useRoute();
+const editUser &#x3D; ref(&#123;
+  editKey: route.query.editKey,
+  currentValue: route.query.currentValue,
+  editName: route.query.editName,
+&#125;)
+const onSubmit &#x3D; (values) &#x3D;&gt; &#123;
+  &#x2F;&#x2F;todo 把editKey currentValue editName提交到后台
+  console.log(&#39;onSubmit&#39;,values);
+&#125;
+
+console.log(route)
+console.log(route.query)
+
+&lt;&#x2F;script&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>同时别忘了这里多传了一个参数，在UserPage.vue里进行修改 <img src="http://img-md-js.linjsblog.top/img/202301021958105.png" alt="image.png"><img src="http://img-md-js.linjsblog.top/img/202301021958713.png" alt="image.png"> 修改以前不完善的地方，按左边返回按钮会重定向到首页，我们目标是回到上一页 ，修改这个地方 <img src="http://img-md-js.linjsblog.top/img/202301021958370.png" alt="image.png"> 测试如下，修改页获得，点击提交，数据也获得，返回也正常 <img src="http://img-md-js.linjsblog.top/img/202301021958579.png" alt="image.png"><img src="http://img-md-js.linjsblog.top/img/202301021958403.png" alt="image.png"><img src="http://img-md-js.linjsblog.top/img/202301021958461.png" alt="image.png"></p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        Author:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">qwq小小舒</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        Link:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://js6288.github.io/2023/01/02/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0%EF%BC%9A%E4%BC%99%E4%BC%B4%E5%8C%B9%E9%85%8D%E7%B3%BB%E7%BB%9F%EF%BC%88%E4%BA%8C%EF%BC%89/">https://js6288.github.io/2023/01/02/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0%EF%BC%9A%E4%BC%99%E4%BC%B4%E5%8C%B9%E9%85%8D%E7%B3%BB%E7%BB%9F%EF%BC%88%E4%BA%8C%EF%BC%89/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        Reprint policy:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    All articles in this blog are used except for special statements
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    reprint policy. If reproduced, please indicate source
+                    <a href="/about" target="_blank">qwq小小舒</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>Copied successfully, please follow the reprint policy of this article</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">more</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/Java/">
+                                    <span class="chip bg-color">Java</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
+            <div class="card">
+                <a href="/2023/01/03/redisson-%E5%AE%9E%E7%8E%B0%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="Redisson 实现分布式锁">
+                        
+                        <span class="card-title">Redisson 实现分布式锁</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-01-03
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Redis/" class="post-category">
+                                    Redis
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">
+                        <span class="chip bg-color">分布式</span>
+                    </a>
+                    
+                    <a href="/tags/redis/">
+                        <span class="chip bg-color">redis</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                Next&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/01/02/%E5%B0%8F%E9%A1%B9%E7%9B%AE%EF%BC%9A%E4%BC%99%E4%BC%B4%E5%8C%B9%E9%85%8D%E7%B3%BB%E7%BB%9F%EF%BC%88%E4%B8%80%EF%BC%89/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="小项目：伙伴匹配系统（一）">
+                        
+                        <span class="card-title">小项目：伙伴匹配系统（一）</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-01-02
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE/" class="post-category">
+                                    个人项目
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Java/">
+                        <span class="chip bg-color">Java</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;TOC</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="/libs/aplayer/Meting.min.js"></script>
+
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2019-2025</span>
+            
+            <a href="/about" target="_blank">qwq小小舒</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            
+            <br>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;Total visits:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;Total visitors:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/blinkfox" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:1181062873@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1181062873" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1181062873" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;Search</span>
+            <input type="search" id="searchInput" name="s" placeholder="Please enter a search keyword"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 白天和黑夜主题 -->
+<div class="stars-con">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>  
+</div>
+
+<script>
+    function switchNightMode() {
+        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
+        setTimeout(function () {
+            $('body').hasClass('DarkMode') 
+            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
+            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
+            
+            setTimeout(function () {
+            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
+                $(this).remove()
+            })
+            }, 2e3)
+        })
+    }
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+    
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

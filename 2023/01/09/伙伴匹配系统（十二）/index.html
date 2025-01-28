@@ -1,0 +1,1952 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="伙伴匹配系统（十二）, 小小舒的爪哇天地">
+    <meta name="description" content="笔记前端开发
+开发前端的功能
+搜索队伍 √
+更新队伍（仅队伍的创始人可见） √
+查看个人已加入队伍 √
+查看个人创建的队伍 √
+解散队伍 √
+退出队伍 √
+
+
+随机匹配 30 - 40 min
+完成之前的遗留问题 todo
+
+前端不同页面怎">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>伙伴匹配系统（十二） | 小小舒的爪哇天地</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    
+
+
+    <!-- bg-cover style     -->
+
+
+
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" type="text/css" href="/css/matery.css">
+<link rel="stylesheet" type="text/css" href="/css/my.css">
+<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+
+
+
+
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/css/post.css">
+
+
+
+
+    
+        <link rel="stylesheet" type="text/css" href="/css/reward.css">
+    
+
+
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">小小舒的爪哇天地</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>Index</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>Tags</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>Categories</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>Archives</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>About</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>Contact</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>Friends</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="Search" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <li>
+    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
+      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">小小舒的爪哇天地</div>
+        <div class="logo-desc">
+            
+            Life is coding, I will debug it.
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			Index
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			Tags
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			Categories
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			Archives
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			About
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			Contact
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			Friends
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/15.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">伙伴匹配系统（十二）</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Java/">
+                                <span class="chip bg-color">Java</span>
+                            </a>
+                        
+                            <a href="/tags/%E7%AE%97%E6%B3%95/">
+                                <span class="chip bg-color">算法</span>
+                            </a>
+                        
+                            <a href="/tags/Spring-Boot/">
+                                <span class="chip bg-color">Spring Boot</span>
+                            </a>
+                        
+                            <a href="/tags/vue/">
+                                <span class="chip bg-color">vue</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE/" class="post-category">
+                                个人项目
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
+                    2023-01-09
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="笔记"><a href="#笔记" class="headerlink" title="笔记"></a>笔记</h2><h3 id="前端开发"><a href="#前端开发" class="headerlink" title="前端开发"></a>前端开发</h3><ol>
+<li>开发前端的功能<ol>
+<li>搜索队伍 √</li>
+<li>更新队伍（仅队伍的创始人可见） √</li>
+<li>查看个人已加入队伍 √</li>
+<li>查看个人创建的队伍 √</li>
+<li>解散队伍 √</li>
+<li>退出队伍 √</li>
+</ol>
+</li>
+<li>随机匹配 30 - 40 min</li>
+<li>完成之前的遗留问题 todo</li>
+</ol>
+<h3 id="前端不同页面怎么传递数据？"><a href="#前端不同页面怎么传递数据？" class="headerlink" title="前端不同页面怎么传递数据？"></a>前端不同页面怎么传递数据？</h3><ol>
+<li><strong>url querystring（xxx?id&#x3D;1）</strong> 比较适用于页面跳转</li>
+<li><strong>url（&#x2F;team&#x2F;:id，xxx&#x2F;1）</strong></li>
+<li>hash (&#x2F;team#1)</li>
+<li>localStorage</li>
+<li><strong>context（全局变量，同页面或整个项目要访问公共变量）</strong></li>
+</ol>
+<h3 id="随机匹配"><a href="#随机匹配" class="headerlink" title="随机匹配"></a>随机匹配</h3><p>为了帮大家更快地发现和自己兴趣相同的朋友 匹配 1 个还是匹配多个？ 答：匹配多个，并且按照匹配的相似度从高到低排序 怎么匹配？（根据什么匹配） 答：标签 tags 还可以根据 user_team 匹配加入相同队伍的用户 本质：找到有相似标签的用户 举例： 用户 A：[Java, 大一, 男] 用户 B：[Java, 大二, 男] 用户 C：[Python, 大二, 女] 用户 D：[Java, 大一, 女]</p>
+<h4 id="1-怎么匹配"><a href="#1-怎么匹配" class="headerlink" title="1. 怎么匹配"></a>1. 怎么匹配</h4><ol>
+<li>找到有共同标签最多的用户（TopN）</li>
+<li>共同标签越多，分数越高，越排在前面</li>
+<li>如果没有匹配的用户，随机推荐几个（降级方案）</li>
+</ol>
+<p>编辑距离算法：<a target="_blank" rel="noopener" href="https://blog.csdn.net/DBC_121/article/details/104198838">https://blog.csdn.net/DBC_121&#x2F;article&#x2F;details&#x2F;104198838</a> 最小编辑距离：字符串 1 通过最少多少次增删改字符的操作可以变成字符串 2 余弦相似度算法：<a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_55613022/article/details/125683937">https://blog.csdn.net/m0_55613022&#x2F;article&#x2F;details&#x2F;125683937</a>（如果需要带权重计算，比如学什么方向最重要，性别相对次要）</p>
+<h4 id="2-怎么对所有用户匹配，取-TOP"><a href="#2-怎么对所有用户匹配，取-TOP" class="headerlink" title="2. 怎么对所有用户匹配，取 TOP"></a>2. 怎么对所有用户匹配，取 TOP</h4><p>直接取出所有用户，依次和当前用户计算分数，取 TOP N（54 秒） 优化方法：</p>
+<ol>
+<li>切忌不要在数据量大的时候循环输出日志（取消掉日志后 20 秒）</li>
+<li>Map 存了所有的分数信息，占用内存解决：维护一个固定长度的有序集合（sortedSet），只保留分数最高的几个用户（时间换空间）e.g.【3, 4, 5, 6, 7】取 TOP 5，id 为 1 的用户就不用放进去了</li>
+<li>细节：剔除自己 √</li>
+<li>尽量只查需要的数据：<ol>
+<li>过滤掉标签为空的用户 √</li>
+<li>根据部分标签取用户（前提是能区分出来哪个标签比较重要）</li>
+<li>只查需要的数据（比如 id 和 tags） √（7.0s）</li>
+</ol>
+</li>
+<li>提前查？（定时任务）<ol>
+<li>提前把所有用户给缓存（不适用于经常更新的数据）</li>
+<li>提前运算出来结果，缓存（针对一些重点用户，提前缓存）</li>
+</ol>
+</li>
+</ol>
+<p>大数据推荐，比如说有几亿个商品，难道要查出来所有的商品？ 难道要对所有的数据计算一遍相似度？ 检索 &#x3D;&gt; 召回 &#x3D;&gt; 粗排 &#x3D;&gt; 精排 &#x3D;&gt; 重排序等等 检索：尽可能多地查符合要求的数据（比如按记录查） 召回：查询可能要用到的数据（不做运算） 粗排：粗略排序，简单地运算（运算相对轻量） 精排：精细排序，确定固定排位</p>
+<h3 id="分表学习建议"><a href="#分表学习建议" class="headerlink" title="分表学习建议"></a>分表学习建议</h3><p>mycat、sharding sphere 框架 一致性 hash</p>
+<h3 id="队伍操作权限控制"><a href="#队伍操作权限控制" class="headerlink" title="队伍操作权限控制"></a>队伍操作权限控制</h3><p>加入队伍： 仅非队伍创建人、且未加入队伍的人可见 更新队伍：仅创建人可见 解散队伍：仅创建人可见 退出队伍：创建人不可见，仅已加入队伍的人可见 加载骨架屏特效 ✔ 解决：van-skeleton 组件 仅加入队伍和创建队伍的人能看到队伍操作按钮（listTeam 接口要能获取我加入的队伍状态） ✔ 方案 1：前端查询我加入了哪些队伍列表，然后判断每个队伍 id 是否在列表中（前端要多发一次请求） 方案 2：在后端去做上述事情（推荐） 前端导航栏死【标题】问题 ✔ 解决：使用 router.beforeEach，根据要跳转页面的 url 路径 匹配 config&#x2F;routes 配置的 title 字段。</p>
+<h2 id="一、前端页面开发"><a href="#一、前端页面开发" class="headerlink" title="一、前端页面开发"></a>一、前端页面开发</h2><h3 id="1-搜索框"><a href="#1-搜索框" class="headerlink" title="1.搜索框"></a>1.搜索框</h3><pre class="line-numbers language-none"><code class="language-none">我们选择vant组件库里的基础搜索框，复制到TeamPage页面，同时还有查询为空时，显示的无结果页面（用户页面以写过）<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="http://img-md-js.linjsblog.top/img/202301071730028.png" alt="image.png"> 因为，我们一次性挂载本质性也是搜索队伍，所以我们把代码提取出来</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">/**
+ * 搜索队伍
+ * @param val
+ * @returns &#123;Promise&lt;void>&#125;
+ */</span>
+<span class="token keyword">const</span> listTeam <span class="token operator">=</span> <span class="token keyword">async</span> <span class="token punctuation">(</span>val <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">const</span> res <span class="token operator">=</span> <span class="token keyword">await</span> myAxios<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">"/team/list"</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">params</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+      <span class="token literal-property property">searchText</span><span class="token operator">:</span> val<span class="token punctuation">,</span>
+      <span class="token literal-property property">pageNum</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>res<span class="token operator">?.</span>code <span class="token operator">===</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    teamList<span class="token punctuation">.</span>value <span class="token operator">=</span> res<span class="token punctuation">.</span>data<span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+    Toast<span class="token punctuation">.</span><span class="token function">fail</span><span class="token punctuation">(</span><span class="token string">'加载队伍失败，请刷新重试'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>挂载和搜索框修改为下图所示：（PS：搜索直接回车就可行） <img src="http://img-md-js.linjsblog.top/img/202301071730241.png" alt="image.png"> 测试 搜索一个队伍，和查询一个不存在的队伍 <img src="http://img-md-js.linjsblog.top/img/202301071730197.png" alt="image.png"><img src="http://img-md-js.linjsblog.top/img/202301071731772.png" alt="image.png"></p>
+<h3 id="2-更新页面"><a href="#2-更新页面" class="headerlink" title="2.更新页面"></a>2.更新页面</h3><p>分析：我们的更新页面和新建队伍页面类似，所以我们直接复制TeamAddPage,创建TeamUpdateTeam页面</p>
+<h4 id="1-完善TeamCardList"><a href="#1-完善TeamCardList" class="headerlink" title="(1).完善TeamCardList"></a>(1).完善TeamCardList</h4><p>我们首先在队伍页面，创建一个按钮来跳转到更新页面，但是只有当前用户是队伍创建者才可以看到次按钮，我们可以直接写在TeamCardList组件里 按钮添加 <img src="http://img-md-js.linjsblog.top/img/202301071731870.png" alt="image.png"> 由于需要判断当前用户是否为队伍创建者，我们要获取当前用户（调用以前写的方法） <img src="http://img-md-js.linjsblog.top/img/202301071731214.png" alt="image.png"> 写跳转按钮的逻辑 <img src="http://img-md-js.linjsblog.top/img/202301071731248.png" alt="image.png"> PS：别忘了引入useRouter 完整代码如下：</p>
+<pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
+  &lt;div
+      id&#x3D;&quot;teamCardList&quot;
+  &gt;
+    &lt;van-card
+        v-for&#x3D;&quot;team in props.teamList&quot;
+        :thumb&#x3D;&quot;mouse&quot;
+        :desc&#x3D;&quot;team.description&quot;
+        :title&#x3D;&quot;&#96;$&#123;team.name&#125;&#96;&quot;
+    &gt;
+      &lt;template #tags&gt;
+        &lt;van-tag plain type&#x3D;&quot;danger&quot; style&#x3D;&quot;margin-right: 8px; margin-top: 8px&quot;&gt;
+          &#123;&#123;
+            teamStatusEnum[team.status]
+          &#125;&#125;
+        &lt;&#x2F;van-tag&gt;
+      &lt;&#x2F;template&gt;
+      &lt;template #bottom&gt;
+        &lt;div&gt;
+          &#123;&#123; &#39;最大人数: &#39; + team.maxNum &#125;&#125;
+        &lt;&#x2F;div&gt;
+        &lt;div v-if&#x3D;&quot;team.expireTime&quot;&gt;
+          &#123;&#123; &#39;过期时间: &#39; + team.expireTime &#125;&#125;
+        &lt;&#x2F;div&gt;
+        &lt;div&gt;
+          &#123;&#123; &#39;创建时间: &#39; + team.createTime &#125;&#125;
+        &lt;&#x2F;div&gt;
+      &lt;&#x2F;template&gt;
+      &lt;template #footer&gt;
+        &lt;van-button size&#x3D;&quot;small&quot; type&#x3D;&quot;primary&quot;  plain @click&#x3D;&quot;doJoinTeam(team.id)&quot;&gt;加入队伍&lt;&#x2F;van-button&gt;
+        &lt;van-button v-if&#x3D;&quot;team.userId &#x3D;&#x3D;&#x3D; currentUser?.id&quot; size&#x3D;&quot;small&quot; plain
+                    @click&#x3D;&quot;doUpdateTeam(team.id)&quot;&gt;更新队伍
+        &lt;&#x2F;van-button&gt;
+      &lt;&#x2F;template&gt;
+    &lt;&#x2F;van-card&gt;
+  &lt;&#x2F;div&gt;
+
+&lt;&#x2F;template&gt;
+
+&lt;script setup lang&#x3D;&quot;ts&quot;&gt;
+import &#123;TeamType&#125; from &quot;..&#x2F;models&#x2F;team&quot;;
+import &#123;teamStatusEnum&#125; from &quot;..&#x2F;constants&#x2F;team&quot;;
+import mouse from &#39;..&#x2F;assets&#x2F;mouse.jpg&#39;;
+import myAxios from &quot;..&#x2F;plugins&#x2F;myAxios&quot;;
+import &#123;Toast&#125; from &quot;vant&quot;;
+
+import &#123;useRouter&#125; from &quot;vue-router&quot;;
+import &#123;onMounted, ref&#125; from &quot;vue&quot;;
+import &#123;getCurrentUser&#125; from &quot;..&#x2F;services&#x2F;user&quot;;
+
+interface TeamCardListProps &#123;
+  teamList: TeamType[];
+&#125;
+
+const props &#x3D; withDefaults(defineProps&lt;TeamCardListProps&gt;(), &#123;
+  &#x2F;&#x2F; @ts-ignore
+  teamList: [] as TeamType[],
+&#125;);
+
+const router &#x3D; useRouter();
+
+&#x2F;**
+ * 加入队伍
+ *&#x2F;
+const doJoinTeam &#x3D; async (id:number) &#x3D;&gt; &#123;
+  const res &#x3D; await myAxios.post(&#39;&#x2F;team&#x2F;join&#39;, &#123;
+    teamId: id,
+
+  &#125;);
+  if (res?.code &#x3D;&#x3D;&#x3D; 0) &#123;
+    Toast.success(&#39;加入成功&#39;);
+  &#125; else &#123;
+    Toast.fail(&#39;加入失败&#39; + (res.description ? &#96;，$&#123;res.description&#125;&#96; : &#39;&#39;));
+  &#125;
+&#125;
+
+&#x2F;**
+ * 跳转至更新队伍页
+ * @param id
+ *&#x2F;
+const doUpdateTeam &#x3D; (id: number) &#x3D;&gt; &#123;
+  router.push(&#123;
+    path: &#39;&#x2F;team&#x2F;update&#39;,
+    query: &#123;
+      id,
+    &#125;
+  &#125;)
+&#125;
+
+const currentUser &#x3D; ref();
+
+onMounted(async () &#x3D;&gt;&#123;
+  currentUser.value &#x3D; await getCurrentUser();
+&#125;)
+
+&lt;&#x2F;script&gt;
+
+&lt;style scoped&gt;
+#teamCardList :deep(.van-image__img) &#123;
+  height: 128px;
+  object-fit: unset;
+&#125;
+&lt;&#x2F;style&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="2-修改TeamUpdateTeam"><a href="#2-修改TeamUpdateTeam" class="headerlink" title="(2).修改TeamUpdateTeam"></a>(2).修改TeamUpdateTeam</h4><p>删除不能修改的组件（最大人数）和固定显示的参数（initFormData），修改提交逻辑（由于是复制得来的，千万别忘了，不然就是增加队伍了） 关键是获取之前队伍的信息。引入Route，来获取上个页面传来的参数 定义变量id <img src="http://img-md-js.linjsblog.top/img/202301071944802.png" alt="image.png"> 挂载获取之前队伍的信息 <img src="http://img-md-js.linjsblog.top/img/202301071945589.png" alt="image.png"> 完整代码如下：</p>
+<pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
+  &lt;div id&#x3D;&quot;teamAddPage&quot;&gt;
+    &lt;van-form @submit&#x3D;&quot;onSubmit&quot;&gt;
+      &lt;van-cell-group inset&gt;
+        &lt;van-field
+            v-model&#x3D;&quot;addTeamData.name&quot;
+            name&#x3D;&quot;name&quot;
+            label&#x3D;&quot;队伍名&quot;
+            placeholder&#x3D;&quot;请输入队伍名&quot;
+            :rules&#x3D;&quot;[&#123; required: true, message: &#39;请输入队伍名&#39; &#125;]&quot;
+        &#x2F;&gt;
+        &lt;van-field
+            v-model&#x3D;&quot;addTeamData.description&quot;
+            rows&#x3D;&quot;4&quot;
+            autosize
+            label&#x3D;&quot;队伍描述&quot;
+            type&#x3D;&quot;textarea&quot;
+            placeholder&#x3D;&quot;请输入队伍描述&quot;
+        &#x2F;&gt;
+        &lt;van-field
+            is-link
+            readonly
+            name&#x3D;&quot;datetimePicker&quot;
+            label&#x3D;&quot;过期时间&quot;
+            :placeholder&#x3D;&quot;addTeamData.expireTime ?? &#39;点击选择过期时间&#39;&quot;
+            @click&#x3D;&quot;showPicker &#x3D; true&quot;
+        &#x2F;&gt;
+        &lt;van-popup v-model:show&#x3D;&quot;showPicker&quot; position&#x3D;&quot;bottom&quot;&gt;
+          &lt;van-datetime-picker
+              v-model&#x3D;&quot;addTeamData.expireTime&quot;
+              @confirm&#x3D;&quot;showPicker &#x3D; false&quot;
+              type&#x3D;&quot;datetime&quot;
+              title&#x3D;&quot;请选择过期时间&quot;
+              :min-date&#x3D;&quot;minDate&quot;
+          &#x2F;&gt;
+        &lt;&#x2F;van-popup&gt;
+        &lt;van-field name&#x3D;&quot;radio&quot; label&#x3D;&quot;队伍状态&quot;&gt;
+          &lt;template #input&gt;
+            &lt;van-radio-group v-model&#x3D;&quot;addTeamData.status&quot; direction&#x3D;&quot;horizontal&quot;&gt;
+              &lt;van-radio name&#x3D;&quot;0&quot;&gt;公开&lt;&#x2F;van-radio&gt;
+              &lt;van-radio name&#x3D;&quot;1&quot;&gt;私有&lt;&#x2F;van-radio&gt;
+              &lt;van-radio name&#x3D;&quot;2&quot;&gt;加密&lt;&#x2F;van-radio&gt;
+            &lt;&#x2F;van-radio-group&gt;
+          &lt;&#x2F;template&gt;
+        &lt;&#x2F;van-field&gt;
+        &lt;van-field
+            v-if&#x3D;&quot;Number(addTeamData.status) &#x3D;&#x3D;&#x3D; 2&quot;
+            v-model&#x3D;&quot;addTeamData.password&quot;
+            type&#x3D;&quot;password&quot;
+            name&#x3D;&quot;password&quot;
+            label&#x3D;&quot;密码&quot;
+            placeholder&#x3D;&quot;请输入队伍密码&quot;
+            :rules&#x3D;&quot;[&#123; required: true, message: &#39;请填写密码&#39; &#125;]&quot;
+        &#x2F;&gt;
+      &lt;&#x2F;van-cell-group&gt;
+      &lt;div style&#x3D;&quot;margin: 16px;&quot;&gt;
+        &lt;van-button round block type&#x3D;&quot;primary&quot; native-type&#x3D;&quot;submit&quot;&gt;
+          提交
+        &lt;&#x2F;van-button&gt;
+      &lt;&#x2F;div&gt;
+    &lt;&#x2F;van-form&gt;
+  &lt;&#x2F;div&gt;
+&lt;&#x2F;template&gt;
+
+&lt;script setup lang&#x3D;&quot;ts&quot;&gt;
+
+import &#123;useRoute, useRouter&#125; from &quot;vue-router&quot;;
+import myAxios from &quot;..&#x2F;plugins&#x2F;myAxios&quot;;
+import &#123;Toast&#125; from &quot;vant&quot;;
+import &#123;onMounted, ref&#125; from &quot;vue&quot;;
+import &#123;TeamType&#125; from &quot;..&#x2F;models&#x2F;team&quot;;
+
+const router &#x3D; useRouter();
+const route &#x3D; useRoute();
+&#x2F;&#x2F; 展示日期选择器
+const showPicker &#x3D; ref(false);
+
+const minDate &#x3D; new Date();
+
+&#x2F;&#x2F; 需要用户填写的表单数据
+const addTeamData &#x3D; ref(&#123;&#125;)
+
+const id &#x3D; route.query.id;
+
+&#x2F;&#x2F;获取之前队伍的信息
+onMounted(async () &#x3D;&gt; &#123;
+  if (id &lt;&#x3D; 0) &#123;
+    Toast.fail(&quot;队伍加载失败&quot;);
+    return;
+  &#125;
+  const res &#x3D; await myAxios.get(&quot;&#x2F;team&#x2F;get&quot;, &#123;
+    params: &#123;
+      id: id,
+    &#125;
+  &#125;);
+  if (res?.code &#x3D;&#x3D;&#x3D; 0) &#123;
+    addTeamData.value &#x3D; res.data;
+  &#125; else &#123;
+    Toast.fail(&quot;队伍加载失败，请刷新重试&quot;);
+  &#125;
+&#125;)
+
+&#x2F;&#x2F; 提交
+const onSubmit &#x3D; async () &#x3D;&gt; &#123;
+  const postData &#x3D; &#123;
+    ...addTeamData.value,
+    status: Number(addTeamData.value.status)
+  &#125;
+  &#x2F;&#x2F; todo 前端参数校验
+  const res &#x3D; await myAxios.post(&quot;&#x2F;team&#x2F;update&quot;, postData);
+  if (res?.code &#x3D;&#x3D;&#x3D; 0 &amp;&amp; res.data) &#123;
+    Toast.success(&#39;更新成功&#39;);
+    router.push(&#123;
+      path: &#39;&#x2F;team&#39;,
+      replace: true,
+    &#125;);
+  &#125; else &#123;
+    Toast.success(&#39;更新失败&#39;);
+  &#125;
+&#125;
+&lt;&#x2F;script&gt;
+
+&lt;style scoped&gt;
+#teamPage &#123;
+&#125;
+&lt;&#x2F;style&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>踩坑处：后端update接口要将@RequestBody删去</strong> <strong>否则会报Required request body is missing的错误（我这边是这样的）</strong></p>
+<h4 id="3-测试：点击更新队伍修改参数"><a href="#3-测试：点击更新队伍修改参数" class="headerlink" title="(3).测试：点击更新队伍修改参数"></a>(3).测试：点击更新队伍修改参数</h4><p><img src="http://img-md-js.linjsblog.top/img/202301072007033.png" alt="image.png"><img src="http://img-md-js.linjsblog.top/img/202301072008239.png" alt="image.png"></p>
+<h3 id="3-查看个人已加入队伍"><a href="#3-查看个人已加入队伍" class="headerlink" title="3.查看个人已加入队伍"></a>3.查看个人已加入队伍</h3><h4 id="1-编写后端接口"><a href="#1-编写后端接口" class="headerlink" title="(1).编写后端接口"></a>(1).编写后端接口</h4><p>复用 listTeam 方法，只新增查询条件，不做修改（开闭原则） 获取当前用户已加入的队伍</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
+ * 获取我创建的队伍
+ *
+ * @param teamQuery
+ * @param request
+ * @return
+ */</span>
+<span class="token annotation punctuation">@GetMapping</span><span class="token punctuation">(</span><span class="token string">"/list/my/create"</span><span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token class-name">BaseResponse</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">List</span><span class="token punctuation">&lt;</span><span class="token class-name">TeamUserVO</span><span class="token punctuation">></span><span class="token punctuation">></span></span> <span class="token function">listMyCreateTeams</span><span class="token punctuation">(</span><span class="token class-name">TeamQuery</span> teamQuery<span class="token punctuation">,</span> <span class="token class-name">HttpServletRequest</span> request<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>teamQuery <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">BusinessException</span><span class="token punctuation">(</span><span class="token class-name">ErrorCode</span><span class="token punctuation">.</span><span class="token constant">PARAMS_ERROR</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token class-name">User</span> loginUser <span class="token operator">=</span> userService<span class="token punctuation">.</span><span class="token function">getLoginUser</span><span class="token punctuation">(</span>request<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    teamQuery<span class="token punctuation">.</span><span class="token function">setUserId</span><span class="token punctuation">(</span>loginUser<span class="token punctuation">.</span><span class="token function">getId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">TeamUserVO</span><span class="token punctuation">></span></span> teamList <span class="token operator">=</span> teamService<span class="token punctuation">.</span><span class="token function">listTeams</span><span class="token punctuation">(</span>teamQuery<span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token class-name">ResultUtils</span><span class="token punctuation">.</span><span class="token function">success</span><span class="token punctuation">(</span>teamList<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>我们查询加入的队伍需要用到id的列表，所以在Teamquery里增加idList字段 <img src="http://img-md-js.linjsblog.top/img/202301072021564.png" alt="image.png"> 获取我加入的队伍</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
+ * 获取我加入的队伍
+ *
+ * @param teamQuery
+ * @param request
+ * @return
+ */</span>
+<span class="token annotation punctuation">@GetMapping</span><span class="token punctuation">(</span><span class="token string">"/list/my/join"</span><span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token class-name">BaseResponse</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">List</span><span class="token punctuation">&lt;</span><span class="token class-name">TeamUserVO</span><span class="token punctuation">></span><span class="token punctuation">></span></span> <span class="token function">listMyJoinTeams</span><span class="token punctuation">(</span><span class="token class-name">TeamQuery</span> teamQuery<span class="token punctuation">,</span> <span class="token class-name">HttpServletRequest</span> request<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>teamQuery <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">BusinessException</span><span class="token punctuation">(</span><span class="token class-name">ErrorCode</span><span class="token punctuation">.</span><span class="token constant">PARAMS_ERROR</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token class-name">User</span> loginUser <span class="token operator">=</span> userService<span class="token punctuation">.</span><span class="token function">getLoginUser</span><span class="token punctuation">(</span>request<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token class-name">QueryWrapper</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">UserTeam</span><span class="token punctuation">></span></span> queryWrapper <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">QueryWrapper</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    queryWrapper<span class="token punctuation">.</span><span class="token function">eq</span><span class="token punctuation">(</span><span class="token string">"userId"</span><span class="token punctuation">,</span> loginUser<span class="token punctuation">.</span><span class="token function">getId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">UserTeam</span><span class="token punctuation">></span></span> userTeamList <span class="token operator">=</span> userTeamService<span class="token punctuation">.</span><span class="token function">list</span><span class="token punctuation">(</span>queryWrapper<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// 取出不重复的队伍 id</span>
+    <span class="token comment">// teamId userId</span>
+    <span class="token class-name">Map</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Long</span><span class="token punctuation">,</span> <span class="token class-name">List</span><span class="token punctuation">&lt;</span><span class="token class-name">UserTeam</span><span class="token punctuation">></span><span class="token punctuation">></span></span> listMap <span class="token operator">=</span> userTeamList<span class="token punctuation">.</span><span class="token function">stream</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">collect</span><span class="token punctuation">(</span><span class="token class-name">Collectors</span><span class="token punctuation">.</span><span class="token function">groupingBy</span><span class="token punctuation">(</span><span class="token class-name">UserTeam</span><span class="token operator">::</span><span class="token function">getTeamId</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Long</span><span class="token punctuation">></span></span> idList <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span>listMap<span class="token punctuation">.</span><span class="token function">keySet</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    teamQuery<span class="token punctuation">.</span><span class="token function">setIdList</span><span class="token punctuation">(</span>idList<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">TeamUserVO</span><span class="token punctuation">></span></span> teamList <span class="token operator">=</span> teamService<span class="token punctuation">.</span><span class="token function">listTeams</span><span class="token punctuation">(</span>teamQuery<span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token class-name">ResultUtils</span><span class="token punctuation">.</span><span class="token function">success</span><span class="token punctuation">(</span>teamList<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>修改下listTeam方法，加一层校验 <img src="http://img-md-js.linjsblog.top/img/202301072021466.png" alt="image.png"></p>
+<h4 id="2-后端测试"><a href="#2-后端测试" class="headerlink" title="(2).后端测试"></a>(2).后端测试</h4><p>自行准备下适合测试测数据（原来的数据都是被逻辑删除） 我这里在数据库里面设置14,24号队伍，其中24的创建者为4,14队伍创建者是550007，4加入了14队伍 <img src="http://img-md-js.linjsblog.top/img/202301072022078.png" alt="image.png"> <img src="http://img-md-js.linjsblog.top/img/202301072022592.png" alt="image.png"></p>
+<h4 id="3-创建前端页面"><a href="#3-创建前端页面" class="headerlink" title="(3).创建前端页面"></a>(3).创建前端页面</h4><p>我们复制一份UserPage，命名为UserUpdatePage，修改UserPage（我们只需要当前用户，修改信息，我创建的队伍，我加入的队伍） 修改UserPage如下：</p>
+<pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
+  &lt;template v-if&#x3D;&quot;user&quot;&gt;
+    &lt;van-cell title&#x3D;&quot;当前用户&quot; :value&#x3D;&quot;user?.username&quot; &#x2F;&gt;
+    &lt;van-cell title&#x3D;&quot;修改信息&quot; is-link to&#x3D;&quot;&#x2F;user&#x2F;update&quot; &#x2F;&gt;
+    &lt;van-cell title&#x3D;&quot;我创建的队伍&quot; is-link to&#x3D;&quot;&#x2F;user&#x2F;team&#x2F;create&quot; &#x2F;&gt;
+    &lt;van-cell title&#x3D;&quot;我加入的队伍&quot; is-link to&#x3D;&quot;&#x2F;user&#x2F;team&#x2F;join&quot; &#x2F;&gt;
+  &lt;&#x2F;template&gt;
+&lt;&#x2F;template&gt;
+
+&lt;script setup lang&#x3D;&quot;ts&quot;&gt;
+import &#123;useRouter&#125; from &quot;vue-router&quot;;
+import &#123;onMounted, ref&#125; from &quot;vue&quot;;
+import myAxios from &quot;..&#x2F;plugins&#x2F;myAxios.js&quot;;
+import &#123;Toast&#125; from &quot;vant&quot;;
+import &#123;getCurrentUser&#125; from &quot;..&#x2F;services&#x2F;user&quot;;
+
+&#x2F;&#x2F; const user &#x3D; &#123;
+&#x2F;&#x2F;   id: 1,
+&#x2F;&#x2F;   username: &#39;鱼皮&#39;,
+&#x2F;&#x2F;   userAccount: &#39;dogYupi&#39;,
+&#x2F;&#x2F;   avatarUrl: &#39;https:&#x2F;&#x2F;img1.baidu.com&#x2F;it&#x2F;u&#x3D;1645832847,2375824523&amp;fm&#x3D;253&amp;fmt&#x3D;auto&amp;app&#x3D;138&amp;f&#x3D;JPEG?w&#x3D;480&amp;h&#x3D;480&#39;,
+&#x2F;&#x2F;   gender: &#39;男&#39;,
+&#x2F;&#x2F;   phone: &#39;121311313&#39;,
+&#x2F;&#x2F;   email: &#39;23432@qq.com&#39;,
+&#x2F;&#x2F;   planetCode: &#39;123&#39;,
+&#x2F;&#x2F;   createTime: new Date(),
+&#x2F;&#x2F; &#125;;
+
+const user &#x3D; ref();
+
+onMounted(async ()&#x3D;&gt;&#123;
+  &#x2F;&#x2F; const res &#x3D; await myAxios.get(&#39;&#x2F;user&#x2F;current&#39;);
+  &#x2F;&#x2F; if (res.code &#x3D;&#x3D;&#x3D; 0)&#123;
+  &#x2F;&#x2F;   user.value &#x3D;res.data;
+  &#x2F;&#x2F;   Toast.success(&#39;获取用户信息成功&#39;);
+  &#x2F;&#x2F; &#125;else &#123;
+  &#x2F;&#x2F;   Toast.fail(&#39;获取用户信息成功&#39;);
+  &#x2F;&#x2F; &#125;
+  user.value&#x3D;await getCurrentUser();
+&#125;)
+
+const router &#x3D; useRouter();
+
+const toEdit &#x3D; (editKey: string, editName: string, currentValue: string) &#x3D;&gt; &#123;
+  router.push(&#123;
+    path: &#39;&#x2F;user&#x2F;edit&#39;,
+    query: &#123;
+      editKey,
+      editName,
+      currentValue,
+    &#125;
+  &#125;)
+&#125;
+&lt;&#x2F;script&gt;
+
+&lt;style scoped&gt;
+
+&lt;&#x2F;style&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>创建页面：查询加入队伍页面和查询创建队伍页面（复制TeamPage页面，形式相同） PS:别忘了在路由里面添加这两个页面 因为我们把原来的用户页面改为用户更新页面，路由里也要修改 <img src="http://img-md-js.linjsblog.top/img/202301072220323.png" alt="image.png"> 查询加入队伍页面</p>
+<pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
+  &lt;div id&#x3D;&quot;teamPage&quot;&gt;
+    &lt;van-search v-model&#x3D;&quot;searchText&quot; placeholder&#x3D;&quot;搜索队伍&quot; @search&#x3D;&quot;onSearch&quot; &#x2F;&gt;
+    &lt;team-card-list :teamList&#x3D;&quot;teamList&quot; &#x2F;&gt;
+    &lt;van-empty v-if&#x3D;&quot;teamList?.length &lt; 1&quot; description&#x3D;&quot;数据为空&quot;&#x2F;&gt;
+  &lt;&#x2F;div&gt;
+&lt;&#x2F;template&gt;
+
+&lt;script setup lang&#x3D;&quot;ts&quot;&gt;
+
+import &#123;useRouter&#125; from &quot;vue-router&quot;;
+import TeamCardList from &quot;..&#x2F;components&#x2F;TeamCardList.vue&quot;;
+import &#123;onMounted, ref&#125; from &quot;vue&quot;;
+import myAxios from &quot;..&#x2F;plugins&#x2F;myAxios&quot;;
+import &#123;Toast&#125; from &quot;vant&quot;;
+
+const router &#x3D; useRouter();
+const searchText &#x3D; ref(&#39;&#39;);
+
+const teamList &#x3D; ref([]);
+
+&#x2F;**
+ * 搜索队伍
+ * @param val
+ * @returns &#123;Promise&lt;void&gt;&#125;
+ *&#x2F;
+const listTeam &#x3D; async (val &#x3D; &#39;&#39;) &#x3D;&gt; &#123;
+  const res &#x3D; await myAxios.get(&quot;&#x2F;team&#x2F;list&#x2F;my&#x2F;join&quot;, &#123;
+    params: &#123;
+      searchText: val,
+      pageNum: 1,
+    &#125;,
+  &#125;);
+  if (res?.code &#x3D;&#x3D;&#x3D; 0) &#123;
+    teamList.value &#x3D; res.data;
+  &#125; else &#123;
+    Toast.fail(&#39;加载队伍失败，请刷新重试&#39;);
+  &#125;
+&#125;
+
+&#x2F;&#x2F; 页面加载时只触发一次
+onMounted( () &#x3D;&gt; &#123;
+  listTeam();
+&#125;)
+
+const onSearch &#x3D; (val) &#x3D;&gt; &#123;
+  listTeam(val);
+&#125;;
+
+&lt;&#x2F;script&gt;
+
+&lt;style scoped&gt;
+#teamPage &#123;
+
+&#125;
+&lt;&#x2F;style&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>查询创建队伍页面</p>
+<pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
+  &lt;div id&#x3D;&quot;teamPage&quot;&gt;
+    &lt;van-search v-model&#x3D;&quot;searchText&quot; placeholder&#x3D;&quot;搜索队伍&quot; @search&#x3D;&quot;onSearch&quot; &#x2F;&gt;
+    &lt;van-button type&#x3D;&quot;primary&quot; @click&#x3D;&quot;doJoinTeam&quot;&gt;创建队伍&lt;&#x2F;van-button&gt;
+    &lt;team-card-list :teamList&#x3D;&quot;teamList&quot; &#x2F;&gt;
+    &lt;van-empty v-if&#x3D;&quot;teamList?.length &lt; 1&quot; description&#x3D;&quot;数据为空&quot;&#x2F;&gt;
+  &lt;&#x2F;div&gt;
+&lt;&#x2F;template&gt;
+
+&lt;script setup lang&#x3D;&quot;ts&quot;&gt;
+
+import &#123;useRouter&#125; from &quot;vue-router&quot;;
+import TeamCardList from &quot;..&#x2F;components&#x2F;TeamCardList.vue&quot;;
+import &#123;onMounted, ref&#125; from &quot;vue&quot;;
+import myAxios from &quot;..&#x2F;plugins&#x2F;myAxios&quot;;
+import &#123;Toast&#125; from &quot;vant&quot;;
+
+const router &#x3D; useRouter();
+const searchText &#x3D; ref(&#39;&#39;);
+
+&#x2F;&#x2F; 跳转到加入队伍页
+const doJoinTeam &#x3D; () &#x3D;&gt; &#123;
+  router.push(&#123;
+    path: &quot;&#x2F;team&#x2F;add&quot;
+  &#125;)
+&#125;
+
+const teamList &#x3D; ref([]);
+
+&#x2F;**
+ * 搜索队伍
+ * @param val
+ * @returns &#123;Promise&lt;void&gt;&#125;
+ *&#x2F;
+const listTeam &#x3D; async (val &#x3D; &#39;&#39;) &#x3D;&gt; &#123;
+  const res &#x3D; await myAxios.get(&quot;&#x2F;team&#x2F;list&#x2F;my&#x2F;create&quot;, &#123;
+    params: &#123;
+      searchText: val,
+      pageNum: 1,
+    &#125;,
+  &#125;);
+  if (res?.code &#x3D;&#x3D;&#x3D; 0) &#123;
+    teamList.value &#x3D; res.data;
+  &#125; else &#123;
+    Toast.fail(&#39;加载队伍失败，请刷新重试&#39;);
+  &#125;
+&#125;
+
+&#x2F;&#x2F; 页面加载时只触发一次
+onMounted( () &#x3D;&gt; &#123;
+  listTeam();
+&#125;)
+
+const onSearch &#x3D; (val) &#x3D;&gt; &#123;
+  listTeam(val);
+&#125;;
+
+&lt;&#x2F;script&gt;
+
+&lt;style scoped&gt;
+#teamPage &#123;
+
+&#125;
+&lt;&#x2F;style&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="4-测试"><a href="#4-测试" class="headerlink" title="(4).测试"></a>(4).测试</h4><p><img src="http://img-md-js.linjsblog.top/img/202301072220015.png" alt="image.png"> <img src="http://img-md-js.linjsblog.top/img/202301072221281.png" alt="image.png"><img src="http://img-md-js.linjsblog.top/img/202301072221003.png" alt="image.png"> <strong>PS：这里我觉得是有bug的，发送的请求是不带参数的,即status的默认状态是为null,会被定义成公共的，这样的话，如果我们创建的队伍是私人或者默认的就不会展现（我觉得应该是复用teamList的缘故，在teamLIst的逻辑里，我们不带参数请求就直接查询所有公开的），解决办法是带个status的参数再发送请求。但是我在knife4j里测试了一下，只能传一个状态参数，类型为整型，这代表了我们不能同查询多个状态的队伍，回到前端由于知识浅薄无法解决传参问题，只能显示公开状态的队伍。拉了鱼皮完整的代码（好像也没解决)，不知道有无大佬能够解决这个问题！</strong></p>
+<h3 id="4-退出和解散队伍"><a href="#4-退出和解散队伍" class="headerlink" title="4.退出和解散队伍"></a>4.退出和解散队伍</h3><h4 id="1-在TeamCardList添加两个按钮来实现这两个功能"><a href="#1-在TeamCardList添加两个按钮来实现这两个功能" class="headerlink" title="1.在TeamCardList添加两个按钮来实现这两个功能"></a>1.在TeamCardList添加两个按钮来实现这两个功能</h4><p><img src="http://img-md-js.linjsblog.top/img/202301072221661.png" alt="image.png"></p>
+<h4 id="2-在js里写入按钮的方法"><a href="#2-在js里写入按钮的方法" class="headerlink" title="2.在js里写入按钮的方法"></a>2.在js里写入按钮的方法</h4><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">/**
+ * 退出队伍
+ * @param id
+ */</span>
+<span class="token keyword">const</span> <span class="token function-variable function">doQuitTeam</span> <span class="token operator">=</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token parameter"><span class="token literal-property property">id</span><span class="token operator">:</span> number</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">const</span> res <span class="token operator">=</span> <span class="token keyword">await</span> myAxios<span class="token punctuation">.</span><span class="token function">post</span><span class="token punctuation">(</span><span class="token string">'/team/quit'</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">teamId</span><span class="token operator">:</span> id
+  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>res<span class="token operator">?.</span>code <span class="token operator">===</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    Toast<span class="token punctuation">.</span><span class="token function">success</span><span class="token punctuation">(</span><span class="token string">'操作成功'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+    Toast<span class="token punctuation">.</span><span class="token function">fail</span><span class="token punctuation">(</span><span class="token string">'操作失败'</span> <span class="token operator">+</span> <span class="token punctuation">(</span>res<span class="token punctuation">.</span>description <span class="token operator">?</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">，</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>res<span class="token punctuation">.</span>description<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token template-punctuation string">`</span></span> <span class="token operator">:</span> <span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">/**
+ * 解散队伍
+ * @param id
+ */</span>
+<span class="token keyword">const</span> <span class="token function-variable function">doDeleteTeam</span> <span class="token operator">=</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token parameter"><span class="token literal-property property">id</span><span class="token operator">:</span> number</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">const</span> res <span class="token operator">=</span> <span class="token keyword">await</span> myAxios<span class="token punctuation">.</span><span class="token function">post</span><span class="token punctuation">(</span><span class="token string">'/team/delete'</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span>
+    id<span class="token punctuation">,</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>res<span class="token operator">?.</span>code <span class="token operator">===</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    Toast<span class="token punctuation">.</span><span class="token function">success</span><span class="token punctuation">(</span><span class="token string">'操作成功'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+    Toast<span class="token punctuation">.</span><span class="token function">fail</span><span class="token punctuation">(</span><span class="token string">'操作失败'</span> <span class="token operator">+</span> <span class="token punctuation">(</span>res<span class="token punctuation">.</span>description <span class="token operator">?</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">，</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>res<span class="token punctuation">.</span>description<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token template-punctuation string">`</span></span> <span class="token operator">:</span> <span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>(4).运行测试 1.退出队伍（这里我退出了名为测试的队伍） <img src="http://img-md-js.linjsblog.top/img/202301072230878.png" alt="image.png"> 查看数据库，也成功删除了 2.解散队伍 <img src="http://img-md-js.linjsblog.top/img/202301072231468.png" alt="image.png"> 报错，这是因为我们后端接口没有封装对象（偷懒)，所以我们封装一个删除请求DeleteRequest</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
+ * 通用删除请求
+ *
+ * @author yupi
+ */</span>
+<span class="token annotation punctuation">@Data</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">DeleteRequest</span> <span class="token keyword">implements</span> <span class="token class-name">Serializable</span> <span class="token punctuation">&#123;</span>
+
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">long</span> serialVersionUID <span class="token operator">=</span> <span class="token number">1787902631969457554L</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">private</span> <span class="token keyword">long</span> id<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>并且修改删除接口</p>
+<pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">@PostMapping(&quot;&#x2F;delete&quot;)
+public BaseResponse&lt;Boolean&gt; deleteTeam(@RequestBody DeleteRequest deleteRequest, HttpServletRequest request) &#123;
+    if (deleteRequest &#x3D;&#x3D; null  deleteRequest.getId() &lt;&#x3D; 0) &#123;
+        throw new BusinessException(ErrorCode.PARAMS_ERROR);
+    &#125;
+    long id &#x3D; deleteRequest.getId();
+    User loginUser &#x3D; userService.getLoginUser(request);
+    boolean result &#x3D; teamService.deleteTeam(id, loginUser);
+    if (!result) &#123;
+        throw new BusinessException(ErrorCode.SYSTEM_ERROR, &quot;删除失败&quot;);
+    &#125;
+    return ResultUtils.success(true);
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>再次测试（这里我们解散名为鼠窝更新的队伍） <img src="http://img-md-js.linjsblog.top/img/202301072231119.png" alt="image.png"> 刷新一下（队伍不在被找到） <img src="http://img-md-js.linjsblog.top/img/202301072231694.png" alt="image.png"> <strong>功能我们在后端去写，更加方便</strong></p>
+<h2 id="二、随机匹配"><a href="#二、随机匹配" class="headerlink" title="二、随机匹配"></a>二、随机匹配</h2><p>编辑距离算法：<a target="_blank" rel="noopener" href="https://blog.csdn.net/DBC_121/article/details/104198838">https://blog.csdn.net/DBC_121&#x2F;article&#x2F;details&#x2F;104198838</a></p>
+<blockquote>
+<p>最小编辑距离：字符串 1 通过最少多少次增删改字符的操作可以变成字符串 2</p>
+</blockquote>
+<p>余弦相似度算法：<a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_55613022/article/details/125683937%EF%BC%88%E5%A6%82%E6%9E%9C%E9%9C%80%E8%A6%81%E5%B8%A6%E6%9D%83%E9%87%8D%E8%AE%A1%E7%AE%97%EF%BC%8C%E6%AF%94%E5%A6%82%E5%AD%A6%E4%BB%80%E4%B9%88%E6%96%B9%E5%90%91%E6%9C%80%E9%87%8D%E8%A6%81%EF%BC%8C%E6%80%A7%E5%88%AB%E7%9B%B8%E5%AF%B9%E6%AC%A1%E8%A6%81">https://blog.csdn.net/m0_55613022&#x2F;article&#x2F;details&#x2F;125683937（如果需要带权重计算，比如学什么方向最重要，性别相对次要</a>）</p>
+<h3 id="1-匹配用户后端编写"><a href="#1-匹配用户后端编写" class="headerlink" title="1.匹配用户后端编写"></a>1.匹配用户后端编写</h3><p>这里我们使用了编辑距离算法 把这个方法放在工具类（新建一个utils包）里面，并写一个测试类测试 我们推荐是通过标签类（所以我们传的参数应该是字符型的列表），修改整理为：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
+* 算法工具类
+*
+* @author yupi
+*/</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">AlgorithmUtils</span> <span class="token punctuation">&#123;</span>
+
+    <span class="token comment">/**
+* 编辑距离算法（用于计算最相似的两组标签）
+* 原理：https://blog.csdn.net/DBC_121/article/details/104198838
+*
+* @param tagList1
+* @param tagList2
+* @return
+*/</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">int</span> <span class="token function">minDistance</span><span class="token punctuation">(</span><span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span> tagList1<span class="token punctuation">,</span> <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span> tagList2<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">int</span> n <span class="token operator">=</span> tagList1<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> m <span class="token operator">=</span> tagList2<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>n <span class="token operator">*</span> m <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">return</span> n <span class="token operator">+</span> m<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token punctuation">]</span> d <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">int</span><span class="token punctuation">[</span>n <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span>m <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            d<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> i<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> m <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            d<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> j<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> m <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <span class="token keyword">int</span> left <span class="token operator">=</span> d<span class="token punctuation">[</span>i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+                <span class="token keyword">int</span> down <span class="token operator">=</span> d<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+                <span class="token keyword">int</span> left_down <span class="token operator">=</span> d<span class="token punctuation">[</span>i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span>j <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token class-name">Objects</span><span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>tagList1<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> tagList2<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>j <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                    left_down <span class="token operator">+=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+                <span class="token punctuation">&#125;</span>
+                d<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token class-name">Math</span><span class="token punctuation">.</span><span class="token function">min</span><span class="token punctuation">(</span>left<span class="token punctuation">,</span> <span class="token class-name">Math</span><span class="token punctuation">.</span><span class="token function">min</span><span class="token punctuation">(</span>down<span class="token punctuation">,</span> left_down<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">return</span> d<span class="token punctuation">[</span>n<span class="token punctuation">]</span><span class="token punctuation">[</span>m<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token comment">/**
+* 编辑距离算法（用于计算最相似的两个字符串）
+* 原理：https://blog.csdn.net/DBC_121/article/details/104198838
+*
+* @param word1
+* @param word2
+* @return
+*/</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">int</span> <span class="token function">minDistance</span><span class="token punctuation">(</span><span class="token class-name">String</span> word1<span class="token punctuation">,</span> <span class="token class-name">String</span> word2<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">int</span> n <span class="token operator">=</span> word1<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> m <span class="token operator">=</span> word2<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>n <span class="token operator">*</span> m <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">return</span> n <span class="token operator">+</span> m<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token punctuation">]</span> d <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">int</span><span class="token punctuation">[</span>n <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span>m <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            d<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> i<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> m <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            d<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> j<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> m <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <span class="token keyword">int</span> left <span class="token operator">=</span> d<span class="token punctuation">[</span>i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+                <span class="token keyword">int</span> down <span class="token operator">=</span> d<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+                <span class="token keyword">int</span> left_down <span class="token operator">=</span> d<span class="token punctuation">[</span>i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span>j <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>word1<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span>i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">!=</span> word2<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span>j <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                    left_down <span class="token operator">+=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+                <span class="token punctuation">&#125;</span>
+                d<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token class-name">Math</span><span class="token punctuation">.</span><span class="token function">min</span><span class="token punctuation">(</span>left<span class="token punctuation">,</span> <span class="token class-name">Math</span><span class="token punctuation">.</span><span class="token function">min</span><span class="token punctuation">(</span>down<span class="token punctuation">,</span> left_down<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">return</span> d<span class="token punctuation">[</span>n<span class="token punctuation">]</span><span class="token punctuation">[</span>m<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>测试方法</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
+* 算法工具类测试
+*/</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">AlgorithmUtilsTest</span> <span class="token punctuation">&#123;</span>
+
+    <span class="token annotation punctuation">@Test</span>
+    <span class="token keyword">void</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">String</span> str1 <span class="token operator">=</span> <span class="token string">"鱼皮是狗"</span><span class="token punctuation">;</span>
+        <span class="token class-name">String</span> str2 <span class="token operator">=</span> <span class="token string">"鱼皮不是狗"</span><span class="token punctuation">;</span>
+        <span class="token class-name">String</span> str3 <span class="token operator">=</span> <span class="token string">"鱼皮是鱼不是狗"</span><span class="token punctuation">;</span>
+        <span class="token comment">//        String str4 = "鱼皮是猫";</span>
+        <span class="token comment">// 1</span>
+        <span class="token keyword">int</span> score1 <span class="token operator">=</span> <span class="token class-name">AlgorithmUtils</span><span class="token punctuation">.</span><span class="token function">minDistance</span><span class="token punctuation">(</span>str1<span class="token punctuation">,</span> str2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// 3</span>
+        <span class="token keyword">int</span> score2 <span class="token operator">=</span> <span class="token class-name">AlgorithmUtils</span><span class="token punctuation">.</span><span class="token function">minDistance</span><span class="token punctuation">(</span>str1<span class="token punctuation">,</span> str3<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>score1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>score2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token annotation punctuation">@Test</span>
+    <span class="token keyword">void</span> <span class="token function">testCompareTags</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span> tagList1 <span class="token operator">=</span> <span class="token class-name">Arrays</span><span class="token punctuation">.</span><span class="token function">asList</span><span class="token punctuation">(</span><span class="token string">"Java"</span><span class="token punctuation">,</span> <span class="token string">"大一"</span><span class="token punctuation">,</span> <span class="token string">"男"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span> tagList2 <span class="token operator">=</span> <span class="token class-name">Arrays</span><span class="token punctuation">.</span><span class="token function">asList</span><span class="token punctuation">(</span><span class="token string">"Java"</span><span class="token punctuation">,</span> <span class="token string">"大一"</span><span class="token punctuation">,</span> <span class="token string">"女"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span> tagList3 <span class="token operator">=</span> <span class="token class-name">Arrays</span><span class="token punctuation">.</span><span class="token function">asList</span><span class="token punctuation">(</span><span class="token string">"Python"</span><span class="token punctuation">,</span> <span class="token string">"大二"</span><span class="token punctuation">,</span> <span class="token string">"女"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// 1</span>
+        <span class="token keyword">int</span> score1 <span class="token operator">=</span> <span class="token class-name">AlgorithmUtils</span><span class="token punctuation">.</span><span class="token function">minDistance</span><span class="token punctuation">(</span>tagList1<span class="token punctuation">,</span> tagList2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// 3</span>
+        <span class="token keyword">int</span> score2 <span class="token operator">=</span> <span class="token class-name">AlgorithmUtils</span><span class="token punctuation">.</span><span class="token function">minDistance</span><span class="token punctuation">(</span>tagList1<span class="token punctuation">,</span> tagList3<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>score1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>score2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>在UserCOntroller里写入获取最匹配的用户的接口</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
+ * 获取最匹配的用户
+ *
+ * @param num
+ * @param request
+ * @return
+ */</span>
+<span class="token annotation punctuation">@GetMapping</span><span class="token punctuation">(</span><span class="token string">"/match"</span><span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token class-name">BaseResponse</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">List</span><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">></span><span class="token punctuation">></span></span> <span class="token function">matchUsers</span><span class="token punctuation">(</span><span class="token keyword">long</span> num<span class="token punctuation">,</span> <span class="token class-name">HttpServletRequest</span> request<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>num <span class="token operator">&lt;=</span> <span class="token number">0</span>  num <span class="token operator">></span> <span class="token number">20</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">BusinessException</span><span class="token punctuation">(</span><span class="token class-name">ErrorCode</span><span class="token punctuation">.</span><span class="token constant">PARAMS_ERROR</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token class-name">User</span> user <span class="token operator">=</span> userService<span class="token punctuation">.</span><span class="token function">getLoginUser</span><span class="token punctuation">(</span>request<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token class-name">ResultUtils</span><span class="token punctuation">.</span><span class="token function">success</span><span class="token punctuation">(</span>userService<span class="token punctuation">.</span><span class="token function">matchUsers</span><span class="token punctuation">(</span>num<span class="token punctuation">,</span> user<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>在USerService里写入matchUsers方法并实现 <img src="http://img-md-js.linjsblog.top/img/202301092343035.png" alt="image.png"> 具体的实现方法本期直播并未完美的完成（遗留bug），所以结合13期的内容，修复了排序的问题 下面就是具体的代码: (这里由于鱼皮踩坑过多，同时自己也没有完全理解，过程就省略)</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Override</span>
+   <span class="token keyword">public</span> <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">></span></span> <span class="token function">matchUsers</span><span class="token punctuation">(</span><span class="token keyword">long</span> num<span class="token punctuation">,</span> <span class="token class-name">User</span> loginUser<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+       <span class="token class-name">QueryWrapper</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">></span></span> queryWrapper <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">QueryWrapper</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       queryWrapper<span class="token punctuation">.</span><span class="token function">select</span><span class="token punctuation">(</span><span class="token string">"id"</span><span class="token punctuation">,</span> <span class="token string">"tags"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       queryWrapper<span class="token punctuation">.</span><span class="token function">isNotNull</span><span class="token punctuation">(</span><span class="token string">"tags"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">></span></span> userList <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">list</span><span class="token punctuation">(</span>queryWrapper<span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token class-name">String</span> tags <span class="token operator">=</span> loginUser<span class="token punctuation">.</span><span class="token function">getTags</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token class-name">Gson</span> gson <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Gson</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span> tagList <span class="token operator">=</span> gson<span class="token punctuation">.</span><span class="token function">fromJson</span><span class="token punctuation">(</span>tags<span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">TypeToken</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">List</span><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+       <span class="token punctuation">&#125;</span><span class="token punctuation">.</span><span class="token function">getType</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token comment">// 用户列表的下标 => 相似度</span>
+       <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Pair</span><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">,</span> <span class="token class-name">Long</span><span class="token punctuation">></span><span class="token punctuation">></span></span> list <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token comment">// 依次计算所有用户和当前用户的相似度</span>
+       <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> userList<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+           <span class="token class-name">User</span> user <span class="token operator">=</span> userList<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+           <span class="token class-name">String</span> userTags <span class="token operator">=</span> user<span class="token punctuation">.</span><span class="token function">getTags</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+           <span class="token comment">// 无标签或者为当前用户自己</span>
+           <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token class-name">StringUtils</span><span class="token punctuation">.</span><span class="token function">isBlank</span><span class="token punctuation">(</span>userTags<span class="token punctuation">)</span>  user<span class="token punctuation">.</span><span class="token function">getId</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> loginUser<span class="token punctuation">.</span><span class="token function">getId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+               <span class="token keyword">continue</span><span class="token punctuation">;</span>
+           <span class="token punctuation">&#125;</span>
+           <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span> userTagList <span class="token operator">=</span> gson<span class="token punctuation">.</span><span class="token function">fromJson</span><span class="token punctuation">(</span>userTags<span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">TypeToken</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">List</span><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+           <span class="token punctuation">&#125;</span><span class="token punctuation">.</span><span class="token function">getType</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+           <span class="token comment">// 计算分数</span>
+           <span class="token keyword">long</span> distance <span class="token operator">=</span> <span class="token class-name">AlgorithmUtils</span><span class="token punctuation">.</span><span class="token function">minDistance</span><span class="token punctuation">(</span>tagList<span class="token punctuation">,</span> userTagList<span class="token punctuation">)</span><span class="token punctuation">;</span>
+           list<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Pair</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span>user<span class="token punctuation">,</span> distance<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token punctuation">&#125;</span>
+       <span class="token comment">// 按编辑距离由小到大排序</span>
+       <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Pair</span><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">,</span> <span class="token class-name">Long</span><span class="token punctuation">></span><span class="token punctuation">></span></span> topUserPairList <span class="token operator">=</span> list<span class="token punctuation">.</span><span class="token function">stream</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+               <span class="token punctuation">.</span><span class="token function">sorted</span><span class="token punctuation">(</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">)</span> <span class="token operator">-></span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span> <span class="token punctuation">(</span>a<span class="token punctuation">.</span><span class="token function">getValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> b<span class="token punctuation">.</span><span class="token function">getValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+               <span class="token punctuation">.</span><span class="token function">limit</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span>
+               <span class="token punctuation">.</span><span class="token function">collect</span><span class="token punctuation">(</span><span class="token class-name">Collectors</span><span class="token punctuation">.</span><span class="token function">toList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token comment">// 原本顺序的 userId 列表</span>
+       <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Long</span><span class="token punctuation">></span></span> userIdList <span class="token operator">=</span> topUserPairList<span class="token punctuation">.</span><span class="token function">stream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span>pair <span class="token operator">-></span> pair<span class="token punctuation">.</span><span class="token function">getKey</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">collect</span><span class="token punctuation">(</span><span class="token class-name">Collectors</span><span class="token punctuation">.</span><span class="token function">toList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token class-name">QueryWrapper</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">></span></span> userQueryWrapper <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">QueryWrapper</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       userQueryWrapper<span class="token punctuation">.</span><span class="token function">in</span><span class="token punctuation">(</span><span class="token string">"id"</span><span class="token punctuation">,</span> userIdList<span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token comment">// 1, 3, 2</span>
+       <span class="token comment">// User1、User2、User3</span>
+       <span class="token comment">// 1 => User1, 2 => User2, 3 => User3</span>
+       <span class="token class-name">Map</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Long</span><span class="token punctuation">,</span> <span class="token class-name">List</span><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">></span><span class="token punctuation">></span></span> userIdUserListMap <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">list</span><span class="token punctuation">(</span>userQueryWrapper<span class="token punctuation">)</span>
+               <span class="token punctuation">.</span><span class="token function">stream</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+               <span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span>user <span class="token operator">-></span> <span class="token function">getSafetyUser</span><span class="token punctuation">(</span>user<span class="token punctuation">)</span><span class="token punctuation">)</span>
+               <span class="token punctuation">.</span><span class="token function">collect</span><span class="token punctuation">(</span><span class="token class-name">Collectors</span><span class="token punctuation">.</span><span class="token function">groupingBy</span><span class="token punctuation">(</span><span class="token class-name">User</span><span class="token operator">::</span><span class="token function">getId</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">></span></span> finalUserList <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">Long</span> userId <span class="token operator">:</span> userIdList<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+           finalUserList<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>userIdUserListMap<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>userId<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token punctuation">&#125;</span>
+       <span class="token keyword">return</span> finalUserList<span class="token punctuation">;</span>
+   <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="2-测试"><a href="#2-测试" class="headerlink" title="2.测试"></a>2.测试</h3><p>在数据库里插入标签假数据 <img src="http://img-md-js.linjsblog.top/img/202301072244091.png" alt="image.png"> 根据最小编辑距离算法，结果排序（排除自己）应该是32456 启动后端，在knife4j接口文档里测试matchUsers，正确用户排序也是32456 <img src="http://img-md-js.linjsblog.top/img/202301072244505.png" alt="image.png"><strong>踩坑处：</strong> <strong>1.一定要把redis的缓存清楚，重新登录，再matchUsers，否则推荐的用户不是通过最小编辑距离算法获得的</strong> <strong>2.我这里好像又有bug如下处</strong> <img src="http://img-md-js.linjsblog.top/img/202301072244341.png" alt="image.png"> <strong>这里鱼皮使用&#x3D;&#x3D;，我使用&#x3D;&#x3D;会依旧查到自己，debug发现值也是相同的，考虑到上次的踩坑处，应该是对象类型的问题，换成equals可行（球友们可自行根据情况编写代码)</strong></p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        Author:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">qwq小小舒</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        Link:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://js6288.github.io/2023/01/09/%E4%BC%99%E4%BC%B4%E5%8C%B9%E9%85%8D%E7%B3%BB%E7%BB%9F%EF%BC%88%E5%8D%81%E4%BA%8C%EF%BC%89/">https://js6288.github.io/2023/01/09/%E4%BC%99%E4%BC%B4%E5%8C%B9%E9%85%8D%E7%B3%BB%E7%BB%9F%EF%BC%88%E5%8D%81%E4%BA%8C%EF%BC%89/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        Reprint policy:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    All articles in this blog are used except for special statements
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    reprint policy. If reproduced, please indicate source
+                    <a href="/about" target="_blank">qwq小小舒</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>Copied successfully, please follow the reprint policy of this article</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">more</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/Java/">
+                                    <span class="chip bg-color">Java</span>
+                                </a>
+                            
+                                <a href="/tags/%E7%AE%97%E6%B3%95/">
+                                    <span class="chip bg-color">算法</span>
+                                </a>
+                            
+                                <a href="/tags/Spring-Boot/">
+                                    <span class="chip bg-color">Spring Boot</span>
+                                </a>
+                            
+                                <a href="/tags/vue/">
+                                    <span class="chip bg-color">vue</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
+            <div class="card">
+                <a href="/2023/01/09/%E4%BC%99%E4%BC%B4%E5%8C%B9%E9%85%8D%E7%B3%BB%E7%BB%9F%EF%BC%88%E5%8D%81%E4%B8%89%EF%BC%89/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="伙伴匹配系统（十三）">
+                        
+                        <span class="card-title">伙伴匹配系统（十三）</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-01-09
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE/" class="post-category">
+                                    个人项目
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Spring-Boot/">
+                        <span class="chip bg-color">Spring Boot</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                Next&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/01/09/%E4%BC%99%E4%BC%B4%E5%8C%B9%E9%85%8D%E7%B3%BB%E7%BB%9F%EF%BC%88%E5%8D%81%E4%B8%80%EF%BC%89/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="伙伴匹配系统（十一）">
+                        
+                        <span class="card-title">伙伴匹配系统（十一）</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-01-09
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE/" class="post-category">
+                                    个人项目
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Java/">
+                        <span class="chip bg-color">Java</span>
+                    </a>
+                    
+                    <a href="/tags/Spring-Boot/">
+                        <span class="chip bg-color">Spring Boot</span>
+                    </a>
+                    
+                    <a href="/tags/vue/">
+                        <span class="chip bg-color">vue</span>
+                    </a>
+                    
+                    <a href="/tags/MySQL/">
+                        <span class="chip bg-color">MySQL</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;TOC</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="/libs/aplayer/Meting.min.js"></script>
+
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2019-2025</span>
+            
+            <a href="/about" target="_blank">qwq小小舒</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            
+            <br>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;Total visits:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;Total visitors:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/blinkfox" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:1181062873@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1181062873" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1181062873" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;Search</span>
+            <input type="search" id="searchInput" name="s" placeholder="Please enter a search keyword"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 白天和黑夜主题 -->
+<div class="stars-con">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>  
+</div>
+
+<script>
+    function switchNightMode() {
+        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
+        setTimeout(function () {
+            $('body').hasClass('DarkMode') 
+            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
+            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
+            
+            setTimeout(function () {
+            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
+                $(this).remove()
+            })
+            }, 2e3)
+        })
+    }
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+    
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

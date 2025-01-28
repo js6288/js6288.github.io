@@ -1,0 +1,1454 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="InnoDB数据存储结构, 小小舒的爪哇天地">
+    <meta name="description" content="InnoDB数据存储结构1. 数据库的存储结构：页索引结构给我们提供了高效的索引方式，不过索引信息以及数据记录都是保存在文件上的，确切说是存储在页结构中。另一方面，索引是在存储引擎中实现的，MySQL服务器上的存储引擎负责对表中数据的读取和">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>InnoDB数据存储结构 | 小小舒的爪哇天地</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    
+
+
+    <!-- bg-cover style     -->
+
+
+
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" type="text/css" href="/css/matery.css">
+<link rel="stylesheet" type="text/css" href="/css/my.css">
+<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+
+
+
+
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/css/post.css">
+
+
+
+
+    
+        <link rel="stylesheet" type="text/css" href="/css/reward.css">
+    
+
+
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">小小舒的爪哇天地</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>Index</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>Tags</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>Categories</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>Archives</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>About</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>Contact</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>Friends</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="Search" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <li>
+    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
+      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">小小舒的爪哇天地</div>
+        <div class="logo-desc">
+            
+            Life is coding, I will debug it.
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			Index
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			Tags
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			Categories
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			Archives
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			About
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			Contact
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			Friends
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/3.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">InnoDB数据存储结构</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                          <div class="article-tag">
+                            <span class="chip bg-color">No tag</span>
+                          </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/MySQL%E9%AB%98%E7%BA%A7/" class="post-category">
+                                MySQL高级
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
+                    2022-08-26
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="InnoDB数据存储结构"><a href="#InnoDB数据存储结构" class="headerlink" title="InnoDB数据存储结构"></a>InnoDB数据存储结构</h1><h2 id="1-数据库的存储结构：页"><a href="#1-数据库的存储结构：页" class="headerlink" title="1. 数据库的存储结构：页"></a>1. 数据库的存储结构：页</h2><p>索引结构给我们提供了高效的索引方式，不过索引信息以及数据记录都是保存在文件上的，确切说是存储在页结构中。另一方面，索引是在存储引擎中实现的，MySQL服务器上的存储引擎负责对表中数据的读取和写入工作。不同存储引擎中存放的格式一般是不同的，甚至有的存储引擎比如Memory都不用磁盘来存储数据。</p>
+<p>由于InnoDB是MySQL的默认存储引擎，所以本章剖析InnoDB存储引擎的数据存储结构。</p>
+<h3 id="1-1-磁盘和内存交互的基本单位"><a href="#1-1-磁盘和内存交互的基本单位" class="headerlink" title="1.1 磁盘和内存交互的基本单位"></a>1.1 磁盘和内存交互的基本单位</h3><p>lnnoDB将数据划分为若干个页，InnoDB中页的大小默认为<strong>16KB</strong>。</p>
+<p>以页作为磁盘和内存之间交互的基本单位，也就是一次最少从磁盘中读取16KB的内容到内存中，一次最少把内存中的16KB内容刷新到磁盘中。也就是说，<strong>在数据库中，不论读一行，还是读多行，都是将这些行所在的页进行加载。也就是说，数据库管理存储空间的基本单位是页(Page)，数据库I&#x2F;O操作的最小单位是页</strong>。一个页中可以存储多个行记录。</p>
+<blockquote>
+<p>记录是按照行来存储的，但是数据库的读取并不以行为单位，否则一次读取（也就是一次IO操作）只能处理一行数据，效率会非常低。</p>
+</blockquote>
+<p><img src="http://img-md-js.linjsblog.top/img/202208241633007.png" alt="image-20220824163339116"></p>
+<h3 id="1-2-页结构概述"><a href="#1-2-页结构概述" class="headerlink" title="1.2 页结构概述"></a>1.2 页结构概述</h3><p>页a、页b、页c …页n这些页可以<code>不在物理结构上</code>相连，只要通过<code>双向链表</code>相关联即可。每个数据页中的记录会按照主键值从小到大的顺序组成一个<code>单向链表</code>，每个数据页都会为存储在它里边的记录生成一个<code>页目录</code>，在通过主键查找某条记录的时候可以在页目录中使用<code>二分法</code>快速定位到对应的槽，然后再遍历该槽对应分组中的记录即可快速找到指定的记录。</p>
+<h3 id="1-3-页结构的大小"><a href="#1-3-页结构的大小" class="headerlink" title="1.3 页结构的大小"></a>1.3 页结构的大小</h3><p>不同的数据库管理系统（简称DBMS ）的页大小不同。比如在MySQL的InnoDB存储引擎中，默认页的大小是<code>16KB</code>，我们可以通过下面的命令来进行查看:</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">mysql&gt; show variables like &quot;%innodb_page_size%&quot;;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="http://img-md-js.linjsblog.top/img/202208241628312.png" alt="image-20220824162844261"></p>
+<p>SQL Server中页的大小为 8KB，而在Oracle中我们用术语“块”(Block)来代表“页”，Oralce支持的块大小为2KB，4KB，8KB，16KB，32KB和64KB。</p>
+<h3 id="1-4-页的上层结构"><a href="#1-4-页的上层结构" class="headerlink" title="1.4 页的上层结构"></a>1.4 页的上层结构</h3><p>另外在数据库中，还存在着区(Extent)、段(Segment)和表空间(Tablespace)的概念。行、页、区、段、表空间的关系如下图所示:</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202208241642406.png" alt="image-20220824164239549"></p>
+<p>区(Extent)是比页大一级的存储结构，在InnoDB存储引擎中，一个区会分配<code>64个连续的页</code>。因为InnoDB中的页大小默认是16KB，所以一个区的大小是64*16KB&#x3D; <code>1MB</code>。</p>
+<p>段(Segment)由一个或多个区组成，区在文件系统是一个连续分配的空间(在InnoDB中是连续的64个页)，不过在段中不要求区与区之间是相邻的。<code>段是数据库中的分配单位</code>，<code>不同类型的数据库对象以不同的段形式存在</code>。当我们创建数据表、索引的时候，就会相应创建对应的段，比如创建一张表时会创建一个表段，创建一个索引时会创建一个索引段。</p>
+<p>表空间（Tablespace）是一个逻辑容器，表空间存储的对象是段，在一个表空间中可以有一个或多个段，但是一个段只能属于一个表空间。数据库由一个或多个表空间组成，表空间从管理上可以划分为<code>系统表空间、用户表空间、撤销表空间、临时表空间</code>等。</p>
+<h2 id="2-页的内部结构"><a href="#2-页的内部结构" class="headerlink" title="2.页的内部结构"></a>2.页的内部结构</h2><p>页如果按类型划分的话，常见的有<code>数据页（保存B+树节点)、系统页、Undo页</code>和<code>事务数据页</code>等。<code>数据页</code>是我们最常使用的页。</p>
+<p>数据页的<code>16KB</code>大小的存储空间被划分为七个部分，分别是**文件头(File Header)<strong>、</strong>页头(Page Header)<strong>、</strong>最大最小记录(Infimum+supremum)<strong>、</strong>用户记录(User Records)<strong>、</strong>空闲空间(Free Space)<strong>、</strong>页目录(Page Directory)<strong>和</strong>文件尾(File Tailer)**。</p>
+<p>页结构的示意图如下所示:</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202208241658940.png" alt="image-20220824165847834"></p>
+<p>这7个部分作用分别如下，我们简单梳理如下表所示：</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202208241700821.png" alt="image-20220824170026313"></p>
+<p>我们可以把这7个结构分成3个部分。</p>
+<h3 id="第1部分：File-Header-文件头部-和-File-Trailer-文件尾部"><a href="#第1部分：File-Header-文件头部-和-File-Trailer-文件尾部" class="headerlink" title="第1部分：File Header(文件头部) 和 File Trailer (文件尾部)"></a>第1部分：File Header(文件头部) 和 File Trailer (文件尾部)</h3><p>首先是文件通用部分，也就是<code>文件头</code>和<code>文件尾</code>。</p>
+<h4 id="File-Header-文件头部"><a href="#File-Header-文件头部" class="headerlink" title="File Header (文件头部)"></a><strong>File Header (文件头部)</strong></h4><p>描述各种页的通用信息，大小：38字节</p>
+<p>构成：</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202208241809776.png" alt="image-20220824180952489"></p>
+<h5 id="FIL-PAGE-OFFSET"><a href="#FIL-PAGE-OFFSET" class="headerlink" title="FIL_PAGE_OFFSET"></a>FIL_PAGE_OFFSET</h5><p>每一个页都有一个单独的页号，就跟你的身份证号码一样，InnoDB通过页号可以唯一定位一个页。</p>
+<h5 id="FIL-PAGE-TYPE"><a href="#FIL-PAGE-TYPE" class="headerlink" title="FIL_PAGE_TYPE"></a>FIL_PAGE_TYPE</h5><p>这个代表当前页的类型：</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202208241812178.png" alt="image-20220824181227430"></p>
+<h5 id="FIL-PAGE-PREV和FIL-PAGE-NEXT"><a href="#FIL-PAGE-PREV和FIL-PAGE-NEXT" class="headerlink" title="FIL_PAGE_PREV和FIL_PAGE_NEXT"></a>FIL_PAGE_PREV和FIL_PAGE_NEXT</h5><p>InnoDB都是以页为单位存放数据的，如果数据分散到多个不连续的页中存储的话需要把这些页关联起来，FIL_PAGE_PREV和FIL_PAGE_NEXT就分别代表本页的上一个和下一个页的页号。这样通过建立一个双向链表把许许多多的页就都串联起来了，保证这些页之间<strong>不需要是物理上的连续，而是逻辑上的连续</strong>。</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202208241814157.png" alt="image-20220824181438233"></p>
+<p><img src="http://img-md-js.linjsblog.top/img/202208241815959.png" alt="image-20220824181508881"></p>
+<h5 id="FIL-PAGE-SPACE-OR-CHKSUM"><a href="#FIL-PAGE-SPACE-OR-CHKSUM" class="headerlink" title="FIL_PAGE_SPACE_OR_CHKSUM"></a>FIL_PAGE_SPACE_OR_CHKSUM</h5><p>代表当前页面的校验和（checksum）</p>
+<p>什么是校验和：</p>
+<p>就是对于一个很长的字节串来说，我们会通过某种算法来计算一个比较短的值来代表这个很长的字节串，这个比较短的值就称为校验和。在比较两个很长的字节串之前，先比较这两个长字节串的校验和，如果校验和都不一样，则两个长字节串肯定是不同的，所以省去了直接比较两个比较长的字节串的时间损耗。</p>
+<p><strong>文件尾部和文件头部都有属性：FIL_PAGE_SPACE_OR_CHKSUM</strong></p>
+<p>作用：</p>
+<p>InnoDB存储引擎以页为单位把数据加载到内存中处理，如果该页中的数据在内存中被修改了，那么在<strong>修改后的某个时间需要把数据同步到磁盘中</strong>。但是在同步了一半的时候断电了，造成了该页传输的不完整。</p>
+<p>为了检测一个页是否完整（也就是在同步的时候有没有发生只同步一半的尴尬情况），这时可以通过文件尾的校验和(checksum 值）与文件头的校验和做比对，如果两个值不相等则证明页的传输有问题，需要重新进行传输，否则认为页的传输已经完成。</p>
+<p>具体的：</p>
+<p>每当一个页面在内存中修改了，在同步之前就要把它的校验和算出来，因为File Header在页面的前边，所以校验和会被首先同步到磁盘，当完全写完时，校验和也会被写到页的尾部，如果完全同步成功，则页的首部和尾部的校验和应该是一致的。如果写了一半儿断电了，那么在File Header中的校验和就代表着已经修改过的页，而在File Trailer中的校验和代表着原先的页，二者不同则意味着同步中间出了错。这里，校验方式就是采用Hash 算法进行校验。</p>
+<h5 id="FIL-PAGE-LSN"><a href="#FIL-PAGE-LSN" class="headerlink" title="FIL_PAGE_LSN"></a>FIL_PAGE_LSN</h5><p>页面被最后修改时对应的日志序列位置（英文名是:Log Sequence Number)</p>
+<h4 id="File-Trailer-文件尾部"><a href="#File-Trailer-文件尾部" class="headerlink" title="File Trailer (文件尾部)"></a><strong>File Trailer (文件尾部)</strong></h4><ul>
+<li><p>前4个字节代表页的校验和:</p>
+<p>这个部分是和File Header中的<strong>校验和</strong>相对应的。</p>
+</li>
+<li><p>后4个字节代表页面被最后修改时对应的日志序列位置（LSN）:</p>
+<p>这个部分也是为了校验页的完整性的，如果前部和尾部的LSN值校验不成功的话，就说明同步过程出现了问题。</p>
+</li>
+</ul>
+<h3 id="第2部分：User-Records-用户记录-、最大最小记录、Free-Space-空闲空间"><a href="#第2部分：User-Records-用户记录-、最大最小记录、Free-Space-空闲空间" class="headerlink" title="第2部分：User Records(用户记录)、最大最小记录、Free Space(空闲空间)"></a>第2部分：User Records(用户记录)、最大最小记录、Free Space(空闲空间)</h3><p>第二个部分是记录部分，页的主要作用是存储记录，所以“最大和最小记录”和“用户记录”部分占了页结构的主要空间。</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202208241831695.png" alt="image-20220824183124564"></p>
+<h4 id="Free-Space-空闲空间"><a href="#Free-Space-空闲空间" class="headerlink" title="Free Space (空闲空间)"></a><strong>Free Space (空闲空间)</strong></h4><p>我们自己存储的记录会按照指定的<strong>行格式</strong>存储到<strong>User Records</strong>部分。但是在一开始生成页的时候，其实并没有User Records这个部分，<strong>每当我们插入一条记录，都会从FreeSpace部分，也就是尚未使用的存储空间中申请一个记录大小的空间划分到User Records部分</strong>，当Free Space部分的空间全部被User Records部分替代掉之后，也就意味着这个页使用完了，如果还有新的记录插入的话，就需要去<strong>申请新的页</strong>了。</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202208241849952.png" alt="image-20220824184955022"></p>
+<h4 id="User-Records-用户记录"><a href="#User-Records-用户记录" class="headerlink" title="User Records(用户记录)"></a><strong>User Records(用户记录)</strong></h4><p>User Records中的这些记录按照<strong>指定的行格式</strong>一条一条摆在User Records部分，相互之间形成单链表。</p>
+<p><code>用户记录里的一条条数据如何记录?</code></p>
+<p>这里需要讲讲记录行格式的<strong>记录头信息</strong>。</p>
+<h4 id="Infimum-Supermum-最小最大记录"><a href="#Infimum-Supermum-最小最大记录" class="headerlink" title="Infimum + Supermum (最小最大记录)"></a><strong>Infimum + Supermum (最小最大记录)</strong></h4><p>记录可以比较大小吗?</p>
+<p>是的，记录可以比大小，对于一条完整的记录来说，比较记录的大小就是比较主键的大小。比方说我们插入的4行记录的主键值分别是:1、2、3、4，这也就意味着这4条记录是从小到大依次递增。</p>
+<p>InnoDB规定的最小记录与最大记录这两条记录的构造十分简单，都是由5字节大小的记录头信息和8字节大小的一个固定的部分组成的，如图所示:</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202208241927087.png" alt="image-20220824192710068"></p>
+<p>这两条记录不是我们自己定义的记录，所以它们并不存放在页的User Records部分，他们被单独放在一个称为Infimum + Supremum的部分，如图所示:</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202208241930409.png" alt="image-20220824193036460"></p>
+<h3 id="第3部分：Page-Directory-页目录-、Page-Header-页面头部"><a href="#第3部分：Page-Directory-页目录-、Page-Header-页面头部" class="headerlink" title="第3部分：Page Directory(页目录)、Page Header(页面头部)"></a>第3部分：Page Directory(页目录)、Page Header(页面头部)</h3><h4 id="1-页目录（Page-Directory）"><a href="#1-页目录（Page-Directory）" class="headerlink" title="1. 页目录（Page Directory）"></a>1. 页目录（Page Directory）</h4><p><strong>为什么需要页目录</strong></p>
+<p>在页中，记录是以单向链表的形式进行存储的。单向链表的特点就是插入、删除非常方便，但是检索效率不高，最差的情况下需要遍历链表上的所有节点才能完成检索。因此在页结构中专门设计了页目录这个模块，专门给记录做一个目录，通过二分查找法的方式进行检索，提升效率。</p>
+<p>需求:根据主键值查找页中的某条记录，如何实现快速查找呢?SELECT*FROM page_demo WHERE c1 &#x3D; 3;</p>
+<p><strong>方式1: 顺序查找</strong> 从Infimum记录（最小记录）开始，沿着链表一直往后找，总有一天会找到（或者找不到)，在找的时候还能投机取巧，因为链表中各个记录的值是按照从小到大顺序排列的，所以当链表的某个节点代表的记录的主键值大于你想要查找的主键值时，你就可以停止查找了，因为该节点后边的节点的主键值依次递增。 如果一个页中存储了非常多的记录，这么查找性能很差。</p>
+<p><strong>方式2: 使用页目录，二分法查找</strong></p>
+<ol>
+<li><p>将所有的记录<strong>分成几个组</strong>，这些记录包括<code>最小记录和最大记录</code>，但不包括标记为“已删除”的记录。</p>
+</li>
+<li><p>第1组，也就是最小记录所在的分组只有1个记录; 最后一组，就是最大记录所在的分组，会有1-8条记录;其余的组记录数量在4-8条之间。</p>
+<p>这样做的好处是，除了第1组（最小记录所在组）以外，其余组的记录数会尽量平分。</p>
+</li>
+<li><p>在每个组中最后一条记录的头信息中会存储该组一共有多少条记录，作为 n_owned字段。</p>
+</li>
+<li><p><strong>页目录用来存储每组最后一条记录的地址偏移量</strong>，这些地址偏移量会按照先后顺序存储起来，每组的地址偏移量也被称之为<code>槽(slot)</code>，每个槽相当于指针指向了不同组的最后</p>
+</li>
+</ol>
+<p>举例1：</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202208261552884.png" alt="image-20220826155258908"></p>
+<p>举例2：</p>
+<p>现在的page_demo表中正常的记录共有6条，InnoDB会把它们分成两组，第一组中只有一个最小记录，第二组中是剩余的5条记录。如下图:</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202208261554199.png" alt="image-20220826155437001"></p>
+<p>从这个图中我们需要注意这么几点:</p>
+<ul>
+<li>现在页目录部分中有两个槽，也就意味着我们的记录被分成了两个组，槽1中的值是112，代表最大记录的地址偏移量（就是从页面的0字节开始数，数112个字节)﹔槽O中的值是99，代表最小记录的地址偏移量。</li>
+<li>注意最小和最大记录的头信息中的n_owned属性<ul>
+<li>最小记录的n_owned值为1，这就代表着以最小记录结尾的这个分组中只有1条记录，也就是最小记录本身。</li>
+<li>最大记录的n_owned值为5，这就代表着以最大记录结尾的这个分组中只有5条记录，包括最大记录本身还有我们自己插入的4条记录。</li>
+</ul>
+</li>
+</ul>
+<p>用箭头指向的方式替代数字，这样更易于我们理解修改后如下:</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202208261556022.png" alt="image-20220826155645843"></p>
+<p><img src="http://img-md-js.linjsblog.top/img/202208261557457.png" alt="image-20220826155711211"></p>
+<p>为什么最小记录的n_owned值为1，而最大记录的n_owned值为5呢?</p>
+<p>InnoDB规定:对于最小记录所在的分组只能有1条记录，最大记录所在的分组拥有的记录条数只能在1<del>8条之间，剩下的分组中记录的条数范围只能在是4</del>8条之间。</p>
+<p>分组是按照下边的步骤进行的:</p>
+<ul>
+<li>初始情况下一个数据页里只有最小记录和最大记录两条记录，它们分属于两个分组。</li>
+<li>之后每插入一条记录，都会从页目录中找到主键值比本记录的主键值大并且差值最小的槽，然后把该槽对应的记录的n_owned值加1，表示本组内又添加了一条记录，直到该组中的记录数等于8个。</li>
+<li>在一个组中的记录数等于8个后再插入一条记录时，会将组中的记录拆分成两个组，一个组中4条记录，另一个5条记录。这个过程会在页目录中新增一个槽来记录这个新增分组中最大的那条记录的偏移量。</li>
+</ul>
+<p><img src="http://img-md-js.linjsblog.top/img/202208261559180.png" alt="image-20220826155917666"></p>
+<p><img src="http://img-md-js.linjsblog.top/img/202208261559798.png" alt="image-20220826155936881"></p>
+<p>这里只保留了16条记录的记录头信息中的n_owned和next_record属性，省略了各个记录之间的箭头。</p>
+<h4 id="2-页面头部（Page-Header）"><a href="#2-页面头部（Page-Header）" class="headerlink" title="2. 页面头部（Page Header）"></a>2. 页面头部（Page Header）</h4><p>为了能得到一个数据页中存储的记录的状态信息，比如本页中已经存储了多少条记录，第一条记录的地址是什么，页目录中存储了多少个槽等等，特意在页中定义了一个叫PageHeader的部分，这个部分占用固定的56个字节，专门存储各种状态信息。</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202208261602300.png" alt="image-20220826160222438"></p>
+<p>PAGE_DIRCTION</p>
+<p>假如新插入的一条记录的主键值比上一条记录的主键值大，我们说这条记录的插入方向是右边，反之则是左边。用来表示最后一条记录插入方向的状态就是PAGE_DIRECTION.</p>
+<p>PAGE_N_DIRCTION</p>
+<p>假设连续几次插入新记录的方向都是一致的，InnoDB会把沿着同一个方向插入记录的条数记下来，这个条数就用PAGE_N_DIRECTION这个状态表示。当然，如果最后一条记录的插入方向改变了的话，这个状态的值会被清零重新统计。</p>
+<h3 id="2-3从数据页的角度看B-树如何查询"><a href="#2-3从数据页的角度看B-树如何查询" class="headerlink" title="2.3从数据页的角度看B+树如何查询"></a>2.3从数据页的角度看B+树如何查询</h3><p>—棵B+树按照节点类型可以分成两部分:</p>
+<ol>
+<li>叶子节点，B+树最底层的节点，节点的高度为o，存储行记录。</li>
+<li>非叶子节点，节点的高度大于0，存储索引键和页面指针，并不存储行记录本身。</li>
+</ol>
+<p><img src="http://img-md-js.linjsblog.top/img/202208261606218.png" alt="image-20220826160607313"></p>
+<p>当我们从页结构来理解B+树的结构的时候，可以帮我们理解一些通过索引进行检索的原理:</p>
+<p><strong>1. B+树是如何进行记录检索的?</strong></p>
+<p>如果通过B+树的索引查询行记录，首先是从B+树的根开始，逐层检索，直到找到叶子节点，也就是找到对应的数据页为止，将数据页加载到内存中，页目录中的槽（slot) 采用二分查找的方式先找到一个粗略的记录分组，然后再在分组中通过链表遍历的方式查找记录。</p>
+<p><strong>2. 普通索引和唯一索引在查询效率上有什么不同?</strong></p>
+<p>我们创建索引的时候可以是普通索引，也可以是唯一索引，那么这两个索引在查询效率上有什么不同呢?</p>
+<p>唯一索引就是在普通索引上增加了约束性，也就是关键字唯一，找到了关键字就停止检索。而普通索引，可能会存在用户记录中的关键字相同的情况，根据页结构的原理，当我们读取一条记录的时候，不是单独将这条记录从磁盘中读出去，而是将这个记录所在的页加载到内存中进行读取。InnoDB存储引擎的页大小为16KB，在一个页中可能存储着上千个记录，因此在普通索引的字段上进行查找也就是在内存中多几次”判断下一条记录”的操作，对于CPU来说，这些操作所消耗的时间是可以忽略不计的。所以对一个索引字段进行检索，采用普通索引还是唯一索引在检索效率上基本上没有差别。</p>
+<h2 id="3-InnoDB-行格式"><a href="#3-InnoDB-行格式" class="headerlink" title="3. InnoDB 行格式"></a>3. InnoDB 行格式</h2><p>我们平时的数据以行为单位来向表中插入数据，这些记录在磁盘上的存放方式也被称为<code>行格式</code>或者<code>记录格式</code>。InnoDB存储引擎设计了4种不同类型的<code>行格式</code>，分别是<code>Compact</code>、 <code>Redundant</code>、 <code>Dynamic</code>和<code>Compressed</code>行格式。</p>
+<p>查看MySQL8的默认行格式:</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">mysql&gt; SELECT @@innodb_default_row_format;
++-----------------------------+
+ @@innodb_default_row_format 
++-----------------------------+
+ dynamic                     
++-----------------------------+
+1 row in set (0.01 sec)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>也可以使用如下语法查看具体表使用的行格式:</p>
+<pre class="line-numbers language-none"><code class="language-none">SHOW TABLE STATUS like &#39;表名&#39;\G<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="3-1-指定行格式的语法"><a href="#3-1-指定行格式的语法" class="headerlink" title="3.1 指定行格式的语法"></a>3.1 指定行格式的语法</h3><p>在创建或修改表的语句中指定行格式:</p>
+<pre class="line-numbers language-none"><code class="language-none">CREATE TABLE 表名(列的信息) ROW_FORMAT&#x3D;行格式名称
+ALTER TABLE 表名 ROW_FORMAT&#x3D;行格式名称<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>举例:</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">mysql&gt; CREATE TABLE record_test_table (-col1 VARCHAR(8),
+-&gt;   col2 VARCHAR(8)NOT NULL,
+-&gt;   col3 CHAR(8),
+-&gt;   col4 VARCHAR(8)
+-&gt;   )CHARSET&#x3D;ascii ROW_FORMAT&#x3D;COMPACT;
+Query OK, 0 rows affected (0.03 sec)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>向表中插入两条记录:</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">INSERT INTO record_test_table(col1, col2, col3,col4)
+VALUES
+(&#39;zhangsan&#39;, &#39;lisi&#39; , &#39;wangwu&#39;, &#39;songhk&#39;),
+(&#39;tong&#39;, &#39;chen&#39;,NULL,NULL);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="3-2-COMPACT行格式"><a href="#3-2-COMPACT行格式" class="headerlink" title="3.2 COMPACT行格式"></a>3.2 COMPACT行格式</h3><p><img src="http://img-md-js.linjsblog.top/img/202208261717306.png" alt="image-20220826171730258"></p>
+<h4 id="3-2-1-变长字段长度列表"><a href="#3-2-1-变长字段长度列表" class="headerlink" title="3.2.1 变长字段长度列表"></a>3.2.1 变长字段长度列表</h4><p>MySQL支持一些变长的数据类型，比如VARCHAR(M)、VARBINARY(M)、TEXT类型，BLOB类型，这些数据类型修饰列称为变长字段，变长字段中存储多少字节的数据不是固定的，所以我们在存储真实数据的时候需要顺便把这些数据占用的字节数也存起来。<strong>在Compact行格式中，把所有变长字段的真实数据占用的字节长度都存放在记录的开头部位，从而形成一个变长字段长度列表。</strong></p>
+<p>注意:这里面存储的变长长度和字段顺序是反过来的。比如两个varchar字段在表结构的顺序是a(10)，b(15)。那么在变长字段长度列表中存储的长度顺序就是15，10，是反过来的。</p>
+<p>以record_test_table表中的第一条记录举例:因为record_test_table表的col1、col2、col4列都是VARCHAR(8)类型的，所以这三个列的值的长度都需要保存在记录开头处，注意record_test_table表中的各个列都使用的是ascii字符集（每个字符只需要1个字节来进行编码）。</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202208261719728.png" alt="image-20220826171930769"></p>
+<p>又因为这些长度值需要按照列的逆序存放，所以最后变长字段长度列表的字节串用十六进制表示的效果就是（各个字节之间实际上没有空格，用空格隔开只是方便理解）:</p>
+<p>06 04 08</p>
+<p>把这个字节串组成的变长字段长度列表填入上边的示意图中的效果就是:</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202208261720046.png" alt="image-20220826172051793"></p>
+<h4 id="3-2-2-NULL值列表"><a href="#3-2-2-NULL值列表" class="headerlink" title="3.2.2 NULL值列表"></a>3.2.2 NULL值列表</h4><p>Compact行格式会把可以为NULL的列统一管理起来，存在一个标记为NULL值列表中。如果表中没有允许存储 NULL 的列，则NULL值列表也不存在了。</p>
+<p><strong>为什么定义NULL值列表?</strong></p>
+<p>之所以要存储NULL是因为数据都是需要对齐的，如果没有标注出来NULL值的位置，就有可能在查询数据的时候出现混乱。如果使用一个特定的符号放到相应的数据位表示空置的话，虽然能达到效果，但是这样很浪费空间，所以直接就在行数据得头部开辟出一块空间专门用来记录该行数据哪些是非空数据，哪些是空数据，格式如下:</p>
+<ol>
+<li><p>二进制位的值为1时，代表该列的值为NULL。</p>
+</li>
+<li><p>二进制位的值为0时，代表该列的值不为NULL。</p>
+</li>
+</ol>
+<p>例如:字段a、b、c，其中a是主键，在某一行中存储的数依次是a&#x3D;1、b&#x3D;null、c&#x3D;2。那么Compact行格式中的NULL值列表中存储:01。第一个0表示c不为null，第二个1表示b是null。这里之所以没有a是因为数据库会自动跳过主键，因为主键肯定是非NULL且唯一的，在NULL值列表的数据中就会自动跳过主键。</p>
+<p>record_test_table的两条记录的NULL值列表就如下:</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202208261724846.png" alt="image-20220826172405656"></p>
+<p>第一条记录：</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202208261723188.png" alt="image-20220826172342686"></p>
+<p>第二条记录：</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202208261724609.png" alt="image-20220826172437633"></p>
+<h4 id="3-3-3-记录头信息（5字节）"><a href="#3-3-3-记录头信息（5字节）" class="headerlink" title="3.3.3 记录头信息（5字节）"></a>3.3.3 记录头信息（5字节）</h4><p>创建一个表</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">mysql&gt;CREATE TABLE page_demo(
+-&gt;c1 INT,
+-&gt;c2 IINl,
+-&gt;c3 VARCHAR( 10000),-&gt; PRIMARY KEY (c1)
+-&gt; )CHARSET&#x3D;ascii RoW_FORMAT&#x3D;Compact;
+
+Query OK, 0 rows affected (0.03 sec)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>这个表记录的行格式如下图：</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202208241902490.png" alt="image-20220824190239509"></p>
+<p>这些记录头的各个属性如下：</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202208241911946.png" alt="image-20220824191135719"></p>
+<p>简化后的行格式示意图</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202208241912380.png" alt="image-20220824191214548"></p>
+<p>插入数据</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">INSERT INTO page_demo VALUES
+
+(1,100, &#39;song&#39;),(2，200, &#39;tong&#39;),(3,300, &#39;zhan&#39;),(4，400,&#39;lisi&#39;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>图示如下：</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202208241914887.png" alt="image-20220824191433878"></p>
+<h5 id="delete-mask"><a href="#delete-mask" class="headerlink" title="delete_mask"></a>delete_mask</h5><p>这个属性标记着当前记录是否被删除，占用1个二进制位。</p>
+<ul>
+<li>值为0:代表记录并没有被删除</li>
+<li>值为1:代表记录被删除掉了</li>
+</ul>
+<p><code>被删除的记录为什么还在页中存储呢?</code></p>
+<p>你以为它删除了，可它还在真实的磁盘上。这些被删除的记录之所以不立即从磁盘上移除，是因为移除它们之后其他的记录在磁盘上需要<code>重新排列，导致性能消耗</code>。所以只是打一个删除标记而已，所有被删除掉的记录都会组成一个所谓的<code>垃圾链表</code>，在这个链表中的记录占用的空间称之为<code>可重用空间</code>，之后如果有新记录插入到表中的话，可能把这些被删除的记录占用的存储空间覆盖掉。</p>
+<h5 id="min-rec-mask"><a href="#min-rec-mask" class="headerlink" title="min_rec_mask"></a>min_rec_mask</h5><p>B+树的每层非叶子节点中的最小记录都会添加该标记，min_rec_mask值为1。</p>
+<p>我们自己插入的四条记录的min_rec_mask值都是0．意味着它们都不是B+树的非叶子节点中的最小记录。</p>
+<h5 id="record-type"><a href="#record-type" class="headerlink" title="record_type"></a>record_type</h5><p>这个属性表示当前记录的类型，一共有4种类型的记录:</p>
+<p>​ 0:表示普通记录 ​ 1:表示B+树非叶节点记录 ​ 2:表示最小记录 ​ 3:表示最大记录</p>
+<p>从图中我们也可以看出来，我们自己插入的记录就是普通记录，它们的record_type值都是0，而最小记录和最大记录的record_type值分别为2和3。至于record_type为1的情况，我们在索引的数据结构章节讲过。</p>
+<h5 id="heap-no"><a href="#heap-no" class="headerlink" title="heap_no"></a>heap_no</h5><p>这个属性表示当前记录在本页中的位置。</p>
+<p>从图中可以看出来，我们插入的4条记录在本页中的位置分别是:2、3、4、5。</p>
+<p>怎么不见heap_no值为0和1的记录呢?</p>
+<p>MySQL会自动给每个页里加了两个记录，由于这两个记录并不是我们自己插入的，所以有时候也称为<code>伪记录</code>或者<code>虚拟记录</code>。这两个伪记录一个代表<code>最小记录</code>，一个代表<code>最大记录</code>。最小记录和最大记录的heap_no值分别是0和1，也就是说它们的位置最靠前。</p>
+<h5 id="n-owned"><a href="#n-owned" class="headerlink" title="n_owned"></a>n_owned</h5><p>页目录中每个组中最后一条记录的头信息中会存储该组一共有多少条记录，作为n_owned字段。</p>
+<p>详情见page directory。</p>
+<h5 id="next-record"><a href="#next-record" class="headerlink" title="next_record"></a>next_record</h5><p>记录头信息里该属性非常重要，它表示从当前记录的真实数据到下一条记录的真实数据的<code>地址偏移量</code>。</p>
+<p>比如:第一条记录的next_record值为32，意味着从第一条记录的真实数据的地址处向后找32个字节便是下一条记录的真实数据。</p>
+<p><strong>注意，下一条记录指得并不是按照我们插入顺序的下一条记录，而是按照主键值由小到大的顺序的下一条记录</strong>。而且规定Infimum记录（也就是最小记录）的下一条记录就是本页中主键值最小的用户记录，而本页中主键值最大的用户记录的下一条记录就是Supremum记录（也就是最大记录）。下图用箭头代替偏移量表示next_record。</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202208241936414.png" alt="image-20220824193625096"></p>
+<ol>
+<li><p>演示：删除操作</p>
+<p>从表中删除掉一条记录，这个链表也是会跟着变化：</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">mysql&gt; DELETE FROM page_demo WHERE c1 &#x3D; 2;
+
+Query OK, 1 row affected (0.02 sec)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>删掉第2条记录后的示意图就是:</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202208241938411.png" alt="image-20220824193848109"></p>
+<p>从图中可以看出来，删除第2条记录前后主要发生了这些变化:</p>
+<p>第2条记录并没有从存储空间中移除，而是把该条记录的delete_mask值设置为1。</p>
+</li>
+<li><p>演示：添加操作</p>
+<p>主键值为2的记录被我们删掉了，但是存储空间却没有回收，如果我们再次把这条记录插入到表中，会发生什么事呢?</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">mysql&gt; INSERT INTO page_demo VALUES(2,200, &#39;tong&#39;);
+Query OK, 1 row affected (0.00 sec)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>我们看一下记录情况</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202208241944324.png" alt="image-20220824194445533"></p>
+<p>直接复用了原来被删除记录的存储空间。</p>
+<p>说明:</p>
+<p>当数据页中存在多条被删除掉的记录时，这些记录的next_record属性将会把这些被删除掉的记录组成一个垃圾链表，以备之后重用这部分存储空间。</p>
+</li>
+</ol>
+<h4 id="3-3-4-记录真实数据"><a href="#3-3-4-记录真实数据" class="headerlink" title="3.3.4 记录真实数据"></a>3.3.4 记录真实数据</h4><p>记录的真实数据除了我们自己定义的列的数据以外，还会有三个隐藏列:</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202208261726760.png" alt="image-20220826172651406"></p>
+<p>实际上这几个列的真正名称其实是:DB_ROW_ID、DB_TRX_ID、DB_ROLL_PTR。。一个表没有手动定义主键，则会选取一个Unique键作为主键，如果连Unique键都没有定义的话，则会为表默认添加一个名为row_id的隐藏列作为主键。所以row_id是在没有自定义主键以及Unique键的情况下才会存在的。</p>
+<p>事务ID和回滚指针在后面的章节中讲解。</p>
+<h3 id="3-3-Dynamic-和-Compressed-行格式"><a href="#3-3-Dynamic-和-Compressed-行格式" class="headerlink" title="3.3 Dynamic 和 Compressed 行格式"></a>3.3 Dynamic 和 Compressed 行格式</h3><h4 id="3-3-1-行溢出"><a href="#3-3-1-行溢出" class="headerlink" title="3.3.1 行溢出"></a>3.3.1 行溢出</h4><p>InnoDB存储引擎可以将一条记录中的某些数据存储在真正的数据页面之外。</p>
+<p>很多DBA喜欢MySQL数据库提供的VARCHAR(M)类型，认为可以存放65535字节。这是真的吗?如果我们使用ascii字符集的话，一个字符就代表一个字节，我们看看VARCHAR(65535)是否可用。</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">CREATE TABLEvarchar_size_demo(
+c VARCHAR(65535)
+)CHARSET&#x3D;ascii ROW_FORMAT&#x3D;Compact;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>结果如下:</p>
+<pre class="line-numbers language-none"><code class="language-none">ERROR 1118(42000):Row size too large.The maximum row size for the used tabletype, not counting BLOBs, is 65535.This includes storage overhead, check the manual.You have to change some columns to TEXT or BLOBs<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>报错信息表达的意思是:MySQL对一条记录占用的最大存储空间是有限制的，除BLOB或者TEXT类型的列之外，其他所有的列(不包括隐藏列和记录头信息）占用的字节长度加起来不能超过65535个字节。</p>
+<p>这个65535个字节除了列本身的数据之外，还包括一些其他的数据，以Compact行格式为例，比如说我们为了存储一个VARCHAR(MI)类型的列，除了真实数据占有空间以外，还需要记录的额外信息。</p>
+<p>如果该VARCHAR类型的列没有NOT NULL属性，那最多只能存储65532个字节的数据，因为变长字段的长度占用2个字节，NULL值标识需要占用1个字节。</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">CREATE TABLE varchar_size_demo(
+c VARCHAR(65532)
+)CHARSET&#x3D;ascii ROW_FORMAT&#x3D;Compact;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>通过上面的案例，我们可以知道一个页的大小一般是16KB，也就是16384字节，而一个VARCHAR(M)类型的列就最多可以存储65533个字节，这样就可能出现一个页存放不了一条记录，这种现象称为<strong>行溢出</strong>。</p>
+<p>在Compact和Reduntant行格式中，对于占用存储空间非常大的列，在记录的真实数据处只会存储该列的一部分数据，把剩余的数据分散存储在几个其他的页中进行分页存储，然后记录的真实数据处用20个字节存储指向这些页的地址（当然这20个字节中还包括这些分散在其他页面中的数据的占用的字节数），从而可以找到剩余数据所在的页。</p>
+<p>这称为页的扩展，举例如下:</p>
+<h4 id="3-3-2-Dynamic-和-Compressed-行格式"><a href="#3-3-2-Dynamic-和-Compressed-行格式" class="headerlink" title="3.3.2 Dynamic 和 Compressed 行格式"></a>3.3.2 Dynamic 和 Compressed 行格式</h4><p>在MySQL 8.0中，默认行格式就是Dynamic，Dynamic、Compressed行格式和Compact行格式挺像，只不过在处理行溢出数据时有分歧:</p>
+<ul>
+<li>Compressed和Dynamic两种记录格式对于存放在BLOB中的数据采用了完全的行溢出的方式。如图，在数据页中只存放20个字节的指针（溢出页的地址），实际的数据都存放在Off Page（溢出页）中。</li>
+<li>Compact和Redundant两种格式会在记录的真实数据处存储一部分数据（存放768个前缀字节）。</li>
+</ul>
+<p>Compressed行记录格式的另一个功能就是，存储在其中的行数据会以zlib的算法进行压缩，因此对于BLOB、TEXT、VARCHAR这类大长度类型的数据能够进行非常有效的存储</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202208311731348.png" alt="image-20220831173151130"></p>
+<h3 id="3-4-Redundant-行格式"><a href="#3-4-Redundant-行格式" class="headerlink" title="3.4 Redundant 行格式"></a>3.4 Redundant 行格式</h3><p>Redundant是MySQL 5.0版本之前InnoDB的行记录存储方式，MySQL 5.0支持Redundant是为了兼容之前版本的页格式。</p>
+<p>现在我们把表record_test__table的行格式修改为Redundant:</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">ALTER TABLE record_test_table ROW_FORMAT&#x3D;Redundant;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>Query OK, 0 rows affected (0.05 sec)</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202208311734045.png" alt="image-20220831173447519"></p>
+<p>从上图可以看到，不同于Compact行记录格式，Redundant行格式的首部是一个字段长度偏移列表,同样是按照列的顺序逆序放置的。</p>
+<p>下边我们从各个方面看一下Redundant行格式有什么不同的地方。</p>
+<h4 id="3-4-1-字段长度偏移列表"><a href="#3-4-1-字段长度偏移列表" class="headerlink" title="3.4.1 字段长度偏移列表"></a>3.4.1 字段长度偏移列表</h4><p>注意Compact行格式的开头是变长字段长度列表，而Redundant行格式的开头是字段长度偏移列表，与变长字段长度列表有两处不同:</p>
+<ul>
+<li>少了“变长”两个字:Redundant行格式会把该条记录中所有列（包括隐藏列）的长度信息都按照逆序存储到字段长度偏移列表。</li>
+<li>多了“偏移”两个字:这意味着计算列值长度的方式不像Compact行格式那么直观，它是采用两个相邻数值的差值来计算各个列值的长度。</li>
+</ul>
+<p>举例:比如第一条记录的字段长度偏移列表就是:</p>
+<pre class="line-numbers language-none"><code class="language-none">2B 25 1F1B 13 0C 06<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>因为它是逆序排放的，所以按照列的顺序排列就是:</p>
+<pre class="line-numbers language-none"><code class="language-none">06 0C 1317 1A 24 25<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>按照两个相邻数值的差值来计算各个列值的长度的意思就是:</p>
+<p>第一列(row_id)的长度就是0x06个字节，也就是6个字节。</p>
+<p>第二列(transaction_id)的长度就是(OxOC - ox06)个字节，也就是6个字节。</p>
+<p>第三列(roll_pointer)的长度就是(Ox13- oxOC)个字节，也就是7个字节。</p>
+<p>第四列(col1)的长度就是(Ox1B - Ox13)个字节，也就是8个字节。</p>
+<p>第五列(col2)的长度就是(Ox1F - Ox1B)个字节，也就是4个字节。</p>
+<h4 id="3-4-2记录头信息"><a href="#3-4-2记录头信息" class="headerlink" title="3.4.2记录头信息"></a>3.4.2记录头信息</h4><p>不同于Compact行格式，Redundant行格式中的记录头信息固定占用6个字节(48位)，每位的含义见下表。</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202208311743095.png" alt="image-20220831174352064"></p>
+<p>与Compact行格式的记录头信息对比来看，有两处不同:</p>
+<ul>
+<li>Redundant行格式多了n_field和1byte_offs_flag这两个属性。</li>
+<li>Redundant行格式没有record_type这个属性。</li>
+</ul>
+<h2 id="4-区、段、碎片区"><a href="#4-区、段、碎片区" class="headerlink" title="4. 区、段、碎片区"></a>4. 区、段、碎片区</h2><h3 id="4-1-为什么要有区"><a href="#4-1-为什么要有区" class="headerlink" title="4.1 为什么要有区"></a>4.1 为什么要有区</h3><p>B+树的每一层中的页都会形成一个双向链表，如果是以页为单位来分配存储空间的话，双向链表相邻的两个页之间的物理位置可能离得非常远。我们介绍B+树索引的适用场景的时候特别提到范围查询只需要定位到最左边的记录和最右边的记录，然后沿着双向链表一直扫描就可以了，而如果链表中相邻的两个页物理位置离得非常远，就是所谓的随机I&#x2F;O。再一次强调，磁盘的速度和内存的速度差了好几个数量级，随机I&#x2F;O是非常慢的，所以我们应该尽量让链表中相邻的页的物理位置也相邻，这样进行范围查询的时候才可以使用所谓的顺序I&#x2F;O。</p>
+<p>引入区的概念，一个区就是在物理位置上连续的64个页。因为InnoDB中的页大小默认是16KB，所以一个区的大小是64*16KB&#x3D; 1MB。在表中数据量大的时候，为某个索引分配空间的时候就不再按照页为单位分配了，而是按照区为单位分配，甚至在表中的数据特别多的时候，可以一次性分配多个连续的区。虽然可能造成一点点空间的浪费(数据不足以填充满整个区)，但是从性能角度看，可以消除很多的随机I&#x2F;O，功大于过!</p>
+<h3 id="4-2-为什么要有段"><a href="#4-2-为什么要有段" class="headerlink" title="4.2 为什么要有段"></a>4.2 为什么要有段</h3><p>对于范围查询，其实是对B+树叶子节点中的记录进行顺序扫描，而如果不区分叶子节点和非叶子节点，统统把节点代表的页面放到申请到的区中的话，进行范围扫描的效果就大打折扣了。所以InnoDB对B+树的叶子节点和非叶子节点进行了区别对待，也就是说叶子节点有自己独有的区，非叶子节点也有自己独有的区。存放叶子节点的区的集合就算是一个段( segment )，存放非叶子节点的区的集合也算是一个段。也就是说一个索引会生成2个段，一个叶子节点段，一个非叶子节点段。</p>
+<p>除了索引的叶子节点段和非叶子节点段之外，InnoDB中还有为存储一些特殊的数据而定义的段，比如回滚段。所以，常见的段有数据段、索引段、回滚段。数据段即为B+树的叶子节点，索引段即为B+树的非叶子节点。</p>
+<p>在InnoDB存储引擎中，对段的管理都是由引擎自身所完成，DBA不能也没有必要对其进行控制。这从一定程度上简化了DBA对于段的管理。</p>
+<p>段其实不对应表空间中某一个连续的物理区域，而是一个逻辑上的概念，由若千个零散的页面以及一些完整的区组成。</p>
+<h3 id="4-3-为什么要有碎片区"><a href="#4-3-为什么要有碎片区" class="headerlink" title="4.3 为什么要有碎片区"></a>4.3 为什么要有碎片区</h3><p>默认情况下，一个使用InnoDB存储引擎的表只有一个聚簇索引，一个索引会生成2个段，而段是以区为单位申请存储空间的，一个区默认占用1M (64*16Kb&#x3D;1024Kb）存储空间，所以默认情况下一个只存了几条记录的小表也需要2M的存储空间么?以后每次添加一个索引都要多申请2M的存储空间么?这对于存储记录比较少的表简直是天大的浪费。这个问题的症结在于到现在为止我们介绍的区都是非常纯粹的，也就是一个区被整个分配给某一个段，或者说区中的所有页面都是为了存储同一个段的数据而存在的，即使段的数据填不满区中所有的页面，那余下的页面也不能挪作他用。</p>
+<p>为了考虑以完整的区为单位分配给某个段对于数据量较小的表太浪费存储空间的这种情况，InnoDB提出了一个碎片(fragment)区的概念。在一个碎片区中，并不是所有的页都是为了存储同一个段的数据而存在的，而是碎片区中的页可以用于不同的目的，比如有些页用于段A，有些页用于段B，有些页甚至哪个段都不属于。碎片区直属于表空间，并不属于任何一个段。</p>
+<p>所以此后为某个段分配存储空间的策略是这样的:</p>
+<ul>
+<li>在刚开始向表中插入数据的时候，段是从某个碎片区以单个页面为单位来分配存储空间的。</li>
+<li>当某个段已经占用了32个碎片区页面之后，就会申请以完整的区为单位来分配存储空间。</li>
+</ul>
+<p>所以现在段不能仅定义为是某些区的集合，更精确的应该是某些零散的页面以及一些完整的区的集合。</p>
+<h3 id="4-4-区的分类"><a href="#4-4-区的分类" class="headerlink" title="4.4 区的分类"></a>4.4 区的分类</h3><p>区大体上可以分为4种类型:</p>
+<ul>
+<li>空闲的区(FREE):现在还没有用到这个区中的任何页面。</li>
+<li>有剩余空间的碎片区(FREE_FRAG):表示碎片区中还有可用的页面。</li>
+<li>没有剩余空间的碎片区(FULL_FRAG)︰表示碎片区中的所有页面都被使用，没有空闲页面。</li>
+<li>附属于某个段的区(FSEG):每一个索引都可以分为叶子节点段和非叶子节点段。</li>
+</ul>
+<p>处于FREE、FREE_FRAG以及 FULL_FRAG这三种状态的区都是独立的，直属于表空间。而处于FSEG状态的区是附属于某个段的。</p>
+<blockquote>
+<p>如果把表空间比作是一个集团军，段就相当于师，区就相当于团。一般的团都是隶属于某个师的，就像是处于FSEG的区全都隶属于某个段，而处于FREE、FREE_FRAG以及FULL_FRAG这三种状态的区却直接隶属于表空间，就像独立团直接听命于军部一样。</p>
+</blockquote>
+<h2 id="5-表空间"><a href="#5-表空间" class="headerlink" title="5. 表空间"></a>5. 表空间</h2><p>表空间可以看做是InnoDB存储引擎逻辑结构的最高层，所有的数据都存放在表空间中。</p>
+<p>表空间是一个逻辑容器，表空间存储的对象是段，在一个表空间中可以有一个或多个段，但是一个段只能属于一个表空间。表空间数据库由一个或多个表空间组成，表空间从管理上可以划分为系统表空间(System tablespace)、独立表空间(File-per-table tablespace)、撤销表空间(Undo Tablespace)和临时表空间(Temporary Tablespace)等。</p>
+<h3 id="5-1-独立表空间"><a href="#5-1-独立表空间" class="headerlink" title="5.1 独立表空间"></a>5.1 独立表空间</h3><p>独立表空间，即每张表有一个独立的表空间，也就是数据和索引信息都会保存在自己的表空间中。独立的表空间(即:单表)可以在不同的数据库之间进行迁移。</p>
+<p>空间可以回收(DROP TABLE操作可自动回收表空间;其他情况，表空间不能自己回收)。如果对于统计分析或是日志表，删除大量数据后可以通过: alter table TableName engine&#x3D;innodb;回收不用的空间。对于使用独立表空间的表，不管怎么删除，表空间的碎片不会太严重的影响性能，而且还有机会处理。</p>
+<p><strong>独立表空间结构</strong></p>
+<p>独立表空间由段、区、页组成。前面已经讲解过了。</p>
+<p><strong>真实表空间对应的文件大小</strong></p>
+<p>我们到数据目录里看，会发现一个新建的表对应的.ibd文件只占用了96K，才6个页面大小(MySQL5.7中)，这是因为一开始表空间占用的空间很小，因为表里边都没有数据。不过别忘了这些.ibd文件是自扩展的，随着表中数据的增多，表空间对应的文件也逐渐增大。</p>
+<p><strong>查看InnoDB的表空间类型</strong></p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">mysql &gt; show variables like &#39;innodb_file_per_table&#39;;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="http://img-md-js.linjsblog.top/img/202208312026403.png" alt="image-20220831202620764"></p>
+<p>你能看到innodb_file_per_table&#x3D;ON，这就意味着每张表都会单独保存为一个.ibd 文件。</p>
+<h3 id="5-2-系统表空间"><a href="#5-2-系统表空间" class="headerlink" title="5.2 系统表空间"></a>5.2 系统表空间</h3><p>系统表空间的结构和独立表空间基本类似，只不过由于整个MysQL进程只有一个系统表空间，在系统表空间中会额外记录一些有关整个系统信息的页面，这部分是独立表空间中没有的。</p>
+<p><strong>InnoDB 数据字典</strong></p>
+<p>每当我们向一个表中插入一条记录的时候，MySQL校验过程如下:</p>
+<p>先要校验一下插入语句对应的表存不存在，插入的列和表中的列是否符合，如果语法没有问题的话，还需要知道该表的聚簇索引和所有二级索引对应的根页面是哪个表空间的哪个页面，然后把记录插入对应索引的B+树中。所以说，MySQL除了保存着我们插入的用户数据之外，还需要保存许多额外的信息，比方说:</p>
+<pre class="line-numbers language-none"><code class="language-none">-某个表属于哪个表空间，表里边有多少列
+-表对应的每一个列的类型是什么
+-该表有多少索引，每个索引对应哪几个字段，该索引对应的根页面在哪个表空间的哪个页面
+-该表有哪些外键，外键对应哪个表的哪些列
+-某个表空间对应文件系统上文件路径是什么
+...<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>上述这些数据并不是我们使用INSERT语句插入的用户数据，实际上是为了更好的管理我们这些用户数据而不得已引入的一些额外数据，这些数据也称为元数据。InnoDB存储引擎特意定义了一些列的内部系统表(internalsystem table)来记录这些这些元数据:</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202208312031651.png" alt="image-20220831203108839"></p>
+<p>注意:用户是不能直接访问InnoDB的这些内部系统表，除非你直接去解析系统表空间对应文件系统上的文件。不过考虑到查看这些表的内容可能有助于大家分析问题，所以在系统数据库<code>information_screma</code>中提供了一些以innodb_sys开头的表:</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202208312037691.png" alt="image-20220831203735625"></p>
+<p>在information_schema数据库中的这些以INNODB_SYS开头的表并不是真正的内部系统表(内部系统表就是我们上边以SYS开头的那些表)，而是在存储引擎启动时读取这些以SYS开头的系统表，然后填充到这些以INNODB_SYS开头的表中。以INNODB_SYS开头的表和以SYS开头的表中的字段并不完全一样，但供大家参考已经足矣。</p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        Author:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">qwq小小舒</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        Link:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://js6288.github.io/2022/08/26/innodb%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84/">https://js6288.github.io/2022/08/26/innodb%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        Reprint policy:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    All articles in this blog are used except for special statements
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    reprint policy. If reproduced, please indicate source
+                    <a href="/about" target="_blank">qwq小小舒</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>Copied successfully, please follow the reprint policy of this article</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">more</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">No tag</span>
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
+            <div class="card">
+                <a href="/2022/08/29/%E8%A7%A3%E9%87%8A%E5%99%A8%E6%A8%A1%E5%BC%8F/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="解释器模式">
+                        
+                        <span class="card-title">解释器模式</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-08-29
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="post-category">
+                                    设计模式
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                Next&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/08/26/%E4%BA%8C-%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA%E5%8F%8A%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="(二) 运行时数据区及程序计数器">
+                        
+                        <span class="card-title">(二) 运行时数据区及程序计数器</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-08-26
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/JVM/" class="post-category">
+                                    JVM
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;TOC</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="/libs/aplayer/Meting.min.js"></script>
+
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2019-2025</span>
+            
+            <a href="/about" target="_blank">qwq小小舒</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            
+            <br>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;Total visits:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;Total visitors:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/blinkfox" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:1181062873@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1181062873" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1181062873" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;Search</span>
+            <input type="search" id="searchInput" name="s" placeholder="Please enter a search keyword"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 白天和黑夜主题 -->
+<div class="stars-con">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>  
+</div>
+
+<script>
+    function switchNightMode() {
+        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
+        setTimeout(function () {
+            $('body').hasClass('DarkMode') 
+            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
+            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
+            
+            setTimeout(function () {
+            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
+                $(this).remove()
+            })
+            }, 2e3)
+        })
+    }
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+    
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

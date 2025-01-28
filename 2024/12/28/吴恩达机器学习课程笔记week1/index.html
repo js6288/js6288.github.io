@@ -1,0 +1,1315 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="吴恩达机器学习课程笔记week1, 小小舒的爪哇天地">
+    <meta name="description" content="吴恩达机器学习课程笔记week1对于数学公式块无法显示的问题：目前blogger还在寻找方法解决：请先移步至csdn:https://blog.csdn.net/linjinshu1/article/details/144791241 带来">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>吴恩达机器学习课程笔记week1 | 小小舒的爪哇天地</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    
+
+
+    <!-- bg-cover style     -->
+
+
+
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" type="text/css" href="/css/matery.css">
+<link rel="stylesheet" type="text/css" href="/css/my.css">
+<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+
+
+
+
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/css/post.css">
+
+
+
+
+    
+        <link rel="stylesheet" type="text/css" href="/css/reward.css">
+    
+
+
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">小小舒的爪哇天地</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>Index</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>Tags</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>Categories</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>Archives</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>About</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>Contact</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>Friends</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="Search" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <li>
+    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
+      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">小小舒的爪哇天地</div>
+        <div class="logo-desc">
+            
+            Life is coding, I will debug it.
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			Index
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			Tags
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			Categories
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			Archives
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			About
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			Contact
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			Friends
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/21.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">吴恩达机器学习课程笔记week1</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">
+                                <span class="chip bg-color">人工智能</span>
+                            </a>
+                        
+                            <a href="/tags/AI/">
+                                <span class="chip bg-color">AI</span>
+                            </a>
+                        
+                            <a href="/tags/machine-learning/">
+                                <span class="chip bg-color">machine learning</span>
+                            </a>
+                        
+                            <a href="/tags/%E5%90%B4%E6%81%A9%E8%BE%BE/">
+                                <span class="chip bg-color">吴恩达</span>
+                            </a>
+                        
+                            <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">
+                                <span class="chip bg-color">机器学习</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-category">
+                                学习笔记
+                            </a>
+                        
+                            <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                机器学习
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
+                    2024-12-28
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="吴恩达机器学习课程笔记week1"><a href="#吴恩达机器学习课程笔记week1" class="headerlink" title="吴恩达机器学习课程笔记week1"></a>吴恩达机器学习课程笔记week1</h1><p>对于数学公式块无法显示的问题：目前blogger还在寻找方法解决：请先移步至csdn:<a target="_blank" rel="noopener" href="https://blog.csdn.net/linjinshu1/article/details/144791241">https://blog.csdn.net/linjinshu1/article/details/144791241</a> 带来不便请谅解</p>
+<h2 id="1-机器学习应用"><a href="#1-机器学习应用" class="headerlink" title="1 机器学习应用"></a>1 机器学习应用</h2><ul>
+<li><p>消费者应用领域：</p>
+<ul>
+<li>搜索引擎的排名机制。</li>
+<li>社交软件为图片添加标签。</li>
+<li>流媒体服务推荐机制，比如B站的“首页通知书”。</li>
+<li>语音助手返回的答案，如问Siri附近的餐厅有哪些。</li>
+<li>邮箱自动识别垃圾邮件。</li>
+</ul>
+</li>
+<li><p>工业领域：</p>
+<ul>
+<li>优化风力涡轮机发电。</li>
+<li>AI医学影像诊断。</li>
+<li>Landing AI将计算机视觉应用到工厂中，帮助检查流水线产品质量等。</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-机器学习简介"><a href="#2-机器学习简介" class="headerlink" title="2 机器学习简介"></a>2 机器学习简介</h2><h3 id="2-1-机器学习的定义"><a href="#2-1-机器学习的定义" class="headerlink" title="2-1 机器学习的定义"></a>2-1 机器学习的定义</h3><p><strong>“Field of study that gives computers ability to learn without being explicity programmed.” —Arthur Samuel(1959)</strong></p>
+<p>本节课将学习很多机器学习算法，内容包括：</p>
+<blockquote>
+<ul>
+<li>**有监督学习(Supervised learning)**：实际应用中，有监督学习使用最广泛，并取得了最快速的进步和创新。Course1、Course2聚焦于有监督学习。</li>
+<li>**无监督学习(Unsupervised learning)**：Course3聚焦于无监督学习。</li>
+<li>**强化学习(Reinforcement learning)**：由于应用没有前两者广泛，所以本课程没有简单介绍。</li>
+<li>使用“学习算法”的实用建议（很重要）：“学习算法”本身只是一种工具，比工具本身更重要的是 如何正确使用这些工具。即使是某些大公司中最熟练的机器学习团队，可能也会因为最开始找错了算法方向而导致多年的成果付诸东流。所以本课程不仅会讲解机器学习算法，同时也会介绍最熟练的机器学习工程师是如何构建系统的，以及一些机器学习应用的最佳案例。</li>
+<li>注：学习算法(Learning Algorithm)，是机器学习算法、深度学习算法等具备学习能力的算法的统称。</li>
+</ul>
+</blockquote>
+<h3 id="2-2-有监督学习"><a href="#2-2-有监督学习" class="headerlink" title="2-2 有监督学习"></a>2-2 有监督学习</h3><p>“有监督学习”指的是学习从 输入 <em>x</em> (一个或多个) 映射到 输出 <em>y</em> 的算法。有监督学习算法的关键在于首先要提供正确的样本示例供算法学习，然后算法便可以针对未见过的输入，输出相应的预测结果。下面是一些有监督学习的在现实生活中的示例</p>
+<ul>
+<li>垃圾邮件过滤器：email –&gt; 垃圾邮件?(0&#x2F;1)</li>
+<li>语音识别：语音 –&gt; 文本</li>
+<li>机器翻译：英文 –&gt; 中文</li>
+<li>广告投递：广告、用户信息 –&gt; 用户点击?(0&#x2F;1)</li>
+<li>自动驾驶：图片、雷达信息 –&gt; 其他车辆位置</li>
+<li>视觉检测：手机图片 –&gt; 有缺陷?(0&#x2F;1)</li>
+</ul>
+<p><strong>回归问题示例：房价预测</strong></p>
+<p>  “房价预测”就是根据房子的面积计算价格。下图中的“红叉”就是预先提供的有正确映射关系的样本，“蓝色拟合线”就相当于算法学习输入样本，最后通过拟合线得到房价便是“预测”，这便是“有监督学习”的完整流程。注意到这个回归问题的输出(房价)可以是任意数字，于是便有无穷种可能。 <img src="http://img-md-js.linjsblog.top/img/202412231107016.png" alt="image-20241223110749793"></p>
+<blockquote>
+<p>直线拟合：根据拟合直线，可以预测房屋面积750feet^2^ 对应的价格大约为 $$150k$$。</p>
+<p>曲线拟合：根据拟合曲线，可以预测房屋面积 750 feet^2^ 对应的价格大约为200k</p>
+</blockquote>
+<p><strong>分类问题示例：乳腺癌检测</strong></p>
+<p>  乳腺癌检测问题就是根据输入的一系列信息，如肿瘤块的大小、患者年龄、肿瘤块的厚度、细胞大小的均匀性、细胞形状的均匀性等，来判断是否为恶性肿瘤(0表示良性&#x2F;1表示恶性)。下面给出“单输入的乳腺癌检测”、“两输入的乳腺癌检测”示意图：</p>
+<p>单输入的乳腺癌检测：输入是“肿瘤的大小”，输出是“良性”、“恶性-类型1”、“恶性-类型2”。 两输入的乳腺癌检测：输入是“肿瘤的大小”、“患者年龄”，输出是“良性”、“恶性”。</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202412231120895.png" alt="image-20241223112035841"></p>
+<p>​ 单输入的乳腺癌检测问题</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202412231120158.png" alt="image-20241223112057104"></p>
+<p>​ 两输入的乳腺癌检测问题</p>
+<h3 id="2-3-无监督学习"><a href="#2-3-无监督学习" class="headerlink" title="2-3 无监督学习"></a>2-3 无监督学习</h3><blockquote>
+<p>无监督学习： Data only comes with inputs x, but not output labels y. Algorithm has to find <strong>structure</strong> in the data.</p>
+</blockquote>
+<p>在“有监督学习”之后，“无监督学习”也被广泛应用起来。“无监督学习”不是要找映射关系，而是想要从 没有标记的数据集 中发现一些有趣的东西，比如这个数据集中有什么 可能的模式或结构。无监督学习的主要类型有：</p>
+<blockquote>
+<p>聚类(Clustering)：将相似的数据点分成一组。</p>
+<p>异常检测(Anomaly detection)：。有非常多的应用，比如在金融系统的诈骗检测中，异常时间、异常交易可能是欺诈。</p>
+<p>降维(Dimensionality reduction)：在尽可能丢失少的信息的前提下，将大数据集压缩成小得多的数据集。</p>
+</blockquote>
+<p>Question: Of the following examples, which would you address using an unsupervised learning algorithm? × Given email labeled as spam&#x2F;not spam, learn a spam filter. √ Given a set of news articles found on the web, group them into sets of articles about the same story. √ Given a database of customer data, automatically discover market segments and group customers into different market segments. × Given a dataset of patients diagnosed as either having diabetes or not, learn to classify new patients as having diabetes or not.</p>
+<p>知识点：有监督学习给数据和标签，重点在于对新输入预测出标签；无监督学习只给数据，重点在于自行分组。</p>
+<p>下面给出“聚类”的3个示例，后续会再介绍“异常检测”和“降维”这两种无监督学习的示例：</p>
+<p><strong>聚类算法示例1：新闻分类</strong>   “谷歌新闻”的任务就是将每天数十万的新闻进行聚类，找到提到相似词的文章并将其分组。很酷的是，聚类算法可以自己计算出哪些词暗示了这些文章属于同一个组，并且谷歌新闻的员工也没有事先告诉算法有哪些组。如下图所示，panda、twin、zoo都是相似的词，这些文章被归为一类。</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202412231359063.png" alt="image-20241223135945000"></p>
+<p><strong>聚类算法示例2：基因分类</strong></p>
+<p>  下图所示的基因图谱，每一列表示一个人的全部基因，每一行表示一种基因，不同的颜色表示该基因的活跃程度，这些基因包括瞳孔颜色、身高、不爱吃西蓝花&#x2F;包菜&#x2F;莴苣等。聚类算法仅根据这些基因数据，将人进行分组，进而找出“基因上很相似的人”。</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202412231400700.png" alt="img"></p>
+<p><strong>聚类算法示例3：客户分群</strong></p>
+<p>  还有一个很常见的聚类算法示例就是，根据客户信息数据库，将不同的客户划分进不同的细分市场，以便更有效的服务客户。比如深度学习团队“dot AI” 想知道 dot AI社区 中的人们，参加课程、订阅通知、参加AI活动等的动机是什么。于是通过调研团队便发现了拥有不同动机的人，比如：提升技能、发展事业、紧随AI潮流、或者哪个都不是。这个例子中调研团队就相当于无监督学习算法。</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202412231400464.png" alt="img"></p>
+<h2 id="3-线性回归模型"><a href="#3-线性回归模型" class="headerlink" title="3 线性回归模型"></a>3 线性回归模型</h2><h3 id="3-1-线性回归模型"><a href="#3-1-线性回归模型" class="headerlink" title="3-1 线性回归模型"></a>3-1 线性回归模型</h3><ul>
+<li>Training Set(数据集)：用于训练模型的数据集。</li>
+<li>_x_：input variable(输入变量) &#x2F; feature(特征) &#x2F; input feature(输入特征)，也就是“特征值”。</li>
+<li>_y_：output variable(输出变量) &#x2F; target variable(目标变量)，也就是“目标值”。</li>
+<li>_m_：表示训练样本的数量。</li>
+<li>(<em>x</em>,<em>y</em>)：单个训练样本。</li>
+<li>(x^(i)^ ,y^(i)^) :第 i 个训练样本。上标加括号是为了和求幂次区别开来。</li>
+<li>$\hat{y}$：表示对 <em>y</em> 的估计或预测</li>
+</ul>
+<p><img src="http://img-md-js.linjsblog.top/img/202412231655900.png" alt="img"></p>
+<ul>
+<li>以前把 <em>f</em> 叫做hypothesis(假设)，但是老师不建议这种叫法，而是称之为function(函数)。</li>
+</ul>
+<p>  上图给出了整个“有监督学习”的流程，也就是“learning algorithm”根据输入的“训练集”得到一个 函数模型_f_，于是便可以通过 <em>f</em> 来对 输入_x_ 进行预测 输出$ \hat{y} $ 。而“线性回归模型”就是假设 函数模型_f_ 为一条直线，因为简单易用，这可能是世界上使用最广泛的学习算法，后续也会在其他机器学习模型中见到线性回归模型。   “线性回归”只是解决回归问题的方法之一，其他方法会在Course2中会介绍。现在以上一小节“房价预测”问题举例，若使用“线性回归模型”假设 <em>f</em> 就是一条直线，于是该模型就可以写成 $$ f_{w,b}(x)&#x3D;wx+b $$</p>
+<blockquote>
+<p>表示函数 <em>f</em> 以 <em>x</em> 为函数输入，其输出$\hat{y}$取决于_w_和_b_的值</p>
+<ul>
+<li>w、b：模型的参数(parameter)</li>
+<li>$f_{w,b}(x)$通常会简写为$f(x)$</li>
+</ul>
+</blockquote>
+<p><img src="http://img-md-js.linjsblog.top/img/202412231742784.png" alt="img"></p>
+<h3 id="3-2-代价函数"><a href="#3-2-代价函数" class="headerlink" title="3-2 代价函数"></a>3-2 代价函数</h3><p>显然，虽然现在已经构建好了“线性回归模型”，但是过训练集的直线有无数种，如何找出 与训练数据最拟合的线 还不明确，于是本节就来介绍 代价函数(cost funtion)。在机器学习中，代价函数用于 衡量模型的好坏，最简单、最常用的代价函数是“平均误差代价函数”(Squared error cost function)：</p>
+<p>$$ J(w,b) &#x3D; \frac{1}{2m} \sum_{i&#x3D;1}^m (\hat{y}^{(i)} - \hat{y}^{(i)}) ^{2} &#x3D; \frac{1}{2m} \sum_{i&#x3D;1}^m (f_{w,b}(x^{(i)}) - y^{(i)})^2 $$</p>
+<blockquote>
+<ul>
+<li>$w$、$b$: 模型的参数</li>
+<li>$i$: 训练样本的标号</li>
+<li>$m$：训练样本的总数</li>
+<li>$y^{(i)}$ :第 i 的样本的真实目标值</li>
+<li>$\hat{y}^{(i)}$: 对$y^{(i)}$的预测目标值</li>
+<li>除以 $2m$：按照惯例，机器学习中的平均代价函数会除以 2m 而非 m ，这是为了使后续的计算更加简洁。</li>
+</ul>
+</blockquote>
+<p>现在来直观的看一下，最小化代价函数如何找到与训练数据最拟合的线。首先简化模型，设置参数 $b &#x3D; 0$ ，并假设训练数据只有三个点。下图给出了不同的 $w$ 所对应不同的 代价$J (w)$，显然在 $w &#x3D; 1$ 处代价最小，直线也最拟合： $$ \min_w J(w) &#x3D; \frac{1}{2m} \sum_{i&#x3D;1}^m (\hat{y}^{(i)} - \hat{y}^{(i)}) ^{2} &#x3D; \frac{1}{2m} \sum_{i&#x3D;1}^m (wx^{(i)} - y^{(i)})^{2} $$ <img src="http://img-md-js.linjsblog.top/img/202412232040779.png" alt="image-20241223204005657"></p>
+<p><img src="http://img-md-js.linjsblog.top/img/202412232040250.png" alt="image-20241223204050148"></p>
+<p>通过尝试不同的w最终绘制出J(w)曲线</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202412232043970.png" alt="img"></p>
+<p>那回到刚才的问题中，同时将 $w$和$b$ 都考虑在内，并引入更多的训练数据，便可以得到下面的代价函数示意图。为了更好的将代价函数可视化，同时使用“等高线图”和“3D图”来展示不同的 $w$ 和 $b$ 所对应不同的 代价$J(w,b)$ 。“3D图”类似一个“碗”，显然在“碗”的底部，代价函数最小：</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202412232357781.png" alt="image-20241223235706685"></p>
+<blockquote>
+<p>课程资料：<a target="_blank" rel="noopener" href="https://github.com/kaieye/2022-Machine-Learning-Specialization">https://github.com/kaieye/2022-Machine-Learning-Specialization</a></p>
+<p>文件路径：Supervised Machine Learning Regression and Classification&#x2F;week1&#x2F;4.Regression Model</p>
+</blockquote>
+<p>虽然现在距离完成“线性回归问题”非常接近了，但是上述是通过人眼来直观的寻找代价函数的最小点，实际上要画出有足够多细节的3D图需要计算大量的 $J(w,b)$，而很多 $J(w,b)$点 都是没用的，这显然不划算。下一节就来介绍如何通过计算有限的 $J(w,b)$点 来找到代价函数最小点。</p>
+<h2 id="4-梯度下降法"><a href="#4-梯度下降法" class="headerlink" title="4 梯度下降法"></a>4 梯度下降法</h2><h3 id="4-1-梯度下降法"><a href="#4-1-梯度下降法" class="headerlink" title="4-1 梯度下降法"></a>4-1 梯度下降法</h3><p>梯度下降(Gradient Desent)常用于寻找某函数(比如代价函数)的最大值、最小值。梯度下降不仅用于线性拟合，也用于训练如神经网络(Course2)等深度学习模型、以及一些最大型、最复杂的人工智能模型。下面以前面的 $\min_{w,b} J(w,b)$ 来举例，梯度下降算法的步骤为：</p>
+<ol>
+<li><p>选择初始点，一般在取值范围内选取简单的整数，如 $w &#x3D; 1 , b &#x3D; 0$。</p>
+</li>
+<li><p>沿着 $J$ 的“负梯度”方向，不断迭代计算 $w $、$b$。之所以沿着“负梯度”方向，是因为沿该方向下降速度最快(steepest descent, 最速下降)。如下：(<strong>注意这个等号是计算机语言的赋值符号</strong>) $$ w&#x3D;w-\alpha \frac {\partial}{\partial w} J(w,b) $$</p>
+<p>$$ b &#x3D; b - \alpha \frac {\partial}{\partial b} J(w,b) $$</p>
+</li>
+</ol>
+<blockquote>
+<p>$\alpha$: 学习率(Learning rate)，用于控制步长。通常为介于0~1之间的一个小的正数，如0.01。</p>
+<p>$\frac {\partial}{\partial w} J(w,b)$ ：代价函数对 $w $ 的偏导数(<strong>Partial</strong> <strong>Derivative</strong>)，其取负值表明的方向可以使 $J$ 下降。</p>
+<p>$\frac {\partial}{\partial b} J(w,b)$: 代价函数对 $b$ 的偏导数，意义同上.</p>
+</blockquote>
+<p>注意：上面是 同时更新(Simultaneously update)，也就是使用旧的 $(w,b)$ 直接分别计算出新的 $w $、$b $；而不是先更新 $w$，再使用这个新的$ w $计算新的 $b$。<img src="http://img-md-js.linjsblog.top/img/202412242119503.png" alt="image-20241224211904055"></p>
+<ol start="3">
+<li>直到 $w$和$b$的负梯度 都为0(或者0的邻域内)，即可认为找到 $J$的最低点。</li>
+</ol>
+<p>下面两张图很直观的给出了整个梯度下降法的过程。在下 图1 中，首先固定 b &#x3D; 0，只分析 w 对代价函数 J ( w ) 的影响。可以发现，若当前 w 在最低点右侧，由于“负梯度”小于0，于是下一个 w 将向左移动；反之若当前 w 在最低点左侧，由于“负梯度”大于0，下一个w 将向右迭代。只要选择合适的学习率α，最终就可以找到最低点所在的w。在 图2 中，则进一步同时考虑 w 和b，可以发现每次也是沿着“负梯度”下降最快的方向，最终可以到达最低点所在处。这个迭代的过程就是“梯度下降”，类似于“下山”的过程</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202412242127029.png" alt="img"></p>
+<p><img src="http://img-md-js.linjsblog.top/img/202412242128696.png" alt="img"></p>
+<h3 id="4-2-学习率α"><a href="#4-2-学习率α" class="headerlink" title="4-2 学习率α"></a>4-2 学习率α</h3><p>学习率α 的选取会对梯度下降的效果产生影响，如果α选的不好，可能会导致无法实现梯度下降</p>
+<ul>
+<li><p>α 选取的太小，会导致下降的速度非常慢(意味着需要计算很长时间)，但最终也会收敛(converge)到最小值。</p>
+</li>
+<li><p>α 选取的太大，很可能会导致在极值点附近反复横跳甚至越来越远，也就是不会收敛甚至发散(diverge)。</p>
+</li>
+<li><p>α 选取的合适，越接近代价函数极小值，梯度越来越小，就会导致步长越来越小。</p>
+</li>
+</ul>
+<p><img src="http://img-md-js.linjsblog.top/img/202412242224348.png" alt="img"></p>
+<p><img src="http://img-md-js.linjsblog.top/img/202412242225064.png" alt="img"></p>
+<h3 id="4-3-用于线性回归的梯度下降"><a href="#4-3-用于线性回归的梯度下降" class="headerlink" title="4-3 用于线性回归的梯度下降"></a>4-3 用于线性回归的梯度下降</h3><p>介绍完梯度下降法，现在来总结一下，将前面的线性回归模型、代价函数、梯度下降算法结合起来，按照下面公式不断迭代直至其收敛：</p>
+<p>到目前为止，在这个课程中，你已经开发了一个线性模型来预测 $f_{w,b}(x^{(i)})$: $$ Linears \ regression \ model:\ f_{w,b} &#x3D; wx + b \tag{1}\ $$</p>
+<p>在线性回归中，通过最小化我们的预测$f_{w,b}(x^{(i)})$, 和实际数据 $y^{(i)}$之间的误差来利用输入训练数据来拟合参数$w$,$b$。该方法被称为损失函数（代价函数） $J(w,b)$。在训练中，你测量所有训练样本的成本 $$ Cost \ function: \ J(w,b) &#x3D; \frac{1}{2m} \sum_{i&#x3D;1}^{m} (f_{w,b}(x^{(i)}) - y^{(i)})^2 \tag{2} \ $$</p>
+<p>在课程中，梯度下降定义如下： $$ \begin{align_} \text{repeat}&amp;\text{ until convergence:} \; \lbrace \newline \; w &amp;&#x3D; w - \alpha \frac{\partial J(w,b)}{\partial w} \tag{3} \; \newline b &amp;&#x3D; b - \alpha \frac{\partial J(w,b)}{\partial b} \newline \rbrace \end{align_} $$ 其中，参数$w,b$被同时更新，梯度定义为：</p>
+<p>$$ \begin{align} \frac{\partial J(w,b)}{\partial w} &amp;&#x3D; \frac{1}{m} \sum\limits_{i &#x3D; 0}^{m-1} (f_{w,b}(x^{(i)}) - y^{(i)})x^{(i)} \tag{4}\ \frac{\partial J(w,b)}{\partial b} &amp;&#x3D; \frac{1}{m} \sum\limits_{i &#x3D; 0}^{m-1} (f_{w,b}(x^{(i)}) - y^{(i)}) \tag{5}\ \end{align} $$</p>
+<p>可以通过在代价（w,b）的等高线图上绘制迭代代价来显示梯度下降的执行过程。</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202412242351353.png" alt="image-20241224235153206"></p>
+<p>从“等高线图”的角度来看，梯度下降法的迭代过程可能如下图红色箭头所示，从起始点不断收敛到最小值，并且注意到这个过程也是越来越慢的：</p>
+<p>放大后，我们可以看到梯度下降的最后步骤。注意，当梯度趋于零时，步骤之间的距离会缩小</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202412242354883.png" alt="image-20241224235445743"></p>
+<p>最后说明一下，由于在使用梯度下降法求解问题的过程中，每次迭代都会使用到所有的训练集数据计算代价函数及其梯度，所以这个梯度下降的过程称为“**批量梯度下降(Batch gradient descent)**”。当然本问题较为简单，在其他数据更为复杂的模型中，为了简化梯度下降法的计算量，每次只使用训练集的子集。</p>
+<blockquote>
+<p>代码：<a target="_blank" rel="noopener" href="https://github.com/kaieye/2022-Machine-Learning-Specialization/tree/main/Supervised%20Machine%20Learning%20Regression%20and%20Classification/week1/6.Train%20the%20model%20with%20gradient%20descent">https://github.com/kaieye/2022-Machine-Learning-Specialization/tree/main/Supervised%20Machine%20Learning%20Regression%20and%20Classification/week1/6.Train%20the%20model%20with%20gradient%20descent</a></p>
+</blockquote>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        Author:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">qwq小小舒</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        Link:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://js6288.github.io/2024/12/28/%E5%90%B4%E6%81%A9%E8%BE%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0week1/">https://js6288.github.io/2024/12/28/%E5%90%B4%E6%81%A9%E8%BE%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0week1/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        Reprint policy:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    All articles in this blog are used except for special statements
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    reprint policy. If reproduced, please indicate source
+                    <a href="/about" target="_blank">qwq小小舒</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>Copied successfully, please follow the reprint policy of this article</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">more</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">
+                                    <span class="chip bg-color">人工智能</span>
+                                </a>
+                            
+                                <a href="/tags/AI/">
+                                    <span class="chip bg-color">AI</span>
+                                </a>
+                            
+                                <a href="/tags/machine-learning/">
+                                    <span class="chip bg-color">machine learning</span>
+                                </a>
+                            
+                                <a href="/tags/%E5%90%B4%E6%81%A9%E8%BE%BE/">
+                                    <span class="chip bg-color">吴恩达</span>
+                                </a>
+                            
+                                <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">
+                                    <span class="chip bg-color">机器学习</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
+            <div class="card">
+                <a href="/2024/12/28/%E5%90%B4%E6%81%A9%E8%BE%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0week2/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="吴恩达机器学习week2">
+                        
+                        <span class="card-title">吴恩达机器学习week2</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2024-12-28
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-category">
+                                    学习笔记
+                                </a>
+                            
+                            <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                    机器学习
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                Next&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2024/12/28/%E8%8B%B1%E8%AF%AD%E4%B8%80%E5%A4%A7%E4%BD%9C%E6%96%87/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="英语一大作文">
+                        
+                        <span class="card-title">英语一大作文</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-12-28
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-category">
+                                    学习笔记
+                                </a>
+                            
+                            <a href="/categories/%E8%80%83%E7%A0%94/" class="post-category">
+                                    考研
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E8%80%83%E7%A0%94/">
+                        <span class="chip bg-color">考研</span>
+                    </a>
+                    
+                    <a href="/tags/%E4%BD%9C%E6%96%87/">
+                        <span class="chip bg-color">作文</span>
+                    </a>
+                    
+                    <a href="/tags/%E8%8B%B1%E8%AF%AD%E4%B8%80/">
+                        <span class="chip bg-color">英语一</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;TOC</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="/libs/aplayer/Meting.min.js"></script>
+
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2019-2025</span>
+            
+            <a href="/about" target="_blank">qwq小小舒</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            
+            <br>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;Total visits:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;Total visitors:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/blinkfox" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:1181062873@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1181062873" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1181062873" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;Search</span>
+            <input type="search" id="searchInput" name="s" placeholder="Please enter a search keyword"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 白天和黑夜主题 -->
+<div class="stars-con">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>  
+</div>
+
+<script>
+    function switchNightMode() {
+        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
+        setTimeout(function () {
+            $('body').hasClass('DarkMode') 
+            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
+            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
+            
+            setTimeout(function () {
+            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
+                $(this).remove()
+            })
+            }, 2e3)
+        })
+    }
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+    
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
