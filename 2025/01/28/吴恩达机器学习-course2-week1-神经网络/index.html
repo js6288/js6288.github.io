@@ -526,8 +526,7 @@
 </blockquote>
 <h3 id="2-2-更复杂的神经网络"><a href="#2-2-更复杂的神经网络" class="headerlink" title="2-2 更复杂的神经网络"></a>2-2 更复杂的神经网络</h3><p><img src="http://img-md-js.linjsblog.top/img/202501262133006.png" alt="image-20250126213318916"></p>
 <p>显然上图中，每一层都有一个输入向量，经过当前层所有神经元的得到输出向量，传递给下一层。将符号整理得更加清晰一些，于是第 $l$ 层神经网络的第 $j$ 个神经元的输出可以写成：</p>
-<pre class="line-numbers language-math" data-language="math"><code class="language-math">a_&#123;j&#125;^&#123;[l]&#125; &#x3D; g(\vec&#123;w&#125;_&#123;j&#125;^&#123;[l]&#125; \cdot \vec&#123;a&#125;^&#123;[l-1]&#125; + b_&#123;j&#125;^&#123;[l]&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
+<p>$$<br>a_{j}^{[l]} &#x3D; g(\vec{w}<em>{j}^{[l]} \cdot \vec{a}^{[l-1]} + b</em>{j}^{[l]})<br>$$</p>
 <p>将输入特征写为 $\vec{x} &#x3D; \vec{a}^{[0]}$ 上式就具有通用性。</p>
 <h3 id="2-3-神经网络前向传播"><a href="#2-3-神经网络前向传播" class="headerlink" title="2-3 神经网络前向传播"></a>2-3 神经网络前向传播</h3><p>“手写数字识别”问题：简洁起见，只识别手写数字0和1。</p>
 <p>输入特征：8x8的灰度图(灰度级0~255)，0表示黑色，255表示白色。于是输入特征 $\vec{x}$的长度为64。 输出：二元分类，输入图片是数字1的概率。</p>
@@ -1102,6 +1101,13 @@ a_last <span class="token operator">=</span> model<span class="token punctuation
 
 </main>
 
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    });
+</script>
 
 
 
