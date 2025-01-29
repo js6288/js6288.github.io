@@ -52,7 +52,9 @@
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 7.3.0"></head>
+<meta name="generator" content="Hexo 7.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
 
 
 <body>
@@ -361,9 +363,17 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">No tag</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">
+                                <span class="chip bg-color">人工智能</span>
+                            </a>
+                        
+                            <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">
+                                <span class="chip bg-color">机器学习</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
@@ -393,12 +403,32 @@
                 
 
                 
-
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>Update Date:&nbsp;&nbsp;
+                    2025-01-29
+                </div>
                 
 
                 
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
+                    3.3k
+                </div>
+                
 
                 
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
+                    12 Min
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>Read Count:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
             </div>
         </div>
         <hr class="clearfix">
@@ -420,8 +450,8 @@
 <li>$m$: 训练样本的总数</li>
 <li>$n$: 表示输入特征(variables or features)的总数</li>
 <li>$\vec X$ ：全部的输入变量(特征)(variables or features) 是一个<strong>二维向量</strong>（矩阵），每一行表示一个样本，每一列表示所有样本的单个特征（变量）</li>
-<li>$\vec x_{j}$ ：表示第 j 个特征概念（<strong>一维向量</strong>），如Number of bedrooms<strong>列</strong>的所有值，j 的取值范围 j &#x3D; 1,2,…,n</li>
-<li>$x_{j}^{(i)} $: 第 i 个训练样本的第 j 个特征，是 <strong>单个值</strong> 如图中，$ x_{1}^{(2)} &#x3D; 1416 $。</li>
+<li>$\vec x_{j}$ ：表示第 j 个特征概念（<strong>一维向量</strong>），如Number of bedrooms<strong>列</strong>的所有值，j 的取值范围 j = 1,2,…,n</li>
+<li>$x_{j}^{(i)} $: 第 i 个训练样本的第 j 个特征，是 <strong>单个值</strong> 如图中，$ x_{1}^{(2)} = 1416 $。</li>
 <li>$y^{(i)}$: 第i个训练样本的目标值，是单个值</li>
 <li>$\vec Y$：全部的训练样本的特征值，是一维向量</li>
 </ul>
@@ -432,12 +462,12 @@
 <li>多元线性回归(multiple linear regression)：具有多维特征的线性回归模型。</li>
 <li>multivariate regression：不是上述“多元回归”！另有别的意思，后面介绍。</li>
 </ul>
-<p> 如上图所示，将“房价预测”中的输入特征数量增加为4个：输入特征：房屋面积、卧室数量、房屋层数、房屋年龄。于是显然其线性回归模型也将从$f_{w,b} &#x3D; wx + b$ 拓展为下面的向量形式：</p>
-<p>$$ f_{\vec w,b}(\vec x) &#x3D; w_1x_1 + w_2x_2 + w_3x_3 + w_4x_4 + b \ &#x3D;\sum_{j&#x3D;1}^n w_ix_i + b \ &#x3D;\vec w \cdot \vec x + b $$</p>
+<p> 如上图所示，将“房价预测”中的输入特征数量增加为4个：输入特征：房屋面积、卧室数量、房屋层数、房屋年龄。于是显然其线性回归模型也将从$f_{w,b} = wx + b$ 拓展为下面的向量形式：</p>
+<p>$$ f_{\vec w,b}(\vec x) = w_1x_1 + w_2x_2 + w_3x_3 + w_4x_4 + b \ =\sum_{j=1}^n w_ix_i + b \ =\vec w \cdot \vec x + b $$</p>
 <blockquote>
-<p>$\vec w$ &#x3D; $[w_1,w_2,…,w_n]^T$: 表示参数的（列）向量，$w_i$ 表示当前特征对房屋价格的影响</p>
+<p>$\vec w$ = $[w_1,w_2,…,w_n]^T$: 表示参数的（列）向量，$w_i$ 表示当前特征对房屋价格的影响</p>
 <p>b： 常数项参数。可以理解为房屋的基价(base price)</p>
-<p>$\vec x &#x3D; [x_1,x_2,…,x_n]^T$ :表示<strong>单个样本</strong>的特征(<strong>列</strong>)向量</p>
+<p>$\vec x = [x_1,x_2,…,x_n]^T$ :表示<strong>单个样本</strong>的特征(<strong>列</strong>)向量</p>
 <p>$\vec w \cdot \vec x$ : 表示两个向量的点积</p>
 </blockquote>
 <h3 id="1-2-向量化"><a href="#1-2-向量化" class="headerlink" title="1-2 向量化"></a>1-2 向量化</h3><p>简单来说，所谓“向量化”就是将分散的数字绑在一起进行处理。虽然概念很简单，但是“向量化”对于机器学习来说非常重要，因为它可以使<strong>模型更简洁</strong>、<strong>代码更简洁</strong>，并且也可以<strong>加速代码运行速度</strong>。比如下图给出了三种书写求和公式的方法。可以发现，使用向量形式的模型表达式最简洁、代码最少(一行)：</p>
@@ -446,14 +476,14 @@
 <p>一个一个写：很麻烦，耗时耗力，也不会加快代码计算。 for循环：每次只能计算单个乘法并相加，n很大时非常耗时。 向量相乘：形式简洁、运行更快。这是因为 numpy.dot()可以并行计算所有乘法，再进行相加。甚至某些内置算法还会使用GPU加速运算。 注：Optional Lab C1_W2_Lab01_Python_Numpy_Vectorization_Soln介绍了一些NumPy的语法。</p>
 </blockquote>
 <p>并且梯度下降法的迭代计算中，使用向量更新参数也会非常简洁。所以<strong>机器学习中尽量使用向量化代码</strong>。</p>
-<h3 id="1-3-用于线性回归的梯度下降法"><a href="#1-3-用于线性回归的梯度下降法" class="headerlink" title="1-3 用于线性回归的梯度下降法"></a>1-3 用于线性回归的梯度下降法</h3><p>有了“向量化”的铺垫，本节将前面的单变量线性回归问题扩展到多元线性回归。首先使用“向量”重写模型，然后也就可以写出<strong>梯度下降法</strong>的“向量”形式，进而迭代计算出模型参数： $$ Model: f_{\vec w,b}(\vec x) &#x3D; \vec w \cdot \vec x + b \ Cost function: \min_{\vec w,b} J(\vec w,b) &#x3D; \frac{1}{2m} \sum_{i &#x3D; 0}^{m-1} (f_{\vec w,b}(\vec x^{(i)}) - y^{i})^2 \ $$</p>
-<p>$$ Gredient \ descent \ repeat \ until \ convergence:\ w_j &#x3D; w_j - \alpha \frac{\partial}{\partial w_j}J(\vec w,b) \ b &#x3D; b - \alpha \frac{\partial}{\partial b}J(\vec w,b) $$</p>
-<p>其中： $$ \begin{align} \frac{\partial J(\mathbf{w},b)}{\partial w_j} &amp;&#x3D; \frac{1}{m} \sum\limits_{i &#x3D; 0}^{m-1} (f_{\mathbf{w},b}(\mathbf{x}^{(i)}) - y^{(i)})x_{j}^{(i)} \ \frac{\partial J(\mathbf{w},b)}{\partial b} &amp;&#x3D; \frac{1}{m} \sum\limits_{i &#x3D; 0}^{m-1} (f_{\mathbf{w},b}(\mathbf{x}^{(i)}) - y^{(i)}) \end{align} $$</p>
+<h3 id="1-3-用于线性回归的梯度下降法"><a href="#1-3-用于线性回归的梯度下降法" class="headerlink" title="1-3 用于线性回归的梯度下降法"></a>1-3 用于线性回归的梯度下降法</h3><p>有了“向量化”的铺垫，本节将前面的单变量线性回归问题扩展到多元线性回归。首先使用“向量”重写模型，然后也就可以写出<strong>梯度下降法</strong>的“向量”形式，进而迭代计算出模型参数： $$ Model: f_{\vec w,b}(\vec x) = \vec w \cdot \vec x + b \ Cost function: \min_{\vec w,b} J(\vec w,b) = \frac{1}{2m} \sum_{i = 0}^{m-1} (f_{\vec w,b}(\vec x^{(i)}) - y^{i})^2 \ $$</p>
+<p>$$ Gredient \ descent \ repeat \ until \ convergence:\ w_j = w_j - \alpha \frac{\partial}{\partial w_j}J(\vec w,b) \ b = b - \alpha \frac{\partial}{\partial b}J(\vec w,b) $$</p>
+<p>其中： $$ \begin{align} \frac{\partial J(\mathbf{w},b)}{\partial w_j} &amp;= \frac{1}{m} \sum\limits_{i = 0}^{m-1} (f_{\mathbf{w},b}(\mathbf{x}^{(i)}) - y^{(i)})x_{j}^{(i)} \ \frac{\partial J(\mathbf{w},b)}{\partial b} &amp;= \frac{1}{m} \sum\limits_{i = 0}^{m-1} (f_{\mathbf{w},b}(\mathbf{x}^{(i)}) - y^{(i)}) \end{align} $$</p>
 <blockquote>
 <p>模型中$\vec x$ 表示单个变量的所有特征，是一维向量</p>
 <p>$f_{\vec w,b}(\vec x^{(i)})$ 是一个值，$y^{(i)}$是一个值</p>
 </blockquote>
-<p>除了梯度下降法，还有一类求解模型参数的方法——**正规方程法(Normal rquation method)**。此方法利用线性代数的知识，直接令代价函数的梯度 $\frac{\partial}{\partial w_j}J(\vec w,b) &#x3D; 0$ , 便可以一步求解出代价函数极小点所对应的参数值：$\vec w &#x3D; (\vec X^T \vec X)^{-1} \vec X^T \vec Y$ 见“<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/60719445">详解正规方程</a>”。但是这种方法有两个缺点：</p>
+<p>除了梯度下降法，还有一类求解模型参数的方法——**正规方程法(Normal rquation method)**。此方法利用线性代数的知识，直接令代价函数的梯度 $\frac{\partial}{\partial w_j}J(\vec w,b) = 0$ , 便可以一步求解出代价函数极小点所对应的参数值：$\vec w = (\vec X^T \vec X)^{-1} \vec X^T \vec Y$ 见“<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/60719445">详解正规方程</a>”。但是这种方法有两个缺点：</p>
 <blockquote>
 <ol>
 <li>适用面小：仅适用于线性拟合，无法应用于其他方法，比如下周要学的“逻辑回归算法(logistic regression algorithm)”或者神经网络(Course2)。</li>
@@ -461,11 +491,11 @@
 </ol>
 </blockquote>
 <p>正规方程法通常会包含在机器学习函数库中，我们无需关心具体的计算过程。对于大多数机器学习算法来说，<strong>梯度下降法仍然是推荐的方法</strong>。</p>
-<h2 id="2-使梯度下降法更快收敛的技巧"><a href="#2-使梯度下降法更快收敛的技巧" class="headerlink" title="2 使梯度下降法更快收敛的技巧"></a>2 使梯度下降法更快收敛的技巧</h2><h3 id="2-1-特征缩放"><a href="#2-1-特征缩放" class="headerlink" title="2-1 特征缩放"></a>2-1 特征缩放</h3><p><strong>特征缩放(feature scaling)可以使梯度下降法更快收敛</strong>。这主要是因为&#x3D;&#x3D;不同特征的取值范围有很大不同，但所有特征所对应的参数的学习率是一致的&#x3D;&#x3D;。这就导致取值范围较小的特征的参数，会“跟不上”取值范围较大的特征的参数变化。比如我们来看看“特征值大小”和其关联的“参数大小”的关系，首先将“房价预测”的问题简化成两个特征： <img src="http://img-md-js.linjsblog.top/img/202412271444330.png" alt="img"></p>
+<h2 id="2-使梯度下降法更快收敛的技巧"><a href="#2-使梯度下降法更快收敛的技巧" class="headerlink" title="2 使梯度下降法更快收敛的技巧"></a>2 使梯度下降法更快收敛的技巧</h2><h3 id="2-1-特征缩放"><a href="#2-1-特征缩放" class="headerlink" title="2-1 特征缩放"></a>2-1 特征缩放</h3><p><strong>特征缩放(feature scaling)可以使梯度下降法更快收敛</strong>。这主要是因为==不同特征的取值范围有很大不同，但所有特征所对应的参数的学习率是一致的==。这就导致取值范围较小的特征的参数，会“跟不上”取值范围较大的特征的参数变化。比如我们来看看“特征值大小”和其关联的“参数大小”的关系，首先将“房价预测”的问题简化成两个特征： <img src="http://img-md-js.linjsblog.top/img/202412271444330.png" alt="img"></p>
 <blockquote>
 <p>$x_1$: 房屋面积，范围是300<del>2000平方英尺。 $x_2$: 卧室数量，范围是0</del>5。 参数选择：显然取值范围更大的$x_1$ 影响更大。</p>
-<p>$w_1&#x3D;50,w_2&#x3D;0.1,b&#x3D;50$: 计算出来的房屋价格是 $100050.5 k$显然与实际的 $500k完全不符。</p>
-<p>$w_1 &#x3D; 0.1 , w_2 &#x3D; 50 , b &#x3D; 50$: 计算出来的房屋价格是 $500 k，正好等于房屋实际价格。</p>
+<p>$w_1=50,w_2=0.1,b=50$: 计算出来的房屋价格是 $100050.5 k$显然与实际的 $500k完全不符。</p>
+<p>$w_1 = 0.1 , w_2 = 50 , b = 50$: 计算出来的房屋价格是 $500 k，正好等于房屋实际价格。</p>
 </blockquote>
 <p>于是，便考虑将 <strong>特征值归一化</strong>，使所有特征值的取值范围大致相同，这样就不会影响参数的迭代计算了。如下图便给出了进行 <strong>特征缩放</strong> 前后的对比：</p>
 <p><img src="http://img-md-js.linjsblog.top/img/202412271517462.png" alt="img"></p>
@@ -476,18 +506,18 @@
 <p>好，现在我们知道进行 <strong>特征缩放</strong> 很有必要，那具体如何进行“特征缩放”，来使得所有特征都有相近的范围大小呢？主要有下面三种方法，并给出了第三种方法“Z-score归一化”的特征缩放效果：</p>
 <ol>
 <li>除以最大值：所有特征除以各自的范围最大值，使得特征值范围都在0~1之间。于是$0.15 \leq \frac {x_1}{2000} \leq 1$、 $0 \leq \frac{x_2}{5} \leq 1$</li>
-<li>均值归一化(Mean normalization)：使得特征值范围大致为-1~1。假设$x_1$ 的平均值为 $\mu_1 &#x3D;600、x_2的平均值为 \mu_2 &#x3D; 2.3 \ ，于是-0.18 \leq \frac{x_1-\mu_1}{2000-300} \leq 0.82、-0.46 \leq \frac{x_2 - \mu_2}{5-0} \leq 0.54$</li>
-<li>Z-score归一化(Z-score normalization)【推荐】：使得特征值服从标准正态分布。假设$x_1$的平均值和标准差分别为$\mu_1 &#x3D; 600，\sigma_1 &#x3D; 450 ，x_2 $ 的平均值和标准差分别为$\mu_2 &#x3D; 2.3，\sigma_2 &#x3D; 1.4 $ 于是 $-0.67 \leq \frac{x_1 - \mu_1}{\sigma_1} \leq 3.1 $ , $-1.6 \leq \frac{x_2- \mu_2}{\sigma_2 } \leq 1.9 $</li>
+<li>均值归一化(Mean normalization)：使得特征值范围大致为-1~1。假设$x_1$ 的平均值为 $\mu_1 =600、x_2的平均值为 \mu_2 = 2.3 \ ，于是-0.18 \leq \frac{x_1-\mu_1}{2000-300} \leq 0.82、-0.46 \leq \frac{x_2 - \mu_2}{5-0} \leq 0.54$</li>
+<li>Z-score归一化(Z-score normalization)【推荐】：使得特征值服从标准正态分布。假设$x_1$的平均值和标准差分别为$\mu_1 = 600，\sigma_1 = 450 ，x_2 $ 的平均值和标准差分别为$\mu_2 = 2.3，\sigma_2 = 1.4 $ 于是 $-0.67 \leq \frac{x_1 - \mu_1}{\sigma_1} \leq 3.1 $ , $-1.6 \leq \frac{x_2- \mu_2}{\sigma_2 } \leq 1.9 $</li>
 </ol>
 <blockquote>
 <ol>
 <li><p>注：Z-score归一化的合理性在于自然界中大部分数据都是服从正态分布的。</p>
 </li>
-<li><p>均值: $\mu_j &#x3D; \frac{1}{m} \sum_{i&#x3D;0}^{m-1} x_j^{(i)} , j&#x3D;0,1,2…n$</p>
+<li><p>均值: $\mu_j = \frac{1}{m} \sum_{i=0}^{m-1} x_j^{(i)} , j=0,1,2…n$</p>
 </li>
-<li><p>方差：$\sigma_j^2 &#x3D; \frac{1}{m} \sum_{i&#x3D;0}^{m-1} (x_j^{(i)} - \mu_j)^2 , j&#x3D;0,1…,n$</p>
+<li><p>方差：$\sigma_j^2 = \frac{1}{m} \sum_{i=0}^{m-1} (x_j^{(i)} - \mu_j)^2 , j=0,1…,n$</p>
 </li>
-<li><p>标准差：$\sigma_j &#x3D; \sqrt{\sigma_j^2} \ , \ j&#x3D;0,1,…n$</p>
+<li><p>标准差：$\sigma_j = \sqrt{\sigma_j^2} \ , \ j=0,1,…n$</p>
 </li>
 </ol>
 </blockquote>
@@ -498,7 +528,7 @@
 <h3 id="2-2-判断梯度下降是否收敛"><a href="#2-2-判断梯度下降是否收敛" class="headerlink" title="2-2 判断梯度下降是否收敛"></a>2-2 判断梯度下降是否收敛</h3><p>本节主要介绍 横坐标为迭代次数 的“<strong>学习曲线</strong>(<strong>learning carve</strong>)”。学习曲线可以帮助我们判断梯度下降法 <strong>是否正在收敛</strong>，或者判断梯度下降法 <strong>是否已经收敛</strong>。如下图给出了正常的学习曲线，</p>
 <p><img src="http://img-md-js.linjsblog.top/img/202412280034032.png" alt="img"></p>
 <blockquote>
-<p>正常情况：每次迭代后，代价函数都应该下降。直到某次迭代后，代价函数几乎不再下降，就认为是收敛。 算法没有收敛：若某次迭代后，代价函数变大，则算法没有收敛，可能意味着学习率$\alpha $过大。 算法已经收敛：上图中的红色段，可以看到代价函数几乎不再下降。 自动收敛测试(automatic convergence test)：若两次迭代之间，代价函数的减少值$\leq \varepsilon &#x3D; 10^{-3}$(自定义)，即可认为收敛。但是通$\epsilon$ 的选取很困难，所以还是建议使用上图所示的学习曲线进行判断。</p>
+<p>正常情况：每次迭代后，代价函数都应该下降。直到某次迭代后，代价函数几乎不再下降，就认为是收敛。 算法没有收敛：若某次迭代后，代价函数变大，则算法没有收敛，可能意味着学习率$\alpha $过大。 算法已经收敛：上图中的红色段，可以看到代价函数几乎不再下降。 自动收敛测试(automatic convergence test)：若两次迭代之间，代价函数的减少值$\leq \varepsilon = 10^{-3}$(自定义)，即可认为收敛。但是通$\epsilon$ 的选取很困难，所以还是建议使用上图所示的学习曲线进行判断。</p>
 </blockquote>
 <p>注意不同的算法或问题，其收敛的迭代次数都不同，有些问题可能几十次就收敛，有些问题可能需要上万次才能收敛。由于很难提前知道梯度下降法是否会收敛，所以可以根据这个学习曲线来进行判断。</p>
 <h3 id="2-3-如何设置学习率"><a href="#2-3-如何设置学习率" class="headerlink" title="2-3 如何设置学习率"></a>2-3 如何设置学习率</h3><p>之前提到，学习率太小，收敛太慢；学习率太大，可能不会收敛。那如何选择合适的学习率呢？正确的做法是，迭代较小的次数，快速地、粗略地选出合适的学习率。具体的<strong>选择策略</strong>是从一个较小的学习率(如0.01)开始，逐渐增大，直到出现不收敛的情况。如下图所示：</p>
@@ -576,7 +606,15 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">No tag</span>
+                            
+                                <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">
+                                    <span class="chip bg-color">人工智能</span>
+                                </a>
+                            
+                                <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">
+                                    <span class="chip bg-color">机器学习</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -611,10 +649,10 @@
                         <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
                     </ul>
                     <div id="alipay">
-                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                        <img src="/medias/reward/alipay1.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -740,6 +778,14 @@
                         <span class="chip bg-color">人工智能</span>
                     </a>
                     
+                    <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">
+                        <span class="chip bg-color">机器学习</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">
+                        <span class="chip bg-color">深度学习</span>
+                    </a>
+                    
                     <a href="/tags/AI/">
                         <span class="chip bg-color">AI</span>
                     </a>
@@ -750,10 +796,6 @@
                     
                     <a href="/tags/%E5%90%B4%E6%81%A9%E8%BE%BE/">
                         <span class="chip bg-color">吴恩达</span>
-                    </a>
-                    
-                    <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">
-                        <span class="chip bg-color">机器学习</span>
                     </a>
                     
                 </div>
@@ -889,60 +931,6 @@
 
     <footer class="page-footer bg-color">
     
-        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
-<style>
-    .aplayer .aplayer-lrc p {
-        
-        display: none;
-        
-        font-size: 12px;
-        font-weight: 700;
-        line-height: 16px !important;
-    }
-
-    .aplayer .aplayer-lrc p.aplayer-lrc-current {
-        
-        display: none;
-        
-        font-size: 15px;
-        color: #42b983;
-    }
-
-    
-    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
-        left: -66px !important;
-    }
-
-    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
-        left: 0px !important;
-    }
-
-    
-</style>
-<div class="">
-    
-    <div class="row">
-        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
-                   server="netease"
-                   type="playlist"
-                   id="503838841"
-                   fixed='true'
-                   autoplay='false'
-                   theme='#42b983'
-                   loop='all'
-                   order='random'
-                   preload='auto'
-                   volume='0.7'
-                   list-folded='true'
-        >
-        </meting-js>
-    </div>
-</div>
-
-<script src="/libs/aplayer/APlayer.min.js"></script>
-<script src="/libs/aplayer/Meting.min.js"></script>
-
-    
 
     <div class="container row center-align"
          style="margin-bottom: 0px !important;">
@@ -981,13 +969,13 @@
             
         </div>
         <div class="col s12 m4 l4 social-link social-statis">
-    <a href="https://github.com/blinkfox" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+    <a href="https://github.com/js6288" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
         <i class="fab fa-github"></i>
     </a>
 
 
 
-    <a href="mailto:1181062873@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:linjingshu6288@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fas fa-envelope-open"></i>
     </a>
 
@@ -997,7 +985,7 @@
 
 
 
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1181062873" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1181062873" data-position="top" data-delay="50">
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1279897306" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1279897306" data-position="top" data-delay="50">
         <i class="fab fa-qq"></i>
     </a>
 

@@ -59,7 +59,9 @@ Java 后端整合 Swagger + Knife4j 接口文档
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 7.3.0"></head>
+<meta name="generator" content="Hexo 7.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
 
 
 <body>
@@ -400,12 +402,32 @@ Java 后端整合 Swagger + Knife4j 接口文档
                 
 
                 
-
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>Update Date:&nbsp;&nbsp;
+                    2025-01-29
+                </div>
                 
 
                 
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
+                    2.5k
+                </div>
+                
 
                 
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
+                    10 Min
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>Read Count:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
             </div>
         </div>
         <hr class="clearfix">
@@ -443,7 +465,7 @@ Java 后端整合 Swagger + Knife4j 接口文档
 <p><strong>为什么需要接口文档？</strong></p>
 <ul>
 <li>有个书面内容（背书或者归档），便于大家参考和查阅，便于 <strong>沉淀和维护</strong> ，拒绝口口相传</li>
-<li>接口文档便于前端和后端开发对接，前后端联调的 <strong>介质</strong> 。后端 &#x3D;&gt; 接口文档 &lt;&#x3D; 前端</li>
+<li>接口文档便于前端和后端开发对接，前后端联调的 <strong>介质</strong> 。后端 =&gt; 接口文档 &lt;= 前端</li>
 <li>好的接口文档支持在线调试、在线测试，可以作为工具提高我们的开发测试效率</li>
 </ul>
 <p><strong>怎么做接口文档？</strong></p>
@@ -457,11 +479,11 @@ Java 后端整合 Swagger + Knife4j 接口文档
 <li>引入依赖（Swagger 或 Knife4j：<a target="_blank" rel="noopener" href="https://doc.xiaominfo.com/knife4j/documentation/get_start.html">https://doc.xiaominfo.com/knife4j/documentation/get_start.html</a>）</li>
 <li>自定义 Swagger 配置类</li>
 <li>定义需要生成接口文档的代码位置（Controller）</li>
-<li>千万注意：线上环境不要把接口暴露出去！！！可以通过在 SwaggerConfig 配置文件开头加上 <code>@Profile(&#123;&quot;dev&quot;, &quot;test&quot;&#125;)</code> 限定配置仅在部分环境开启</li>
+<li>千万注意：线上环境不要把接口暴露出去！！！可以通过在 SwaggerConfig 配置文件开头加上 <code>@Profile({"dev", "test"})</code> 限定配置仅在部分环境开启</li>
 <li>启动即可</li>
-<li>可以通过在 controller 方法上添加 [@Api、@ApiImplicitParam(name ](&#x2F;Api、@ApiImplicitParam(name ) &#x3D; “name”,value &#x3D; “姓名”,required &#x3D; true)    [@ApiOperation(value ](&#x2F;ApiOperation(value ) &#x3D; “向客人问好”) 等注解来自定义生成的接口描述信息</li>
+<li>可以通过在 controller 方法上添加 [@Api、@ApiImplicitParam(name ](/Api、@ApiImplicitParam(name ) = “name”,value = “姓名”,required = true) &nbsp; &nbsp;[@ApiOperation(value ](/ApiOperation(value ) = “向客人问好”) 等注解来自定义生成的接口描述信息</li>
 </ol>
-<p>如果 springboot version &gt;&#x3D; 2.6，需要添加如下配置：</p>
+<p>如果 springboot version &gt;= 2.6，需要添加如下配置：</p>
 <pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">spring</span><span class="token punctuation">:</span>
   <span class="token key atrule">mvc</span><span class="token punctuation">:</span>
     <span class="token key atrule">pathmatch</span><span class="token punctuation">:</span>
@@ -489,7 +511,7 @@ Java 后端整合 Swagger + Knife4j 接口文档
   <span class="token parameter variable">--compressed</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <ol start="2">
-<li><strong>用程序去调用接口</strong> （java okhttp httpclient &#x2F; python 都可以）</li>
+<li><strong>用程序去调用接口</strong> （java okhttp httpclient / python 都可以）</li>
 <li>处理（清洗）一下数据，之后就可以写到数据库里</li>
 </ol>
 <p><strong>流程</strong></p>
@@ -509,20 +531,20 @@ Java 后端整合 Swagger + Knife4j 接口文档
 <li>监听器：先创建监听器、在读取文件时绑定监听器。单独抽离处理逻辑，代码清晰易于维护；一条一条处理，适用于数据量大的场景。</li>
 <li>同步读：无需创建监听器，一次性获取完整数据。方便简单，但是数据量大时会有等待时常，也可能内存溢出。</li>
 </ol>
-<h2 id="后端整合-Swagger-Knife4j"><a href="#后端整合-Swagger-Knife4j" class="headerlink" title="后端整合 Swagger + Knife4j"></a>后端整合 Swagger + Knife4j</h2><h3 id="第一步：在用户中心系统的pom-xml中引入Knife4j的依赖包，Maven坐标如下："><a href="#第一步：在用户中心系统的pom-xml中引入Knife4j的依赖包，Maven坐标如下：" class="headerlink" title="第一步：在用户中心系统的pom.xml中引入Knife4j的依赖包，Maven坐标如下："></a>第一步：在用户中心系统的pom.xml中引入<a target="_blank" rel="noopener" href="https://search.maven.org/search?q=a:knife4j">Knife4j的依赖包</a>，Maven坐标如下：</h3><pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token comment">&lt;!--引入Knife4j的官方start包,Swagger2基于Springfox2.10.5项目--></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>com.github.xiaoymin<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
-    <span class="token comment">&lt;!--使用Swagger2--></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>knife4j-spring-boot-starter<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>2.0.9<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="后端整合-Swagger-Knife4j"><a href="#后端整合-Swagger-Knife4j" class="headerlink" title="后端整合 Swagger + Knife4j"></a>后端整合 Swagger + Knife4j</h2><h3 id="第一步：在用户中心系统的pom-xml中引入Knife4j的依赖包，Maven坐标如下："><a href="#第一步：在用户中心系统的pom-xml中引入Knife4j的依赖包，Maven坐标如下：" class="headerlink" title="第一步：在用户中心系统的pom.xml中引入Knife4j的依赖包，Maven坐标如下："></a>第一步：在用户中心系统的pom.xml中引入<a target="_blank" rel="noopener" href="https://search.maven.org/search?q=a:knife4j">Knife4j的依赖包</a>，Maven坐标如下：</h3><pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token comment">&lt;!--引入Knife4j的官方start包,Swagger2基于Springfox2.10.5项目--&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">&gt;</span></span>com.github.xiaoymin<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">&gt;</span></span>
+    <span class="token comment">&lt;!--使用Swagger2--&gt;</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">&gt;</span></span>knife4j-spring-boot-starter<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">&gt;</span></span>2.0.9<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">&gt;</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="第二步：在config目录（没有就新建）下创建Swagger配置依赖，代码如下："><a href="#第二步：在config目录（没有就新建）下创建Swagger配置依赖，代码如下：" class="headerlink" title="第二步：在config目录（没有就新建）下创建Swagger配置依赖，代码如下："></a>第二步：在config目录（没有就新建）下创建Swagger配置依赖，代码如下：</h3><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Configuration</span>
 <span class="token annotation punctuation">@EnableSwagger2WebMvc</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Knife4jConfiguration</span> <span class="token punctuation">&#123;</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Knife4jConfiguration</span> <span class="token punctuation">{</span>
 
     <span class="token annotation punctuation">@Bean</span><span class="token punctuation">(</span>value <span class="token operator">=</span> <span class="token string">"dockerBean"</span><span class="token punctuation">)</span>
-    <span class="token keyword">public</span> <span class="token class-name">Docket</span> <span class="token function">dockerBean</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token class-name">Docket</span> <span class="token function">dockerBean</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token comment">//指定使用Swagger2规范</span>
         <span class="token class-name">Docket</span> docket<span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">Docket</span><span class="token punctuation">(</span><span class="token class-name">DocumentationType</span><span class="token punctuation">.</span><span class="token constant">SWAGGER_2</span><span class="token punctuation">)</span>
                 <span class="token punctuation">.</span><span class="token function">apiInfo</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">ApiInfoBuilder</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
@@ -540,8 +562,8 @@ Java 后端整合 Swagger + Knife4j 接口文档
                 <span class="token punctuation">.</span><span class="token function">paths</span><span class="token punctuation">(</span><span class="token class-name">PathSelectors</span><span class="token punctuation">.</span><span class="token function">any</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
                 <span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token keyword">return</span> docket<span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>这里鱼皮一开始使用的swagger的文档，但是由于踩坑换成了knife4j的依赖，所以创建的swagger配置格式会不大一样，我这里是按照鱼皮一开始swagger文档格式写的，整理代码如下：</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>yupi<span class="token punctuation">.</span>usercenter<span class="token punctuation">.</span>config</span><span class="token punctuation">;</span>
@@ -559,9 +581,9 @@ Java 后端整合 Swagger + Knife4j 接口文档
 
 <span class="token annotation punctuation">@Configuration</span>
 <span class="token annotation punctuation">@EnableSwagger2WebMvc</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">SwaggerConfig</span> <span class="token punctuation">&#123;</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">SwaggerConfig</span> <span class="token punctuation">{</span>
     <span class="token annotation punctuation">@Bean</span><span class="token punctuation">(</span>value <span class="token operator">=</span> <span class="token string">"defaultApi2"</span><span class="token punctuation">)</span>
-    <span class="token keyword">public</span> <span class="token class-name">Docket</span> <span class="token function">defaultApi2</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token class-name">Docket</span> <span class="token function">defaultApi2</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
         <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Docket</span><span class="token punctuation">(</span><span class="token class-name">DocumentationType</span><span class="token punctuation">.</span><span class="token constant">SWAGGER_2</span><span class="token punctuation">)</span>
                 <span class="token punctuation">.</span><span class="token function">apiInfo</span><span class="token punctuation">(</span><span class="token function">apiInfo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
                 <span class="token punctuation">.</span><span class="token function">select</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
@@ -569,13 +591,13 @@ Java 后端整合 Swagger + Knife4j 接口文档
                 <span class="token punctuation">.</span><span class="token function">apis</span><span class="token punctuation">(</span><span class="token class-name">RequestHandlerSelectors</span><span class="token punctuation">.</span><span class="token function">basePackage</span><span class="token punctuation">(</span><span class="token string">"com.yupi.usercenter.controller"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
                 <span class="token punctuation">.</span><span class="token function">paths</span><span class="token punctuation">(</span><span class="token class-name">PathSelectors</span><span class="token punctuation">.</span><span class="token function">any</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
                 <span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">}</span>
 
     <span class="token comment">/**
      * api 信息
      * @return
      */</span>
-    <span class="token keyword">private</span> <span class="token class-name">ApiInfo</span> <span class="token function">apiInfo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">private</span> <span class="token class-name">ApiInfo</span> <span class="token function">apiInfo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
         <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">ApiInfoBuilder</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
                 <span class="token punctuation">.</span><span class="token function">title</span><span class="token punctuation">(</span><span class="token string">"鱼皮用户中心"</span><span class="token punctuation">)</span>
                 <span class="token punctuation">.</span><span class="token function">description</span><span class="token punctuation">(</span><span class="token string">"鱼皮用户中心文档"</span><span class="token punctuation">)</span>
@@ -583,8 +605,8 @@ Java 后端整合 Swagger + Knife4j 接口文档
                 <span class="token punctuation">.</span><span class="token function">contact</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Contact</span><span class="token punctuation">(</span><span class="token string">"yupi"</span><span class="token punctuation">,</span><span class="token string">"https://github.com/liyupi"</span><span class="token punctuation">,</span><span class="token string">"1212121@qq.com"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
                 <span class="token punctuation">.</span><span class="token function">version</span><span class="token punctuation">(</span><span class="token string">"1.0"</span><span class="token punctuation">)</span>
                 <span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>如果你的springboot版本是大于等于2.6以上，大概率会出现一下报错： <img src="http://img-md-js.linjsblog.top/img/202301032130543.png" alt="image.png"> 在application.yaml配置文件中添加如下配置：</p>
 <pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">spring</span><span class="token punctuation">:</span>
@@ -593,7 +615,7 @@ Java 后端整合 Swagger + Knife4j 接口文档
       <span class="token key atrule">matching-strategy</span><span class="token punctuation">:</span> ANT_PATH_MATCHER<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>访问这个路径：<a target="_blank" rel="noopener" href="http://localhost:8080/api/doc.html">http://localhost:8080/api/doc.html</a> 显示如下 <img src="http://img-md-js.linjsblog.top/img/202301032130610.png" alt="image.png"></p>
-<h3 id="第三步：测试knife4j"><a href="#第三步：测试knife4j" class="headerlink" title="第三步：测试knife4j"></a>第三步：测试knife4j</h3><p>首先需要登录 <img src="http://img-md-js.linjsblog.top/img/202301032130483.png" alt="image.png"> 成功获取响应内容 现在再测试下获取登录用户信息 <img src="http://img-md-js.linjsblog.top/img/202301032130201.png" alt="image.png"> 可以通过在 controller 方法上添加 @Api、@ApiImplicitParam(name &#x3D; “name”,value &#x3D; “姓名”,required &#x3D; true) @ApiOperation(value &#x3D; “向客人问好”) 等注解来自定义生成的接口描述信息 <strong>这里就不演示了看个人需求</strong></p>
+<h3 id="第三步：测试knife4j"><a href="#第三步：测试knife4j" class="headerlink" title="第三步：测试knife4j"></a>第三步：测试knife4j</h3><p>首先需要登录 <img src="http://img-md-js.linjsblog.top/img/202301032130483.png" alt="image.png"> 成功获取响应内容 现在再测试下获取登录用户信息 <img src="http://img-md-js.linjsblog.top/img/202301032130201.png" alt="image.png"> 可以通过在 controller 方法上添加 @Api、@ApiImplicitParam(name = “name”,value = “姓名”,required = true) @ApiOperation(value = “向客人问好”) 等注解来自定义生成的接口描述信息 <strong>这里就不演示了看个人需求</strong></p>
 <h2 id="存量用户信息导入及同步-1"><a href="#存量用户信息导入及同步-1" class="headerlink" title="存量用户信息导入及同步"></a>存量用户信息导入及同步</h2><h3 id="第一步：分析原网站是怎么获取这些数据的？哪个接口？"><a href="#第一步：分析原网站是怎么获取这些数据的？哪个接口？" class="headerlink" title="第一步：分析原网站是怎么获取这些数据的？哪个接口？"></a>第一步：分析原网站是怎么获取这些数据的？哪个接口？</h3><ol>
 <li>按 F12 打开控 制台，查看网络请求，复制 curl 代码便于查看和执行：</li>
 </ol>
@@ -608,16 +630,16 @@ Java 后端整合 Swagger + Knife4j 接口文档
   <span class="token parameter variable">--compressed</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <ol start="2">
-<li><strong>用程序去调用接口</strong> （java okhttp httpclient &#x2F; python 都可以）</li>
+<li><strong>用程序去调用接口</strong> （java okhttp httpclient / python 都可以）</li>
 <li>处理（清洗）一下数据，之后就可以写到数据库里</li>
 </ol>
 <h3 id="第二步：具体实现流程"><a href="#第二步：具体实现流程" class="headerlink" title="第二步：具体实现流程"></a>第二步：具体实现流程</h3><p>1.从 excel 中导入全量用户数据，<strong>判重</strong> 这里使用了easyexcel 官网： 在pom.xml里引入依赖</p>
-<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token comment">&lt;!-- https://mvnrepository.com/artifact/com.alibaba/easyexcel --></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>com.alibaba<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>easyexcel<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>3.1.1<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token comment">&lt;!-- https://mvnrepository.com/artifact/com.alibaba/easyexcel --&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">&gt;</span></span>com.alibaba<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">&gt;</span></span>easyexcel<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">&gt;</span></span>3.1.1<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">&gt;</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>现在开始写读表格的程序 首先这是一次性的代码，我们先创建一个once目录，再创建XingQiuTableUserInfo.java文件，这个文件作用就是将表格和对象相关联起来</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>yupi<span class="token punctuation">.</span>usercenter<span class="token punctuation">.</span>once</span><span class="token punctuation">;</span>
@@ -629,7 +651,7 @@ Java 后端整合 Swagger + Knife4j 接口文档
  * 星球表格用户信息
  */</span>
 <span class="token annotation punctuation">@Data</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">XingQiuTableUserInfo</span> <span class="token punctuation">&#123;</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">XingQiuTableUserInfo</span> <span class="token punctuation">{</span>
     <span class="token comment">/**
      * 星球编号
      */</span>
@@ -641,7 +663,7 @@ Java 后端整合 Swagger + Knife4j 接口文档
      */</span>
     <span class="token annotation punctuation">@ExcelProperty</span><span class="token punctuation">(</span><span class="token string">"成员昵称"</span><span class="token punctuation">)</span>
     <span class="token keyword">private</span> <span class="token class-name">String</span> userName<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>创建一个监听器</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>yupi<span class="token punctuation">.</span>usercenter<span class="token punctuation">.</span>once</span><span class="token punctuation">;</span>
@@ -651,17 +673,17 @@ Java 后端整合 Swagger + Knife4j 接口文档
 <span class="token keyword">import</span> <span class="token import"><span class="token namespace">lombok<span class="token punctuation">.</span>extern<span class="token punctuation">.</span>slf4j<span class="token punctuation">.</span></span><span class="token class-name">Slf4j</span></span><span class="token punctuation">;</span>
 
 <span class="token annotation punctuation">@Slf4j</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">TableListener</span> <span class="token keyword">implements</span> <span class="token class-name">ReadListener</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">XingQiuTableUserInfo</span><span class="token punctuation">></span></span> <span class="token punctuation">&#123;</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">TableListener</span> <span class="token keyword">implements</span> <span class="token class-name">ReadListener</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">XingQiuTableUserInfo</span><span class="token punctuation">&gt;</span></span> <span class="token punctuation">{</span>
     <span class="token comment">/**
      * 这个每一条数据解析都会来调用
      *
-     * @param data    one row value. Is is same as &#123;@link AnalysisContext#readRowHolder()&#125;
+     * @param data    one row value. Is is same as {@link AnalysisContext#readRowHolder()}
      * @param context
      */</span>
     <span class="token annotation punctuation">@Override</span>
-    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">invoke</span><span class="token punctuation">(</span><span class="token class-name">XingQiuTableUserInfo</span> data<span class="token punctuation">,</span> <span class="token class-name">AnalysisContext</span> context<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">invoke</span><span class="token punctuation">(</span><span class="token class-name">XingQiuTableUserInfo</span> data<span class="token punctuation">,</span> <span class="token class-name">AnalysisContext</span> context<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">}</span>
 
     <span class="token comment">/**
      * 所有数据解析完成了 都会来调用
@@ -669,10 +691,10 @@ Java 后端整合 Swagger + Knife4j 接口文档
      * @param context
      */</span>
     <span class="token annotation punctuation">@Override</span>
-    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">doAfterAllAnalysed</span><span class="token punctuation">(</span><span class="token class-name">AnalysisContext</span> context<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">doAfterAllAnalysed</span><span class="token punctuation">(</span><span class="token class-name">AnalysisContext</span> context<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"已解析完成"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>最后我们要使用，先创建一个ImportExcel类作为实现类，先使用官方文档的方法一。即第一种读取方式：监听器：先创建监听器、在读取文件时绑定监听器。单独抽离处理逻辑，代码清晰易于维护；一条一条处理，适用于数据量大的场景。 同时我们也需要创建一个假数据的excel表格来进行测试，我这边提供一个自己写的 假数据：<a target="_blank" rel="noopener" href="https://www.yuque.com/attachments/yuque/0/2022/xlsx/26315235/1668498633173-7ede61b4-c6b8-4e35-af29-445a8fa30b04.xlsx?_lake_card=%7B%22src%22:%22https://www.yuque.com/attachments/yuque/0/2022/xlsx/26315235/1668498633173-7ede61b4-c6b8-4e35-af29-445a8fa30b04.xlsx%22,%22name%22:%22testExcel.xlsx%22,%22size%22:9153,%22type%22:%22application/vnd.openxmlformats-officedocument.spreadsheetml.sheet%22,%22ext%22:%22xlsx%22,%22source%22:%22%22,%22status%22:%22done%22,%22download%22:true,%22taskId%22:%22uc1a20890-b915-43c8-8048-a3229ae9fcc%22,%22taskType%22:%22upload%22,%22__spacing%22:%22both%22,%22id%22:%22uaa83dbb3%22,%22margin%22:%7B%22top%22:true,%22bottom%22:true%7D,%22card%22:%22file%22%7D">testExcel.xlsx</a></p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>yupi<span class="token punctuation">.</span>usercenter<span class="token punctuation">.</span>once</span><span class="token punctuation">;</span>
@@ -682,16 +704,16 @@ Java 后端整合 Swagger + Knife4j 接口文档
 <span class="token comment">/**
  * 导入Excel
  */</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ImportExcel</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ImportExcel</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token comment">//写法1</span>
         <span class="token class-name">String</span> fileName <span class="token operator">=</span> <span class="token string">"F:\\code\\星球项目\\用户中心\\user-center-backend-master\\src\\main\\resources\\testExcel.xlsx"</span><span class="token punctuation">;</span>
         <span class="token comment">// 这里 需要指定读用哪个class去读，然后读取第一个sheet 文件流会自动关闭</span>
         <span class="token comment">// 这里每次会读取100条数据 然后返回过来 直接调用使用数据就行</span>
         <span class="token class-name">EasyExcel</span><span class="token punctuation">.</span><span class="token function">read</span><span class="token punctuation">(</span>fileName<span class="token punctuation">,</span><span class="token class-name">XingQiuTableUserInfo</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span><span class="token keyword">new</span> <span class="token class-name">TableListener</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">sheet</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">doRead</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>测试运行 <img src="http://img-md-js.linjsblog.top/img/202301032131390.png" alt="image.png"> 试一下第二种方法：同步读：无需创建监听器，一次性获取完整数据。方便简单，但是数据量大时会有等待时常，也可能内存溢出。在ImportExcel里创建两个方法，为了以后调用方便，修改代码如下</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>yupi<span class="token punctuation">.</span>usercenter<span class="token punctuation">.</span>once</span><span class="token punctuation">;</span>
@@ -702,37 +724,37 @@ Java 后端整合 Swagger + Knife4j 接口文档
 <span class="token comment">/**
  * 导入Excel
  */</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ImportExcel</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ImportExcel</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
 
         <span class="token class-name">String</span> fileName <span class="token operator">=</span> <span class="token string">"F:\\\\code\\\\星球项目\\\\用户中心\\\\user-center-backend-master\\\\src\\\\main\\\\resources\\\\testExcel.xlsx"</span><span class="token punctuation">;</span>
         <span class="token comment">// listenerRead(fileName);</span>
 
         <span class="token function">synchronousRead</span><span class="token punctuation">(</span>fileName<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">}</span>
 
     <span class="token comment">/**
      * 监听器读
      * @param fileName
      */</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">listenerRead</span><span class="token punctuation">(</span><span class="token class-name">String</span> fileName<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">listenerRead</span><span class="token punctuation">(</span><span class="token class-name">String</span> fileName<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token comment">// 这里 需要指定读用哪个class去读，然后读取第一个sheet 文件流会自动关闭</span>
         <span class="token comment">// 这里每次会读取100条数据 然后返回过来 直接调用使用数据就行</span>
         <span class="token class-name">EasyExcel</span><span class="token punctuation">.</span><span class="token function">read</span><span class="token punctuation">(</span>fileName<span class="token punctuation">,</span> <span class="token class-name">XingQiuTableUserInfo</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">TableListener</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">sheet</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">doRead</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">}</span>
 
     <span class="token comment">/**
      * 同步读
      * @param fileName
      */</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">synchronousRead</span><span class="token punctuation">(</span><span class="token class-name">String</span> fileName<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">synchronousRead</span><span class="token punctuation">(</span><span class="token class-name">String</span> fileName<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token comment">// 这里 需要指定读用哪个class去读，然后读取第一个sheet 同步读取会自动finish</span>
-        <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">XingQiuTableUserInfo</span><span class="token punctuation">></span></span> list <span class="token operator">=</span> <span class="token class-name">EasyExcel</span><span class="token punctuation">.</span><span class="token function">read</span><span class="token punctuation">(</span>fileName<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">head</span><span class="token punctuation">(</span><span class="token class-name">XingQiuTableUserInfo</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">sheet</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">doReadSync</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">XingQiuTableUserInfo</span> data <span class="token operator">:</span> list<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">XingQiuTableUserInfo</span><span class="token punctuation">&gt;</span></span> list <span class="token operator">=</span> <span class="token class-name">EasyExcel</span><span class="token punctuation">.</span><span class="token function">read</span><span class="token punctuation">(</span>fileName<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">head</span><span class="token punctuation">(</span><span class="token class-name">XingQiuTableUserInfo</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">sheet</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">doReadSync</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">XingQiuTableUserInfo</span> data <span class="token operator">:</span> list<span class="token punctuation">)</span> <span class="token punctuation">{</span>
             <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><img src="http://img-md-js.linjsblog.top/img/202301032131993.png" alt="image.png"> 千万注意：线上环境不要把接口暴露出去！！！可以通过在 SwaggerConfig 配置文件开头加上 @Profile({“dev”, “test”}) 限定配置仅在部分环境开启 先配置为prod，再运行，发现访问失败 <img src="http://img-md-js.linjsblog.top/img/202301032131584.png" alt="image.png"> 去application.yml中修改默认配置，并在swaggerConfig中加上@Profile注解 <img src="http://img-md-js.linjsblog.top/img/202301032131663.png" alt="image.png"><img src="http://img-md-js.linjsblog.top/img/202301032132817.png" alt="image.png"></p>
 
@@ -837,10 +859,10 @@ Java 后端整合 Swagger + Knife4j 接口文档
                         <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
                     </ul>
                     <div id="alipay">
-                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                        <img src="/medias/reward/alipay1.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -1116,60 +1138,6 @@ Java 后端整合 Swagger + Knife4j 接口文档
 
     <footer class="page-footer bg-color">
     
-        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
-<style>
-    .aplayer .aplayer-lrc p {
-        
-        display: none;
-        
-        font-size: 12px;
-        font-weight: 700;
-        line-height: 16px !important;
-    }
-
-    .aplayer .aplayer-lrc p.aplayer-lrc-current {
-        
-        display: none;
-        
-        font-size: 15px;
-        color: #42b983;
-    }
-
-    
-    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
-        left: -66px !important;
-    }
-
-    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
-        left: 0px !important;
-    }
-
-    
-</style>
-<div class="">
-    
-    <div class="row">
-        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
-                   server="netease"
-                   type="playlist"
-                   id="503838841"
-                   fixed='true'
-                   autoplay='false'
-                   theme='#42b983'
-                   loop='all'
-                   order='random'
-                   preload='auto'
-                   volume='0.7'
-                   list-folded='true'
-        >
-        </meting-js>
-    </div>
-</div>
-
-<script src="/libs/aplayer/APlayer.min.js"></script>
-<script src="/libs/aplayer/Meting.min.js"></script>
-
-    
 
     <div class="container row center-align"
          style="margin-bottom: 0px !important;">
@@ -1208,13 +1176,13 @@ Java 后端整合 Swagger + Knife4j 接口文档
             
         </div>
         <div class="col s12 m4 l4 social-link social-statis">
-    <a href="https://github.com/blinkfox" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+    <a href="https://github.com/js6288" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
         <i class="fab fa-github"></i>
     </a>
 
 
 
-    <a href="mailto:1181062873@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:linjingshu6288@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fas fa-envelope-open"></i>
     </a>
 
@@ -1224,7 +1192,7 @@ Java 后端整合 Swagger + Knife4j 接口文档
 
 
 
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1181062873" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1181062873" data-position="top" data-delay="50">
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1279897306" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1279897306" data-position="top" data-delay="50">
         <i class="fab fa-qq"></i>
     </a>
 

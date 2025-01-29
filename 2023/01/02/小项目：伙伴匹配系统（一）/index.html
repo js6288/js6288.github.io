@@ -7,8 +7,8 @@
     <meta name="keywords" content="小项目：伙伴匹配系统（一）, 小小舒的爪哇天地">
     <meta name="description" content="开发笔记介绍：帮助大家找到志同道合的伙伴，移动端 H5 网页（尽量兼容 PC 端）
 需求分析
-用户去添加标签，标签的分类（要有哪些标签、怎么把标签进行分类）学习方向 java &amp;#x2F; c++，工作 &amp;#x2F; 大学
-主动搜索：允许用">
+用户去添加标签，标签的分类（要有哪些标签、怎么把标签进行分类）学习方向 java / c++，工作 / 大学
+主动搜索：允许用户根据标签去搜索其他">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -55,7 +55,9 @@
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 7.3.0"></head>
+<meta name="generator" content="Hexo 7.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
 
 
 <body>
@@ -396,12 +398,32 @@
                 
 
                 
-
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>Update Date:&nbsp;&nbsp;
+                    2025-01-29
+                </div>
                 
 
                 
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
+                    4k
+                </div>
+                
 
                 
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
+                    17 Min
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>Read Count:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
             </div>
         </div>
         <hr class="clearfix">
@@ -417,7 +439,7 @@
             <div id="articleContent">
                 <h2 id="开发笔记"><a href="#开发笔记" class="headerlink" title="开发笔记"></a>开发笔记</h2><p>介绍：帮助大家找到志同道合的伙伴，移动端 H5 网页（尽量兼容 PC 端）</p>
 <h3 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h3><ol>
-<li>用户去添加标签，标签的分类（要有哪些标签、怎么把标签进行分类）学习方向 java &#x2F; c++，工作 &#x2F; 大学</li>
+<li>用户去添加标签，标签的分类（要有哪些标签、怎么把标签进行分类）学习方向 java / c++，工作 / 大学</li>
 <li>主动搜索：允许用户根据标签去搜索其他用户<ol>
 <li>Redis 缓存</li>
 </ol>
@@ -488,105 +510,105 @@ npm i vite-plugin-style-import@1.4.1 -D
 yarn add vite-plugin-style-import@1.4.1 -D<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>这里推荐npm方式，yarn大概率会像鱼皮那样报错，安装失败 安装完成后，在 <strong>vite.config.js</strong> 文件中配置插件：</p>
-<pre class="line-numbers language-none"><code class="language-none">import vue from &#39;@vitejs&#x2F;plugin-vue&#39;;
-import styleImport, &#123; VantResolve &#125; from &#39;vite-plugin-style-import&#39;;
+<pre class="line-numbers language-none"><code class="language-none">import vue from '@vitejs/plugin-vue';
+import styleImport, { VantResolve } from 'vite-plugin-style-import';
 
-export default &#123;
+export default {
   plugins: [
     vue(),
-    styleImport(&#123;
+    styleImport({
       resolves: [VantResolve()],
-    &#125;),
+    }),
   ],
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+};<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>整理如下：</p>
-<pre class="line-numbers language-none"><code class="language-none">import &#123; defineConfig &#125; from &#39;vite&#39;
-import vue from &#39;@vitejs&#x2F;plugin-vue&#39;
-import styleImport, &#123; VantResolve &#125; from &#39;vite-plugin-style-import&#39;;
+<pre class="line-numbers language-none"><code class="language-none">import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+import styleImport, { VantResolve } from 'vite-plugin-style-import';
 
-&#x2F;&#x2F; https:&#x2F;&#x2F;vitejs.dev&#x2F;config&#x2F;
-export default defineConfig(&#123;
+// https://vitejs.dev/config/
+export default defineConfig({
   plugins: [
     vue(),
-    styleImport(&#123;
+    styleImport({
       resolves: [VantResolve()],
-    &#125;),
+    }),
   ]
-  server: &#123;
+  server: {
     port: 3000,
-  &#125;
-&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+  }
+})<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>通过npm安装vant</p>
 <pre class="line-numbers language-none"><code class="language-none"># Vue 3 项目，安装最新版 Vant
 npm i vant<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>接着引入组件在main.ts文件里</p>
-<pre class="line-numbers language-none"><code class="language-none">import &#123; createApp &#125; from &#39;vue&#39;;
-import &#123; Button &#125; from &#39;vant&#39;;
+<pre class="line-numbers language-none"><code class="language-none">import { createApp } from 'vue';
+import { Button } from 'vant';
 
-const app &#x3D; createApp();
+const app = createApp();
 app.use(Button);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>整理如下</p>
-<pre class="line-numbers language-none"><code class="language-none">import &#123; createApp &#125; from &#39;vue&#39;
-import &#39;.&#x2F;style.css&#39;
-import App from &#39;.&#x2F;App.vue&#39;
-import &#123; Button &#125; from &#39;vant&#39;;
+<pre class="line-numbers language-none"><code class="language-none">import { createApp } from 'vue'
+import './style.css'
+import App from './App.vue'
+import { Button } from 'vant';
 
-const app &#x3D; createApp(App);
+const app = createApp(App);
 app.use(Button);
-app.mount(&#39;#app&#39;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+app.mount('#app');<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>现在可以测试一下引入是否成功</p>
-<pre class="line-numbers language-none"><code class="language-none">&lt;van-button type&#x3D;&quot;primary&quot;&gt;主要按钮&lt;&#x2F;van-button&gt;
-&lt;van-button type&#x3D;&quot;success&quot;&gt;成功按钮&lt;&#x2F;van-button&gt;
-&lt;van-button type&#x3D;&quot;default&quot;&gt;默认按钮&lt;&#x2F;van-button&gt;
-&lt;van-button type&#x3D;&quot;warning&quot;&gt;警告按钮&lt;&#x2F;van-button&gt;
-&lt;van-button type&#x3D;&quot;danger&quot;&gt;危险按钮&lt;&#x2F;van-button&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-none"><code class="language-none">&lt;van-button type="primary"&gt;主要按钮&lt;/van-button&gt;
+&lt;van-button type="success"&gt;成功按钮&lt;/van-button&gt;
+&lt;van-button type="default"&gt;默认按钮&lt;/van-button&gt;
+&lt;van-button type="warning"&gt;警告按钮&lt;/van-button&gt;
+&lt;van-button type="danger"&gt;危险按钮&lt;/van-button&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>黏贴到App.vue里面</p>
 <pre class="line-numbers language-none"><code class="language-none">&lt;template&gt;
   &lt;div&gt;
-    &lt;a href&#x3D;&quot;https:&#x2F;&#x2F;vitejs.dev&quot; target&#x3D;&quot;_blank&quot;&gt;
-      &lt;img src&#x3D;&quot;&#x2F;vite.svg&quot; class&#x3D;&quot;logo&quot; alt&#x3D;&quot;Vite logo&quot; &#x2F;&gt;
-    &lt;&#x2F;a&gt;
-    &lt;a href&#x3D;&quot;https:&#x2F;&#x2F;vuejs.org&#x2F;&quot; target&#x3D;&quot;_blank&quot;&gt;
-      &lt;img src&#x3D;&quot;.&#x2F;assets&#x2F;vue.svg&quot; class&#x3D;&quot;logo vue&quot; alt&#x3D;&quot;Vue logo&quot; &#x2F;&gt;
-    &lt;&#x2F;a&gt;
-  &lt;&#x2F;div&gt;
-  &lt;HelloWorld msg&#x3D;&quot;Vite + Vue&quot; &#x2F;&gt;
-  &lt;van-button type&#x3D;&quot;primary&quot;&gt;主要按钮&lt;&#x2F;van-button&gt;
-  &lt;van-button type&#x3D;&quot;success&quot;&gt;成功按钮&lt;&#x2F;van-button&gt;
-  &lt;van-button type&#x3D;&quot;default&quot;&gt;默认按钮&lt;&#x2F;van-button&gt;
-  &lt;van-button type&#x3D;&quot;warning&quot;&gt;警告按钮&lt;&#x2F;van-button&gt;
-  &lt;van-button type&#x3D;&quot;danger&quot;&gt;危险按钮&lt;&#x2F;van-button&gt;
-&lt;&#x2F;template&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    &lt;a href="https://vitejs.dev" target="_blank"&gt;
+      &lt;img src="/vite.svg" class="logo" alt="Vite logo" /&gt;
+    &lt;/a&gt;
+    &lt;a href="https://vuejs.org/" target="_blank"&gt;
+      &lt;img src="./assets/vue.svg" class="logo vue" alt="Vue logo" /&gt;
+    &lt;/a&gt;
+  &lt;/div&gt;
+  &lt;HelloWorld msg="Vite + Vue" /&gt;
+  &lt;van-button type="primary"&gt;主要按钮&lt;/van-button&gt;
+  &lt;van-button type="success"&gt;成功按钮&lt;/van-button&gt;
+  &lt;van-button type="default"&gt;默认按钮&lt;/van-button&gt;
+  &lt;van-button type="warning"&gt;警告按钮&lt;/van-button&gt;
+  &lt;van-button type="danger"&gt;危险按钮&lt;/van-button&gt;
+&lt;/template&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>运行，启动项目访问，我这里出现了报错 <img src="http://img-md-js.linjsblog.top/img/202301012356165.png" alt="image.png"> 发现是依赖引入路径的问题，百度！ 修改vite.config.ts代码，增加如下代码</p>
-<pre class="line-numbers language-none"><code class="language-none">export default defineConfig(&#123;
+<pre class="line-numbers language-none"><code class="language-none">export default defineConfig({
   plugins: [
     vue(),
-    styleImport(&#123;
+    styleImport({
       resolves: [VantResolve()],
-      &#x2F;&#x2F;增加的代码
+      //增加的代码
       libs: [
-        &#123;
-          libraryName: &#39;vant&#39;,
+        {
+          libraryName: 'vant',
           esModule: true,
-          resolveStyle: name &#x3D;&gt; &#96;..&#x2F;es&#x2F;$&#123;name&#125;&#x2F;style&#96;
-        &#125;
+          resolveStyle: name =&gt; `../es/${name}/style`
+        }
      ]
-    &#125;),
+    }),
   ],
-  server: &#123;
+  server: {
     port: 3000,
-  &#125;
-&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+  }
+})<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>再次启动项目，不报错，在底部成功出现了按键 <img src="http://img-md-js.linjsblog.top/img/202301012357930.png" alt="image.png"></p>
-<h3 id="二、前端主页-组件概览"><a href="#二、前端主页-组件概览" class="headerlink" title="二、前端主页 + 组件概览"></a>二、前端主页 + 组件概览</h3><p><strong>设计</strong>： 导航条：展示当前页面名称 主页搜索框 &#x3D;&gt; 搜索页 &#x3D;&gt; 搜索结果页（标签筛选页） 内容 tab 栏：</p>
+<h3 id="二、前端主页-组件概览"><a href="#二、前端主页-组件概览" class="headerlink" title="二、前端主页 + 组件概览"></a>二、前端主页 + 组件概览</h3><p><strong>设计</strong>： 导航条：展示当前页面名称 主页搜索框 =&gt; 搜索页 =&gt; 搜索结果页（标签筛选页） 内容 tab 栏：</p>
 <ul>
 <li>主页（推荐页 + <strong>广告</strong> ）<ul>
 <li>搜索框</li>
@@ -597,117 +619,117 @@ app.mount(&#39;#app&#39;);<span aria-hidden="true" class="line-numbers-rows"><sp
 <li>队伍页</li>
 <li>用户页（消息 - 暂时考虑发邮件）</li>
 </ul>
-<p><strong>开发</strong>： 很多页面要复用组件 &#x2F; 样式，重复写很麻烦、不利于维护，所以抽象一个通用的布局（Layout） 组件化</p>
+<p><strong>开发</strong>： 很多页面要复用组件 / 样式，重复写很麻烦、不利于维护，所以抽象一个通用的布局（Layout） 组件化</p>
 <h4 id="1-删除App-vue中无用的代码，只剩下框架；删除components中的hello文件，建立layouts文件夹（复用，通用布局）"><a href="#1-删除App-vue中无用的代码，只剩下框架；删除components中的hello文件，建立layouts文件夹（复用，通用布局）" class="headerlink" title="1. 删除App.vue中无用的代码，只剩下框架；删除components中的hello文件，建立layouts文件夹（复用，通用布局）"></a>1. 删除App.vue中无用的代码，只剩下框架；删除components中的hello文件，建立layouts文件夹（复用，通用布局）</h4><h4 id="2-搭建基本框架"><a href="#2-搭建基本框架" class="headerlink" title="2.搭建基本框架"></a>2.搭建基本框架</h4><p>复制navbar模块的代码如下，插入到layouts目录下的BasicLayouts.vue文件中</p>
 <pre class="line-numbers language-none"><code class="language-none">&lt;van-nav-bar
-  title&#x3D;&quot;标题&quot;
-  left-text&#x3D;&quot;返回&quot;
-  right-text&#x3D;&quot;按钮&quot;
+  title="标题"
+  left-text="返回"
+  right-text="按钮"
   left-arrow
-  @click-left&#x3D;&quot;onClickLeft&quot;
-  @click-right&#x3D;&quot;onClickRight&quot;
-&#x2F;&gt;
+  @click-left="onClickLeft"
+  @click-right="onClickRight"
+/&gt;
 
-import &#123; Toast &#125; from &#39;vant&#39;;
+import { Toast } from 'vant';
 
-export default &#123;
-  setup() &#123;
-    const onClickLeft &#x3D; () &#x3D;&gt; history.back();
-    const onClickRight &#x3D; () &#x3D;&gt; Toast(&#39;按钮&#39;);
-    return &#123;
+export default {
+  setup() {
+    const onClickLeft = () =&gt; history.back();
+    const onClickRight = () =&gt; Toast('按钮');
+    return {
       onClickLeft,
       onClickRight,
-    &#125;;
-  &#125;,
-&#125;;
+    };
+  },
+};
 
-&lt;van-nav-bar title&#x3D;&quot;标题&quot; left-text&#x3D;&quot;返回&quot; left-arrow&gt;
+&lt;van-nav-bar title="标题" left-text="返回" left-arrow&gt;
   &lt;template #right&gt;
-    &lt;van-icon name&#x3D;&quot;search&quot; size&#x3D;&quot;18&quot; &#x2F;&gt;
-  &lt;&#x2F;template&gt;
-&lt;&#x2F;van-nav-bar&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    &lt;van-icon name="search" size="18" /&gt;
+  &lt;/template&gt;
+&lt;/van-nav-bar&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>整理可得</p>
 <pre class="line-numbers language-none"><code class="language-none">&lt;template&gt;
   &lt;van-nav-bar
-      title&#x3D;&quot;标题&quot;
+      title="标题"
       left-arrow
-      @click-left&#x3D;&quot;onClickLeft&quot;
-      @click-right&#x3D;&quot;onClickRight&quot;
+      @click-left="onClickLeft"
+      @click-right="onClickRight"
   &gt;
   &lt;template #right&gt;
-    &lt;van-icon name&#x3D;&quot;search&quot; size&#x3D;&quot;18&quot; &#x2F;&gt;
-  &lt;&#x2F;template&gt;
-  &lt;&#x2F;van-nav-bar&gt;
-&lt;&#x2F;template&gt;
+    &lt;van-icon name="search" size="18" /&gt;
+  &lt;/template&gt;
+  &lt;/van-nav-bar&gt;
+&lt;/template&gt;
 
 &lt;script setup&gt;
-  const onClickLeft &#x3D; () &#x3D;&gt; alert(&#39;左&#39;);
-  const onClickRight &#x3D; () &#x3D;&gt; alert(&#39;右&#39;);
-&lt;&#x2F;script&gt;
+  const onClickLeft = () =&gt; alert('左');
+  const onClickRight = () =&gt; alert('右');
+&lt;/script&gt;
 
 &lt;style scoped&gt;
 
-&lt;&#x2F;style&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+&lt;/style&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>在其中<code>&lt;script setup&gt;</code>中的setup是把下面的常量暴露出去 同时不要忘了在main.ts中按需引入组件</p>
-<pre class="line-numbers language-none"><code class="language-none">import &#123;Button, Icon, NavBar&#125; from &#39;vant&#39;;
+<pre class="line-numbers language-none"><code class="language-none">import {Button, Icon, NavBar} from 'vant';
 app.use(NavBar);
 app.use(Icon);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>最后再App.vue中引入组件</p>
-<pre class="line-numbers language-none"><code class="language-none">&lt;script setup lang&#x3D;&quot;ts&quot;&gt;
-import BasicLayout from &quot;.&#x2F;components&#x2F;layouts&#x2F;BasicLayout.vue&quot;;
-&lt;&#x2F;script&gt;
+<pre class="line-numbers language-none"><code class="language-none">&lt;script setup lang="ts"&gt;
+import BasicLayout from "./components/layouts/BasicLayout.vue";
+&lt;/script&gt;
 
 &lt;template&gt;
-  &lt;BasicLayout &#x2F;&gt;
-&lt;&#x2F;template&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+  &lt;BasicLayout /&gt;
+&lt;/template&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>结果显示如下 <img src="http://img-md-js.linjsblog.top/img/202301012357226.png" alt="image.png"><img src="http://img-md-js.linjsblog.top/img/202301012357493.png" alt="image.png"> 根据需求进行魔改（如法炮制): 引入底部的tabbar 复制如下的代码到BasicLayouts.vue中</p>
-<pre class="line-numbers language-none"><code class="language-none">&lt;van-tabbar v-model&#x3D;&quot;active&quot; @change&#x3D;&quot;onChange&quot;&gt;
-  &lt;van-tabbar-item icon&#x3D;&quot;home-o&quot;&gt;标签 1&lt;&#x2F;van-tabbar-item&gt;
-  &lt;van-tabbar-item icon&#x3D;&quot;search&quot;&gt;标签 2&lt;&#x2F;van-tabbar-item&gt;
-  &lt;van-tabbar-item icon&#x3D;&quot;friends-o&quot;&gt;标签 3&lt;&#x2F;van-tabbar-item&gt;
-  &lt;van-tabbar-item icon&#x3D;&quot;setting-o&quot;&gt;标签 4&lt;&#x2F;van-tabbar-item&gt;
-&lt;&#x2F;van-tabbar&gt;
+<pre class="line-numbers language-none"><code class="language-none">&lt;van-tabbar v-model="active" @change="onChange"&gt;
+  &lt;van-tabbar-item icon="home-o"&gt;标签 1&lt;/van-tabbar-item&gt;
+  &lt;van-tabbar-item icon="search"&gt;标签 2&lt;/van-tabbar-item&gt;
+  &lt;van-tabbar-item icon="friends-o"&gt;标签 3&lt;/van-tabbar-item&gt;
+  &lt;van-tabbar-item icon="setting-o"&gt;标签 4&lt;/van-tabbar-item&gt;
+&lt;/van-tabbar&gt;
 
-import &#123; ref &#125; from &#39;vue&#39;;
-import &#123; Toast &#125; from &#39;vant&#39;;
+import { ref } from 'vue';
+import { Toast } from 'vant';
 
-export default &#123;
-  setup() &#123;
-    const active &#x3D; ref(0);
-    const onChange &#x3D; (index) &#x3D;&gt; Toast(&#96;标签 $&#123;index&#125;&#96;);
-    return &#123;
+export default {
+  setup() {
+    const active = ref(0);
+    const onChange = (index) =&gt; Toast(`标签 ${index}`);
+    return {
       icon,
       onChange,
-    &#125;;
-  &#125;,
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    };
+  },
+};<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>整理如下</p>
 <pre class="line-numbers language-none"><code class="language-none">&lt;template&gt;
-  &lt;van-tabbar v-model&#x3D;&quot;active&quot; @change&#x3D;&quot;onChange&quot;&gt;
-    &lt;van-tabbar-item icon&#x3D;&quot;home-o&quot; name&#x3D;&quot;index&quot;&gt;主页&lt;&#x2F;van-tabbar-item&gt;
-    &lt;van-tabbar-item icon&#x3D;&quot;search&quot; name&#x3D;&quot;team&quot;&gt;队伍&lt;&#x2F;van-tabbar-item&gt;
-    &lt;van-tabbar-item icon&#x3D;&quot;friends-o&quot; name&#x3D;&quot;user&quot;&gt;个人&lt;&#x2F;van-tabbar-item&gt;
-  &lt;&#x2F;van-tabbar&gt;
-&lt;&#x2F;template&gt;
+  &lt;van-tabbar v-model="active" @change="onChange"&gt;
+    &lt;van-tabbar-item icon="home-o" name="index"&gt;主页&lt;/van-tabbar-item&gt;
+    &lt;van-tabbar-item icon="search" name="team"&gt;队伍&lt;/van-tabbar-item&gt;
+    &lt;van-tabbar-item icon="friends-o" name="user"&gt;个人&lt;/van-tabbar-item&gt;
+  &lt;/van-tabbar&gt;
+&lt;/template&gt;
 
 &lt;script setup&gt;
-  import &#123; ref &#125; from &#39;vue&#39;;
-  import &#123; Toast &#125; from &#39;vant&#39;;
-  const active &#x3D; ref(&quot;index&quot;);
-  const onChange &#x3D; (index) &#x3D;&gt; Toast(&#96;标签 $&#123;index&#125;&#96;);
-&lt;&#x2F;script&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+  import { ref } from 'vue';
+  import { Toast } from 'vant';
+  const active = ref("index");
+  const onChange = (index) =&gt; Toast(`标签 ${index}`);
+&lt;/script&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>同时这个也需要在main.ts中引入组件</p>
-<pre class="line-numbers language-none"><code class="language-none">import &#123;Button, Icon, NavBar, Tabbar, TabbarItem&#125; from &#39;vant&#39;;
+<pre class="line-numbers language-none"><code class="language-none">import {Button, Icon, NavBar, Tabbar, TabbarItem} from 'vant';
 app.use(Tabbar);
 app.use(TabbarItem);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
-<p>const active &#x3D; ref(“index”); 这句的作用是在进入页面时默认index页面的图标是高亮的 通过change事件来监听选中标签的变化 <img src="http://img-md-js.linjsblog.top/img/202301012357695.png" alt="image.png"> 注意：其中一定要把main.ts中的import ‘.&#x2F;style.css’删去，我这边初始化的文件里有这一行，否则会引起样式冲突。</p>
+<p>const active = ref(“index”); 这句的作用是在进入页面时默认index页面的图标是高亮的 通过change事件来监听选中标签的变化 <img src="http://img-md-js.linjsblog.top/img/202301012357695.png" alt="image.png"> 注意：其中一定要把main.ts中的import ‘./style.css’删去，我这边初始化的文件里有这一行，否则会引起样式冲突。</p>
 <h4 id="3-完善，引入两个页面，创建pages目录和index-vue和team-vue，并在BasicLayouts-vue中引入"><a href="#3-完善，引入两个页面，创建pages目录和index-vue和team-vue，并在BasicLayouts-vue中引入" class="headerlink" title="3.完善，引入两个页面，创建pages目录和index.vue和team.vue，并在BasicLayouts.vue中引入"></a>3.完善，引入两个页面，创建pages目录和index.vue和team.vue，并在BasicLayouts.vue中引入</h4><p><img src="http://img-md-js.linjsblog.top/img/202301020045914.png" alt="image.png"><img src="http://img-md-js.linjsblog.top/img/202301012357646.png" alt="image.png"> 结果如下 <img src="http://img-md-js.linjsblog.top/img/202301012358947.png" alt="image.png"><img src="http://img-md-js.linjsblog.top/img/202301012358695.png" alt="image.png"> 前端主页+组件到此完成</p>
 <h3 id="三、数据库表设计"><a href="#三、数据库表设计" class="headerlink" title="三、数据库表设计"></a>三、数据库表设计</h3><p><strong>标签的分类（要有哪些标签、怎么把标签进行分类）</strong> <strong>新增标签表（分类表）</strong> 建议用标签，不要用分类，更灵活。 性别：男、女 方向：Java、C++、Go、前端 正在学：Spring 目标：考研、春招、秋招、社招、考公、竞赛（蓝桥杯）、转行、跳槽 段位：初级、中级、高级、王者 身份：小学、初中、高中、大一、大二、大三、大四、学生、待业、已就业、研一、研二、研三 状态：乐观、有点丧、一般、单身、已婚、有对象 <strong>【用户自己定义标签】？</strong> 字段： id int 主键 标签名 varchar 非空（必须唯一，唯一索引） 上传标签的用户 userId int（如果要根据 userId 查已上传标签的话，最好加上，普通索引） 父标签 id ，parentId，int（分类） 是否为父标签 isParent, tinyint（0 不是父标签、1 - 父标签） 创建时间 createTime，datetime 更新时间 updateTime，datetime 是否删除 isDelete， tinyint（0、1）</p>
 <p>怎么查询所有标签，并且把标签分好组？按父标签 id 分组，能实现 √ 根据父标签查询子标签？根据 id 查询，能实现 √</p>
@@ -751,7 +773,7 @@ app.use(TabbarItem);<span aria-hidden="true" class="line-numbers-rows"><span></s
 <li>还可以 SQL 查询与内存计算相结合，比如先用 SQL 过滤掉部分 tag</li>
 </ul>
 <p>建议通过实际测试来分析哪种查询比较快，数据量大的时候验证效果更明显！</p>
-<h4 id="2-解析-JSON-字符串"><a href="#2-解析-JSON-字符串" class="headerlink" title="2.解析 JSON 字符串"></a>2.解析 JSON 字符串</h4><p>序列化：java对象转成 json 反序列化：把 json 转为 java 对象 java  json 序列化库有很多：</p>
+<h4 id="2-解析-JSON-字符串"><a href="#2-解析-JSON-字符串" class="headerlink" title="2.解析 JSON 字符串"></a>2.解析 JSON 字符串</h4><p>序列化：java对象转成 json 反序列化：把 json 转为 java 对象 java &nbsp;json 序列化库有很多：</p>
 <ol>
 <li><strong>gson</strong>（google 的）</li>
 <li>fastjson alibaba（ali 出品，快，但是漏洞太多）</li>
@@ -767,32 +789,32 @@ app.use(TabbarItem);<span aria-hidden="true" class="line-numbers-rows"><span></s
 * @return
 */</span>
 <span class="token annotation punctuation">@Override</span>
-    <span class="token keyword">public</span> <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">></span></span> <span class="token function">searchUsersByTags</span><span class="token punctuation">(</span><span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span> tagNameList<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token class-name">CollectionUtils</span><span class="token punctuation">.</span><span class="token function">isEmpty</span><span class="token punctuation">(</span>tagNameList<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">&gt;</span></span> <span class="token function">searchUsersByTags</span><span class="token punctuation">(</span><span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">&gt;</span></span> tagNameList<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token class-name">CollectionUtils</span><span class="token punctuation">.</span><span class="token function">isEmpty</span><span class="token punctuation">(</span>tagNameList<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
         <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">BusinessException</span><span class="token punctuation">(</span><span class="token class-name">ErrorCode</span><span class="token punctuation">.</span><span class="token constant">PARAMS_ERROR</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">}</span>
     <span class="token comment">//拼接 and 查询</span>
     <span class="token comment">//like '%Java%' and like '%Python%'</span>
-    <span class="token class-name">QueryWrapper</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">></span></span> queryWrapper <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">QueryWrapper</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token class-name">String</span> tagName <span class="token operator">:</span> tagNameList<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token class-name">QueryWrapper</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">&gt;</span></span> queryWrapper <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">QueryWrapper</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token class-name">String</span> tagName <span class="token operator">:</span> tagNameList<span class="token punctuation">)</span><span class="token punctuation">{</span>
         queryWrapper<span class="token operator">=</span>queryWrapper<span class="token punctuation">.</span><span class="token function">like</span><span class="token punctuation">(</span><span class="token string">"tags"</span><span class="token punctuation">,</span>tagName<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-    <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">></span></span> userList <span class="token operator">=</span> userMapper<span class="token punctuation">.</span><span class="token function">selectList</span><span class="token punctuation">(</span>queryWrapper<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">&gt;</span></span> userList <span class="token operator">=</span> userMapper<span class="token punctuation">.</span><span class="token function">selectList</span><span class="token punctuation">(</span>queryWrapper<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span> userList<span class="token punctuation">.</span><span class="token function">stream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token operator">::</span><span class="token function">getSafetyUser</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">collect</span><span class="token punctuation">(</span><span class="token class-name">Collectors</span><span class="token punctuation">.</span><span class="token function">toList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h4 id="3-对searchUsersByTags方法进行测试"><a href="#3-对searchUsersByTags方法进行测试" class="headerlink" title="3.对searchUsersByTags方法进行测试"></a>3.对searchUsersByTags方法进行测试</h4><p>进入到UserServiceTest中，编写方法去测试</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Test</span>
-<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">searchUsersByTags</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-    <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span> tagNameList <span class="token operator">=</span> <span class="token class-name">Arrays</span><span class="token punctuation">.</span><span class="token function">asList</span><span class="token punctuation">(</span><span class="token string">"java"</span><span class="token punctuation">,</span> <span class="token string">"python"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">></span></span> userList <span class="token operator">=</span> userService<span class="token punctuation">.</span><span class="token function">searchUsersByTags</span><span class="token punctuation">(</span>tagNameList<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">searchUsersByTags</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">&gt;</span></span> tagNameList <span class="token operator">=</span> <span class="token class-name">Arrays</span><span class="token punctuation">.</span><span class="token function">asList</span><span class="token punctuation">(</span><span class="token string">"java"</span><span class="token punctuation">,</span> <span class="token string">"python"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">&gt;</span></span> userList <span class="token operator">=</span> userService<span class="token punctuation">.</span><span class="token function">searchUsersByTags</span><span class="token punctuation">(</span>tagNameList<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token class-name">Assert</span><span class="token punctuation">.</span><span class="token function">assertNotNull</span><span class="token punctuation">(</span>userList<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>此时的userMapper.xml，脱敏方法以及user类中并未及时更新，缺少了tags字段，所以现在进行添加 <img src="http://img-md-js.linjsblog.top/img/202301012359153.png" alt="image.png"><img src="http://img-md-js.linjsblog.top/img/202301012359518.png" alt="image.png"> <img src="http://img-md-js.linjsblog.top/img/202301012359349.png" alt="image.png"> 在表中插入tags的数据 <img src="http://img-md-js.linjsblog.top/img/202301012359861.png" alt="image.png"> 为了便于观察在配置文件中配置sql日志 <img src="http://img-md-js.linjsblog.top/img/202301012359330.png" alt="image.png"> 最后进行debug，打上断点 <img src="http://img-md-js.linjsblog.top/img/202301012359527.png" alt="image.png"> 结果如下 <img src="http://img-md-js.linjsblog.top/img/202301020000094.png" alt="image.png"> 日志也生成了</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token operator">==</span><span class="token operator">></span>  <span class="token class-name">Preparing</span><span class="token operator">:</span> <span class="token class-name">SELECT</span> id<span class="token punctuation">,</span>username<span class="token punctuation">,</span>userAccount<span class="token punctuation">,</span>avatarUrl<span class="token punctuation">,</span>gender<span class="token punctuation">,</span>userPassword<span class="token punctuation">,</span>phone<span class="token punctuation">,</span>email<span class="token punctuation">,</span>userStatus<span class="token punctuation">,</span>createTime<span class="token punctuation">,</span>updateTime<span class="token punctuation">,</span>isDelete<span class="token punctuation">,</span>userRole<span class="token punctuation">,</span>planetCode<span class="token punctuation">,</span>tags <span class="token constant">FROM</span> user <span class="token class-name">WHERE</span> isDelete<span class="token operator">=</span><span class="token number">0</span> <span class="token constant">AND</span> <span class="token punctuation">(</span>tags <span class="token constant">LIKE</span> <span class="token operator">?</span> <span class="token constant">AND</span> tags <span class="token constant">LIKE</span> <span class="token operator">?</span><span class="token punctuation">)</span>
-<span class="token operator">==</span><span class="token operator">></span> <span class="token class-name">Parameters</span><span class="token operator">:</span> <span class="token operator">%</span>java<span class="token operator">%</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token operator">%</span>python<span class="token operator">%</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">)</span>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token operator">==</span><span class="token operator">&gt;</span>  <span class="token class-name">Preparing</span><span class="token operator">:</span> <span class="token class-name">SELECT</span> id<span class="token punctuation">,</span>username<span class="token punctuation">,</span>userAccount<span class="token punctuation">,</span>avatarUrl<span class="token punctuation">,</span>gender<span class="token punctuation">,</span>userPassword<span class="token punctuation">,</span>phone<span class="token punctuation">,</span>email<span class="token punctuation">,</span>userStatus<span class="token punctuation">,</span>createTime<span class="token punctuation">,</span>updateTime<span class="token punctuation">,</span>isDelete<span class="token punctuation">,</span>userRole<span class="token punctuation">,</span>planetCode<span class="token punctuation">,</span>tags <span class="token constant">FROM</span> user <span class="token class-name">WHERE</span> isDelete<span class="token operator">=</span><span class="token number">0</span> <span class="token constant">AND</span> <span class="token punctuation">(</span>tags <span class="token constant">LIKE</span> <span class="token operator">?</span> <span class="token constant">AND</span> tags <span class="token constant">LIKE</span> <span class="token operator">?</span><span class="token punctuation">)</span>
+<span class="token operator">==</span><span class="token operator">&gt;</span> <span class="token class-name">Parameters</span><span class="token operator">:</span> <span class="token operator">%</span>java<span class="token operator">%</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token operator">%</span>python<span class="token operator">%</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">)</span>
 <span class="token operator">&lt;=</span><span class="token operator">=</span>    <span class="token class-name">Columns</span><span class="token operator">:</span> id<span class="token punctuation">,</span> username<span class="token punctuation">,</span> userAccount<span class="token punctuation">,</span> avatarUrl<span class="token punctuation">,</span> gender<span class="token punctuation">,</span> userPassword<span class="token punctuation">,</span> phone<span class="token punctuation">,</span> email<span class="token punctuation">,</span> userStatus<span class="token punctuation">,</span> createTime<span class="token punctuation">,</span> updateTime<span class="token punctuation">,</span> isDelete<span class="token punctuation">,</span> userRole<span class="token punctuation">,</span> planetCode<span class="token punctuation">,</span> tags
 <span class="token operator">&lt;=</span><span class="token operator">=</span>        <span class="token class-name">Row</span><span class="token operator">:</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token keyword">null</span><span class="token punctuation">,</span> yupi<span class="token punctuation">,</span> https<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>img1<span class="token punctuation">.</span>baidu<span class="token punctuation">.</span>com<span class="token operator">/</span>it<span class="token operator">/</span>u<span class="token operator">=</span><span class="token number">1645832847</span><span class="token punctuation">,</span><span class="token number">2375824523</span><span class="token operator">&amp;</span>fm<span class="token operator">=</span><span class="token number">253</span><span class="token operator">&amp;</span>fmt<span class="token operator">=</span>auto<span class="token operator">&amp;</span>app<span class="token operator">=</span><span class="token number">138</span><span class="token operator">&amp;</span>f<span class="token operator">=</span><span class="token constant">JPEG</span><span class="token operator">?</span>w<span class="token operator">=</span><span class="token number">480</span><span class="token operator">&amp;</span>h<span class="token operator">=</span><span class="token number">480</span><span class="token punctuation">,</span> <span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token number">12345678</span><span class="token punctuation">,</span> <span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">2022</span><span class="token operator">-</span><span class="token number">11</span><span class="token operator">-</span><span class="token number">08</span> <span class="token number">19</span><span class="token operator">:</span><span class="token number">00</span><span class="token operator">:</span><span class="token number">49</span><span class="token punctuation">,</span> <span class="token number">2022</span><span class="token operator">-</span><span class="token number">11</span><span class="token operator">-</span><span class="token number">12</span> <span class="token number">21</span><span class="token operator">:</span><span class="token number">23</span><span class="token operator">:</span><span class="token number">33</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string">"java"</span><span class="token punctuation">,</span><span class="token string">"c++"</span><span class="token punctuation">,</span><span class="token string">"python"</span><span class="token punctuation">]</span>
 <span class="token operator">&lt;=</span><span class="token operator">=</span>      <span class="token class-name">Total</span><span class="token operator">:</span> <span class="token number">1</span>
@@ -803,90 +825,90 @@ Disconnected</span> from the target <span class="token constant">VM</span><span 
 
 <p>注意踩坑点：由于是用户中心的代码，因为上线的原因，配置文件中的数据库是云服务器，现在测试的数据库是本地的，所以要根据自己的情况去修改配置，否则就会查询不出</p>
 <h4 id="4-第一种方法完成，现在进行第二种方法，在searchUsersByTags中修改代码"><a href="#4-第一种方法完成，现在进行第二种方法，在searchUsersByTags中修改代码" class="headerlink" title="4.第一种方法完成，现在进行第二种方法，在searchUsersByTags中修改代码"></a>4.第一种方法完成，现在进行第二种方法，在searchUsersByTags中修改代码</h4><p>首先要引入gson依赖（反序列化）</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token generics"><span class="token punctuation">&lt;</span>dependency<span class="token punctuation">></span></span>
-    <span class="token generics"><span class="token punctuation">&lt;</span>groupId<span class="token punctuation">></span></span>com<span class="token punctuation">.</span>google<span class="token punctuation">.</span>code<span class="token punctuation">.</span>gson<span class="token operator">&lt;</span><span class="token operator">/</span>groupId<span class="token operator">></span>
-    <span class="token generics"><span class="token punctuation">&lt;</span>artifactId<span class="token punctuation">></span></span>gson<span class="token operator">&lt;</span><span class="token operator">/</span>artifactId<span class="token operator">></span>
-    <span class="token generics"><span class="token punctuation">&lt;</span>version<span class="token punctuation">></span></span><span class="token number">2.8</span><span class="token number">.9</span><span class="token operator">&lt;</span><span class="token operator">/</span>version<span class="token operator">></span>
-<span class="token operator">&lt;</span><span class="token operator">/</span>dependency<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token generics"><span class="token punctuation">&lt;</span>dependency<span class="token punctuation">&gt;</span></span>
+    <span class="token generics"><span class="token punctuation">&lt;</span>groupId<span class="token punctuation">&gt;</span></span>com<span class="token punctuation">.</span>google<span class="token punctuation">.</span>code<span class="token punctuation">.</span>gson<span class="token operator">&lt;</span><span class="token operator">/</span>groupId<span class="token operator">&gt;</span>
+    <span class="token generics"><span class="token punctuation">&lt;</span>artifactId<span class="token punctuation">&gt;</span></span>gson<span class="token operator">&lt;</span><span class="token operator">/</span>artifactId<span class="token operator">&gt;</span>
+    <span class="token generics"><span class="token punctuation">&lt;</span>version<span class="token punctuation">&gt;</span></span><span class="token number">2.8</span><span class="token number">.9</span><span class="token operator">&lt;</span><span class="token operator">/</span>version<span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>dependency<span class="token operator">&gt;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>第二种代码如下</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java">   <span class="token annotation punctuation">@Override</span>
-    <span class="token keyword">public</span> <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">></span></span> <span class="token function">searchUsersByTags</span><span class="token punctuation">(</span><span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span> tagNameList<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token class-name">CollectionUtils</span><span class="token punctuation">.</span><span class="token function">isEmpty</span><span class="token punctuation">(</span>tagNameList<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">&gt;</span></span> <span class="token function">searchUsersByTags</span><span class="token punctuation">(</span><span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">&gt;</span></span> tagNameList<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token class-name">CollectionUtils</span><span class="token punctuation">.</span><span class="token function">isEmpty</span><span class="token punctuation">(</span>tagNameList<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
             <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">BusinessException</span><span class="token punctuation">(</span><span class="token class-name">ErrorCode</span><span class="token punctuation">.</span><span class="token constant">PARAMS_ERROR</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">}</span>
 <span class="token comment">//        //拼接 and 查询</span>
 <span class="token comment">//        //like '%Java%' and like '%Python%'</span>
-<span class="token comment">//        QueryWrapper&lt;User> queryWrapper = new QueryWrapper&lt;>();</span>
-<span class="token comment">//        for(String tagName : tagNameList)&#123;</span>
+<span class="token comment">//        QueryWrapper&lt;User&gt; queryWrapper = new QueryWrapper&lt;&gt;();</span>
+<span class="token comment">//        for(String tagName : tagNameList){</span>
 <span class="token comment">//            queryWrapper=queryWrapper.like("tags",tagName);</span>
-<span class="token comment">//        &#125;</span>
-<span class="token comment">//        List&lt;User> userList = userMapper.selectList(queryWrapper);</span>
+<span class="token comment">//        }</span>
+<span class="token comment">//        List&lt;User&gt; userList = userMapper.selectList(queryWrapper);</span>
 <span class="token comment">//        return userList.stream().map(this::getSafetyUser).collect(Collectors.toList());</span>
 
         <span class="token comment">//1.先查询所有用户</span>
-        <span class="token class-name">QueryWrapper</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">></span></span> queryWrapper <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">QueryWrapper</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">></span></span> userList <span class="token operator">=</span> userMapper<span class="token punctuation">.</span><span class="token function">selectList</span><span class="token punctuation">(</span>queryWrapper<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">QueryWrapper</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">&gt;</span></span> queryWrapper <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">QueryWrapper</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">&gt;</span></span> userList <span class="token operator">=</span> userMapper<span class="token punctuation">.</span><span class="token function">selectList</span><span class="token punctuation">(</span>queryWrapper<span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token class-name">Gson</span> gson <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Gson</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token comment">//2.在内存中判断是否包含要求的标签</span>
-        <span class="token keyword">return</span> userList<span class="token punctuation">.</span><span class="token function">stream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span>user <span class="token operator">-></span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> userList<span class="token punctuation">.</span><span class="token function">stream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span>user <span class="token operator">-&gt;</span> <span class="token punctuation">{</span>
             <span class="token class-name">String</span> tagsStr <span class="token operator">=</span> user<span class="token punctuation">.</span><span class="token function">getTags</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token class-name">StringUtils</span><span class="token punctuation">.</span><span class="token function">isBlank</span><span class="token punctuation">(</span>tagsStr<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token class-name">StringUtils</span><span class="token punctuation">.</span><span class="token function">isBlank</span><span class="token punctuation">(</span>tagsStr<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
                 <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
-            <span class="token punctuation">&#125;</span>
-            <span class="token class-name">Set</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span> tempTagNameSet <span class="token operator">=</span> gson<span class="token punctuation">.</span><span class="token function">fromJson</span><span class="token punctuation">(</span>tagsStr<span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">TypeToken</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Set</span><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-            <span class="token punctuation">&#125;</span><span class="token punctuation">.</span><span class="token function">getType</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">String</span> tagName <span class="token operator">:</span> tagNameList<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-                <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>tempTagNameSet<span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span>tagName<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+            <span class="token punctuation">}</span>
+            <span class="token class-name">Set</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">&gt;</span></span> tempTagNameSet <span class="token operator">=</span> gson<span class="token punctuation">.</span><span class="token function">fromJson</span><span class="token punctuation">(</span>tagsStr<span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">TypeToken</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Set</span><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">&gt;</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token punctuation">}</span><span class="token punctuation">.</span><span class="token function">getType</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">String</span> tagName <span class="token operator">:</span> tagNameList<span class="token punctuation">)</span><span class="token punctuation">{</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>tempTagNameSet<span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span>tagName<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
                     <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
-                <span class="token punctuation">&#125;</span>
-            <span class="token punctuation">&#125;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
             <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token operator">::</span><span class="token function">getSafetyUser</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">collect</span><span class="token punctuation">(</span><span class="token class-name">Collectors</span><span class="token punctuation">.</span><span class="token function">toList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token operator">::</span><span class="token function">getSafetyUser</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">collect</span><span class="token punctuation">(</span><span class="token class-name">Collectors</span><span class="token punctuation">.</span><span class="token function">toList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>依照第一种方法进行测试，结果如下 <img src="http://img-md-js.linjsblog.top/img/202301020026393.png" alt="image.png"> <img src="http://img-md-js.linjsblog.top/img/202301020000403.png" alt="image.png"></p>
 <h4 id="5-耗时的比较"><a href="#5-耗时的比较" class="headerlink" title="5.耗时的比较"></a>5.耗时的比较</h4><p>继续修改searchUsersByTags的代码如下</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java">    <span class="token annotation punctuation">@Override</span>
-    <span class="token keyword">public</span> <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">></span></span> <span class="token function">searchUsersByTags</span><span class="token punctuation">(</span><span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span> tagNameList<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token class-name">CollectionUtils</span><span class="token punctuation">.</span><span class="token function">isEmpty</span><span class="token punctuation">(</span>tagNameList<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">&gt;</span></span> <span class="token function">searchUsersByTags</span><span class="token punctuation">(</span><span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">&gt;</span></span> tagNameList<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token class-name">CollectionUtils</span><span class="token punctuation">.</span><span class="token function">isEmpty</span><span class="token punctuation">(</span>tagNameList<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
             <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">BusinessException</span><span class="token punctuation">(</span><span class="token class-name">ErrorCode</span><span class="token punctuation">.</span><span class="token constant">PARAMS_ERROR</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-        <span class="token class-name">QueryWrapper</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">></span></span> queryWrapper <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">QueryWrapper</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token class-name">QueryWrapper</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">&gt;</span></span> queryWrapper <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">QueryWrapper</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         userMapper<span class="token punctuation">.</span><span class="token function">selectCount</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token keyword">long</span> startTime <span class="token operator">=</span> <span class="token class-name">System</span><span class="token punctuation">.</span><span class="token function">currentTimeMillis</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token comment">//拼接 and 查询</span>
         <span class="token comment">//like '%Java%' and like '%Python%'</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">String</span> tagName <span class="token operator">:</span> tagNameList<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">String</span> tagName <span class="token operator">:</span> tagNameList<span class="token punctuation">)</span> <span class="token punctuation">{</span>
             queryWrapper <span class="token operator">=</span> queryWrapper<span class="token punctuation">.</span><span class="token function">like</span><span class="token punctuation">(</span><span class="token string">"tags"</span><span class="token punctuation">,</span> tagName<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-        <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">></span></span> userList <span class="token operator">=</span> userMapper<span class="token punctuation">.</span><span class="token function">selectList</span><span class="token punctuation">(</span>queryWrapper<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">&gt;</span></span> userList <span class="token operator">=</span> userMapper<span class="token punctuation">.</span><span class="token function">selectList</span><span class="token punctuation">(</span>queryWrapper<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token comment">//        return userList.stream().map(this::getSafetyUser).collect(Collectors.toList());</span>
         log<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token string">"sql query time ="</span> <span class="token operator">+</span> <span class="token punctuation">(</span><span class="token class-name">System</span><span class="token punctuation">.</span><span class="token function">currentTimeMillis</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> startTime<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token comment">//1.先查询所有用户</span>
         startTime <span class="token operator">=</span> <span class="token class-name">System</span><span class="token punctuation">.</span><span class="token function">currentTimeMillis</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        queryWrapper <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">QueryWrapper</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        queryWrapper <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">QueryWrapper</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         userList <span class="token operator">=</span> userMapper<span class="token punctuation">.</span><span class="token function">selectList</span><span class="token punctuation">(</span>queryWrapper<span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token class-name">Gson</span> gson <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Gson</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token comment">//2.在内存中判断是否包含要求的标签</span>
-        userList<span class="token punctuation">.</span><span class="token function">stream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span>user <span class="token operator">-></span> <span class="token punctuation">&#123;</span>
+        userList<span class="token punctuation">.</span><span class="token function">stream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span>user <span class="token operator">-&gt;</span> <span class="token punctuation">{</span>
             <span class="token class-name">String</span> tagsStr <span class="token operator">=</span> user<span class="token punctuation">.</span><span class="token function">getTags</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token class-name">StringUtils</span><span class="token punctuation">.</span><span class="token function">isBlank</span><span class="token punctuation">(</span>tagsStr<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token class-name">StringUtils</span><span class="token punctuation">.</span><span class="token function">isBlank</span><span class="token punctuation">(</span>tagsStr<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
                 <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
-            <span class="token punctuation">&#125;</span>
-            <span class="token class-name">Set</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span> tempTagNameSet <span class="token operator">=</span> gson<span class="token punctuation">.</span><span class="token function">fromJson</span><span class="token punctuation">(</span>tagsStr<span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">TypeToken</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Set</span><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-            <span class="token punctuation">&#125;</span><span class="token punctuation">.</span><span class="token function">getType</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">String</span> tagName <span class="token operator">:</span> tagNameList<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-                <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>tempTagNameSet<span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span>tagName<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token punctuation">}</span>
+            <span class="token class-name">Set</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">&gt;</span></span> tempTagNameSet <span class="token operator">=</span> gson<span class="token punctuation">.</span><span class="token function">fromJson</span><span class="token punctuation">(</span>tagsStr<span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">TypeToken</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Set</span><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">&gt;</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token punctuation">}</span><span class="token punctuation">.</span><span class="token function">getType</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">String</span> tagName <span class="token operator">:</span> tagNameList<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>tempTagNameSet<span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span>tagName<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
                     <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
-                <span class="token punctuation">&#125;</span>
-            <span class="token punctuation">&#125;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
             <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token operator">::</span><span class="token function">getSafetyUser</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">collect</span><span class="token punctuation">(</span><span class="token class-name">Collectors</span><span class="token punctuation">.</span><span class="token function">toList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token operator">::</span><span class="token function">getSafetyUser</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">collect</span><span class="token punctuation">(</span><span class="token class-name">Collectors</span><span class="token punctuation">.</span><span class="token function">toList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         log<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token string">"menory query time ="</span> <span class="token operator">+</span> <span class="token punctuation">(</span><span class="token class-name">System</span><span class="token punctuation">.</span><span class="token function">currentTimeMillis</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> startTime<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
         <span class="token keyword">return</span> userList<span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>进行测试（这边就进行了两次）： <img src="http://img-md-js.linjsblog.top/img/202301020000449.png" alt="image.png"> <img src="http://img-md-js.linjsblog.top/img/202301020000638.png" alt="image.png"> 结论：我这边都是内存快，鱼皮是SQL的快，除去第一次链接数据库的时间，也还是内存快，可能和数据的数量有关，测试并不是很准确，尽量要在实际的应用场景中观察。</p>
 
@@ -991,10 +1013,10 @@ Disconnected</span> from the target <span class="token constant">VM</span><span 
                         <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
                     </ul>
                     <div id="alipay">
-                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                        <img src="/medias/reward/alipay1.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -1242,60 +1264,6 @@ Disconnected</span> from the target <span class="token constant">VM</span><span 
 
     <footer class="page-footer bg-color">
     
-        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
-<style>
-    .aplayer .aplayer-lrc p {
-        
-        display: none;
-        
-        font-size: 12px;
-        font-weight: 700;
-        line-height: 16px !important;
-    }
-
-    .aplayer .aplayer-lrc p.aplayer-lrc-current {
-        
-        display: none;
-        
-        font-size: 15px;
-        color: #42b983;
-    }
-
-    
-    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
-        left: -66px !important;
-    }
-
-    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
-        left: 0px !important;
-    }
-
-    
-</style>
-<div class="">
-    
-    <div class="row">
-        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
-                   server="netease"
-                   type="playlist"
-                   id="503838841"
-                   fixed='true'
-                   autoplay='false'
-                   theme='#42b983'
-                   loop='all'
-                   order='random'
-                   preload='auto'
-                   volume='0.7'
-                   list-folded='true'
-        >
-        </meting-js>
-    </div>
-</div>
-
-<script src="/libs/aplayer/APlayer.min.js"></script>
-<script src="/libs/aplayer/Meting.min.js"></script>
-
-    
 
     <div class="container row center-align"
          style="margin-bottom: 0px !important;">
@@ -1334,13 +1302,13 @@ Disconnected</span> from the target <span class="token constant">VM</span><span 
             
         </div>
         <div class="col s12 m4 l4 social-link social-statis">
-    <a href="https://github.com/blinkfox" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+    <a href="https://github.com/js6288" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
         <i class="fab fa-github"></i>
     </a>
 
 
 
-    <a href="mailto:1181062873@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:linjingshu6288@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fas fa-envelope-open"></i>
     </a>
 
@@ -1350,7 +1318,7 @@ Disconnected</span> from the target <span class="token constant">VM</span><span 
 
 
 
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1181062873" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1181062873" data-position="top" data-delay="50">
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1279897306" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1279897306" data-position="top" data-delay="50">
         <i class="fab fa-qq"></i>
     </a>
 

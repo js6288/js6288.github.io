@@ -52,7 +52,9 @@
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 7.3.0"></head>
+<meta name="generator" content="Hexo 7.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
 
 
 <body>
@@ -367,6 +369,10 @@
                                 <span class="chip bg-color">人工智能</span>
                             </a>
                         
+                            <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">
+                                <span class="chip bg-color">机器学习</span>
+                            </a>
+                        
                             <a href="/tags/deep-learning/">
                                 <span class="chip bg-color">deep learning</span>
                             </a>
@@ -409,12 +415,32 @@
                 
 
                 
-
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>Update Date:&nbsp;&nbsp;
+                    2025-01-29
+                </div>
                 
 
                 
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
+                    6k
+                </div>
+                
 
                 
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
+                    21 Min
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>Read Count:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
             </div>
         </div>
         <hr class="clearfix">
@@ -463,7 +489,7 @@
 <p>“<strong>需求预测</strong>(Demand Predication)”问题：预测某产品是否为畅销产品。</p>
 <ul>
 <li>输入特征：价格、运费、市场营销、材质等。</li>
-<li>输出：二元输出，是否为畅销产品(0&#x2F;1)。</li>
+<li>输出：二元输出，是否为畅销产品(0/1)。</li>
 </ul>
 </blockquote>
 <p>我们先只考虑“价格”这一个特征，对于这种二元分类问题，仿照“逻辑回归”，我们仍然可以使用Sigmoid函数来拟合单个神经元的模型函数。于是该神经元模型，输入价格特征 x ，输出当前衬衫为畅销产品的概率 f ( x )（在神经网络中被称为“激活值” a ）。这个小逻辑回归算法可以认为是非常简化的单个神经元模型，如下图所示：</p>
@@ -479,7 +505,7 @@
 <li>隐藏层(hidden layer)：对输入层的$\vec{x}$进行映射，得到”激活向量“ $\vec{a}$ ,发送给输出层</li>
 <li>输出层(output layer)：根据 $\vec{a}$ 计算出最终的预测结果，也就是成为畅销产品的概率。</li>
 </ul>
-<p>注1：具有相似输入特征的神经元会被分组为同一“层”(layer)。 注2：除了输入层，所有隐藏层+输出层&#x3D;神经网络总层数。比如上图就是两层神经网络。</p>
+<p>注1：具有相似输入特征的神经元会被分组为同一“层”(layer)。 注2：除了输入层，所有隐藏层+输出层=神经网络总层数。比如上图就是两层神经网络。</p>
 </blockquote>
 <p>上述就是整个神经网络的形成原理。但注意到上述我们手动规定了“隐藏层”的神经元数量、每个神经元与输入特征的关系。要是遇到庞大且复杂的神经网络，显然都靠手动规定几乎不可能！所以<strong>实际构建神经网络时，只需要设定隐藏层数量、以及每个隐藏层的神经元数量，其他的对应关系等无需规定，神经网络模型都可以自行学习</strong>（Week2介绍）。这也解释了，之所以称之为“隐藏层”，是因为我们一般只知 道数据集$(\vec{X},\vec{Y})$ ,而不会像上述一样预先设置好“消费者因素”，也就是说，我们一开始并不知道“隐藏层”间的神经元之间的对应关系。</p>
 <p> 最后要说的一点是，上述只是具有单个隐藏层的神经网络模型，下面是具有多个隐藏层的，某些文献中也被称为“多层感知器(multilayer perceptron)”：</p>
@@ -511,7 +537,7 @@
 <p>$a^{[l]}$ : 第 $l$ 层神经网络输出的单个“激活值”，一般是最后一层的“输出层”的输出。</p>
 <p>$\vec{a}^{[0]}$ : 一般等价于输入特征$\vec{x}$, 该表达式是为了与隐藏层、输入层统一形式</p>
 <p>g(.) : 默认表示Sigmoid函数，是神经网络“激活函数”的其中一种</p>
-<p>按照惯例，神经网络的层数 &#x3D; 所有隐藏层 + 输出层。比如，两层神经网络就是只包含一个隐藏层。</p>
+<p>按照惯例，神经网络的层数 = 所有隐藏层 + 输出层。比如，两层神经网络就是只包含一个隐藏层。</p>
 </blockquote>
 <p><img src="http://img-md-js.linjsblog.top/img/202501261942413.png" alt="img"></p>
 <p>图1</p>
@@ -520,20 +546,20 @@
 <p><img src="http://img-md-js.linjsblog.top/img/202501261942103.png" alt="img"></p>
 <p>图3</p>
 <blockquote>
-<p>输入层(layer0)：给出特征向量 $\vec{x}$ ，比如令 $\vec{x}$⃗ &#x3D; [ 197 , 184 , 136 , 214 ] 。 隐藏层(layer1)：如图1，包括三个神经元，每个神经元使用Sigmoid函数，并且都有各自的参数$\vec{w}<em>{j}^{[l]},{b}</em>{j}^{[l]}$ ,j&#x3D;1,2,3; 假设这三个神经元的计算结果组成当前层的激活向量$\vec{a}^{[1]}&#x3D;[0.3,0.7,0.2]$.</p>
-<p>输出层(layer2)：如图2，只有单个神经元，利用参数 $\vec{w}<em>{1}^{[2]},{b}</em>{1}^{[2]}$ 和输入的 $\vec{a}^{[1]} 计算出 \vec{a}^{[2]} &#x3D; 0.84$</p>
+<p>输入层(layer0)：给出特征向量 $\vec{x}$ ，比如令 $\vec{x}$⃗ = [ 197 , 184 , 136 , 214 ] 。 隐藏层(layer1)：如图1，包括三个神经元，每个神经元使用Sigmoid函数，并且都有各自的参数$\vec{w}<em>{j}^{[l]},{b}</em>{j}^{[l]}$ ,j=1,2,3; 假设这三个神经元的计算结果组成当前层的激活向量$\vec{a}^{[1]}=[0.3,0.7,0.2]$.</p>
+<p>输出层(layer2)：如图2，只有单个神经元，利用参数 $\vec{w}<em>{1}^{[2]},{b}</em>{1}^{[2]}$ 和输入的 $\vec{a}^{[1]} 计算出 \vec{a}^{[2]} = 0.84$</p>
 <p>判决：对于图3，对输出层的结果进行二进制判决，阈值可设置为0.5。这一步并不是必要的。</p>
 </blockquote>
 <h3 id="2-2-更复杂的神经网络"><a href="#2-2-更复杂的神经网络" class="headerlink" title="2-2 更复杂的神经网络"></a>2-2 更复杂的神经网络</h3><p><img src="http://img-md-js.linjsblog.top/img/202501262133006.png" alt="image-20250126213318916"></p>
 <p>显然上图中，每一层都有一个输入向量，经过当前层所有神经元的得到输出向量，传递给下一层。将符号整理得更加清晰一些，于是第 $l$ 层神经网络的第 $j$ 个神经元的输出可以写成：</p>
-<p>$$<br>a_{j}^{[l]} &#x3D; g(\vec{w}<em>{j}^{[l]} \cdot \vec{a}^{[l-1]} + b</em>{j}^{[l]})<br>$$</p>
-<p>将输入特征写为 $\vec{x} &#x3D; \vec{a}^{[0]}$ 上式就具有通用性。</p>
+<p>$$<br>a_{j}^{[l]} = g(\vec{w}<em>{j}^{[l]} \cdot \vec{a}^{[l-1]} + b</em>{j}^{[l]})<br>$$</p>
+<p>将输入特征写为 $\vec{x} = \vec{a}^{[0]}$ 上式就具有通用性。</p>
 <h3 id="2-3-神经网络前向传播"><a href="#2-3-神经网络前向传播" class="headerlink" title="2-3 神经网络前向传播"></a>2-3 神经网络前向传播</h3><p>“手写数字识别”问题：简洁起见，只识别手写数字0和1。</p>
 <p>输入特征：8x8的灰度图(灰度级0~255)，0表示黑色，255表示白色。于是输入特征 $\vec{x}$的长度为64。 输出：二元分类，输入图片是数字1的概率。</p>
 <p>假设我们使用三层神经网络，隐藏层1有25个神经元、隐藏层2有15个神经元，每层神经元的计算公式如下图所示，</p>
 <p><img src="http://img-md-js.linjsblog.top/img/202501262357286.png" alt="img"></p>
 <p>将上述表达式合并，于是第 $ l $ 层神经网络的输出为(矩阵格式)：</p>
-<p>$\vec{A}^{[l]} &#x3D; g(\vec{W}^{[l]} \vec{A}^{[l-1]} + \vec{B}^{[l]})$</p>
+<p>$\vec{A}^{[l]} = g(\vec{W}^{[l]} \vec{A}^{[l-1]} + \vec{B}^{[l]})$</p>
 <p>解释：</p>
 <ul>
 <li>约定当前层为 $l$ ，且当前层总共有 $M$个神经元。</li>
@@ -596,7 +622,7 @@ layer_2 <span class="token operator">=</span> Dense<span class="token punctuatio
 a2 <span class="token operator">=</span> layer_2<span class="token punctuation">(</span>a1<span class="token punctuation">)</span>                                <span class="token comment"># 计算输出值</span>
 
 <span class="token comment"># 判决</span>
-<span class="token keyword">if</span> a2 <span class="token operator">>=</span> <span class="token number">0.5</span><span class="token punctuation">:</span>
+<span class="token keyword">if</span> a2 <span class="token operator">&gt;=</span> <span class="token number">0.5</span><span class="token punctuation">:</span>
     yhat <span class="token operator">=</span> <span class="token number">1</span>
 <span class="token keyword">else</span><span class="token punctuation">:</span>
     yhat <span class="token operator">=</span> <span class="token number">0</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
@@ -624,7 +650,7 @@ model<span class="token punctuation">.</span>fit<span class="token punctuation">
 
 <span class="token comment"># 预测并判决</span>
 a_last <span class="token operator">=</span> model<span class="token punctuation">.</span>predict<span class="token punctuation">(</span>x_new<span class="token punctuation">)</span>
-<span class="token keyword">if</span> a_last <span class="token operator">>=</span> <span class="token number">0.5</span><span class="token punctuation">:</span>
+<span class="token keyword">if</span> a_last <span class="token operator">&gt;=</span> <span class="token number">0.5</span><span class="token punctuation">:</span>
     yhat <span class="token operator">=</span> <span class="token number">1</span>
 <span class="token keyword">else</span><span class="token punctuation">:</span>
     yhat <span class="token operator">=</span> <span class="token number">0</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
@@ -675,7 +701,7 @@ model<span class="token punctuation">.</span>fit<span class="token punctuation">
 
 <span class="token comment"># 预测并判决</span>
 a_last <span class="token operator">=</span> model<span class="token punctuation">.</span>predict<span class="token punctuation">(</span>x_new<span class="token punctuation">)</span>
-<span class="token keyword">if</span> a_last <span class="token operator">>=</span> <span class="token number">0.5</span><span class="token punctuation">:</span>
+<span class="token keyword">if</span> a_last <span class="token operator">&gt;=</span> <span class="token number">0.5</span><span class="token punctuation">:</span>
     yhat <span class="token operator">=</span> 1python
 <span class="token keyword">else</span><span class="token punctuation">:</span>
     yhat <span class="token operator">=</span> <span class="token number">0</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
@@ -771,6 +797,10 @@ a_last <span class="token operator">=</span> model<span class="token punctuation
                                     <span class="chip bg-color">人工智能</span>
                                 </a>
                             
+                                <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">
+                                    <span class="chip bg-color">机器学习</span>
+                                </a>
+                            
                                 <a href="/tags/deep-learning/">
                                     <span class="chip bg-color">deep learning</span>
                                 </a>
@@ -821,10 +851,10 @@ a_last <span class="token operator">=</span> model<span class="token punctuation
                         <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
                     </ul>
                     <div id="alipay">
-                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                        <img src="/medias/reward/alipay1.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -907,6 +937,10 @@ a_last <span class="token operator">=</span> model<span class="token punctuation
                         <span class="chip bg-color">人工智能</span>
                     </a>
                     
+                    <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">
+                        <span class="chip bg-color">机器学习</span>
+                    </a>
+                    
                     <a href="/tags/deep-learning/">
                         <span class="chip bg-color">deep learning</span>
                     </a>
@@ -971,6 +1005,18 @@ a_last <span class="token operator">=</span> model<span class="token punctuation
                 </div>
                 
                 <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">
+                        <span class="chip bg-color">人工智能</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">
+                        <span class="chip bg-color">机器学习</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">
+                        <span class="chip bg-color">深度学习</span>
+                    </a>
                     
                     <a href="/tags/machine-learning/">
                         <span class="chip bg-color">machine learning</span>
@@ -1113,60 +1159,6 @@ a_last <span class="token operator">=</span> model<span class="token punctuation
 
     <footer class="page-footer bg-color">
     
-        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
-<style>
-    .aplayer .aplayer-lrc p {
-        
-        display: none;
-        
-        font-size: 12px;
-        font-weight: 700;
-        line-height: 16px !important;
-    }
-
-    .aplayer .aplayer-lrc p.aplayer-lrc-current {
-        
-        display: none;
-        
-        font-size: 15px;
-        color: #42b983;
-    }
-
-    
-    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
-        left: -66px !important;
-    }
-
-    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
-        left: 0px !important;
-    }
-
-    
-</style>
-<div class="">
-    
-    <div class="row">
-        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
-                   server="netease"
-                   type="playlist"
-                   id="503838841"
-                   fixed='true'
-                   autoplay='false'
-                   theme='#42b983'
-                   loop='all'
-                   order='random'
-                   preload='auto'
-                   volume='0.7'
-                   list-folded='true'
-        >
-        </meting-js>
-    </div>
-</div>
-
-<script src="/libs/aplayer/APlayer.min.js"></script>
-<script src="/libs/aplayer/Meting.min.js"></script>
-
-    
 
     <div class="container row center-align"
          style="margin-bottom: 0px !important;">
@@ -1205,13 +1197,13 @@ a_last <span class="token operator">=</span> model<span class="token punctuation
             
         </div>
         <div class="col s12 m4 l4 social-link social-statis">
-    <a href="https://github.com/blinkfox" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+    <a href="https://github.com/js6288" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
         <i class="fab fa-github"></i>
     </a>
 
 
 
-    <a href="mailto:1181062873@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:linjingshu6288@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fas fa-envelope-open"></i>
     </a>
 
@@ -1221,7 +1213,7 @@ a_last <span class="token operator">=</span> model<span class="token punctuation
 
 
 
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1181062873" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1181062873" data-position="top" data-delay="50">
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1279897306" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1279897306" data-position="top" data-delay="50">
         <i class="fab fa-qq"></i>
     </a>
 

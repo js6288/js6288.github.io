@@ -53,7 +53,9 @@
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 7.3.0"></head>
+<meta name="generator" content="Hexo 7.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
 
 
 <body>
@@ -410,12 +412,32 @@
                 
 
                 
-
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>Update Date:&nbsp;&nbsp;
+                    2025-01-29
+                </div>
                 
 
                 
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
+                    3.8k
+                </div>
+                
 
                 
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
+                    15 Min
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>Read Count:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
             </div>
         </div>
         <hr class="clearfix">
@@ -432,7 +454,7 @@
                 <h3 id="组队功能"><a href="#组队功能" class="headerlink" title="组队功能"></a>组队功能</h3><h4 id="理想的应用场景"><a href="#理想的应用场景" class="headerlink" title="理想的应用场景"></a>理想的应用场景</h4><p>我要跟别人一起参加竞赛或者做项目，可以发起队伍或者加入别人的队伍</p>
 <h4 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h4><p>用户可以 <strong>创建</strong> 一个队伍，设置队伍的人数、队伍名称（标题）、描述、超时时间 P0 队长、剩余的人数 聊天？ 公开 或 private 或加密 <strong>用户创建队伍最多 5 个</strong> 展示队伍列表，根据名称搜索队伍 P0，信息流中不展示已过期的队伍 修改队伍信息 P0 ~ P1 用户可以加入队伍（其他人、未满、未过期），允许加入多个队伍，但是要有个上限 P0 是否需要队长同意？筛选审批？ 用户可以退出队伍（如果队长退出，权限转移给第二早加入的用户 —— 先来后到） P1 队长可以解散队伍 P0</p>
 <hr>
-<p>分享队伍 &#x3D;》 邀请其他用户加入队伍 P1 业务流程：</p>
+<p>分享队伍 =》 邀请其他用户加入队伍 P1 业务流程：</p>
 <ol>
 <li>生成分享链接（分享二维码）</li>
 <li>用户访问链接，可以点击加入</li>
@@ -443,17 +465,17 @@
 <li>请求参数是否为空？</li>
 <li>是否登录，未登录不允许创建</li>
 <li>校验信息<ol>
-<li>队伍人数 &gt; 1 且 &lt;&#x3D; 20</li>
-<li>队伍标题 &lt;&#x3D; 20</li>
-<li>描述 &lt;&#x3D; 512</li>
+<li>队伍人数 &gt; 1 且 &lt;= 20</li>
+<li>队伍标题 &lt;= 20</li>
+<li>描述 &lt;= 512</li>
 <li>status 是否公开（int）不传默认为 0（公开）</li>
-<li>如果 status 是加密状态，一定要有密码，且密码 &lt;&#x3D; 32</li>
+<li>如果 status 是加密状态，一定要有密码，且密码 &lt;= 32</li>
 <li>超时时间 &gt; 当前时间</li>
 <li>校验用户最多创建 5 个队伍</li>
 </ol>
 </li>
 <li>插入队伍信息到队伍表</li>
-<li>插入用户 &#x3D;&gt; 队伍关系到关系表</li>
+<li>插入用户 =&gt; 队伍关系到关系表</li>
 </ol>
 <h5 id="2、查询队伍列表"><a href="#2、查询队伍列表" class="headerlink" title="2、查询队伍列表"></a>2、查询队伍列表</h5><p>分页展示队伍列表，根据名称、最大人数等搜索队伍 P0，信息流中不展示已过期的队伍</p>
 <ol>
@@ -465,14 +487,14 @@
 <li><strong>关联查询已加入队伍的用户信息（可能会很耗费性能，建议大家用自己写 SQL 的方式实现）</strong></li>
 </ol>
 <p><strong>实现方式</strong> 1）自己写 SQL</p>
-<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">&#x2F;&#x2F; 1. 自己写 SQL
-&#x2F;&#x2F; 查询队伍和创建人的信息
-&#x2F;&#x2F; select * from team t left join user u on t.userId &#x3D; u.id
-&#x2F;&#x2F; 查询队伍和已加入队伍成员的信息
-&#x2F;&#x2F; select *
-&#x2F;&#x2F; from team t
-&#x2F;&#x2F;         left join user_team ut on t.id &#x3D; ut.teamId
-&#x2F;&#x2F;         left join user u on ut.userId &#x3D; u.id;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">// 1. 自己写 SQL
+// 查询队伍和创建人的信息
+// select * from team t left join user u on t.userId = u.id
+// 查询队伍和已加入队伍成员的信息
+// select *
+// from team t
+// &nbsp; &nbsp; &nbsp; &nbsp; left join user_team ut on t.id = ut.teamId
+// &nbsp; &nbsp; &nbsp; &nbsp; left join user u on ut.userId = u.id;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h5 id="3-修改队伍信息"><a href="#3-修改队伍信息" class="headerlink" title="3. 修改队伍信息"></a>3. 修改队伍信息</h5><ol>
 <li>判断请求参数是否为空</li>
@@ -517,7 +539,7 @@
 </ol>
 <h5 id="7-获取当前用户已加入的队伍"><a href="#7-获取当前用户已加入的队伍" class="headerlink" title="7. 获取当前用户已加入的队伍"></a>7. 获取当前用户已加入的队伍</h5><h5 id="8-获取当前用户创建的队伍"><a href="#8-获取当前用户创建的队伍" class="headerlink" title="8. 获取当前用户创建的队伍"></a>8. 获取当前用户创建的队伍</h5><p>复用 listTeam 方法，只新增查询条件，不做修改（开闭原则）</p>
 <hr>
-<h4 id="事务注解"><a href="#事务注解" class="headerlink" title="事务注解"></a>事务注解</h4><p>@Transactional(rollbackFor &#x3D; Exception.class) 要么数据操作都成功，要么都失败</p>
+<h4 id="事务注解"><a href="#事务注解" class="headerlink" title="事务注解"></a>事务注解</h4><p>@Transactional(rollbackFor = Exception.class) 要么数据操作都成功，要么都失败</p>
 <h3 id="数据库表设计"><a href="#数据库表设计" class="headerlink" title="数据库表设计"></a>数据库表设计</h3><p>队伍表 team 字段：</p>
 <ul>
 <li>id 主键 bigint（最简单、连续，放 url 上比较简短，但缺点是爬虫）</li>
@@ -534,19 +556,19 @@
 </ul>
 <pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">create table team
 (
-    id bigint auto_increment comment &#39;id&#39; primary key,
-    name  varchar(256)          not null comment &#39;队伍名称&#39;,
-    description varchar(1024)           null comment &#39;描述&#39;,
-    maxNum  int   default 1         not null comment &#39;最大人数&#39;,
-    expireTime  datetime null comment &#39;过期时间&#39;,
-    userId      bigint comment &#39;用户id&#39;,
-    status  int   default 0         not null comment &#39;0 - 公开，1 - 私有，2 - 加密&#39;,
-    password varchar(512)            null comment &#39;密码&#39;,
-    createTime  datetime default CURRENT_TIMESTAMP null comment &#39;创建时间&#39;,
+    id bigint auto_increment comment 'id' primary key,
+    name  varchar(256)          not null comment '队伍名称',
+    description varchar(1024)           null comment '描述',
+    maxNum  int   default 1         not null comment '最大人数',
+    expireTime  datetime null comment '过期时间',
+    userId      bigint comment '用户id',
+    status  int   default 0         not null comment '0 - 公开，1 - 私有，2 - 加密',
+    password varchar(512)            null comment '密码',
+    createTime  datetime default CURRENT_TIMESTAMP null comment '创建时间',
     updateTime  datetime default CURRENT_TIMESTAMP null on update CURRENT_TIMESTAMP,
-    isDelete   tinyint default 0         not null comment &#39;是否删除&#39;
+    isDelete   tinyint default 0         not null comment '是否删除'
 )
-    comment &#39;队伍&#39;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    comment '队伍';<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>用户 - 队伍表 user_team 字段：</p>
 <ul>
@@ -560,15 +582,15 @@
 </ul>
 <pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">create table user_team
 (
-    id bigint auto_increment comment &#39;id&#39;  primary key,
-    userId      bigint comment &#39;用户id&#39;,
-    teamId      bigint comment &#39;队伍id&#39;,
-    joinTime datetime null comment &#39;加入时间&#39;,
-    createTime  datetime default CURRENT_TIMESTAMP null comment &#39;创建时间&#39;,
+    id bigint auto_increment comment 'id'  primary key,
+    userId      bigint comment '用户id',
+    teamId      bigint comment '队伍id',
+    joinTime datetime null comment '加入时间',
+    createTime  datetime default CURRENT_TIMESTAMP null comment '创建时间',
     updateTime  datetime default CURRENT_TIMESTAMP null on update CURRENT_TIMESTAMP,
-    isDelete   tinyint default 0         not null comment &#39;是否删除&#39;
+    isDelete   tinyint default 0         not null comment '是否删除'
 )
-    comment &#39;用户队伍关系&#39;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    comment '用户队伍关系';<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>两个关系：</p>
 <ol>
@@ -581,7 +603,7 @@
 <li>用户表补充已加入的队伍字段，队伍表补充已加入的用户字段（便于查询，不用写多对多的代码，可以直接根据队伍查用户、根据用户查队伍）</li>
 </ol>
 <h4 id="为什么需要请求参数包装类？"><a href="#为什么需要请求参数包装类？" class="headerlink" title="为什么需要请求参数包装类？"></a>为什么需要请求参数包装类？</h4><ol>
-<li>请求参数名称 &#x2F; 类型和实体类不一样</li>
+<li>请求参数名称 / 类型和实体类不一样</li>
 <li>有一些参数用不到，如果要自动生成接口文档，会增加理解成本</li>
 <li>对个实体类映射到同一个对象</li>
 </ol>
@@ -590,94 +612,94 @@
 <h2 id="一、数据库建表"><a href="#一、数据库建表" class="headerlink" title="一、数据库建表"></a>一、数据库建表</h2><p>复制下列ddl建表语句，到idea里面建表</p>
 <pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">create table team
 (
-    id           bigint auto_increment comment &#39;id&#39;
+    id           bigint auto_increment comment 'id'
         primary key,
-    name   varchar(256)                   not null comment &#39;队伍名称&#39;,
-    description varchar(1024)                      null comment &#39;描述&#39;,
-    maxNum    int      default 1                 not null comment &#39;最大人数&#39;,
-    expireTime    datetime  null comment &#39;过期时间&#39;,
-    userId            bigint comment &#39;用户id&#39;,
-    status    int      default 0                 not null comment &#39;0 - 公开，1 - 私有，2 - 加密&#39;,
-    password varchar(512)                       null comment &#39;密码&#39;,
+    name   varchar(256)                   not null comment '队伍名称',
+    description varchar(1024)                      null comment '描述',
+    maxNum    int      default 1                 not null comment '最大人数',
+    expireTime    datetime  null comment '过期时间',
+    userId            bigint comment '用户id',
+    status    int      default 0                 not null comment '0 - 公开，1 - 私有，2 - 加密',
+    password varchar(512)                       null comment '密码',
 
-    createTime   datetime default CURRENT_TIMESTAMP null comment &#39;创建时间&#39;,
+    createTime   datetime default CURRENT_TIMESTAMP null comment '创建时间',
     updateTime   datetime default CURRENT_TIMESTAMP null on update CURRENT_TIMESTAMP,
-    isDelete     tinyint  default 0                 not null comment &#39;是否删除&#39;
+    isDelete     tinyint  default 0                 not null comment '是否删除'
 )
-    comment &#39;队伍&#39;;
+    comment '队伍';
 
 create table user_team
 (
-    id           bigint auto_increment comment &#39;id&#39;
+    id           bigint auto_increment comment 'id'
         primary key,
-    userId            bigint comment &#39;用户id&#39;,
-    teamId            bigint comment &#39;队伍id&#39;,
-    joinTime datetime  null comment &#39;加入时间&#39;,
-    createTime   datetime default CURRENT_TIMESTAMP null comment &#39;创建时间&#39;,
+    userId            bigint comment '用户id',
+    teamId            bigint comment '队伍id',
+    joinTime datetime  null comment '加入时间',
+    createTime   datetime default CURRENT_TIMESTAMP null comment '创建时间',
     updateTime   datetime default CURRENT_TIMESTAMP null on update CURRENT_TIMESTAMP,
-    isDelete     tinyint  default 0                 not null comment &#39;是否删除&#39;
+    isDelete     tinyint  default 0                 not null comment '是否删除'
 )
-    comment &#39;用户队伍关系&#39;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    comment '用户队伍关系';<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>显示的表格如下（tag表以前建过，这期好像鱼皮忘记了，暂时不要删）: <img src="http://img-md-js.linjsblog.top/img/202301041954934.png" alt="image.png"> 使用MybatisX-Generator生成domain，service和mapper文件，然后把生成的文件都移到对应的目录里面，别忘了把mapper.xml里的路径改成自己对应的。 PS：别忘了在team和user_team类中的is_delete字段添加@TableLogic注解，实现逻辑删除 <img src="http://img-md-js.linjsblog.top/img/202301041811287.png" alt="image.png"></p>
 <h2 id="二、编写接口（TeamController）"><a href="#二、编写接口（TeamController）" class="headerlink" title="二、编写接口（TeamController）"></a>二、编写接口（TeamController）</h2><h3 id="1-复制UserController并重命名为TeamController修改整理为："><a href="#1-复制UserController并重命名为TeamController修改整理为：" class="headerlink" title="1.复制UserController并重命名为TeamController修改整理为："></a>1.复制UserController并重命名为TeamController修改整理为：</h3><p><img src="http://img-md-js.linjsblog.top/img/202301041811395.png" alt="image.png"></p>
 <h3 id="2-编写具体的接口"><a href="#2-编写具体的接口" class="headerlink" title="2.编写具体的接口"></a>2.编写具体的接口</h3><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@PostMapping</span><span class="token punctuation">(</span><span class="token string">"/add"</span><span class="token punctuation">)</span>
-<span class="token keyword">public</span> <span class="token class-name">BaseResponse</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Long</span><span class="token punctuation">></span></span> <span class="token function">addTeam</span><span class="token punctuation">(</span><span class="token annotation punctuation">@RequestBody</span> <span class="token class-name">Team</span> team<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>team <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+<span class="token keyword">public</span> <span class="token class-name">BaseResponse</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Long</span><span class="token punctuation">&gt;</span></span> <span class="token function">addTeam</span><span class="token punctuation">(</span><span class="token annotation punctuation">@RequestBody</span> <span class="token class-name">Team</span> team<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>team <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">BusinessException</span><span class="token punctuation">(</span><span class="token class-name">ErrorCode</span><span class="token punctuation">.</span><span class="token constant">PARAMS_ERROR</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">}</span>
     <span class="token keyword">boolean</span> save <span class="token operator">=</span> teamService<span class="token punctuation">.</span><span class="token function">save</span><span class="token punctuation">(</span>team<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>save<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>save<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">BusinessException</span><span class="token punctuation">(</span><span class="token class-name">ErrorCode</span><span class="token punctuation">.</span><span class="token constant">SYSTEM_ERROR</span><span class="token punctuation">,</span> <span class="token string">"插入失败"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">}</span>
     <span class="token keyword">return</span> <span class="token class-name">ResultUtils</span><span class="token punctuation">.</span><span class="token function">success</span><span class="token punctuation">(</span>team<span class="token punctuation">.</span><span class="token function">getId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
+<span class="token punctuation">}</span>
 
 <span class="token annotation punctuation">@PostMapping</span><span class="token punctuation">(</span><span class="token string">"/delete"</span><span class="token punctuation">)</span>
-<span class="token keyword">public</span> <span class="token class-name">BaseResponse</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Boolean</span><span class="token punctuation">></span></span> <span class="token function">deleteTeam</span><span class="token punctuation">(</span><span class="token annotation punctuation">@RequestBody</span> <span class="token keyword">long</span> id<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>id <span class="token operator">&lt;=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+<span class="token keyword">public</span> <span class="token class-name">BaseResponse</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Boolean</span><span class="token punctuation">&gt;</span></span> <span class="token function">deleteTeam</span><span class="token punctuation">(</span><span class="token annotation punctuation">@RequestBody</span> <span class="token keyword">long</span> id<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>id <span class="token operator">&lt;=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">BusinessException</span><span class="token punctuation">(</span><span class="token class-name">ErrorCode</span><span class="token punctuation">.</span><span class="token constant">PARAMS_ERROR</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">}</span>
     <span class="token keyword">boolean</span> result <span class="token operator">=</span> teamService<span class="token punctuation">.</span><span class="token function">removeById</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>result<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>result<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">BusinessException</span><span class="token punctuation">(</span><span class="token class-name">ErrorCode</span><span class="token punctuation">.</span><span class="token constant">SYSTEM_ERROR</span><span class="token punctuation">,</span> <span class="token string">"删除失败"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">}</span>
     <span class="token keyword">return</span> <span class="token class-name">ResultUtils</span><span class="token punctuation">.</span><span class="token function">success</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
+<span class="token punctuation">}</span>
 
 <span class="token annotation punctuation">@PostMapping</span><span class="token punctuation">(</span><span class="token string">"/update"</span><span class="token punctuation">)</span>
-<span class="token keyword">public</span> <span class="token class-name">BaseResponse</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Boolean</span><span class="token punctuation">></span></span> <span class="token function">updateTeam</span><span class="token punctuation">(</span><span class="token annotation punctuation">@RequestBody</span> <span class="token class-name">Team</span> team<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>team <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+<span class="token keyword">public</span> <span class="token class-name">BaseResponse</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Boolean</span><span class="token punctuation">&gt;</span></span> <span class="token function">updateTeam</span><span class="token punctuation">(</span><span class="token annotation punctuation">@RequestBody</span> <span class="token class-name">Team</span> team<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>team <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">BusinessException</span><span class="token punctuation">(</span><span class="token class-name">ErrorCode</span><span class="token punctuation">.</span><span class="token constant">PARAMS_ERROR</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">}</span>
     <span class="token keyword">boolean</span> result <span class="token operator">=</span> teamService<span class="token punctuation">.</span><span class="token function">updateById</span><span class="token punctuation">(</span>team<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>result<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>result<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">BusinessException</span><span class="token punctuation">(</span><span class="token class-name">ErrorCode</span><span class="token punctuation">.</span><span class="token constant">SYSTEM_ERROR</span><span class="token punctuation">,</span> <span class="token string">"更新失败"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">}</span>
     <span class="token keyword">return</span> <span class="token class-name">ResultUtils</span><span class="token punctuation">.</span><span class="token function">success</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
+<span class="token punctuation">}</span>
 
 <span class="token annotation punctuation">@GetMapping</span><span class="token punctuation">(</span><span class="token string">"/get"</span><span class="token punctuation">)</span>
-<span class="token keyword">public</span> <span class="token class-name">BaseResponse</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Team</span><span class="token punctuation">></span></span> <span class="token function">getTeamById</span><span class="token punctuation">(</span><span class="token annotation punctuation">@RequestBody</span> <span class="token keyword">long</span> id<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>id <span class="token operator">&lt;=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+<span class="token keyword">public</span> <span class="token class-name">BaseResponse</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Team</span><span class="token punctuation">&gt;</span></span> <span class="token function">getTeamById</span><span class="token punctuation">(</span><span class="token annotation punctuation">@RequestBody</span> <span class="token keyword">long</span> id<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>id <span class="token operator">&lt;=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">BusinessException</span><span class="token punctuation">(</span><span class="token class-name">ErrorCode</span><span class="token punctuation">.</span><span class="token constant">PARAMS_ERROR</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">}</span>
     <span class="token class-name">Team</span> team <span class="token operator">=</span> teamService<span class="token punctuation">.</span><span class="token function">getById</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>team <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>team <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">BusinessException</span><span class="token punctuation">(</span><span class="token class-name">ErrorCode</span><span class="token punctuation">.</span><span class="token constant">NULL_ERROR</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">}</span>
     <span class="token keyword">return</span> <span class="token class-name">ResultUtils</span><span class="token punctuation">.</span><span class="token function">success</span><span class="token punctuation">(</span>team<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h4 id="这边我们需要新建请求参数包装类和包装类，原因如下："><a href="#这边我们需要新建请求参数包装类和包装类，原因如下：" class="headerlink" title="这边我们需要新建请求参数包装类和包装类，原因如下："></a>这边我们需要新建请求参数包装类和包装类，原因如下：</h4><h5 id="为什么需要请求参数包装类？-1"><a href="#为什么需要请求参数包装类？-1" class="headerlink" title="为什么需要请求参数包装类？"></a>为什么需要请求参数包装类？</h5><ol>
-<li>请求参数名称 &#x2F; 类型和实体类不一样</li>
+<li>请求参数名称 / 类型和实体类不一样</li>
 <li>有一些参数用不到，如果要自动生成接口文档，会增加理解成本</li>
 <li>对个实体类映射到同一个对象</li>
 </ol>
 <h5 id="为什么需要包装类？-1"><a href="#为什么需要包装类？-1" class="headerlink" title="为什么需要包装类？"></a>为什么需要包装类？</h5><p>可能有些字段需要隐藏，不能返回给前端 或者有些字段某些方法是不关心的</p>
 <p>在model包里新建一个dto包，写一个包装类TeamQuery</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Data</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">TeamQuery</span> <span class="token punctuation">&#123;</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">TeamQuery</span> <span class="token punctuation">{</span>
     <span class="token comment">/**
      * id
      */</span>
@@ -707,11 +729,11 @@ create table user_team
      * 0 - 公开，1 - 私有，2 - 加密
      */</span>
     <span class="token keyword">private</span> <span class="token class-name">Integer</span> status<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>在common包下新建分页请求参数包装类</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Data</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">PageRequest</span> <span class="token keyword">implements</span> <span class="token class-name">Serializable</span> <span class="token punctuation">&#123;</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">PageRequest</span> <span class="token keyword">implements</span> <span class="token class-name">Serializable</span> <span class="token punctuation">{</span>
 
     <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">long</span> serialVersionUID <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">4162304142710323660L</span><span class="token punctuation">;</span>
 
@@ -725,40 +747,40 @@ create table user_team
      */</span>
     <span class="token keyword">protected</span> <span class="token keyword">int</span> pageNum<span class="token punctuation">;</span>
 
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>同时在TeamQuery上继承这个分页请求，后面接口会用上 <img src="http://img-md-js.linjsblog.top/img/202301041836538.png" alt="image.png"></p>
 <h4 id="继续编写接口"><a href="#继续编写接口" class="headerlink" title="继续编写接口"></a>继续编写接口</h4><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@GetMapping</span><span class="token punctuation">(</span><span class="token string">"/list"</span><span class="token punctuation">)</span>
-    <span class="token keyword">public</span> <span class="token class-name">BaseResponse</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">List</span><span class="token punctuation">&lt;</span><span class="token class-name">Team</span><span class="token punctuation">></span><span class="token punctuation">></span></span> <span class="token function">listTeams</span><span class="token punctuation">(</span><span class="token class-name">TeamQuery</span> teamQuery<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>teamQuery <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token class-name">BaseResponse</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">List</span><span class="token punctuation">&lt;</span><span class="token class-name">Team</span><span class="token punctuation">&gt;</span><span class="token punctuation">&gt;</span></span> <span class="token function">listTeams</span><span class="token punctuation">(</span><span class="token class-name">TeamQuery</span> teamQuery<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>teamQuery <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
             <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">BusinessException</span><span class="token punctuation">(</span><span class="token class-name">ErrorCode</span><span class="token punctuation">.</span><span class="token constant">PARAMS_ERROR</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">}</span>
         <span class="token class-name">Team</span> team <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Team</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token class-name">BeanUtils</span><span class="token punctuation">.</span><span class="token function">copyProperties</span><span class="token punctuation">(</span>team<span class="token punctuation">,</span>teamQuery<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token class-name">QueryWrapper</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Team</span><span class="token punctuation">></span></span> queryWrapper <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">QueryWrapper</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span>team<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Team</span><span class="token punctuation">></span></span> teamList <span class="token operator">=</span> teamService<span class="token punctuation">.</span><span class="token function">list</span><span class="token punctuation">(</span>queryWrapper<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">QueryWrapper</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Team</span><span class="token punctuation">&gt;</span></span> queryWrapper <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">QueryWrapper</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span>team<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Team</span><span class="token punctuation">&gt;</span></span> teamList <span class="token operator">=</span> teamService<span class="token punctuation">.</span><span class="token function">list</span><span class="token punctuation">(</span>queryWrapper<span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token keyword">return</span> <span class="token class-name">ResultUtils</span><span class="token punctuation">.</span><span class="token function">success</span><span class="token punctuation">(</span>teamList<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">}</span>
 
     <span class="token annotation punctuation">@GetMapping</span><span class="token punctuation">(</span><span class="token string">"/list/page"</span><span class="token punctuation">)</span>
-    <span class="token keyword">public</span> <span class="token class-name">BaseResponse</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Page</span><span class="token punctuation">&lt;</span><span class="token class-name">Team</span><span class="token punctuation">></span><span class="token punctuation">></span></span> <span class="token function">listTeamsByPage</span><span class="token punctuation">(</span><span class="token class-name">TeamQuery</span> teamQuery<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>teamQuery <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token class-name">BaseResponse</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Page</span><span class="token punctuation">&lt;</span><span class="token class-name">Team</span><span class="token punctuation">&gt;</span><span class="token punctuation">&gt;</span></span> <span class="token function">listTeamsByPage</span><span class="token punctuation">(</span><span class="token class-name">TeamQuery</span> teamQuery<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>teamQuery <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
             <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">BusinessException</span><span class="token punctuation">(</span><span class="token class-name">ErrorCode</span><span class="token punctuation">.</span><span class="token constant">PARAMS_ERROR</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">}</span>
         <span class="token class-name">Team</span> team <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Team</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token class-name">BeanUtils</span><span class="token punctuation">.</span><span class="token function">copyProperties</span><span class="token punctuation">(</span>team<span class="token punctuation">,</span>teamQuery<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token class-name">Page</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Team</span><span class="token punctuation">></span></span> page <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Page</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span>teamQuery<span class="token punctuation">.</span><span class="token function">getPageNum</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>teamQuery<span class="token punctuation">.</span><span class="token function">getPageSize</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token class-name">QueryWrapper</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Team</span><span class="token punctuation">></span></span> queryWrapper <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">QueryWrapper</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span>team<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token class-name">Page</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Team</span><span class="token punctuation">></span></span> resultPage <span class="token operator">=</span> teamService<span class="token punctuation">.</span><span class="token function">page</span><span class="token punctuation">(</span>page<span class="token punctuation">,</span> queryWrapper<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">Page</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Team</span><span class="token punctuation">&gt;</span></span> page <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Page</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span>teamQuery<span class="token punctuation">.</span><span class="token function">getPageNum</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>teamQuery<span class="token punctuation">.</span><span class="token function">getPageSize</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">QueryWrapper</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Team</span><span class="token punctuation">&gt;</span></span> queryWrapper <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">QueryWrapper</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span>team<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">Page</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Team</span><span class="token punctuation">&gt;</span></span> resultPage <span class="token operator">=</span> teamService<span class="token punctuation">.</span><span class="token function">page</span><span class="token punctuation">(</span>page<span class="token punctuation">,</span> queryWrapper<span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token keyword">return</span> <span class="token class-name">ResultUtils</span><span class="token punctuation">.</span><span class="token function">success</span><span class="token punctuation">(</span>resultPage<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>踩坑处：注意Page导入的是mybatisplus，而不是springboot自带的那个</strong></p>
 <h4 id="利用knife4j测试接口"><a href="#利用knife4j测试接口" class="headerlink" title="利用knife4j测试接口"></a>利用knife4j测试接口</h4><p>首先插入10条数据 <img src="http://img-md-js.linjsblog.top/img/202301042316865.png" alt="image.png"> list展现队伍信息，确实是有10条 <img src="http://img-md-js.linjsblog.top/img/202301042316273.png" alt="image.png"> 分页查询：设置每页只显示两条 <img src="http://img-md-js.linjsblog.top/img/202301042316655.png" alt="image.png"> 分页查询：设置每页只显示两条（第二页） <img src="http://img-md-js.linjsblog.top/img/202301042316988.png" alt="image.png"> 删除队伍信息 <img src="http://img-md-js.linjsblog.top/img/202301042316901.png" alt="image.png"></p>
 <h3 id="3-细化接口（根据具体的需求）"><a href="#3-细化接口（根据具体的需求）" class="headerlink" title="3.细化接口（根据具体的需求）"></a>3.细化接口（根据具体的需求）</h3><h4 id="1-这边我们会运用到队伍的状态-即公开，私有等，所以我们提前写一个队伍状态枚举类"><a href="#1-这边我们会运用到队伍的状态-即公开，私有等，所以我们提前写一个队伍状态枚举类" class="headerlink" title="1.这边我们会运用到队伍的状态,即公开，私有等，所以我们提前写一个队伍状态枚举类"></a>1.这边我们会运用到队伍的状态,即公开，私有等，所以我们提前写一个队伍状态枚举类</h4><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * 队伍状态枚举
  */</span>
-<span class="token keyword">public</span> <span class="token keyword">enum</span> <span class="token class-name">TeamStatusEnum</span> <span class="token punctuation">&#123;</span>
+<span class="token keyword">public</span> <span class="token keyword">enum</span> <span class="token class-name">TeamStatusEnum</span> <span class="token punctuation">{</span>
     <span class="token function">PUBLIC</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token string">"公开"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     <span class="token function">PRIVATE</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token string">"私有"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     <span class="token function">SECRET</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token string">"加密"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -766,128 +788,128 @@ create table user_team
     <span class="token keyword">private</span> <span class="token keyword">int</span> value<span class="token punctuation">;</span>
     <span class="token keyword">private</span> <span class="token class-name">String</span> text<span class="token punctuation">;</span>
 
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token class-name">TeamStatusEnum</span> <span class="token function">getEnumByValue</span><span class="token punctuation">(</span><span class="token class-name">Integer</span> value<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>value <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token class-name">TeamStatusEnum</span> <span class="token function">getEnumByValue</span><span class="token punctuation">(</span><span class="token class-name">Integer</span> value<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>value <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
             <span class="token keyword">return</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">}</span>
         <span class="token class-name">TeamStatusEnum</span><span class="token punctuation">[</span><span class="token punctuation">]</span> values <span class="token operator">=</span> <span class="token class-name">TeamStatusEnum</span><span class="token punctuation">.</span><span class="token function">values</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">TeamStatusEnum</span> teamStatusEnum<span class="token operator">:</span> values<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>teamStatusEnum<span class="token punctuation">.</span><span class="token function">getValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">==</span>value<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">TeamStatusEnum</span> teamStatusEnum<span class="token operator">:</span> values<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>teamStatusEnum<span class="token punctuation">.</span><span class="token function">getValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">==</span>value<span class="token punctuation">)</span><span class="token punctuation">{</span>
                 <span class="token keyword">return</span> teamStatusEnum<span class="token punctuation">;</span>
-            <span class="token punctuation">&#125;</span>
-        <span class="token punctuation">&#125;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
         <span class="token keyword">return</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">}</span>
 
-    <span class="token class-name">TeamStatusEnum</span><span class="token punctuation">(</span><span class="token keyword">int</span> value<span class="token punctuation">,</span> <span class="token class-name">String</span> text<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token class-name">TeamStatusEnum</span><span class="token punctuation">(</span><span class="token keyword">int</span> value<span class="token punctuation">,</span> <span class="token class-name">String</span> text<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword">this</span><span class="token punctuation">.</span>value <span class="token operator">=</span> value<span class="token punctuation">;</span>
         <span class="token keyword">this</span><span class="token punctuation">.</span>text <span class="token operator">=</span> text<span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">}</span>
 
-    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">getValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">getValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword">return</span> value<span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">}</span>
 
-    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setValue</span><span class="token punctuation">(</span><span class="token keyword">int</span> value<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setValue</span><span class="token punctuation">(</span><span class="token keyword">int</span> value<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword">this</span><span class="token punctuation">.</span>value <span class="token operator">=</span> value<span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">}</span>
 
-    <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">getText</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">getText</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword">return</span> text<span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">}</span>
 
-    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setText</span><span class="token punctuation">(</span><span class="token class-name">String</span> text<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setText</span><span class="token punctuation">(</span><span class="token class-name">String</span> text<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword">this</span><span class="token punctuation">.</span>text <span class="token operator">=</span> text<span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h4 id="2-正式开始细化接口"><a href="#2-正式开始细化接口" class="headerlink" title="2.正式开始细化接口"></a>2.正式开始细化接口</h4><p>在TeamService里写入 long addTeam(Team team, User loginUser); 并在TeamServiceImpl实现这个方法 TeamServiceImpl里代码整理如下：</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Service</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">TeamServiceImpl</span> <span class="token keyword">extends</span> <span class="token class-name">ServiceImpl</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">TeamMapper</span><span class="token punctuation">,</span> <span class="token class-name">Team</span><span class="token punctuation">></span></span>
-        <span class="token keyword">implements</span> <span class="token class-name">TeamService</span> <span class="token punctuation">&#123;</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">TeamServiceImpl</span> <span class="token keyword">extends</span> <span class="token class-name">ServiceImpl</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">TeamMapper</span><span class="token punctuation">,</span> <span class="token class-name">Team</span><span class="token punctuation">&gt;</span></span>
+        <span class="token keyword">implements</span> <span class="token class-name">TeamService</span> <span class="token punctuation">{</span>
 
     <span class="token annotation punctuation">@Resource</span>
     <span class="token keyword">private</span> <span class="token class-name">UserTeamService</span> userTeamService<span class="token punctuation">;</span>
 
     <span class="token annotation punctuation">@Override</span>
     <span class="token annotation punctuation">@Transactional</span><span class="token punctuation">(</span>rollbackFor <span class="token operator">=</span> <span class="token class-name">Exception</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span>
-    <span class="token keyword">public</span> <span class="token keyword">long</span> <span class="token function">addTeam</span><span class="token punctuation">(</span><span class="token class-name">Team</span> team<span class="token punctuation">,</span> <span class="token class-name">User</span> loginUser<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">long</span> <span class="token function">addTeam</span><span class="token punctuation">(</span><span class="token class-name">Team</span> team<span class="token punctuation">,</span> <span class="token class-name">User</span> loginUser<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token comment">//1.请求参数是否为空</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>team <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>team <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
             <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">BusinessException</span><span class="token punctuation">(</span><span class="token class-name">ErrorCode</span><span class="token punctuation">.</span><span class="token constant">PARAMS_ERROR</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">}</span>
         <span class="token comment">//2.是否登录，未登录不允许创建</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>loginUser <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>loginUser <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
             <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">BusinessException</span><span class="token punctuation">(</span><span class="token class-name">ErrorCode</span><span class="token punctuation">.</span><span class="token constant">NO_AUTH</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">}</span>
         <span class="token keyword">final</span> <span class="token keyword">long</span> userId <span class="token operator">=</span> loginUser<span class="token punctuation">.</span><span class="token function">getId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token comment">//3.检验信息</span>
-        <span class="token comment">//(1).队伍人数>1且&lt;=20</span>
+        <span class="token comment">//(1).队伍人数&gt;1且&lt;=20</span>
         <span class="token keyword">int</span> maxNum <span class="token operator">=</span> <span class="token class-name">Optional</span><span class="token punctuation">.</span><span class="token function">ofNullable</span><span class="token punctuation">(</span>team<span class="token punctuation">.</span><span class="token function">getMaxNum</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">orElse</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//如果为空，直接赋值为0</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>maxNum <span class="token generics"><span class="token punctuation">&lt;</span> 1  maxNum <span class="token punctuation">></span></span> <span class="token number">20</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>maxNum <span class="token generics"><span class="token punctuation">&lt;</span> 1  maxNum <span class="token punctuation">&gt;</span></span> <span class="token number">20</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
             <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">BusinessException</span><span class="token punctuation">(</span><span class="token class-name">ErrorCode</span><span class="token punctuation">.</span><span class="token constant">PARAMS_ERROR</span><span class="token punctuation">,</span> <span class="token string">"队伍人数不满足要求"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">}</span>
         <span class="token comment">//(2).队伍标题 &lt;=20</span>
         <span class="token class-name">String</span> name <span class="token operator">=</span> team<span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token class-name">StringUtils</span><span class="token punctuation">.</span><span class="token function">isBlank</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span>  name<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">></span> <span class="token number">20</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token class-name">StringUtils</span><span class="token punctuation">.</span><span class="token function">isBlank</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span>  name<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&gt;</span> <span class="token number">20</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
             <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">BusinessException</span><span class="token punctuation">(</span><span class="token class-name">ErrorCode</span><span class="token punctuation">.</span><span class="token constant">PARAMS_ERROR</span><span class="token punctuation">,</span> <span class="token string">"队伍标题不满足要求"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">}</span>
         <span class="token comment">// 3. 描述&lt;= 512</span>
         <span class="token class-name">String</span> description <span class="token operator">=</span> team<span class="token punctuation">.</span><span class="token function">getDescription</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token class-name">StringUtils</span><span class="token punctuation">.</span><span class="token function">isNotBlank</span><span class="token punctuation">(</span>description<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> description<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">></span> <span class="token number">512</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token class-name">StringUtils</span><span class="token punctuation">.</span><span class="token function">isNotBlank</span><span class="token punctuation">(</span>description<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> description<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&gt;</span> <span class="token number">512</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
             <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">BusinessException</span><span class="token punctuation">(</span><span class="token class-name">ErrorCode</span><span class="token punctuation">.</span><span class="token constant">PARAMS_ERROR</span><span class="token punctuation">,</span> <span class="token string">"队伍描述过长"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">}</span>
         <span class="token comment">//4.status 是否公开，不传默认为0</span>
         <span class="token keyword">int</span> status <span class="token operator">=</span> <span class="token class-name">Optional</span><span class="token punctuation">.</span><span class="token function">ofNullable</span><span class="token punctuation">(</span>team<span class="token punctuation">.</span><span class="token function">getStatus</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">orElse</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token class-name">TeamStatusEnum</span> statusEnum <span class="token operator">=</span> <span class="token class-name">TeamStatusEnum</span><span class="token punctuation">.</span><span class="token function">getEnumByValue</span><span class="token punctuation">(</span>status<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>statusEnum <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>statusEnum <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
             <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">BusinessException</span><span class="token punctuation">(</span><span class="token class-name">ErrorCode</span><span class="token punctuation">.</span><span class="token constant">PARAMS_ERROR</span><span class="token punctuation">,</span> <span class="token string">"队伍状态不满足要求"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">}</span>
 
         <span class="token comment">//5.如果status是加密状态，一定要密码 且密码&lt;=32</span>
         <span class="token class-name">String</span> password <span class="token operator">=</span> team<span class="token punctuation">.</span><span class="token function">getPassword</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token class-name">TeamStatusEnum</span><span class="token punctuation">.</span><span class="token constant">SECRET</span><span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>statusEnum<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token class-name">StringUtils</span><span class="token punctuation">.</span><span class="token function">isBlank</span><span class="token punctuation">(</span>password<span class="token punctuation">)</span>  password<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">></span> <span class="token number">32</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token class-name">TeamStatusEnum</span><span class="token punctuation">.</span><span class="token constant">SECRET</span><span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>statusEnum<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token class-name">StringUtils</span><span class="token punctuation">.</span><span class="token function">isBlank</span><span class="token punctuation">(</span>password<span class="token punctuation">)</span>  password<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&gt;</span> <span class="token number">32</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
                 <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">BusinessException</span><span class="token punctuation">(</span><span class="token class-name">ErrorCode</span><span class="token punctuation">.</span><span class="token constant">PARAMS_ERROR</span><span class="token punctuation">,</span> <span class="token string">"密码设置不正确"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token punctuation">&#125;</span>
-        <span class="token punctuation">&#125;</span>
-        <span class="token comment">//6.超出时间 > 当前时间</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment">//6.超出时间 &gt; 当前时间</span>
         <span class="token class-name">Date</span> expireTime <span class="token operator">=</span> team<span class="token punctuation">.</span><span class="token function">getExpireTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">after</span><span class="token punctuation">(</span>expireTime<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-            <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">BusinessException</span><span class="token punctuation">(</span><span class="token class-name">ErrorCode</span><span class="token punctuation">.</span><span class="token constant">PARAMS_ERROR</span><span class="token punctuation">,</span> <span class="token string">"超出时间 > 当前时间"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">after</span><span class="token punctuation">(</span>expireTime<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">BusinessException</span><span class="token punctuation">(</span><span class="token class-name">ErrorCode</span><span class="token punctuation">.</span><span class="token constant">PARAMS_ERROR</span><span class="token punctuation">,</span> <span class="token string">"超出时间 &gt; 当前时间"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
 
         <span class="token comment">//7.校验用户最多创建5个队伍</span>
         <span class="token comment">//todo 有bug。可能同时创建100个队伍</span>
-        <span class="token class-name">QueryWrapper</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Team</span><span class="token punctuation">></span></span> queryWrapper <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">QueryWrapper</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">QueryWrapper</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Team</span><span class="token punctuation">&gt;</span></span> queryWrapper <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">QueryWrapper</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         queryWrapper<span class="token punctuation">.</span><span class="token function">eq</span><span class="token punctuation">(</span><span class="token string">"userId"</span><span class="token punctuation">,</span> userId<span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token keyword">long</span> hasTeamNum <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">count</span><span class="token punctuation">(</span>queryWrapper<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>hasTeamNum <span class="token operator">>=</span> <span class="token number">5</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>hasTeamNum <span class="token operator">&gt;=</span> <span class="token number">5</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
             <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">BusinessException</span><span class="token punctuation">(</span><span class="token class-name">ErrorCode</span><span class="token punctuation">.</span><span class="token constant">PARAMS_ERROR</span><span class="token punctuation">,</span> <span class="token string">"用户最多创建5个队伍"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">}</span>
         <span class="token comment">//8.插入队伍消息到队伍表</span>
         team<span class="token punctuation">.</span><span class="token function">setId</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         team<span class="token punctuation">.</span><span class="token function">setUserId</span><span class="token punctuation">(</span>userId<span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token keyword">boolean</span> result <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">save</span><span class="token punctuation">(</span>team<span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token class-name">Long</span> teamId <span class="token operator">=</span> team<span class="token punctuation">.</span><span class="token function">getId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>result  team <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>result  team <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
             <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">BusinessException</span><span class="token punctuation">(</span><span class="token class-name">ErrorCode</span><span class="token punctuation">.</span><span class="token constant">PARAMS_ERROR</span><span class="token punctuation">,</span> <span class="token string">"创建队伍失败"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-        <span class="token comment">//9. 插入用户 ==> 队伍关系 到关系表</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment">//9. 插入用户 ==&gt; 队伍关系 到关系表</span>
         <span class="token class-name">UserTeam</span> userTeam <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">UserTeam</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         userTeam<span class="token punctuation">.</span><span class="token function">setTeamId</span><span class="token punctuation">(</span>userId<span class="token punctuation">)</span><span class="token punctuation">;</span>
         userTeam<span class="token punctuation">.</span><span class="token function">setTeamId</span><span class="token punctuation">(</span>teamId<span class="token punctuation">)</span><span class="token punctuation">;</span>
         userTeam<span class="token punctuation">.</span><span class="token function">setJoinTime</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         result <span class="token operator">=</span> userTeamService<span class="token punctuation">.</span><span class="token function">save</span><span class="token punctuation">(</span>userTeam<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>result<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>result<span class="token punctuation">)</span> <span class="token punctuation">{</span>
             <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">BusinessException</span><span class="token punctuation">(</span><span class="token class-name">ErrorCode</span><span class="token punctuation">.</span><span class="token constant">PARAMS_ERROR</span><span class="token punctuation">,</span> <span class="token string">"创建队伍失败"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">}</span>
         <span class="token keyword">return</span> teamId<span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h4 id="3-优化完成控制层"><a href="#3-优化完成控制层" class="headerlink" title="3.优化完成控制层"></a>3.优化完成控制层</h4><p>这里我们因为完善了业务层，所以在controller层可以简便下代码，我们需要新建一个队伍添加请求封装类（便于前端知道该输入哪些参数） 新的请求封装类位于model包里的request包</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Data</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">TeamAddRequest</span> <span class="token punctuation">&#123;</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">TeamAddRequest</span> <span class="token punctuation">{</span>
 
     <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">long</span> serialVersionUID <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">4162304142710323660L</span><span class="token punctuation">;</span>
 
@@ -925,20 +947,20 @@ create table user_team
      * 密码
      */</span>
     <span class="token keyword">private</span> <span class="token class-name">String</span> password<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>修改的addTeam接口如下：</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@PostMapping</span><span class="token punctuation">(</span><span class="token string">"/add"</span><span class="token punctuation">)</span>
-<span class="token keyword">public</span> <span class="token class-name">BaseResponse</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Long</span><span class="token punctuation">></span></span> <span class="token function">addTeam</span><span class="token punctuation">(</span><span class="token annotation punctuation">@RequestBody</span> <span class="token class-name">TeamAddRequest</span> teamAddRequest<span class="token punctuation">,</span> <span class="token class-name">HttpServletRequest</span> request<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>teamAddRequest <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+<span class="token keyword">public</span> <span class="token class-name">BaseResponse</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Long</span><span class="token punctuation">&gt;</span></span> <span class="token function">addTeam</span><span class="token punctuation">(</span><span class="token annotation punctuation">@RequestBody</span> <span class="token class-name">TeamAddRequest</span> teamAddRequest<span class="token punctuation">,</span> <span class="token class-name">HttpServletRequest</span> request<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>teamAddRequest <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">BusinessException</span><span class="token punctuation">(</span><span class="token class-name">ErrorCode</span><span class="token punctuation">.</span><span class="token constant">PARAMS_ERROR</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">}</span>
     <span class="token class-name">User</span> loginUser <span class="token operator">=</span> userService<span class="token punctuation">.</span><span class="token function">getLoginUser</span><span class="token punctuation">(</span>request<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token class-name">Team</span> team <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Team</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token class-name">BeanUtils</span><span class="token punctuation">.</span><span class="token function">copyProperties</span><span class="token punctuation">(</span>teamAddRequest<span class="token punctuation">,</span>team<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">long</span> teamId <span class="token operator">=</span> teamService<span class="token punctuation">.</span><span class="token function">addTeam</span><span class="token punctuation">(</span>team<span class="token punctuation">,</span> loginUser<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span> <span class="token class-name">ResultUtils</span><span class="token punctuation">.</span><span class="token function">success</span><span class="token punctuation">(</span>teamId<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>注意 ：BeanUtils.copyProperties(teamAddRequest,team); 两个参数的位置原来写错了，现在需要调换</strong> <img src="http://img-md-js.linjsblog.top/img/202301042316497.png" alt="image.png"></p>
 <h4 id="4-测试"><a href="#4-测试" class="headerlink" title="4.测试"></a>4.测试</h4><p>启动项目，好像刚刚的请求参数封装类没起作用（这里跟鱼皮的一样），只能自己删除再输入 <img src="http://img-md-js.linjsblog.top/img/202301042315900.png" alt="image.png"> 成功的插入 ps：这里过期时间的获取可从控制台输入一下代码来实现，单单的输入年月日会导致数据库里的时间增加8小时（应该是时区的问题） <img src="http://img-md-js.linjsblog.top/img/202301042315956.png" alt="image.png"> 多次发送添加请求，当插入5次之后，再插入会报错 <img src="http://img-md-js.linjsblog.top/img/202301042316453.png" alt="image.png"> 测试事务是否起作用 注意要在方法上添加如下注解 <img src="http://img-md-js.linjsblog.top/img/202301042316616.png" alt="image.png"> 首先数据库的数据删至4条，别忘了把对应的用户表关系也删除，保持一致 修改TeamServiceImpl，目的是骗过编译器，直接创建队伍失败 <img src="http://img-md-js.linjsblog.top/img/202301042317090.png" alt="image.png"> 稍微修改下参数，发送，确实报用户关系失败 <img src="http://img-md-js.linjsblog.top/img/202301042317802.png" alt="image.png"> 数据库里也没用增加数据，证实了事务起作用，最后别忘了把刚刚增加的代码所删除（骗过编译器)</p>
@@ -1060,10 +1082,10 @@ create table user_team
                         <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
                     </ul>
                     <div id="alipay">
-                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                        <img src="/medias/reward/alipay1.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -1331,60 +1353,6 @@ create table user_team
 
     <footer class="page-footer bg-color">
     
-        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
-<style>
-    .aplayer .aplayer-lrc p {
-        
-        display: none;
-        
-        font-size: 12px;
-        font-weight: 700;
-        line-height: 16px !important;
-    }
-
-    .aplayer .aplayer-lrc p.aplayer-lrc-current {
-        
-        display: none;
-        
-        font-size: 15px;
-        color: #42b983;
-    }
-
-    
-    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
-        left: -66px !important;
-    }
-
-    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
-        left: 0px !important;
-    }
-
-    
-</style>
-<div class="">
-    
-    <div class="row">
-        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
-                   server="netease"
-                   type="playlist"
-                   id="503838841"
-                   fixed='true'
-                   autoplay='false'
-                   theme='#42b983'
-                   loop='all'
-                   order='random'
-                   preload='auto'
-                   volume='0.7'
-                   list-folded='true'
-        >
-        </meting-js>
-    </div>
-</div>
-
-<script src="/libs/aplayer/APlayer.min.js"></script>
-<script src="/libs/aplayer/Meting.min.js"></script>
-
-    
 
     <div class="container row center-align"
          style="margin-bottom: 0px !important;">
@@ -1423,13 +1391,13 @@ create table user_team
             
         </div>
         <div class="col s12 m4 l4 social-link social-statis">
-    <a href="https://github.com/blinkfox" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+    <a href="https://github.com/js6288" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
         <i class="fab fa-github"></i>
     </a>
 
 
 
-    <a href="mailto:1181062873@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:linjingshu6288@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fas fa-envelope-open"></i>
     </a>
 
@@ -1439,7 +1407,7 @@ create table user_team
 
 
 
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1181062873" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1181062873" data-position="top" data-delay="50">
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1279897306" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1279897306" data-position="top" data-delay="50">
         <i class="fab fa-qq"></i>
     </a>
 

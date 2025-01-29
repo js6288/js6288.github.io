@@ -59,7 +59,9 @@
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 7.3.0"></head>
+<meta name="generator" content="Hexo 7.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
 
 
 <body>
@@ -404,12 +406,32 @@
                 
 
                 
-
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>Update Date:&nbsp;&nbsp;
+                    2025-01-29
+                </div>
                 
 
                 
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
+                    650
+                </div>
+                
 
                 
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
+                    2 Min
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>Read Count:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
             </div>
         </div>
         <hr class="clearfix">
@@ -437,36 +459,36 @@
 </ol>
 <p>这个算法的时间复杂度为O(n)，其中n是数组的大小。由于是对原数组进行操作，空间复杂度为O(1)。</p>
 <p>代码：</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">void delSame(vector&lt;int&gt;&amp; arr)&#123;
-    if (arr.empty())&#123;
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">void delSame(vector&lt;int&gt;&amp; arr){
+    if (arr.empty()){
         return;
-    &#125;
+    }
     int i,j;
-    for (i &#x3D; 0,j &#x3D; 1; j &lt; arr.size(); j++) &#123;
-        if (arr[i]!&#x3D;arr[j])&#123;
+    for (i = 0,j = 1; j &lt; arr.size(); j++) {
+        if (arr[i]!=arr[j]){
             i++;
-            arr[i] &#x3D; arr[j];
-        &#125;
-    &#125;
-    arr.resize(i+1);&#x2F;&#x2F;当你希望删除容器末尾的元素时，可以使用 resize 来缩小容器的大小。
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+            arr[i] = arr[j];
+        }
+    }
+    arr.resize(i+1);//当你希望删除容器末尾的元素时，可以使用 resize 来缩小容器的大小。
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>拓展：将本题中的有序表改为无序表，你能想到时间复杂度位O(n)的方法吗？</p>
 <p>可以用散列表来实现</p>
 <p>在C++中，可以使用哈希表（例如 <code>std::unordered_set</code>）来跟踪已看到的元素</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">void delSameUnSorted(vector&lt;int&gt;&amp; arr)&#123;
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">void delSameUnSorted(vector&lt;int&gt;&amp; arr){
     std::unordered_set&lt;int&gt; seen;
-    size_t index &#x3D; 0;
+    size_t index = 0;
 
-    for (size_t i &#x3D; 0; i &lt; arr.size(); ++i) &#123;
-        if (seen.find(arr[i]) &#x3D;&#x3D; seen.end()) &#123;
+    for (size_t i = 0; i &lt; arr.size(); ++i) {
+        if (seen.find(arr[i]) == seen.end()) {
             seen.insert(arr[i]);
-            arr[index++] &#x3D; arr[i];
-        &#125;
-    &#125;
+            arr[index++] = arr[i];
+        }
+    }
 
-    arr.resize(index);  &#x2F;&#x2F; 调整数组大小，删除多余的元素
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    arr.resize(index);  // 调整数组大小，删除多余的元素
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <ol>
 <li><strong>初始化哈希表</strong>：<code>std::unordered_set&lt;int&gt; seen</code> 用于跟踪已遇到的元素。</li>
@@ -581,10 +603,10 @@
                         <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
                     </ul>
                     <div id="alipay">
-                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                        <img src="/medias/reward/alipay1.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -848,60 +870,6 @@
 
     <footer class="page-footer bg-color">
     
-        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
-<style>
-    .aplayer .aplayer-lrc p {
-        
-        display: none;
-        
-        font-size: 12px;
-        font-weight: 700;
-        line-height: 16px !important;
-    }
-
-    .aplayer .aplayer-lrc p.aplayer-lrc-current {
-        
-        display: none;
-        
-        font-size: 15px;
-        color: #42b983;
-    }
-
-    
-    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
-        left: -66px !important;
-    }
-
-    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
-        left: 0px !important;
-    }
-
-    
-</style>
-<div class="">
-    
-    <div class="row">
-        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
-                   server="netease"
-                   type="playlist"
-                   id="503838841"
-                   fixed='true'
-                   autoplay='false'
-                   theme='#42b983'
-                   loop='all'
-                   order='random'
-                   preload='auto'
-                   volume='0.7'
-                   list-folded='true'
-        >
-        </meting-js>
-    </div>
-</div>
-
-<script src="/libs/aplayer/APlayer.min.js"></script>
-<script src="/libs/aplayer/Meting.min.js"></script>
-
-    
 
     <div class="container row center-align"
          style="margin-bottom: 0px !important;">
@@ -940,13 +908,13 @@
             
         </div>
         <div class="col s12 m4 l4 social-link social-statis">
-    <a href="https://github.com/blinkfox" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+    <a href="https://github.com/js6288" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
         <i class="fab fa-github"></i>
     </a>
 
 
 
-    <a href="mailto:1181062873@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:linjingshu6288@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fas fa-envelope-open"></i>
     </a>
 
@@ -956,7 +924,7 @@
 
 
 
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1181062873" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1181062873" data-position="top" data-delay="50">
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1279897306" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1279897306" data-position="top" data-delay="50">
         <i class="fab fa-qq"></i>
     </a>
 

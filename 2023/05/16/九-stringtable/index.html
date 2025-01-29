@@ -56,7 +56,9 @@ String 实现了 Serializable 接口：表示字符串是支持序列化的。
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 7.3.0"></head>
+<meta name="generator" content="Hexo 7.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
 
 
 <body>
@@ -393,12 +395,32 @@ String 实现了 Serializable 接口：表示字符串是支持序列化的。
                 
 
                 
-
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>Update Date:&nbsp;&nbsp;
+                    2025-01-29
+                </div>
                 
 
                 
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
+                    5.6k
+                </div>
+                
 
                 
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
+                    24 Min
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>Read Count:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
             </div>
         </div>
         <hr class="clearfix">
@@ -422,7 +444,7 @@ String 实现了 Serializable 接口：表示字符串是支持序列化的。
 <h3 id="1-1-String-在-jdk9-中存储结构变更"><a href="#1-1-String-在-jdk9-中存储结构变更" class="headerlink" title="1.1. String 在 jdk9 中存储结构变更"></a>1.1. String 在 jdk9 中存储结构变更</h3><p>官网地址：<a target="_blank" rel="noopener" href="http://openjdk.java.net/jeps/254">JEP 254: Compact Strings (java.net)</a></p>
 <blockquote>
 <h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><p>The current implementation of the <code>String</code> class stores characters in a <code>char</code> array, using two bytes (sixteen bits) for each character. Data gathered from many different applications indicates that strings are a major component of heap usage and, moreover, that most <code>String</code> objects contain only Latin-1 characters. Such characters require only one byte of storage, hence half of the space in the internal <code>char</code> arrays of such <code>String</code> objects is going unused.</p>
-<h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>We propose to change the internal representation of the <code>String</code> class from a UTF-16 <code>char</code> array to a <code>byte</code> array plus an encoding-flag field. The new <code>String</code> class will store characters encoded either as ISO-8859-1&#x2F;Latin-1 (one byte per character), or as UTF-16 (two bytes per character), based upon the contents of the string. The encoding flag will indicate which encoding is used.</p>
+<h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>We propose to change the internal representation of the <code>String</code> class from a UTF-16 <code>char</code> array to a <code>byte</code> array plus an encoding-flag field. The new <code>String</code> class will store characters encoded either as ISO-8859-1/Latin-1 (one byte per character), or as UTF-16 (two bytes per character), based upon the contents of the string. The encoding flag will indicate which encoding is used.</p>
 <p>String-related classes such as <code>AbstractStringBuilder</code>, <code>StringBuilder</code>, and <code>StringBuffer</code> will be updated to use the same representation, as will the HotSpot VM’s intrinsic string operations.</p>
 <p>This is purely an implementation change, with no changes to existing public interfaces. There are no plans to add any new public APIs or other interfaces.</p>
 <p>The prototyping work done to date confirms the expected reduction in memory footprint, substantial reductions of GC activity, and minor performance regressions in some corner cases.</p>
@@ -430,19 +452,19 @@ String 实现了 Serializable 接口：表示字符串是支持序列化的。
 <p><strong>动机</strong></p>
 <p>目前 String 类的实现将字符存储在一个 char 数组中，每个字符使用两个字节（16 位）。从许多不同的应用中收集到的数据表明，字符串是堆使用的主要组成部分，此外，大多数字符串对象只包含 Latin-1 字符。这些字符只需要一个字节的存储空间，因此这些字符串对象的内部字符数组中有一半的空间没有被使用。</p>
 <p><strong>说明</strong></p>
-<p>我们建议将 String 类的内部表示方法从 UTF-16 字符数组改为字节数组加编码标志域。新的 String 类将根据字符串的内容，以 ISO-8859-1&#x2F;Latin-1（每个字符一个字节）或 UTF-16（每个字符两个字节）的方式存储字符编码。编码标志将表明使用的是哪种编码。</p>
+<p>我们建议将 String 类的内部表示方法从 UTF-16 字符数组改为字节数组加编码标志域。新的 String 类将根据字符串的内容，以 ISO-8859-1/Latin-1（每个字符一个字节）或 UTF-16（每个字符两个字节）的方式存储字符编码。编码标志将表明使用的是哪种编码。</p>
 <hr>
 <p>与字符串相关的类，如AbstractStringBuilder、StringBuilder 和 StringBuffer 将被更新以使用相同的表示方法，HotSpot VM 的内在字符串操作也是如此。</p>
 <p>这纯粹是一个实现上的变化，对现有的公共接口没有变化。目前没有计划增加任何新的公共 API 或其他接口。</p>
 <p>迄今为止所做的原型设计工作证实了内存占用的预期减少，GC 活动的大幅减少，以及在某些角落情况下的轻微性能倒退。</p>
 <p>结论：String 再也不用 char[] 来存储了，改成了 byte [] 加上编码标记，节约了一些空间</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">final</span> <span class="token keyword">class</span> <span class="token class-name">String</span> <span class="token keyword">implements</span> <span class="token class-name"><span class="token namespace">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span>Serializable</span><span class="token punctuation">,</span> <span class="token class-name">Comparable</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span><span class="token punctuation">,</span> <span class="token class-name">CharSequence</span> <span class="token punctuation">&#123;</span>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">final</span> <span class="token keyword">class</span> <span class="token class-name">String</span> <span class="token keyword">implements</span> <span class="token class-name"><span class="token namespace">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span>Serializable</span><span class="token punctuation">,</span> <span class="token class-name">Comparable</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">,</span> <span class="token class-name">CharSequence</span> <span class="token punctuation">{</span>
 
     <span class="token annotation punctuation">@Stable</span>
 
     <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> value<span class="token punctuation">;</span>
 
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="1-2-String-的基本特性"><a href="#1-2-String-的基本特性" class="headerlink" title="1.2. String 的基本特性"></a>1.2. String 的基本特性</h3><p>String：代表不可变的字符序列。简称：不可变性。</p>
 <ul>
@@ -494,7 +516,7 @@ String 实现了 Serializable 接口：表示字符串是支持序列化的。
 </blockquote>
 <p>简介：在 JDK 7 中，内部字符串不再分配在 Java 堆的永久代中，而是分配在 Java 堆的主要部分（称为年轻代和老年代），与应用程序创建的其他对象一起。这种变化将导致更多的数据驻留在主 Java 堆中，而更少的数据在永久代中，因此可能需要调整堆的大小。大多数应用程序将看到由于这一变化而导致的堆使用的相对较小的差异，但加载许多类或大量使用 String.intern()方法的大型应用程序将看到更明显的差异。</p>
 <h2 id="3-String-的基本操作"><a href="#3-String-的基本操作" class="headerlink" title="3. String 的基本操作"></a>3. String 的基本操作</h2><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Test</span>
-<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">test1</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">test1</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">print1n</span><span class="token punctuation">(</span><span class="token string">"1"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//2321</span>
     <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"2"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"3"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -515,21 +537,21 @@ String 实现了 Serializable 接口：表示字符串是支持序列化的。
     <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"8"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"9"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"10"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//2330</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>Java 语言规范里要求完全相同的字符串字面量，应该包含同样的 Unicode 字符序列（包含同一份码点序列的常量），并且必须是指向同一个 String 类实例。</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">Memory</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token comment">//line 1</span>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">Memory</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token comment">//line 1</span>
         <span class="token keyword">int</span> i<span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span><span class="token comment">//line 2</span>
         <span class="token class-name">Object</span> obj <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Object</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//line 3</span>
         <span class="token class-name">Memory</span> mem <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Memory</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//Line 4</span>
         mem<span class="token punctuation">.</span><span class="token function">foo</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//Line 5</span>
-    <span class="token punctuation">&#125;</span><span class="token comment">//Line 9</span>
-    <span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token class-name">Object</span> param<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token comment">//line 6</span>
+    <span class="token punctuation">}</span><span class="token comment">//Line 9</span>
+    <span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token class-name">Object</span> param<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token comment">//line 6</span>
         <span class="token class-name">String</span> str <span class="token operator">=</span> param<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//line 7</span>
         <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span><span class="token comment">//Line 8</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token punctuation">}</span><span class="token comment">//Line 8</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><img src="http://img-md-js.linjsblog.top/img/202305152131804.png" alt="image-20210511111607132"></p>
 <h2 id="4-字符串拼接操作"><a href="#4-字符串拼接操作" class="headerlink" title="4. 字符串拼接操作"></a>4. 字符串拼接操作</h2><ul>
@@ -539,7 +561,7 @@ String 实现了 Serializable 接口：表示字符串是支持序列化的。
 <li>如果拼接的结果调用 intern()方法，则主动将常量池中还没有的字符串对象放入池中，并返回此对象地址</li>
 </ul>
 <p><strong>举例 1</strong></p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">test1</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">test1</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token comment">// 都是常量，前端编译期会进行代码优化</span>
     <span class="token comment">// 通过idea直接看对应的反编译的class文件，会显示 String s1 = "abc"; 说明做了代码优化</span>
     <span class="token class-name">String</span> s1 <span class="token operator">=</span> <span class="token string">"a"</span> <span class="token operator">+</span> <span class="token string">"b"</span> <span class="token operator">+</span> <span class="token string">"c"</span><span class="token punctuation">;</span>
@@ -547,10 +569,10 @@ String 实现了 Serializable 接口：表示字符串是支持序列化的。
 
     <span class="token comment">// true，有上述可知，s1和s2实际上指向字符串常量池中的同一个值</span>
     <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>s1 <span class="token operator">==</span> s2<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>举例 2</strong></p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">test5</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">test5</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token class-name">String</span> s1 <span class="token operator">=</span> <span class="token string">"javaEE"</span><span class="token punctuation">;</span>
     <span class="token class-name">String</span> s2 <span class="token operator">=</span> <span class="token string">"hadoop"</span><span class="token punctuation">;</span>
 
@@ -572,10 +594,10 @@ String 实现了 Serializable 接口：表示字符串是支持序列化的。
 
     <span class="token class-name">String</span> s8 <span class="token operator">=</span> s6<span class="token punctuation">.</span><span class="token function">intern</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>s3 <span class="token operator">==</span> s8<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// true intern之后，s8和s3一样，指向字符串常量池中的"javaEEhadoop"</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>举例 3</strong></p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">test6</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">test6</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
     <span class="token class-name">String</span> s0 <span class="token operator">=</span> <span class="token string">"beijing"</span><span class="token punctuation">;</span>
     <span class="token class-name">String</span> s1 <span class="token operator">=</span> <span class="token string">"bei"</span><span class="token punctuation">;</span>
     <span class="token class-name">String</span> s2 <span class="token operator">=</span> <span class="token string">"jing"</span><span class="token punctuation">;</span>
@@ -586,52 +608,52 @@ String 实现了 Serializable 接口：表示字符串是支持序列化的。
     <span class="token keyword">final</span> <span class="token class-name">String</span> s5 <span class="token operator">=</span> <span class="token string">"xi"</span><span class="token punctuation">;</span>
     <span class="token class-name">String</span> s6 <span class="token operator">=</span> s4 <span class="token operator">+</span> s5<span class="token punctuation">;</span>
     <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>s6 <span class="token operator">==</span> s7<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// true s4和s5是final修饰的，编译期就能确定s6的值了</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <ul>
 <li>不使用 final 修饰，即为变量。如 s3 行的 s1 和 s2，会通过 new StringBuilder 进行拼接</li>
 <li>使用 final 修饰，即为常量。会在编译器进行代码优化。在实际开发中，能够使用 final 的，尽量使用</li>
 </ul>
 <p><strong>举例 4</strong></p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">test3</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">test3</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
     <span class="token class-name">String</span> s1 <span class="token operator">=</span> <span class="token string">"a"</span><span class="token punctuation">;</span>
     <span class="token class-name">String</span> s2 <span class="token operator">=</span> <span class="token string">"b"</span><span class="token punctuation">;</span>
     <span class="token class-name">String</span> s3 <span class="token operator">=</span> <span class="token string">"ab"</span><span class="token punctuation">;</span>
     <span class="token class-name">String</span> s4 <span class="token operator">=</span> s1 <span class="token operator">+</span> s2<span class="token punctuation">;</span>
     <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>s3<span class="token operator">==</span>s4<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>字节码</strong></p>
 <p>我们拿例 4 的字节码进行查看，可以发现<code>s1 + s2</code>实际上是 new 了一个 StringBuilder 对象，并使用了 append 方法将 s1 和 s2 添加进来，最后调用了 toString 方法赋给 s4</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"> <span class="token number">0</span> ldc <span class="token comment">#2 &lt;a></span>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"> <span class="token number">0</span> ldc <span class="token comment">#2 &lt;a&gt;</span>
  <span class="token number">2</span> astore_1
- <span class="token number">3</span> ldc <span class="token comment">#3 &lt;b></span>
+ <span class="token number">3</span> ldc <span class="token comment">#3 &lt;b&gt;</span>
  <span class="token number">5</span> astore_2
- <span class="token number">6</span> ldc <span class="token comment">#4 &lt;ab></span>
+ <span class="token number">6</span> ldc <span class="token comment">#4 &lt;ab&gt;</span>
  <span class="token number">8</span> astore_3
- <span class="token number">9</span> new <span class="token comment">#5 &lt;java/lang/StringBuilder></span>
+ <span class="token number">9</span> new <span class="token comment">#5 &lt;java/lang/StringBuilder&gt;</span>
 <span class="token number">12</span> dup
-<span class="token number">13</span> invokespecial <span class="token comment">#6 &lt;java/lang/StringBuilder.&lt;init>></span>
+<span class="token number">13</span> invokespecial <span class="token comment">#6 &lt;java/lang/StringBuilder.&lt;init&gt;&gt;</span>
 <span class="token number">16</span> aload_1
-<span class="token number">17</span> invokevirtual <span class="token comment">#7 &lt;java/lang/StringBuilder.append></span>
+<span class="token number">17</span> invokevirtual <span class="token comment">#7 &lt;java/lang/StringBuilder.append&gt;</span>
 <span class="token number">20</span> aload_2
-<span class="token number">21</span> invokevirtual <span class="token comment">#7 &lt;java/lang/StringBuilder.append></span>
-<span class="token number">24</span> invokevirtual <span class="token comment">#8 &lt;java/lang/StringBuilder.toString></span>
+<span class="token number">21</span> invokevirtual <span class="token comment">#7 &lt;java/lang/StringBuilder.append&gt;</span>
+<span class="token number">24</span> invokevirtual <span class="token comment">#8 &lt;java/lang/StringBuilder.toString&gt;</span>
 <span class="token number">27</span> astore <span class="token number">4</span>
-<span class="token number">29</span> getstatic <span class="token comment">#9 &lt;java/lang/System.out></span>
+<span class="token number">29</span> getstatic <span class="token comment">#9 &lt;java/lang/System.out&gt;</span>
 <span class="token number">32</span> aload_3
 <span class="token number">33</span> aload <span class="token number">4</span>
 <span class="token number">35</span> if_acmpne <span class="token number">42</span> <span class="token punctuation">(</span>+7<span class="token punctuation">)</span>
 <span class="token number">38</span> iconst_1
 <span class="token number">39</span> goto <span class="token number">43</span> <span class="token punctuation">(</span>+4<span class="token punctuation">)</span>
 <span class="token number">42</span> iconst_0
-<span class="token number">43</span> invokevirtual <span class="token comment">#10 &lt;java/io/PrintStream.println></span>
+<span class="token number">43</span> invokevirtual <span class="token comment">#10 &lt;java/io/PrintStream.println&gt;</span>
 <span class="token number">46</span> <span class="token builtin class-name">return</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>字符串拼接操作性能对比</strong></p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Test</span>
-<span class="token punctuation">&#123;</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword">int</span> times <span class="token operator">=</span> <span class="token number">50000</span><span class="token punctuation">;</span>
 
         <span class="token comment">// String</span>
@@ -651,29 +673,29 @@ String 实现了 Serializable 接口：表示字符串是支持序列化的。
         <span class="token function">testStringBuffer</span><span class="token punctuation">(</span>times<span class="token punctuation">)</span><span class="token punctuation">;</span>
         end <span class="token operator">=</span> <span class="token class-name">System</span><span class="token punctuation">.</span><span class="token function">currentTimeMillis</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"StringBuffer: "</span> <span class="token operator">+</span> <span class="token punctuation">(</span>end<span class="token operator">-</span>start<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"ms"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">}</span>
 
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">testString</span><span class="token punctuation">(</span><span class="token keyword">int</span> times<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">testString</span><span class="token punctuation">(</span><span class="token keyword">int</span> times<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token class-name">String</span> str <span class="token operator">=</span> <span class="token string">""</span><span class="token punctuation">;</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> times<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> times<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
             str <span class="token operator">+=</span> <span class="token string">"test"</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
 
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">testStringBuilder</span><span class="token punctuation">(</span><span class="token keyword">int</span> times<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">testStringBuilder</span><span class="token punctuation">(</span><span class="token keyword">int</span> times<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token class-name">StringBuilder</span> sb <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">StringBuilder</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> times<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> times<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
             sb<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"test"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
 
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">testStringBuffer</span><span class="token punctuation">(</span><span class="token keyword">int</span> times<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">testStringBuffer</span><span class="token punctuation">(</span><span class="token keyword">int</span> times<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token class-name">StringBuffer</span> sb <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">StringBuffer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> times<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> times<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
             sb<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"test"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 
 <span class="token comment">// 结果</span>
 <span class="token class-name">String</span><span class="token operator">:</span> <span class="token number">7963</span>ms
@@ -689,21 +711,21 @@ String 实现了 Serializable 接口：表示字符串是支持序列化的。
  * Constructs a string builder with no characters in it and an
  * initial capacity of 16 characters.
  */</span>
-<span class="token keyword">public</span> <span class="token class-name">StringBuilder</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+<span class="token keyword">public</span> <span class="token class-name">StringBuilder</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">super</span><span class="token punctuation">(</span><span class="token number">16</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
+<span class="token punctuation">}</span>
 
 <span class="token comment">/**
  * Constructs a string builder with no characters in it and an
- * initial capacity specified by the &#123;@code capacity&#125; argument.
+ * initial capacity specified by the {@code capacity} argument.
  *
  * @param      capacity  the initial capacity.
- * @throws     NegativeArraySizeException  if the &#123;@code capacity&#125;
- *               argument is less than &#123;@code 0&#125;.
+ * @throws     NegativeArraySizeException  if the {@code capacity}
+ *               argument is less than {@code 0}.
  */</span>
-<span class="token keyword">public</span> <span class="token class-name">StringBuilder</span><span class="token punctuation">(</span><span class="token keyword">int</span> capacity<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+<span class="token keyword">public</span> <span class="token class-name">StringBuilder</span><span class="token punctuation">(</span><span class="token keyword">int</span> capacity<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">super</span><span class="token punctuation">(</span>capacity<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h2 id="5-intern-的使用"><a href="#5-intern-的使用" class="headerlink" title="5. intern()的使用"></a>5. intern()的使用</h2><p>官方 API 文档中的解释</p>
 <blockquote>
@@ -720,7 +742,7 @@ String 实现了 Serializable 接口：表示字符串是支持序列化的。
 </ul>
 </blockquote>
 <p>当调用 intern 方法时，如果池子里已经包含了一个与这个 String 对象相等的字符串，正如 equals(Object)方法所确定的，那么池子里的字符串会被返回。否则，这个 String 对象被添加到池中，并返回这个 String 对象的引用。</p>
-<p>由此可见，对于任何两个字符串 s 和 t，当且仅当 s.equals(t)为真时，s.intern() &#x3D;&#x3D; t.intern()为真。</p>
+<p>由此可见，对于任何两个字符串 s 和 t，当且仅当 s.equals(t)为真时，s.intern() == t.intern()为真。</p>
 <p>所有字面字符串和以字符串为值的常量表达式都是 interned。</p>
 <p>返回一个与此字符串内容相同的字符串，但保证是来自一个唯一的字符串池。</p>
 <hr>
@@ -735,7 +757,7 @@ String 实现了 Serializable 接口：表示字符串是支持序列化的。
 
 <p>通俗点讲，Interned string 就是确保字符串在内存里只有一份拷贝，这样可以节约内存空间，加快字符串操作任务的执行速度。注意，这个值会被存放在字符串内部池（String Intern Pool）</p>
 <p><img src="http://img-md-js.linjsblog.top/img/202305152216979.png" alt="image-20210511145542579"></p>
-<h3 id="5-1-intern-的使用：JDK6-vs-JDK7-8"><a href="#5-1-intern-的使用：JDK6-vs-JDK7-8" class="headerlink" title="5.1. intern 的使用：JDK6 vs JDK7&#x2F;8"></a>5.1. intern 的使用：JDK6 vs JDK7&#x2F;8</h3><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
+<h3 id="5-1-intern-的使用：JDK6-vs-JDK7-8"><a href="#5-1-intern-的使用：JDK6-vs-JDK7-8" class="headerlink" title="5.1. intern 的使用：JDK6 vs JDK7/8"></a>5.1. intern 的使用：JDK6 vs JDK7/8</h3><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * ① String s = new String("1")
  * 创建了两个对象
  *      堆空间中一个new对象
@@ -782,27 +804,27 @@ s3<span class="token punctuation">.</span><span class="token function">intern</s
 <p><img src="http://img-md-js.linjsblog.top/img/202305152343690.png" alt="image-20200711151326909"></p>
 <p><strong>练习 2</strong> <img src="http://img-md-js.linjsblog.top/img/202305152343312.png" alt="image-20200711151433277"></p>
 <h3 id="5-2-intern-的效率测试：空间角度"><a href="#5-2-intern-的效率测试：空间角度" class="headerlink" title="5.2. intern 的效率测试：空间角度"></a>5.2. intern 的效率测试：空间角度</h3><p>我们通过测试一下，使用了 intern 和不使用的时候，其实相差还挺多的</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">StringIntern2</span> <span class="token punctuation">&#123;</span>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">StringIntern2</span> <span class="token punctuation">{</span>
     <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> <span class="token constant">MAX_COUNT</span> <span class="token operator">=</span> <span class="token number">1000</span> <span class="token operator">*</span> <span class="token number">10000</span><span class="token punctuation">;</span>
     <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> arr <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">[</span><span class="token constant">MAX_COUNT</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
 
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token class-name">Integer</span> <span class="token punctuation">[</span><span class="token punctuation">]</span> data <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Integer</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">&#123;</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">,</span><span class="token number">9</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token class-name">Integer</span> <span class="token punctuation">[</span><span class="token punctuation">]</span> data <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Integer</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">,</span><span class="token number">9</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
         <span class="token keyword">long</span> start <span class="token operator">=</span> <span class="token class-name">System</span><span class="token punctuation">.</span><span class="token function">currentTimeMillis</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token constant">MAX_COUNT</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token constant">MAX_COUNT</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
             <span class="token comment">// arr[i] = new String(String.valueOf(data[i%data.length]));</span>
             arr<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">.</span><span class="token function">valueOf</span><span class="token punctuation">(</span>data<span class="token punctuation">[</span>i<span class="token operator">%</span>data<span class="token punctuation">.</span>length<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">intern</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">}</span>
         <span class="token keyword">long</span> end <span class="token operator">=</span> <span class="token class-name">System</span><span class="token punctuation">.</span><span class="token function">currentTimeMillis</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"花费的时间为："</span> <span class="token operator">+</span> <span class="token punctuation">(</span>end <span class="token operator">-</span> start<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">try</span> <span class="token punctuation">{</span>
             <span class="token class-name">Thread</span><span class="token punctuation">.</span><span class="token function">sleep</span><span class="token punctuation">(</span><span class="token number">1000000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
             e<span class="token punctuation">.</span><span class="token function">getStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 
 <span class="token comment">// 运行结果</span>
 不使用intern：<span class="token number">7256</span>ms
@@ -810,22 +832,22 @@ s3<span class="token punctuation">.</span><span class="token function">intern</s
 
 <p><strong>结论</strong>：对于程序中大量使用存在的字符串时，尤其存在很多已经重复的字符串时，使用 intern()方法能够节省内存空间。</p>
 <p>大的网站平台，需要内存中存储大量的字符串。比如社交网站，很多人都存储：北京市、海淀区等信息。这时候如果字符串都调用 intern()方法，就会很明显降低内存的大小。</p>
-<h2 id="6-StringTable-的垃圾回收"><a href="#6-StringTable-的垃圾回收" class="headerlink" title="6. StringTable 的垃圾回收"></a>6. StringTable 的垃圾回收</h2><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">StringGCTest</span> <span class="token punctuation">&#123;</span>
+<h2 id="6-StringTable-的垃圾回收"><a href="#6-StringTable-的垃圾回收" class="headerlink" title="6. StringTable 的垃圾回收"></a>6. StringTable 的垃圾回收</h2><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">StringGCTest</span> <span class="token punctuation">{</span>
     <span class="token comment">/**
      * -Xms15m -Xmx15m -XX:+PrintGCDetails
      */</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
 
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">100000</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">100000</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
             <span class="token class-name">String</span><span class="token punctuation">.</span><span class="token function">valueOf</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">intern</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>运行结果</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token punctuation">[</span><span class="token constant">GC</span> <span class="token punctuation">(</span><span class="token class-name">Allocation</span> <span class="token class-name">Failure</span><span class="token punctuation">)</span> <span class="token punctuation">[</span><span class="token class-name">PSYoungGen</span><span class="token operator">:</span> <span class="token number">4096</span>K<span class="token operator">-></span><span class="token function">504K</span><span class="token punctuation">(</span><span class="token number">4608</span>K<span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token number">4096</span>K<span class="token operator">-></span><span class="token function">1689K</span><span class="token punctuation">(</span><span class="token number">15872</span>K<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">0.0581583</span> secs<span class="token punctuation">]</span> <span class="token punctuation">[</span><span class="token class-name">Times</span><span class="token operator">:</span> user<span class="token operator">=</span><span class="token number">0.00</span> sys<span class="token operator">=</span><span class="token number">0.00</span><span class="token punctuation">,</span> real<span class="token operator">=</span><span class="token number">0.06</span> secs<span class="token punctuation">]</span> 
-<span class="token punctuation">[</span><span class="token constant">GC</span> <span class="token punctuation">(</span><span class="token class-name">Allocation</span> <span class="token class-name">Failure</span><span class="token punctuation">)</span> <span class="token punctuation">[</span><span class="token class-name">PSYoungGen</span><span class="token operator">:</span> <span class="token number">4600</span>K<span class="token operator">-></span><span class="token function">504K</span><span class="token punctuation">(</span><span class="token number">4608</span>K<span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token number">5785</span>K<span class="token operator">-></span><span class="token function">2310K</span><span class="token punctuation">(</span><span class="token number">15872</span>K<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">0.0015621</span> secs<span class="token punctuation">]</span> <span class="token punctuation">[</span><span class="token class-name">Times</span><span class="token operator">:</span> user<span class="token operator">=</span><span class="token number">0.00</span> sys<span class="token operator">=</span><span class="token number">0.00</span><span class="token punctuation">,</span> real<span class="token operator">=</span><span class="token number">0.00</span> secs<span class="token punctuation">]</span> 
-<span class="token punctuation">[</span><span class="token constant">GC</span> <span class="token punctuation">(</span><span class="token class-name">Allocation</span> <span class="token class-name">Failure</span><span class="token punctuation">)</span> <span class="token punctuation">[</span><span class="token class-name">PSYoungGen</span><span class="token operator">:</span> <span class="token number">4600</span>K<span class="token operator">-></span><span class="token function">504K</span><span class="token punctuation">(</span><span class="token number">4608</span>K<span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token number">6406</span>K<span class="token operator">-></span><span class="token function">2350K</span><span class="token punctuation">(</span><span class="token number">15872</span>K<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">0.0034849</span> secs<span class="token punctuation">]</span> <span class="token punctuation">[</span><span class="token class-name">Times</span><span class="token operator">:</span> user<span class="token operator">=</span><span class="token number">0.00</span> sys<span class="token operator">=</span><span class="token number">0.00</span><span class="token punctuation">,</span> real<span class="token operator">=</span><span class="token number">0.00</span> secs<span class="token punctuation">]</span> 
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token punctuation">[</span><span class="token constant">GC</span> <span class="token punctuation">(</span><span class="token class-name">Allocation</span> <span class="token class-name">Failure</span><span class="token punctuation">)</span> <span class="token punctuation">[</span><span class="token class-name">PSYoungGen</span><span class="token operator">:</span> <span class="token number">4096</span>K<span class="token operator">-&gt;</span><span class="token function">504K</span><span class="token punctuation">(</span><span class="token number">4608</span>K<span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token number">4096</span>K<span class="token operator">-&gt;</span><span class="token function">1689K</span><span class="token punctuation">(</span><span class="token number">15872</span>K<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">0.0581583</span> secs<span class="token punctuation">]</span> <span class="token punctuation">[</span><span class="token class-name">Times</span><span class="token operator">:</span> user<span class="token operator">=</span><span class="token number">0.00</span> sys<span class="token operator">=</span><span class="token number">0.00</span><span class="token punctuation">,</span> real<span class="token operator">=</span><span class="token number">0.06</span> secs<span class="token punctuation">]</span> 
+<span class="token punctuation">[</span><span class="token constant">GC</span> <span class="token punctuation">(</span><span class="token class-name">Allocation</span> <span class="token class-name">Failure</span><span class="token punctuation">)</span> <span class="token punctuation">[</span><span class="token class-name">PSYoungGen</span><span class="token operator">:</span> <span class="token number">4600</span>K<span class="token operator">-&gt;</span><span class="token function">504K</span><span class="token punctuation">(</span><span class="token number">4608</span>K<span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token number">5785</span>K<span class="token operator">-&gt;</span><span class="token function">2310K</span><span class="token punctuation">(</span><span class="token number">15872</span>K<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">0.0015621</span> secs<span class="token punctuation">]</span> <span class="token punctuation">[</span><span class="token class-name">Times</span><span class="token operator">:</span> user<span class="token operator">=</span><span class="token number">0.00</span> sys<span class="token operator">=</span><span class="token number">0.00</span><span class="token punctuation">,</span> real<span class="token operator">=</span><span class="token number">0.00</span> secs<span class="token punctuation">]</span> 
+<span class="token punctuation">[</span><span class="token constant">GC</span> <span class="token punctuation">(</span><span class="token class-name">Allocation</span> <span class="token class-name">Failure</span><span class="token punctuation">)</span> <span class="token punctuation">[</span><span class="token class-name">PSYoungGen</span><span class="token operator">:</span> <span class="token number">4600</span>K<span class="token operator">-&gt;</span><span class="token function">504K</span><span class="token punctuation">(</span><span class="token number">4608</span>K<span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token number">6406</span>K<span class="token operator">-&gt;</span><span class="token function">2350K</span><span class="token punctuation">(</span><span class="token number">15872</span>K<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">0.0034849</span> secs<span class="token punctuation">]</span> <span class="token punctuation">[</span><span class="token class-name">Times</span><span class="token operator">:</span> user<span class="token operator">=</span><span class="token number">0.00</span> sys<span class="token operator">=</span><span class="token number">0.00</span><span class="token punctuation">,</span> real<span class="token operator">=</span><span class="token number">0.00</span> secs<span class="token punctuation">]</span> 
 <span class="token class-name">Heap</span>
  <span class="token class-name">PSYoungGen</span>      total <span class="token number">4608</span>K<span class="token punctuation">,</span> used <span class="token number">1919</span>K <span class="token punctuation">[</span><span class="token number">0x00000000ffb00000</span><span class="token punctuation">,</span> <span class="token number">0x0000000100000000</span><span class="token punctuation">,</span> <span class="token number">0x0000000100000000</span><span class="token punctuation">)</span>
   eden space <span class="token number">4096</span>K<span class="token punctuation">,</span> <span class="token number">34</span><span class="token operator">%</span> used <span class="token punctuation">[</span><span class="token number">0x00000000ffb00000</span><span class="token punctuation">,</span><span class="token number">0x00000000ffc61d30</span><span class="token punctuation">,</span><span class="token number">0x00000000fff00000</span><span class="token punctuation">)</span>
@@ -840,7 +862,7 @@ s3<span class="token punctuation">.</span><span class="token function">intern</s
 <blockquote>
 <h2 id="Motivation-1"><a href="#Motivation-1" class="headerlink" title="Motivation"></a>Motivation</h2><p>Many large-scale Java applications are currently bottlenecked on memory. Measurements have shown that roughly 25% of the Java heap live data set in these types of applications is consumed by <code>String</code> objects. Further, roughly half of those <code>String</code> objects are duplicates, where duplicates means <code>string1.equals(string2)</code> is true. Having duplicate <code>String</code> objects on the heap is, essentially, just a waste of memory. This project will implement automatic and continuous <code>String</code> deduplication in the G1 garbage collector to avoid wasting memory and reduce the memory footprint.</p>
 </blockquote>
-<p>目前，许多大规模的 Java 应用程序在内存上遇到了瓶颈。测量表明，在这些类型的应用程序中，大约 25%的 Java 堆实时数据集被<code>String&#39;对象所消耗。此外，这些 &quot;String &quot;对象中大约有一半是重复的，其中重复意味着 &quot;string1.equals(string2) &quot;是真的。在堆上有重复的</code>String’对象，从本质上讲，只是一种内存的浪费。这个项目将在 G1 垃圾收集器中实现自动和持续的`String’重复数据删除，以避免浪费内存，减少内存占用。</p>
+<p>目前，许多大规模的 Java 应用程序在内存上遇到了瓶颈。测量表明，在这些类型的应用程序中，大约 25%的 Java 堆实时数据集被<code>String'对象所消耗。此外，这些 "String "对象中大约有一半是重复的，其中重复意味着 "string1.equals(string2) "是真的。在堆上有重复的</code>String’对象，从本质上讲，只是一种内存的浪费。这个项目将在 G1 垃圾收集器中实现自动和持续的`String’重复数据删除，以避免浪费内存，减少内存占用。</p>
 <hr>
 <p>注意这里说的重复，指的是在堆中的数据，而不是常量池中的，因为常量池中的本身就不会重复</p>
 <p>背景：对许多 Java 应用（有大的也有小的）做的测试得出以下结果：</p>
@@ -957,10 +979,10 @@ s3<span class="token punctuation">.</span><span class="token function">intern</s
                         <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
                     </ul>
                     <div id="alipay">
-                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                        <img src="/medias/reward/alipay1.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -1200,60 +1222,6 @@ s3<span class="token punctuation">.</span><span class="token function">intern</s
 
     <footer class="page-footer bg-color">
     
-        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
-<style>
-    .aplayer .aplayer-lrc p {
-        
-        display: none;
-        
-        font-size: 12px;
-        font-weight: 700;
-        line-height: 16px !important;
-    }
-
-    .aplayer .aplayer-lrc p.aplayer-lrc-current {
-        
-        display: none;
-        
-        font-size: 15px;
-        color: #42b983;
-    }
-
-    
-    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
-        left: -66px !important;
-    }
-
-    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
-        left: 0px !important;
-    }
-
-    
-</style>
-<div class="">
-    
-    <div class="row">
-        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
-                   server="netease"
-                   type="playlist"
-                   id="503838841"
-                   fixed='true'
-                   autoplay='false'
-                   theme='#42b983'
-                   loop='all'
-                   order='random'
-                   preload='auto'
-                   volume='0.7'
-                   list-folded='true'
-        >
-        </meting-js>
-    </div>
-</div>
-
-<script src="/libs/aplayer/APlayer.min.js"></script>
-<script src="/libs/aplayer/Meting.min.js"></script>
-
-    
 
     <div class="container row center-align"
          style="margin-bottom: 0px !important;">
@@ -1292,13 +1260,13 @@ s3<span class="token punctuation">.</span><span class="token function">intern</s
             
         </div>
         <div class="col s12 m4 l4 social-link social-statis">
-    <a href="https://github.com/blinkfox" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+    <a href="https://github.com/js6288" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
         <i class="fab fa-github"></i>
     </a>
 
 
 
-    <a href="mailto:1181062873@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:linjingshu6288@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fas fa-envelope-open"></i>
     </a>
 
@@ -1308,7 +1276,7 @@ s3<span class="token punctuation">.</span><span class="token function">intern</s
 
 
 
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1181062873" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1181062873" data-position="top" data-delay="50">
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1279897306" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1279897306" data-position="top" data-delay="50">
         <i class="fab fa-qq"></i>
     </a>
 

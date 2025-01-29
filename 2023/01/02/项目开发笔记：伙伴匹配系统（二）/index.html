@@ -13,7 +13,7 @@
 存量用户信息导入及同步（爬虫）
 
 Java 8
-stream &amp;#x2F;">
+stream / para">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -60,7 +60,9 @@ stream &amp;#x2F;">
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 7.3.0"></head>
+<meta name="generator" content="Hexo 7.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
 
 
 <body>
@@ -401,12 +403,32 @@ stream &amp;#x2F;">
                 
 
                 
-
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>Update Date:&nbsp;&nbsp;
+                    2025-01-29
+                </div>
                 
 
                 
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
+                    3.1k
+                </div>
+                
 
                 
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
+                    14 Min
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>Read Count:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
             </div>
         </div>
         <hr class="clearfix">
@@ -428,10 +450,10 @@ stream &amp;#x2F;">
 <li>存量用户信息导入及同步（爬虫）</li>
 </ol>
 <h3 id="Java-8"><a href="#Java-8" class="headerlink" title="Java 8"></a>Java 8</h3><ol>
-<li>stream &#x2F; parallelStream 流失处理</li>
+<li>stream / parallelStream 流失处理</li>
 <li>Optional 可选类</li>
 </ol>
-<h3 id="前端整合路由"><a href="#前端整合路由" class="headerlink" title="前端整合路由"></a>前端整合路由</h3><p>Vue-Router：<a target="_blank" rel="noopener" href="https://router.vuejs.org/zh/guide/#html%EF%BC%8C%E7%9B%B4%E6%8E%A5%E7%9C%8B%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3%E5%BC%95%E5%85%A5">https://router.vuejs.org/zh/guide/#html，直接看官方文档引入</a> Vue-Router 其实就是帮助你根据不同的 url 来展示不同的页面（组件），不用自己写 if &#x2F; else 路由配置影响整个项目，所以建议单独用 config 目录、单独的配置文件去集中定义和管理。 有些组件库可能自带了和 Vue-Router 的整合，所以尽量先看组件文档、省去自己写的时间。</p>
+<h3 id="前端整合路由"><a href="#前端整合路由" class="headerlink" title="前端整合路由"></a>前端整合路由</h3><p>Vue-Router：<a target="_blank" rel="noopener" href="https://router.vuejs.org/zh/guide/#html%EF%BC%8C%E7%9B%B4%E6%8E%A5%E7%9C%8B%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3%E5%BC%95%E5%85%A5">https://router.vuejs.org/zh/guide/#html，直接看官方文档引入</a> Vue-Router 其实就是帮助你根据不同的 url 来展示不同的页面（组件），不用自己写 if / else 路由配置影响整个项目，所以建议单独用 config 目录、单独的配置文件去集中定义和管理。 有些组件库可能自带了和 Vue-Router 的整合，所以尽量先看组件文档、省去自己写的时间。</p>
 <h2 id="项目开始"><a href="#项目开始" class="headerlink" title="项目开始"></a>项目开始</h2><h3 id="一、上次的标签接口调试"><a href="#一、上次的标签接口调试" class="headerlink" title="一、上次的标签接口调试"></a>一、上次的标签接口调试</h3><h4 id="1-更改代码"><a href="#1-更改代码" class="headerlink" title="1.更改代码"></a>1.更改代码</h4><p>上次的searchUsersByTags方法里写了两种查询方式，这次就把它们分开，写成两个方法 整理如下</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * 根据标签搜索用户(内存过滤)
@@ -440,28 +462,28 @@ stream &amp;#x2F;">
  * @return
  */</span>
 <span class="token annotation punctuation">@Override</span>
-<span class="token keyword">public</span> <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">></span></span> <span class="token function">searchUsersByTags</span><span class="token punctuation">(</span><span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span> tagNameList<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token class-name">CollectionUtils</span><span class="token punctuation">.</span><span class="token function">isEmpty</span><span class="token punctuation">(</span>tagNameList<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+<span class="token keyword">public</span> <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">&gt;</span></span> <span class="token function">searchUsersByTags</span><span class="token punctuation">(</span><span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">&gt;</span></span> tagNameList<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token class-name">CollectionUtils</span><span class="token punctuation">.</span><span class="token function">isEmpty</span><span class="token punctuation">(</span>tagNameList<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">BusinessException</span><span class="token punctuation">(</span><span class="token class-name">ErrorCode</span><span class="token punctuation">.</span><span class="token constant">PARAMS_ERROR</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">}</span>
     <span class="token comment">//1.先查询所有用户</span>
-    <span class="token class-name">QueryWrapper</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">></span></span> queryWrapper <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">QueryWrapper</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">></span></span> userList <span class="token operator">=</span> userMapper<span class="token punctuation">.</span><span class="token function">selectList</span><span class="token punctuation">(</span>queryWrapper<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token class-name">QueryWrapper</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">&gt;</span></span> queryWrapper <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">QueryWrapper</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">&gt;</span></span> userList <span class="token operator">=</span> userMapper<span class="token punctuation">.</span><span class="token function">selectList</span><span class="token punctuation">(</span>queryWrapper<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token class-name">Gson</span> gson <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Gson</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token comment">//2.在内存中判断是否包含要求的标签</span>
-    <span class="token keyword">return</span> userList<span class="token punctuation">.</span><span class="token function">stream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span>user <span class="token operator">-></span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> userList<span class="token punctuation">.</span><span class="token function">stream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span>user <span class="token operator">-&gt;</span> <span class="token punctuation">{</span>
         <span class="token class-name">String</span> tagsStr <span class="token operator">=</span> user<span class="token punctuation">.</span><span class="token function">getTags</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token class-name">Set</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span> tempTagNameSet <span class="token operator">=</span> gson<span class="token punctuation">.</span><span class="token function">fromJson</span><span class="token punctuation">(</span>tagsStr<span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">TypeToken</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Set</span><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token punctuation">&#125;</span><span class="token punctuation">.</span><span class="token function">getType</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        tempTagNameSet <span class="token operator">=</span> <span class="token class-name">Optional</span><span class="token punctuation">.</span><span class="token function">ofNullable</span><span class="token punctuation">(</span>tempTagNameSet<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">orElse</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">HashSet</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">String</span> tagName <span class="token operator">:</span> tagNameList<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>tempTagNameSet<span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span>tagName<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">Set</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">&gt;</span></span> tempTagNameSet <span class="token operator">=</span> gson<span class="token punctuation">.</span><span class="token function">fromJson</span><span class="token punctuation">(</span>tagsStr<span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">TypeToken</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Set</span><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">&gt;</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token punctuation">}</span><span class="token punctuation">.</span><span class="token function">getType</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        tempTagNameSet <span class="token operator">=</span> <span class="token class-name">Optional</span><span class="token punctuation">.</span><span class="token function">ofNullable</span><span class="token punctuation">(</span>tempTagNameSet<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">orElse</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">HashSet</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">String</span> tagName <span class="token operator">:</span> tagNameList<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>tempTagNameSet<span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span>tagName<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
                 <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
-            <span class="token punctuation">&#125;</span>
-        <span class="token punctuation">&#125;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
         <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token operator">::</span><span class="token function">getSafetyUser</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">collect</span><span class="token punctuation">(</span><span class="token class-name">Collectors</span><span class="token punctuation">.</span><span class="token function">toList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token operator">::</span><span class="token function">getSafetyUser</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">collect</span><span class="token punctuation">(</span><span class="token class-name">Collectors</span><span class="token punctuation">.</span><span class="token function">toList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
     * 根据标签搜索用户(SQL查询)
@@ -469,19 +491,19 @@ stream &amp;#x2F;">
     * @return
     */</span>
    <span class="token annotation punctuation">@Deprecated</span>
-   <span class="token keyword">private</span> <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">></span></span> <span class="token function">searchUsersByTagsBySQL</span><span class="token punctuation">(</span><span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span> tagNameList<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-       <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token class-name">CollectionUtils</span><span class="token punctuation">.</span><span class="token function">isEmpty</span><span class="token punctuation">(</span>tagNameList<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+   <span class="token keyword">private</span> <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">&gt;</span></span> <span class="token function">searchUsersByTagsBySQL</span><span class="token punctuation">(</span><span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">&gt;</span></span> tagNameList<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+       <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token class-name">CollectionUtils</span><span class="token punctuation">.</span><span class="token function">isEmpty</span><span class="token punctuation">(</span>tagNameList<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
            <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">BusinessException</span><span class="token punctuation">(</span><span class="token class-name">ErrorCode</span><span class="token punctuation">.</span><span class="token constant">PARAMS_ERROR</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-       <span class="token punctuation">&#125;</span>
-       <span class="token class-name">QueryWrapper</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">></span></span> queryWrapper <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">QueryWrapper</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token punctuation">}</span>
+       <span class="token class-name">QueryWrapper</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">&gt;</span></span> queryWrapper <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">QueryWrapper</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
        <span class="token comment">//拼接 and 查询</span>
        <span class="token comment">//like '%Java%' and like '%Python%'</span>
-       <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">String</span> tagName <span class="token operator">:</span> tagNameList<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+       <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">String</span> tagName <span class="token operator">:</span> tagNameList<span class="token punctuation">)</span> <span class="token punctuation">{</span>
            queryWrapper <span class="token operator">=</span> queryWrapper<span class="token punctuation">.</span><span class="token function">like</span><span class="token punctuation">(</span><span class="token string">"tags"</span><span class="token punctuation">,</span> tagName<span class="token punctuation">)</span><span class="token punctuation">;</span>
-       <span class="token punctuation">&#125;</span>
-       <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">></span></span> userList <span class="token operator">=</span> userMapper<span class="token punctuation">.</span><span class="token function">selectList</span><span class="token punctuation">(</span>queryWrapper<span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token punctuation">}</span>
+       <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">&gt;</span></span> userList <span class="token operator">=</span> userMapper<span class="token punctuation">.</span><span class="token function">selectList</span><span class="token punctuation">(</span>queryWrapper<span class="token punctuation">)</span><span class="token punctuation">;</span>
        <span class="token keyword">return</span> userList<span class="token punctuation">.</span><span class="token function">stream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token operator">::</span><span class="token function">getSafetyUser</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">collect</span><span class="token punctuation">(</span><span class="token class-name">Collectors</span><span class="token punctuation">.</span><span class="token function">toList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-   <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+   <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h4 id="2-测试接口"><a href="#2-测试接口" class="headerlink" title="2.测试接口"></a>2.测试接口</h4><p>按照上次的测试方法，打断点debug 结果如下，成功查询到 <img src="http://img-md-js.linjsblog.top/img/202301021951440.png" alt="image.png"></p>
 <h3 id="二、前端整合路由"><a href="#二、前端整合路由" class="headerlink" title="二、前端整合路由"></a>二、前端整合路由</h3><p>vue 路由组件库地址：</p>
@@ -489,258 +511,258 @@ stream &amp;#x2F;">
 
 <p>我这边没有权限报错，如果有，就删掉node_modules和yarn-error.log。再次输入安装命令，成功安装 package里的依赖要存在vue-router <img src="http://img-md-js.linjsblog.top/img/202301021952257.png" alt="image.png"></p>
 <h4 id="2-路由引入"><a href="#2-路由引入" class="headerlink" title="2.路由引入"></a>2.路由引入</h4><p>看文档，按着步骤引用</p>
-<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F; 1. 定义路由组件.
-&#x2F;&#x2F; 也可以从其他文件导入
-const Home &#x3D; &#123; template: &#39;&lt;div&gt;Home&lt;&#x2F;div&gt;&#39; &#125;
-const About &#x3D; &#123; template: &#39;&lt;div&gt;About&lt;&#x2F;div&gt;&#39; &#125;
+<pre class="line-numbers language-none"><code class="language-none">// 1. 定义路由组件.
+// 也可以从其他文件导入
+const Home = { template: '&lt;div&gt;Home&lt;/div&gt;' }
+const About = { template: '&lt;div&gt;About&lt;/div&gt;' }
 
-&#x2F;&#x2F; 2. 定义一些路由
-&#x2F;&#x2F; 每个路由都需要映射到一个组件。
-&#x2F;&#x2F; 我们后面再讨论嵌套路由。
-const routes &#x3D; [
-  &#123; path: &#39;&#x2F;&#39;, component: Home &#125;,
-  &#123; path: &#39;&#x2F;about&#39;, component: About &#125;,
+// 2. 定义一些路由
+// 每个路由都需要映射到一个组件。
+// 我们后面再讨论嵌套路由。
+const routes = [
+  { path: '/', component: Home },
+  { path: '/about', component: About },
 ]
 
-&#x2F;&#x2F; 3. 创建路由实例并传递 &#96;routes&#96; 配置
-&#x2F;&#x2F; 你可以在这里输入更多的配置，但我们在这里
-&#x2F;&#x2F; 暂时保持简单
-const router &#x3D; VueRouter.createRouter(&#123;
-  &#x2F;&#x2F; 4. 内部提供了 history 模式的实现。为了简单起见，我们在这里使用 hash 模式。
+// 3. 创建路由实例并传递 `routes` 配置
+// 你可以在这里输入更多的配置，但我们在这里
+// 暂时保持简单
+const router = VueRouter.createRouter({
+  // 4. 内部提供了 history 模式的实现。为了简单起见，我们在这里使用 hash 模式。
   history: VueRouter.createWebHashHistory(),
-  routes, &#x2F;&#x2F; &#96;routes: routes&#96; 的缩写
-&#125;)
+  routes, // `routes: routes` 的缩写
+})
 
-&#x2F;&#x2F; 5. 创建并挂载根实例
-const app &#x3D; Vue.createApp(&#123;&#125;)
-&#x2F;&#x2F;确保 _use_ 路由实例使
-&#x2F;&#x2F;整个应用支持路由。
+// 5. 创建并挂载根实例
+const app = Vue.createApp({})
+//确保 _use_ 路由实例使
+//整个应用支持路由。
 app.use(router)
 
-app.mount(&#39;#app&#39;)
+app.mount('#app')
 
-&#x2F;&#x2F; 现在，应用已经启动了！<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+// 现在，应用已经启动了！<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>复制到main.ts中并修改，整理如下</p>
-<pre class="line-numbers language-none"><code class="language-none">import &#123; createApp &#125; from &#39;vue&#39;
-import App from &#39;.&#x2F;App.vue&#39;
-import &#123;Button, Icon, NavBar, Tabbar, TabbarItem&#125; from &#39;vant&#39;;
-import Index from &quot;.&#x2F;pages&#x2F;Index.vue&quot;;
-import Team from &quot;.&#x2F;pages&#x2F;Team.vue&quot;;
-import * as VueRouter from &#39;vue-router&#39;;
+<pre class="line-numbers language-none"><code class="language-none">import { createApp } from 'vue'
+import App from './App.vue'
+import {Button, Icon, NavBar, Tabbar, TabbarItem} from 'vant';
+import Index from "./pages/Index.vue";
+import Team from "./pages/Team.vue";
+import * as VueRouter from 'vue-router';
 
-const app &#x3D; createApp(App);
+const app = createApp(App);
 app.use(Button);
 app.use(NavBar);
 app.use(Icon);
 app.use(Tabbar);
 app.use(TabbarItem);
 
-&#x2F;&#x2F;定义一些路由
-const routes &#x3D; [
-    &#123; path: &#39;&#x2F;&#39;, component: Index &#125;,
-    &#123; path: &#39;&#x2F;about&#39;, component: Team &#125;,
+//定义一些路由
+const routes = [
+    { path: '/', component: Index },
+    { path: '/about', component: Team },
 ]
 
-const router &#x3D; VueRouter.createRouter(&#123;
-    &#x2F;&#x2F; 4. 内部提供了 history 模式的实现。为了简单起见，我们在这里使用 hash 模式。
+const router = VueRouter.createRouter({
+    // 4. 内部提供了 history 模式的实现。为了简单起见，我们在这里使用 hash 模式。
     history: VueRouter.createWebHashHistory(),
-    routes, &#x2F;&#x2F; &#96;routes: routes&#96; 的缩写
-&#125;)
+    routes, // `routes: routes` 的缩写
+})
 
 app.use(router)
 
-app.mount(&#39;#app&#39;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+app.mount('#app');<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>定义的路由，即跳转的规则是全局性的，尽量提取出来，不要全部写在main.ts中 在src目录下，建立config目录和route文件，把路由的定义移动到里面，注意！不是复制！ route文件代码如下</p>
-<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F;定义一些路由
-import Index from &quot;..&#x2F;pages&#x2F;Index.vue&quot;;
-import Team from &quot;..&#x2F;pages&#x2F;Team.vue&quot;;
-import User from &quot;..&#x2F;pages&#x2F;User.vue&quot;;
+<pre class="line-numbers language-none"><code class="language-none">//定义一些路由
+import Index from "../pages/Index.vue";
+import Team from "../pages/Team.vue";
+import User from "../pages/User.vue";
 
-const routes &#x3D; [
-    &#123; path: &#39;&#x2F;&#39;, component: Index &#125;,
-    &#123; path: &#39;&#x2F;Team&#39;, component: Team &#125;,
-    &#123; path: &#39;&#x2F;User&#39;, component: User &#125;,
+const routes = [
+    { path: '/', component: Index },
+    { path: '/Team', component: Team },
+    { path: '/User', component: User },
 ]
 
-export default routes;&#x2F;&#x2F;导出<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+export default routes;//导出<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>回到main.ts文件中，把routes引入。选中routes按alt+anter，或者手动导入 <img src="http://img-md-js.linjsblog.top/img/202301021952293.png" alt="image.png"> 找到BasicLayout.vue文件，原先是利用v-if进行改变，跳转的，现在引入router-view，根据不同的页面展示不同的内容，个人理解：原先是单页面跳转，就是利用js重新渲染页面，而利用router-view后，是在多个页面里面进行跳转。 div 里的内容修改为如下 <img src="http://img-md-js.linjsblog.top/img/202301021952810.png" alt="image.png"> 搭配route-link创建链接，进行测试 <img src="http://img-md-js.linjsblog.top/img/202301021952987.png" alt="image.png"> 启动项目，测试一下，点击链接，发现路径是跳转的 <img src="http://img-md-js.linjsblog.top/img/202301021953426.png" alt="image.png"><img src="http://img-md-js.linjsblog.top/img/202301021953195.png" alt="image.png"> 这些表明框架结构已经成功搭建，vant3标签栏已经支持路由模式（正好是vue-route） <img src="http://img-md-js.linjsblog.top/img/202301021953098.png" alt="image.png"> 上次创建页面少创建了个人页面，现在依葫芦画瓢，创建个人页面（这个比较简单就不演示了），注意：别忘了到route.ts中引入这个页面 <img src="http://img-md-js.linjsblog.top/img/202301021953935.png" alt="image.png"> 继续修改BasicLayout.vue如下 <img src="http://img-md-js.linjsblog.top/img/202301021953157.png" alt="image.png"> 删除route-link（现在没用了，可通过标签栏跳转了） 测试一下，结果如下 <img src="http://img-md-js.linjsblog.top/img/202301021954274.png" alt="image.png"><img src="http://img-md-js.linjsblog.top/img/202301021954067.png" alt="image.png"><img src="http://img-md-js.linjsblog.top/img/202301021954780.png" alt="image.png"></p>
 <h4 id="三、前端开发"><a href="#三、前端开发" class="headerlink" title="三、前端开发"></a>三、前端开发</h4><h4 id="1-准备工作"><a href="#1-准备工作" class="headerlink" title="1.准备工作"></a>1.准备工作</h4><p>首先把原先的页面名称修改下，有些会与自带的起冲突，添加searchpage页面 ，并修改其他页面名称修改如下 <img src="http://img-md-js.linjsblog.top/img/202301021954394.png" alt="image.png"><img src="http://img-md-js.linjsblog.top/img/202301021954642.png" alt="image.png"> 为了编写代码中的便利，把按需引入改为全部引路，在main.ts中修改代码</p>
-<pre class="line-numbers language-none"><code class="language-none">import &#123; createApp &#125; from &#39;vue&#39;
-import App from &#39;.&#x2F;App.vue&#39;
-import * as VueRouter from &#39;vue-router&#39;;
-import routes from &quot;.&#x2F;config&#x2F;route&quot;;
-import Vant from &#39;vant&#39;;
-import &#39;vant&#x2F;lib&#x2F;index.css&#39;
+<pre class="line-numbers language-none"><code class="language-none">import { createApp } from 'vue'
+import App from './App.vue'
+import * as VueRouter from 'vue-router';
+import routes from "./config/route";
+import Vant from 'vant';
+import 'vant/lib/index.css'
 
-const app &#x3D; createApp(App);
+const app = createApp(App);
 app.use(Vant);
 
-const router &#x3D; VueRouter.createRouter(&#123;
-    &#x2F;&#x2F; 4. 内部提供了 history 模式的实现。为了简单起见，我们在这里使用 hash 模式。
+const router = VueRouter.createRouter({
+    // 4. 内部提供了 history 模式的实现。为了简单起见，我们在这里使用 hash 模式。
     history: VueRouter.createWebHashHistory(),
-    routes, &#x2F;&#x2F; &#96;routes: routes&#96; 的缩写
-&#125;)
+    routes, // `routes: routes` 的缩写
+})
 
 app.use(router);
-app.mount(&#39;#app&#39;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+app.mount('#app');<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h4 id="2-添加搜索框"><a href="#2-添加搜索框" class="headerlink" title="2.添加搜索框"></a>2.添加搜索框</h4><p>在vant文档里找到合适的组件如下 <img src="http://img-md-js.linjsblog.top/img/202301021954239.png" alt="image.png"> 将其复制到searchpage页面里，并修改整理</p>
 <pre class="line-numbers language-none"><code class="language-none">&lt;template&gt;
-  &lt;form action&#x3D;&quot;&#x2F;&quot;&gt;
+  &lt;form action="/"&gt;
     &lt;van-search
-        v-model&#x3D;&quot;searchText&quot;
+        v-model="searchText"
         show-action
-        placeholder&#x3D;&quot;请输入搜索关键词&quot;
-        @search&#x3D;&quot;onSearch&quot;
-        @cancel&#x3D;&quot;onCancel&quot;
-    &#x2F;&gt;
-  &lt;&#x2F;form&gt;
-&lt;&#x2F;template&gt;
+        placeholder="请输入搜索关键词"
+        @search="onSearch"
+        @cancel="onCancel"
+    /&gt;
+  &lt;/form&gt;
+&lt;/template&gt;
 
 &lt;script setup&gt;
-import &#123; ref &#125; from &#39;vue&#39;;
-import &#123; Toast &#125; from &#39;vant&#39;;
+import { ref } from 'vue';
+import { Toast } from 'vant';
 
-const searchText &#x3D; ref(&#39;&#39;);
-const onSearch &#x3D; (val) &#x3D;&gt; Toast(val);
-const onCancel &#x3D; () &#x3D;&gt; Toast(&#39;取消&#39;);
+const searchText = ref('');
+const onSearch = (val) =&gt; Toast(val);
+const onCancel = () =&gt; Toast('取消');
 
-&lt;&#x2F;script&gt;
+&lt;/script&gt;
 
 &lt;style scoped&gt;
 
-&lt;&#x2F;style&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+&lt;/style&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>然后做一个点击搜索按钮，跳转到搜索页面，在vue router 官方文档里有此内容，复制到BsaicLayout.vue中修改，顺便把左边的返回页面按钮也写了，使其跳转到主页 <img src="http://img-md-js.linjsblog.top/img/202301021954516.png" alt="image.png"> <img src="http://img-md-js.linjsblog.top/img/202301021955073.png" alt="image.png"> 测试一下，按搜索按钮 <img src="http://img-md-js.linjsblog.top/img/202301021955888.png" alt="image.png"><img src="http://img-md-js.linjsblog.top/img/202301021955026.png" alt="image.png"><img src="http://img-md-js.linjsblog.top/img/202301021955116.png" alt="image.png"> 按左边返回按钮 <img src="http://img-md-js.linjsblog.top/img/202301021955127.png" alt="image.png"><img src="http://img-md-js.linjsblog.top/img/202301021955822.png" alt="image.png"></p>
 <h4 id="3-添加，搜索，删除标签"><a href="#3-添加，搜索，删除标签" class="headerlink" title="3.添加，搜索，删除标签"></a>3.添加，搜索，删除标签</h4><p>目标是实现标签显示，包括可选标签和已选标签，所以我们要引入分割线去区分</p>
 <pre class="line-numbers language-none"><code class="language-none">&lt;van-divider
-  :style&#x3D;&quot;&#123; color: &#39;#1989fa&#39;, borderColor: &#39;#1989fa&#39;, padding: &#39;0 16px&#39; &#125;&quot;
+  :style="{ color: '#1989fa', borderColor: '#1989fa', padding: '0 16px' }"
 &gt;
   文字
-&lt;&#x2F;van-divider&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+&lt;/van-divider&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>同时我们需要在点击搜索后，让页面显示已选标签，所以要引入tag标签</p>
-<pre class="line-numbers language-none"><code class="language-none">&lt;van-tag :show&#x3D;&quot;show&quot; closeable size&#x3D;&quot;medium&quot; type&#x3D;&quot;primary&quot; @close&#x3D;&quot;close&quot;&gt;
+<pre class="line-numbers language-none"><code class="language-none">&lt;van-tag :show="show" closeable size="medium" type="primary" @close="close"&gt;
   标签
-&lt;&#x2F;van-tag&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+&lt;/van-tag&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>标签需要我们手动选择，所以也要引入选择标签组件，这边我们使用TreeSelect</p>
-<pre class="line-numbers language-none"><code class="language-none">import &#123; ref &#125; from &#39;vue&#39;;
+<pre class="line-numbers language-none"><code class="language-none">import { ref } from 'vue';
 
-export default &#123;
-  setup() &#123;
-    const activeId &#x3D; ref(1);
-    const activeIndex &#x3D; ref(0);
-    const items &#x3D; [
-      &#123;
-        text: &#39;浙江&#39;,
+export default {
+  setup() {
+    const activeId = ref(1);
+    const activeIndex = ref(0);
+    const items = [
+      {
+        text: '浙江',
         children: [
-          &#123; text: &#39;杭州&#39;, id: 1 &#125;,
-          &#123; text: &#39;温州&#39;, id: 2 &#125;,
+          { text: '杭州', id: 1 },
+          { text: '温州', id: 2 },
         ],
-      &#125;,
-      &#123;
-        text: &#39;江苏&#39;,
+      },
+      {
+        text: '江苏',
         children: [
-          &#123; text: &#39;南京&#39;, id: 5 &#125;,
-          &#123; text: &#39;无锡&#39;, id: 6 &#125;,
+          { text: '南京', id: 5 },
+          { text: '无锡', id: 6 },
         ],
-      &#125;,
+      },
     ];
 
-    return &#123;
+    return {
       items,
       activeId,
       activeIndex,
-    &#125;;
-  &#125;,
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    };
+  },
+};<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>已选标签之间是挤在一起，为了美观，我们来选择Layout布局来设置间距</p>
-<pre class="line-numbers language-none"><code class="language-none">&lt;van-row gutter&#x3D;&quot;20&quot;&gt;
-  &lt;van-col span&#x3D;&quot;8&quot;&gt;span: 8&lt;&#x2F;van-col&gt;
-  &lt;van-col span&#x3D;&quot;8&quot;&gt;span: 8&lt;&#x2F;van-col&gt;
-  &lt;van-col span&#x3D;&quot;8&quot;&gt;span: 8&lt;&#x2F;van-col&gt;
-&lt;&#x2F;van-row&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-none"><code class="language-none">&lt;van-row gutter="20"&gt;
+  &lt;van-col span="8"&gt;span: 8&lt;/van-col&gt;
+  &lt;van-col span="8"&gt;span: 8&lt;/van-col&gt;
+  &lt;van-col span="8"&gt;span: 8&lt;/van-col&gt;
+&lt;/van-row&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>将上面的组件复制到SearchPage.vue并整理修改</p>
 <pre class="line-numbers language-none"><code class="language-none">&lt;template&gt;
-  &lt;form action&#x3D;&quot;&#x2F;&quot;&gt;
+  &lt;form action="/"&gt;
     &lt;van-search
-        v-model&#x3D;&quot;searchText&quot;
+        v-model="searchText"
         show-action
-        placeholder&#x3D;&quot;请输入搜索关键词&quot;
-        @search&#x3D;&quot;onSearch&quot;
-        @cancel&#x3D;&quot;onCancel&quot;
-    &#x2F;&gt;
-  &lt;&#x2F;form&gt;
-  &lt;van-divider content-position&#x3D;&quot;left&quot;&gt;已选标签&lt;&#x2F;van-divider&gt;
-  &lt;div v-if&#x3D;&quot;activeIds.length&#x3D;&#x3D;&#x3D;0&quot;&gt;请选择标签&lt;&#x2F;div&gt;
-  &lt;van-row gutter&#x3D;&quot;16&quot; style&#x3D;&quot;padding: 0 16px&quot;&gt;
-    &lt;van-col v-for&#x3D;&quot;tag in activeIds&quot;&gt;
-      &lt;van-tag closeable size&#x3D;&quot;small&quot; type&#x3D;&quot;primary&quot;&gt;
-        &#123;&#123;tag&#125;&#125;
-      &lt;&#x2F;van-tag&gt;
-    &lt;&#x2F;van-col&gt;
-  &lt;&#x2F;van-row&gt;
+        placeholder="请输入搜索关键词"
+        @search="onSearch"
+        @cancel="onCancel"
+    /&gt;
+  &lt;/form&gt;
+  &lt;van-divider content-position="left"&gt;已选标签&lt;/van-divider&gt;
+  &lt;div v-if="activeIds.length===0"&gt;请选择标签&lt;/div&gt;
+  &lt;van-row gutter="16" style="padding: 0 16px"&gt;
+    &lt;van-col v-for="tag in activeIds"&gt;
+      &lt;van-tag closeable size="small" type="primary"&gt;
+        {{tag}}
+      &lt;/van-tag&gt;
+    &lt;/van-col&gt;
+  &lt;/van-row&gt;
   &lt;van-tree-select
-      v-model:active-id&#x3D;&quot;activeIds&quot;
-      v-model:main-active-index&#x3D;&quot;activeIndex&quot;
-      :items&#x3D;&quot;tagList&quot;
-  &#x2F;&gt;
-&lt;&#x2F;template&gt;
+      v-model:active-id="activeIds"
+      v-model:main-active-index="activeIndex"
+      :items="tagList"
+  /&gt;
+&lt;/template&gt;
 
 &lt;script setup&gt;
-import &#123; ref &#125; from &#39;vue&#39;;
-import &#123; Toast &#125; from &#39;vant&#39;;
+import { ref } from 'vue';
+import { Toast } from 'vant';
 
-const searchText &#x3D; ref(&#39;&#39;);
-const onSearch &#x3D; (val) &#x3D;&gt; Toast(val);
-const onCancel &#x3D; () &#x3D;&gt; Toast(&#39;取消&#39;);
+const searchText = ref('');
+const onSearch = (val) =&gt; Toast(val);
+const onCancel = () =&gt; Toast('取消');
 
-&#x2F;&#x2F;已选中的标签
-const activeIds &#x3D; ref([]);
-const activeIndex &#x3D; ref(0);
-const tagList &#x3D; [
-  &#123;
-    text: &#39;性别&#39;,
+//已选中的标签
+const activeIds = ref([]);
+const activeIndex = ref(0);
+const tagList = [
+  {
+    text: '性别',
     children: [
-      &#123; text: &#39;男&#39;, id: &#39;男&#39; &#125;,
-      &#123; text: &#39;女&#39;, id: &#39;女&#39; &#125;,
+      { text: '男', id: '男' },
+      { text: '女', id: '女' },
     ],
-  &#125;,
-  &#123;
-    text: &#39;年级&#39;,
+  },
+  {
+    text: '年级',
     children: [
-      &#123; text: &#39;大一&#39;, id: &#39;大一&#39; &#125;,
-      &#123; text: &#39;大二&#39;, id: &#39;大二&#39; &#125;,
+      { text: '大一', id: '大一' },
+      { text: '大二', id: '大二' },
     ],
-  &#125;,
+  },
 ];
 
-&lt;&#x2F;script&gt;
+&lt;/script&gt;
 
 &lt;style scoped&gt;
 
-&lt;&#x2F;style&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+&lt;/style&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>看看现在页面是什么样的 <img src="http://img-md-js.linjsblog.top/img/202301021955418.png" alt="image.png"> 但是点击×删不掉已选标签，这是因为我们没写移除标签函数，添加函数！</p>
-<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F;移除标签
-const doClose &#x3D; (tag) &#x3D;&gt;&#123;
-  activeIds.value&#x3D;activeIds.value.filter(item &#x3D;&gt;&#123;
-    return item !&#x3D;&#x3D; tag;
-  &#125;)
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-none"><code class="language-none">//移除标签
+const doClose = (tag) =&gt;{
+  activeIds.value=activeIds.value.filter(item =&gt;{
+    return item !== tag;
+  })
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>别忘了在tag里面添加@close&#x3D;”doClose(tag)”！ <img src="http://img-md-js.linjsblog.top/img/202301021956738.png" alt="image.png"> 不出意外的话就可以删除已选标签了 最后就要进行关键字查询，来去过滤标签了（可以直接在前端里面过滤，因为标签的数据量不大，没必要向后台发送请求） <img src="http://img-md-js.linjsblog.top/img/202301021956602.png" alt="image.png"><img src="http://img-md-js.linjsblog.top/img/202301021956573.png" alt="image.png"> 现在要将数据扁平化，原来是嵌套结构，将数据扁平之后（打平）再进行过滤 <img src="http://img-md-js.linjsblog.top/img/202301021956444.png" alt="image.png"><img src="http://img-md-js.linjsblog.top/img/202301021956958.png" alt="image.png"> 踩坑注意：画红线框处我这边是必须要这样写，@炎大佬的笔记里两个都是花括号，照着写我这边就会显示Uncaught TypeError: tempChildren.filter is not a function 测试：选中性别，搜索男，点击取消，选中年级，搜索大一 显示结果如下 <img src="http://img-md-js.linjsblog.top/img/202301021956142.png" alt="image.png"><img src="http://img-md-js.linjsblog.top/img/202301021956581.png" alt="image.png"><img src="http://img-md-js.linjsblog.top/img/202301021956042.png" alt="image.png"></p>
+<p>别忘了在tag里面添加@close=”doClose(tag)”！ <img src="http://img-md-js.linjsblog.top/img/202301021956738.png" alt="image.png"> 不出意外的话就可以删除已选标签了 最后就要进行关键字查询，来去过滤标签了（可以直接在前端里面过滤，因为标签的数据量不大，没必要向后台发送请求） <img src="http://img-md-js.linjsblog.top/img/202301021956602.png" alt="image.png"><img src="http://img-md-js.linjsblog.top/img/202301021956573.png" alt="image.png"> 现在要将数据扁平化，原来是嵌套结构，将数据扁平之后（打平）再进行过滤 <img src="http://img-md-js.linjsblog.top/img/202301021956444.png" alt="image.png"><img src="http://img-md-js.linjsblog.top/img/202301021956958.png" alt="image.png"> 踩坑注意：画红线框处我这边是必须要这样写，@炎大佬的笔记里两个都是花括号，照着写我这边就会显示Uncaught TypeError: tempChildren.filter is not a function 测试：选中性别，搜索男，点击取消，选中年级，搜索大一 显示结果如下 <img src="http://img-md-js.linjsblog.top/img/202301021956142.png" alt="image.png"><img src="http://img-md-js.linjsblog.top/img/202301021956581.png" alt="image.png"><img src="http://img-md-js.linjsblog.top/img/202301021956042.png" alt="image.png"></p>
 <h4 id="4-创建用户信息页"><a href="#4-创建用户信息页" class="headerlink" title="4.创建用户信息页"></a>4.创建用户信息页</h4><p>在vant文档里寻找到适合的组件来编写用户信息页面，这里选择了cell单元格，将其黏贴到UserPage.vue中 <img src="http://img-md-js.linjsblog.top/img/202301021957472.png" alt="image.png"> 我们现在要定义一下后台用户数据的类别，在用户中心中我们曾经写过这个规范 在src目录下建立models目录，并创建user.d.ts文件，将规范粘贴进去并适当修改如下</p>
-<pre class="line-numbers language-none"><code class="language-none">&#x2F;**
+<pre class="line-numbers language-none"><code class="language-none">/**
  * 用户类别
- *&#x2F;
-export type CurrentUser &#x3D; &#123;
+ */
+export type CurrentUser = {
     id: number;
     username: string;
     userAccount: string;
@@ -753,102 +775,102 @@ export type CurrentUser &#x3D; &#123;
     planetCode: string;
     tags: string[];
     createTime: Date;
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+};<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>在UserPage.vue中引入，自己写点假数据</p>
 <pre class="line-numbers language-none"><code class="language-none">&lt;template&gt;
-  &lt;van-cell title&#x3D;&quot;昵称&quot; is-link to&#x3D;&#39;&#x2F;user&#x2F;edit&#39; :value&#x3D;&quot;user.username&quot;&#x2F;&gt;
-  &lt;van-cell title&#x3D;&quot;账号&quot; is-link to&#x3D;&#39;&#x2F;user&#x2F;edit&#39; :value&#x3D;&quot;user.userAccount&quot; &#x2F;&gt;
-  &lt;van-cell title&#x3D;&quot;头像&quot; is-link to&#x3D;&#39;&#x2F;user&#x2F;edit&#39;&gt;
-    &lt;img style&#x3D;&quot;height: 48px&quot; :src&#x3D;&quot;user.avatarUrl&quot;&#x2F;&gt;
-  &lt;&#x2F;van-cell&gt;
-  &lt;van-cell title&#x3D;&quot;性别&quot; is-link to&#x3D;&#39;&#x2F;user&#x2F;edit&#39; :value&#x3D;&quot;user.gender&quot; &#x2F;&gt;
-  &lt;van-cell title&#x3D;&quot;电话&quot; is-link to&#x3D;&#39;&#x2F;user&#x2F;edit&#39; :value&#x3D;&quot;user.phone&quot; &#x2F;&gt;
-  &lt;van-cell title&#x3D;&quot;邮箱&quot; is-link to&#x3D;&#39;&#x2F;user&#x2F;edit&#39; :value&#x3D;&quot;user.email&quot; &#x2F;&gt;
-  &lt;van-cell title&#x3D;&quot;星球编号&quot; :value&#x3D;&quot;user.planetCode&quot; &#x2F;&gt;
-  &lt;van-cell title&#x3D;&quot;注册时间&quot; :value&#x3D;&quot;user.createTime.toISOString()&quot; &#x2F;&gt;
-&lt;&#x2F;template&gt;
+  &lt;van-cell title="昵称" is-link to='/user/edit' :value="user.username"/&gt;
+  &lt;van-cell title="账号" is-link to='/user/edit' :value="user.userAccount" /&gt;
+  &lt;van-cell title="头像" is-link to='/user/edit'&gt;
+    &lt;img style="height: 48px" :src="user.avatarUrl"/&gt;
+  &lt;/van-cell&gt;
+  &lt;van-cell title="性别" is-link to='/user/edit' :value="user.gender" /&gt;
+  &lt;van-cell title="电话" is-link to='/user/edit' :value="user.phone" /&gt;
+  &lt;van-cell title="邮箱" is-link to='/user/edit' :value="user.email" /&gt;
+  &lt;van-cell title="星球编号" :value="user.planetCode" /&gt;
+  &lt;van-cell title="注册时间" :value="user.createTime.toISOString()" /&gt;
+&lt;/template&gt;
 
 &lt;script setup&gt;
-const user &#x3D; &#123;
+const user = {
   id: 1,
-  username: &#39;鱼皮&#39;,
-  userAccount: &#39;dogYupi&#39;,
-  avatarUrl: &#39;https:&#x2F;&#x2F;img1.baidu.com&#x2F;it&#x2F;u&#x3D;1645832847,2375824523&amp;fm&#x3D;253&amp;fmt&#x3D;auto&amp;app&#x3D;138&amp;f&#x3D;JPEG?w&#x3D;480&amp;h&#x3D;480&#39;,
-  gender: &#39;男&#39;,
-  phone: &#39;121311313&#39;,
-  email: &#39;23432@qq.com&#39;,
-  planetCode: &#39;123&#39;,
+  username: '鱼皮',
+  userAccount: 'dogYupi',
+  avatarUrl: 'https://img1.baidu.com/it/u=1645832847,2375824523&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=480&amp;h=480',
+  gender: '男',
+  phone: '121311313',
+  email: '23432@qq.com',
+  planetCode: '123',
   createTime: new Date(),
-&#125;;
-&lt;&#x2F;script&gt;
+};
+&lt;/script&gt;
 
 &lt;style scoped&gt;
 
-&lt;&#x2F;style&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+&lt;/style&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>显示如下 <img src="http://img-md-js.linjsblog.top/img/202301021957535.png" alt="image.png"></p>
 <h4 id="5-创建用户信息修改页"><a href="#5-创建用户信息修改页" class="headerlink" title="5.创建用户信息修改页"></a>5.创建用户信息修改页</h4><p>点击&gt;可进入到修改页 <img src="http://img-md-js.linjsblog.top/img/202301021957544.png" alt="image.png"> 新建一个用户编辑页,命名为UserEditPage.vue 在route.ts添加新路由 <img src="http://img-md-js.linjsblog.top/img/202301021957092.png" alt="image.png"> 对UserPage.vue和UserEditPage.vue进行修改 UserPage.vue： <img src="http://img-md-js.linjsblog.top/img/202301021957859.png" alt="image.png"><img src="http://img-md-js.linjsblog.top/img/202301021957277.png" alt="image.png"> UserEditPage.vue： <img src="http://img-md-js.linjsblog.top/img/202301022000615.png" alt="image.png"> 测试获取参数 <img src="http://img-md-js.linjsblog.top/img/202301021957797.png" alt="image.png"><img src="http://img-md-js.linjsblog.top/img/202301021957430.png" alt="image.png"> 现在可以开始写编辑方法了，从组件库获取相应的表单 <img src="http://img-md-js.linjsblog.top/img/202301022000784.png" alt="image.png"> 代码如下：</p>
-<pre class="line-numbers language-none"><code class="language-none">&lt;van-form @submit&#x3D;&quot;onSubmit&quot;&gt;
+<pre class="line-numbers language-none"><code class="language-none">&lt;van-form @submit="onSubmit"&gt;
   &lt;van-cell-group inset&gt;
     &lt;van-field
-      v-model&#x3D;&quot;username&quot;
-      name&#x3D;&quot;用户名&quot;
-      label&#x3D;&quot;用户名&quot;
-      placeholder&#x3D;&quot;用户名&quot;
-      :rules&#x3D;&quot;[&#123; required: true, message: &#39;请填写用户名&#39; &#125;]&quot;
-    &#x2F;&gt;
+      v-model="username"
+      name="用户名"
+      label="用户名"
+      placeholder="用户名"
+      :rules="[{ required: true, message: '请填写用户名' }]"
+    /&gt;
     &lt;van-field
-      v-model&#x3D;&quot;password&quot;
-      type&#x3D;&quot;password&quot;
-      name&#x3D;&quot;密码&quot;
-      label&#x3D;&quot;密码&quot;
-      placeholder&#x3D;&quot;密码&quot;
-      :rules&#x3D;&quot;[&#123; required: true, message: &#39;请填写密码&#39; &#125;]&quot;
-    &#x2F;&gt;
-  &lt;&#x2F;van-cell-group&gt;
-  &lt;div style&#x3D;&quot;margin: 16px;&quot;&gt;
-    &lt;van-button round block type&#x3D;&quot;primary&quot; native-type&#x3D;&quot;submit&quot;&gt;
+      v-model="password"
+      type="password"
+      name="密码"
+      label="密码"
+      placeholder="密码"
+      :rules="[{ required: true, message: '请填写密码' }]"
+    /&gt;
+  &lt;/van-cell-group&gt;
+  &lt;div style="margin: 16px;"&gt;
+    &lt;van-button round block type="primary" native-type="submit"&gt;
       提交
-    &lt;&#x2F;van-button&gt;
-  &lt;&#x2F;div&gt;
-&lt;&#x2F;van-form&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    &lt;/van-button&gt;
+  &lt;/div&gt;
+&lt;/van-form&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>复制粘贴到UserEditPage.vue修改整理如下</p>
 <pre class="line-numbers language-none"><code class="language-none">&lt;template&gt;
-  &lt;van-form @submit&#x3D;&quot;onSubmit&quot;&gt;
+  &lt;van-form @submit="onSubmit"&gt;
       &lt;van-field
-          v-model&#x3D;&quot;editUser.currentValue&quot;
-          :name&#x3D;&quot;editUser.editKey&quot;
-          :label&#x3D;&quot;editUser.editName&quot;
-          :placeholder&#x3D;&quot;&#39;请输入$&#123;editUser.editName&#125;&#39;&quot;
-      &#x2F;&gt;
-    &lt;div style&#x3D;&quot;margin: 16px;&quot;&gt;
-      &lt;van-button round block type&#x3D;&quot;primary&quot; native-type&#x3D;&quot;submit&quot;&gt;
+          v-model="editUser.currentValue"
+          :name="editUser.editKey"
+          :label="editUser.editName"
+          :placeholder="'请输入${editUser.editName}'"
+      /&gt;
+    &lt;div style="margin: 16px;"&gt;
+      &lt;van-button round block type="primary" native-type="submit"&gt;
         提交
-      &lt;&#x2F;van-button&gt;
-    &lt;&#x2F;div&gt;
-  &lt;&#x2F;van-form&gt;
-&lt;&#x2F;template&gt;
+      &lt;/van-button&gt;
+    &lt;/div&gt;
+  &lt;/van-form&gt;
+&lt;/template&gt;
 
-&lt;script setup lang&#x3D;&quot;ts&quot;&gt;
-import &#123;useRoute&#125; from &quot;vue-router&quot;;
-import &#123;ref&#125; from &quot;vue&quot;;
-const route &#x3D; useRoute();
-const editUser &#x3D; ref(&#123;
+&lt;script setup lang="ts"&gt;
+import {useRoute} from "vue-router";
+import {ref} from "vue";
+const route = useRoute();
+const editUser = ref({
   editKey: route.query.editKey,
   currentValue: route.query.currentValue,
   editName: route.query.editName,
-&#125;)
-const onSubmit &#x3D; (values) &#x3D;&gt; &#123;
-  &#x2F;&#x2F;todo 把editKey currentValue editName提交到后台
-  console.log(&#39;onSubmit&#39;,values);
-&#125;
+})
+const onSubmit = (values) =&gt; {
+  //todo 把editKey currentValue editName提交到后台
+  console.log('onSubmit',values);
+}
 
 console.log(route)
 console.log(route.query)
 
-&lt;&#x2F;script&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+&lt;/script&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>同时别忘了这里多传了一个参数，在UserPage.vue里进行修改 <img src="http://img-md-js.linjsblog.top/img/202301021958105.png" alt="image.png"><img src="http://img-md-js.linjsblog.top/img/202301021958713.png" alt="image.png"> 修改以前不完善的地方，按左边返回按钮会重定向到首页，我们目标是回到上一页 ，修改这个地方 <img src="http://img-md-js.linjsblog.top/img/202301021958370.png" alt="image.png"> 测试如下，修改页获得，点击提交，数据也获得，返回也正常 <img src="http://img-md-js.linjsblog.top/img/202301021958579.png" alt="image.png"><img src="http://img-md-js.linjsblog.top/img/202301021958403.png" alt="image.png"><img src="http://img-md-js.linjsblog.top/img/202301021958461.png" alt="image.png"></p>
 
@@ -953,10 +975,10 @@ console.log(route.query)
                         <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
                     </ul>
                     <div id="alipay">
-                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                        <img src="/medias/reward/alipay1.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -1216,60 +1238,6 @@ console.log(route.query)
 
     <footer class="page-footer bg-color">
     
-        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
-<style>
-    .aplayer .aplayer-lrc p {
-        
-        display: none;
-        
-        font-size: 12px;
-        font-weight: 700;
-        line-height: 16px !important;
-    }
-
-    .aplayer .aplayer-lrc p.aplayer-lrc-current {
-        
-        display: none;
-        
-        font-size: 15px;
-        color: #42b983;
-    }
-
-    
-    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
-        left: -66px !important;
-    }
-
-    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
-        left: 0px !important;
-    }
-
-    
-</style>
-<div class="">
-    
-    <div class="row">
-        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
-                   server="netease"
-                   type="playlist"
-                   id="503838841"
-                   fixed='true'
-                   autoplay='false'
-                   theme='#42b983'
-                   loop='all'
-                   order='random'
-                   preload='auto'
-                   volume='0.7'
-                   list-folded='true'
-        >
-        </meting-js>
-    </div>
-</div>
-
-<script src="/libs/aplayer/APlayer.min.js"></script>
-<script src="/libs/aplayer/Meting.min.js"></script>
-
-    
 
     <div class="container row center-align"
          style="margin-bottom: 0px !important;">
@@ -1308,13 +1276,13 @@ console.log(route.query)
             
         </div>
         <div class="col s12 m4 l4 social-link social-statis">
-    <a href="https://github.com/blinkfox" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+    <a href="https://github.com/js6288" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
         <i class="fab fa-github"></i>
     </a>
 
 
 
-    <a href="mailto:1181062873@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:linjingshu6288@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fas fa-envelope-open"></i>
     </a>
 
@@ -1324,7 +1292,7 @@ console.log(route.query)
 
 
 
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1181062873" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1181062873" data-position="top" data-delay="50">
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1279897306" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1279897306" data-position="top" data-delay="50">
         <i class="fab fa-qq"></i>
     </a>
 

@@ -55,7 +55,9 @@
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 7.3.0"></head>
+<meta name="generator" content="Hexo 7.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
 
 
 <body>
@@ -396,12 +398,32 @@
                 
 
                 
-
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>Update Date:&nbsp;&nbsp;
+                    2025-01-29
+                </div>
                 
 
                 
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
+                    9.7k
+                </div>
+                
 
                 
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
+                    33 Min
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>Read Count:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
             </div>
         </div>
         <hr class="clearfix">
@@ -619,7 +641,7 @@
 <p><img src="http://img-md-js.linjsblog.top/img/202406151611671.png" alt="image-20201012200120166"></p>
 <p>如果收到这4个重复的确认并不会触发发送立刻重传，一段时间后。超时计时器超时，也会将发送窗口内以发送过的这些数据分组全部重传</p>
 <p><img src="http://img-md-js.linjsblog.top/img/202406151611672.png" alt="image-20201012200454557"></p>
-<p>若WT超过取值范围，例如WT&#x3D;8，会出现什么情况？</p>
+<p>若WT超过取值范围，例如WT=8，会出现什么情况？</p>
 <p><img src="http://img-md-js.linjsblog.top/img/202406151611673.png" alt="image-20201012201109774"></p>
 <p>习题</p>
 <p><img src="http://img-md-js.linjsblog.top/img/202406151611674.png" alt="image-20201012202419107"></p>
@@ -743,7 +765,7 @@
 <p><strong>受控接入在局域网中使用得较少，本书不再讨论</strong></p>
 <p><strong>随机接入</strong></p>
 <p><strong>重点</strong></p>
-<h2 id="随机接入（CSMA-CD协议）"><a href="#随机接入（CSMA-CD协议）" class="headerlink" title="随机接入（CSMA&#x2F;CD协议）"></a>随机接入（CSMA&#x2F;CD协议）</h2><p><strong>总线局域网使用协议：CSMA&#x2F;CD</strong></p>
+<h2 id="随机接入（CSMA-CD协议）"><a href="#随机接入（CSMA-CD协议）" class="headerlink" title="随机接入（CSMA/CD协议）"></a>随机接入（CSMA/CD协议）</h2><p><strong>总线局域网使用协议：CSMA/CD</strong></p>
 <h3 id="基本概念-2"><a href="#基本概念-2" class="headerlink" title="基本概念"></a>基本概念</h3><p><strong>最初</strong>的<strong>以太网</strong>是将许多计算机都连接到一根总线上。易于实现广播通信。当初认为这样的连接方法既简单又可靠，因为总线上没有有源器件。</p>
 <blockquote>
 <p><strong>以太网（Ethernet）</strong>是一种计算机<strong>局域网技术</strong>。IEEE组织的IEEE 802.3标准制定了<strong>以太网（Ethernet）</strong>的技术标准</p>
@@ -770,26 +792,26 @@
 <p><img src="http://img-md-js.linjsblog.top/img/202406151611706.png" alt="image-20201013221834942"></p>
 <p>A 需要单程传播时延的 2 倍的时间，才能检测到与 B 的发送产生了冲突</p>
 </blockquote>
-<h3 id="CSMA-CD-协议工作流程"><a href="#CSMA-CD-协议工作流程" class="headerlink" title="CSMA&#x2F;CD 协议工作流程"></a>CSMA&#x2F;CD 协议工作流程</h3><p><img src="http://img-md-js.linjsblog.top/img/202406151611707.png" alt="image-20201013221705893"></p>
-<h3 id="CSMA-CD-协议工作——争用期（碰撞窗口）"><a href="#CSMA-CD-协议工作——争用期（碰撞窗口）" class="headerlink" title="CSMA&#x2F;CD 协议工作——争用期（碰撞窗口）"></a>CSMA&#x2F;CD 协议工作——争用期（碰撞窗口）</h3><p><img src="http://img-md-js.linjsblog.top/img/202406151611708.png" alt="image-20201013223235305"></p>
-<h3 id="CSMA-CD-协议工作——最小帧长"><a href="#CSMA-CD-协议工作——最小帧长" class="headerlink" title="CSMA&#x2F;CD 协议工作——最小帧长"></a>CSMA&#x2F;CD 协议工作——最小帧长</h3><p><img src="http://img-md-js.linjsblog.top/img/202406151611709.png" alt="image-20201013224051932"></p>
-<h3 id="CSMA-CD-协议工作——最大帧长"><a href="#CSMA-CD-协议工作——最大帧长" class="headerlink" title="CSMA&#x2F;CD 协议工作——最大帧长"></a>CSMA&#x2F;CD 协议工作——最大帧长</h3><p><img src="http://img-md-js.linjsblog.top/img/202406151611710.png" alt="image-20201013225400777"></p>
-<h3 id="CSMA-CD-协议工作——截断二进制指数退避算法"><a href="#CSMA-CD-协议工作——截断二进制指数退避算法" class="headerlink" title="CSMA&#x2F;CD 协议工作——截断二进制指数退避算法"></a>CSMA&#x2F;CD 协议工作——截断二进制指数退避算法</h3><p><img src="http://img-md-js.linjsblog.top/img/202406151611711.png" alt="image-20201013230717856"></p>
-<h3 id="CSMA-CD-协议工作——信道利用率"><a href="#CSMA-CD-协议工作——信道利用率" class="headerlink" title="CSMA&#x2F;CD 协议工作——信道利用率"></a>CSMA&#x2F;CD 协议工作——信道利用率</h3><p><img src="http://img-md-js.linjsblog.top/img/202406151611712.png" alt="image-20201013231430295"></p>
-<h3 id="CSMA-CD-协议工作——帧接收流程"><a href="#CSMA-CD-协议工作——帧接收流程" class="headerlink" title="CSMA&#x2F;CD 协议工作——帧接收流程"></a>CSMA&#x2F;CD 协议工作——帧接收流程</h3><p><img src="http://img-md-js.linjsblog.top/img/202406151611713.png" alt="image-20201013231703302"></p>
-<h3 id="CSMA-CD-协议的重要特性"><a href="#CSMA-CD-协议的重要特性" class="headerlink" title="CSMA&#x2F;CD 协议的重要特性"></a>CSMA&#x2F;CD 协议的重要特性</h3><ul>
-<li>使用 CSMA&#x2F;CD 协议的以太网不能进行全双工通信而<strong>只能进行双向交替通信（半双工通信）。</strong></li>
+<h3 id="CSMA-CD-协议工作流程"><a href="#CSMA-CD-协议工作流程" class="headerlink" title="CSMA/CD 协议工作流程"></a>CSMA/CD 协议工作流程</h3><p><img src="http://img-md-js.linjsblog.top/img/202406151611707.png" alt="image-20201013221705893"></p>
+<h3 id="CSMA-CD-协议工作——争用期（碰撞窗口）"><a href="#CSMA-CD-协议工作——争用期（碰撞窗口）" class="headerlink" title="CSMA/CD 协议工作——争用期（碰撞窗口）"></a>CSMA/CD 协议工作——争用期（碰撞窗口）</h3><p><img src="http://img-md-js.linjsblog.top/img/202406151611708.png" alt="image-20201013223235305"></p>
+<h3 id="CSMA-CD-协议工作——最小帧长"><a href="#CSMA-CD-协议工作——最小帧长" class="headerlink" title="CSMA/CD 协议工作——最小帧长"></a>CSMA/CD 协议工作——最小帧长</h3><p><img src="http://img-md-js.linjsblog.top/img/202406151611709.png" alt="image-20201013224051932"></p>
+<h3 id="CSMA-CD-协议工作——最大帧长"><a href="#CSMA-CD-协议工作——最大帧长" class="headerlink" title="CSMA/CD 协议工作——最大帧长"></a>CSMA/CD 协议工作——最大帧长</h3><p><img src="http://img-md-js.linjsblog.top/img/202406151611710.png" alt="image-20201013225400777"></p>
+<h3 id="CSMA-CD-协议工作——截断二进制指数退避算法"><a href="#CSMA-CD-协议工作——截断二进制指数退避算法" class="headerlink" title="CSMA/CD 协议工作——截断二进制指数退避算法"></a>CSMA/CD 协议工作——截断二进制指数退避算法</h3><p><img src="http://img-md-js.linjsblog.top/img/202406151611711.png" alt="image-20201013230717856"></p>
+<h3 id="CSMA-CD-协议工作——信道利用率"><a href="#CSMA-CD-协议工作——信道利用率" class="headerlink" title="CSMA/CD 协议工作——信道利用率"></a>CSMA/CD 协议工作——信道利用率</h3><p><img src="http://img-md-js.linjsblog.top/img/202406151611712.png" alt="image-20201013231430295"></p>
+<h3 id="CSMA-CD-协议工作——帧接收流程"><a href="#CSMA-CD-协议工作——帧接收流程" class="headerlink" title="CSMA/CD 协议工作——帧接收流程"></a>CSMA/CD 协议工作——帧接收流程</h3><p><img src="http://img-md-js.linjsblog.top/img/202406151611713.png" alt="image-20201013231703302"></p>
+<h3 id="CSMA-CD-协议的重要特性"><a href="#CSMA-CD-协议的重要特性" class="headerlink" title="CSMA/CD 协议的重要特性"></a>CSMA/CD 协议的重要特性</h3><ul>
+<li>使用 CSMA/CD 协议的以太网不能进行全双工通信而<strong>只能进行双向交替通信（半双工通信）。</strong></li>
 <li>每个站在发送数据之后的一小段时间内，存在着遭遇碰撞的可能性。</li>
 <li>这种<strong>发送的不确定性</strong>使整个以太网的平均通信量远小于以太网的最高数据率。</li>
 </ul>
 <blockquote>
-<p>CSMA&#x2F;CD协议曾经用于各种总线结构以太网和双绞线以太网的早起版本中。</p>
-<p><strong>现在的以太网基于交换机和全双工连接，不会有碰撞，因此没有必要使用CSMA&#x2F;CS协议</strong></p>
+<p>CSMA/CD协议曾经用于各种总线结构以太网和双绞线以太网的早起版本中。</p>
+<p><strong>现在的以太网基于交换机和全双工连接，不会有碰撞，因此没有必要使用CSMA/CS协议</strong></p>
 </blockquote>
-<h2 id="随机接入（CSMA-CA协议）"><a href="#随机接入（CSMA-CA协议）" class="headerlink" title="随机接入（CSMA&#x2F;CA协议）"></a>随机接入（CSMA&#x2F;CA协议）</h2><p><strong>无线局域网使用的协议：CSMA&#x2F;CA</strong></p>
-<h3 id="为什么无线局域网要使用CSMA-CA协议"><a href="#为什么无线局域网要使用CSMA-CA协议" class="headerlink" title="为什么无线局域网要使用CSMA&#x2F;CA协议"></a>为什么无线局域网要使用CSMA&#x2F;CA协议</h3><p><img src="http://img-md-js.linjsblog.top/img/202406151611714.png" alt="image-20201014192811760"></p>
+<h2 id="随机接入（CSMA-CA协议）"><a href="#随机接入（CSMA-CA协议）" class="headerlink" title="随机接入（CSMA/CA协议）"></a>随机接入（CSMA/CA协议）</h2><p><strong>无线局域网使用的协议：CSMA/CA</strong></p>
+<h3 id="为什么无线局域网要使用CSMA-CA协议"><a href="#为什么无线局域网要使用CSMA-CA协议" class="headerlink" title="为什么无线局域网要使用CSMA/CA协议"></a>为什么无线局域网要使用CSMA/CA协议</h3><p><img src="http://img-md-js.linjsblog.top/img/202406151611714.png" alt="image-20201014192811760"></p>
 <h3 id="帧间间隔IFS（InterFrame-Space）"><a href="#帧间间隔IFS（InterFrame-Space）" class="headerlink" title="帧间间隔IFS（InterFrame Space）"></a>帧间间隔IFS（InterFrame Space）</h3><p><img src="http://img-md-js.linjsblog.top/img/202406151611715.png" alt="image-20201014200149717"></p>
-<h3 id="CSMA-CA协议的工作原理"><a href="#CSMA-CA协议的工作原理" class="headerlink" title="CSMA&#x2F;CA协议的工作原理"></a>CSMA&#x2F;CA协议的工作原理</h3><p><img src="http://img-md-js.linjsblog.top/img/202406151611716.png" alt="image-20201014200833233"></p>
+<h3 id="CSMA-CA协议的工作原理"><a href="#CSMA-CA协议的工作原理" class="headerlink" title="CSMA/CA协议的工作原理"></a>CSMA/CA协议的工作原理</h3><p><img src="http://img-md-js.linjsblog.top/img/202406151611716.png" alt="image-20201014200833233"></p>
 <blockquote>
 <p><strong>源站为什么在检测到信道空闲后还要再等待一段时间DIFS？</strong></p>
 <ul>
@@ -807,10 +829,10 @@
 </blockquote>
 <p><strong>使用退避算法的时机</strong></p>
 <p><img src="http://img-md-js.linjsblog.top/img/202406151611718.png" alt="image-20201014201927680"></p>
-<h3 id="CSMA-CA协议的退避算法"><a href="#CSMA-CA协议的退避算法" class="headerlink" title="CSMA&#x2F;CA协议的退避算法"></a>CSMA&#x2F;CA协议的退避算法</h3><p><img src="http://img-md-js.linjsblog.top/img/202406151611719.png" alt="image-20201014202213766"></p>
+<h3 id="CSMA-CA协议的退避算法"><a href="#CSMA-CA协议的退避算法" class="headerlink" title="CSMA/CA协议的退避算法"></a>CSMA/CA协议的退避算法</h3><p><img src="http://img-md-js.linjsblog.top/img/202406151611719.png" alt="image-20201014202213766"></p>
 <p><strong>退避算法的示例</strong></p>
 <p><img src="http://img-md-js.linjsblog.top/img/202406151611720.png" alt="image-20201014202819851"></p>
-<h3 id="CSMA-CA协议的信道预约和虚拟载波监听"><a href="#CSMA-CA协议的信道预约和虚拟载波监听" class="headerlink" title="CSMA&#x2F;CA协议的信道预约和虚拟载波监听"></a>CSMA&#x2F;CA协议的信道预约和虚拟载波监听</h3><p><img src="http://img-md-js.linjsblog.top/img/202406151611721.png" alt="image-20201014203119710"></p>
+<h3 id="CSMA-CA协议的信道预约和虚拟载波监听"><a href="#CSMA-CA协议的信道预约和虚拟载波监听" class="headerlink" title="CSMA/CA协议的信道预约和虚拟载波监听"></a>CSMA/CA协议的信道预约和虚拟载波监听</h3><p><img src="http://img-md-js.linjsblog.top/img/202406151611721.png" alt="image-20201014203119710"></p>
 <p><img src="http://img-md-js.linjsblog.top/img/202406151611722.png" alt="image-20201014203506878"></p>
 <p><strong>虚拟载波监听机制能减少隐蔽站带来的碰撞问题的示例</strong></p>
 <p><img src="http://img-md-js.linjsblog.top/img/202406151611723.png" alt="image-20201014203859033"></p>
@@ -950,7 +972,7 @@
 <li>传统以太网最初是使用粗同轴电缆，后来演进到使用比较便宜的细同轴电缆，最后发展为使用更便宜和更灵活的双绞线。</li>
 <li>采用双绞线的以太网采用星形拓扑，在星形的中心则增加了一种可靠性非常高的设备，叫做<strong>集线器</strong> (hub)。</li>
 <li><strong>集线器</strong>是也可以看做多口中继器，每个端口都可以成为一个中继器，中继器是对减弱的信号进行放大和发送的设备</li>
-<li><strong>集线器</strong>的以太网在逻辑上仍是个总线网，需要使用CSMA&#x2F;CD协议来协调各主机争用总线，只能工作在半双工模式，收发帧不能同时进行</li>
+<li><strong>集线器</strong>的以太网在逻辑上仍是个总线网，需要使用CSMA/CD协议来协调各主机争用总线，只能工作在半双工模式，收发帧不能同时进行</li>
 </ul>
 </blockquote>
 <h3 id="集线器HUB在物理层扩展以太网"><a href="#集线器HUB在物理层扩展以太网" class="headerlink" title="集线器HUB在物理层扩展以太网"></a>集线器HUB在物理层扩展以太网</h3><p><strong>使用集线器扩展</strong>：将多个以太网段连成更大的、多级星形结构的以太网</p>
@@ -1263,10 +1285,10 @@
                         <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
                     </ul>
                     <div id="alipay">
-                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                        <img src="/medias/reward/alipay1.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -1522,60 +1544,6 @@
 
     <footer class="page-footer bg-color">
     
-        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
-<style>
-    .aplayer .aplayer-lrc p {
-        
-        display: none;
-        
-        font-size: 12px;
-        font-weight: 700;
-        line-height: 16px !important;
-    }
-
-    .aplayer .aplayer-lrc p.aplayer-lrc-current {
-        
-        display: none;
-        
-        font-size: 15px;
-        color: #42b983;
-    }
-
-    
-    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
-        left: -66px !important;
-    }
-
-    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
-        left: 0px !important;
-    }
-
-    
-</style>
-<div class="">
-    
-    <div class="row">
-        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
-                   server="netease"
-                   type="playlist"
-                   id="503838841"
-                   fixed='true'
-                   autoplay='false'
-                   theme='#42b983'
-                   loop='all'
-                   order='random'
-                   preload='auto'
-                   volume='0.7'
-                   list-folded='true'
-        >
-        </meting-js>
-    </div>
-</div>
-
-<script src="/libs/aplayer/APlayer.min.js"></script>
-<script src="/libs/aplayer/Meting.min.js"></script>
-
-    
 
     <div class="container row center-align"
          style="margin-bottom: 0px !important;">
@@ -1614,13 +1582,13 @@
             
         </div>
         <div class="col s12 m4 l4 social-link social-statis">
-    <a href="https://github.com/blinkfox" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+    <a href="https://github.com/js6288" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
         <i class="fab fa-github"></i>
     </a>
 
 
 
-    <a href="mailto:1181062873@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:linjingshu6288@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fas fa-envelope-open"></i>
     </a>
 
@@ -1630,7 +1598,7 @@
 
 
 
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1181062873" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1181062873" data-position="top" data-delay="50">
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1279897306" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1279897306" data-position="top" data-delay="50">
         <i class="fab fa-qq"></i>
     </a>
 

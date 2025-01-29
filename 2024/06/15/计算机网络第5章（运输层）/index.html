@@ -56,7 +56,9 @@
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 7.3.0"></head>
+<meta name="generator" content="Hexo 7.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
 
 
 <body>
@@ -397,12 +399,32 @@
                 
 
                 
-
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>Update Date:&nbsp;&nbsp;
+                    2025-01-29
+                </div>
                 
 
                 
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
+                    5.9k
+                </div>
+                
 
                 
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
+                    20 Min
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>Read Count:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
             </div>
         </div>
         <hr class="clearfix">
@@ -443,7 +465,7 @@
 <p><strong>多个进程（这里一个端口表示一个进程）</strong> 利用一个运输层协议（或者称为运输层接口）<strong>发送</strong>数据称为 <strong>复用</strong></p>
 <p><strong>多个进程（这里一个端口表示一个进程）</strong> 利用一个运输层协议（或者称为运输层接口）<strong>接收</strong>时叫做 <strong>分用</strong>。</p>
 </blockquote>
-<h2 id="TCP-IP体系的应用层常用协议所使用的运输层熟知端口号"><a href="#TCP-IP体系的应用层常用协议所使用的运输层熟知端口号" class="headerlink" title="TCP&#x2F;IP体系的应用层常用协议所使用的运输层熟知端口号"></a>TCP&#x2F;IP体系的应用层常用协议所使用的运输层熟知端口号</h2><p><img src="http://img-md-js.linjsblog.top/img/202406151629532.png" alt="image-20201020224521744"></p>
+<h2 id="TCP-IP体系的应用层常用协议所使用的运输层熟知端口号"><a href="#TCP-IP体系的应用层常用协议所使用的运输层熟知端口号" class="headerlink" title="TCP/IP体系的应用层常用协议所使用的运输层熟知端口号"></a>TCP/IP体系的应用层常用协议所使用的运输层熟知端口号</h2><p><img src="http://img-md-js.linjsblog.top/img/202406151629532.png" alt="image-20201020224521744"></p>
 <h2 id="运输层传输流程"><a href="#运输层传输流程" class="headerlink" title="运输层传输流程"></a>运输层传输流程</h2><p>举例</p>
 <p><img src="http://img-md-js.linjsblog.top/img/202406151629533.png" alt="image-20201020224658524"></p>
 <blockquote>
@@ -483,7 +505,7 @@
 <p><img src="http://img-md-js.linjsblog.top/img/202406151629542.png" alt="image-20201020232337332"></p>
 <hr>
 <h1 id="5-3、UDP和TCP的对比"><a href="#5-3、UDP和TCP的对比" class="headerlink" title="5.3、UDP和TCP的对比"></a>5.3、UDP和TCP的对比</h1><h2 id="概念-1"><a href="#概念-1" class="headerlink" title="概念"></a>概念</h2><ul>
-<li><strong>UDP</strong> 和 <strong>TCP</strong> 是TCP&#x2F;IP体系结构<strong>运输层</strong>中的两个重要协议</li>
+<li><strong>UDP</strong> 和 <strong>TCP</strong> 是TCP/IP体系结构<strong>运输层</strong>中的两个重要协议</li>
 <li>当运输层采用面向连接的 <strong>TCP</strong> 协议时，尽管下面的网络是不可靠的（只提供尽最大努力服务），但这种逻辑通信信道就相当于一条<strong>全双工的可靠信道</strong>。</li>
 <li>当运输层采用无连接的 <strong>UDP</strong> 协议时，这种逻辑通信信道是一条<strong>不可靠信道</strong>。</li>
 </ul>
@@ -602,7 +624,7 @@
 <h2 id="拥塞控制的算法"><a href="#拥塞控制的算法" class="headerlink" title="拥塞控制的算法"></a>拥塞控制的算法</h2><p><img src="http://img-md-js.linjsblog.top/img/202406151629567.png" alt="image-20201022141423443"></p>
 <p><img src="http://img-md-js.linjsblog.top/img/202406151629568.png" alt="image-20201022141556134"></p>
 <blockquote>
-<p>真正的发送窗口值 &#x3D; Min (接收方窗口值，拥塞窗口值)</p>
+<p>真正的发送窗口值 = Min (接收方窗口值，拥塞窗口值)</p>
 </blockquote>
 <p>下图的实例横纵坐标的意思</p>
 <p>传输轮次：</p>
@@ -635,7 +657,7 @@
 </blockquote>
 <h4 id="拥塞避免（congestion-avoidance）"><a href="#拥塞避免（congestion-avoidance）" class="headerlink" title="拥塞避免（congestion avoidance）"></a>拥塞避免（congestion avoidance）</h4><ul>
 <li>思路：让拥塞窗口 cwnd <strong>缓慢地增大</strong>，避免出现拥塞。</li>
-<li>每经过一个传输轮次，拥塞窗口 <strong>cwnd &#x3D; cwnd + 1</strong>。</li>
+<li>每经过一个传输轮次，拥塞窗口 <strong>cwnd = cwnd + 1</strong>。</li>
 <li>使拥塞窗口 cwnd 按线性规律缓慢增长。</li>
 <li>在拥塞避免阶段，具有 “<strong>加法增大</strong>” (Additive Increase) 的特点。</li>
 </ul>
@@ -945,10 +967,10 @@
                         <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
                     </ul>
                     <div id="alipay">
-                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                        <img src="/medias/reward/alipay1.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -1204,60 +1226,6 @@
 
     <footer class="page-footer bg-color">
     
-        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
-<style>
-    .aplayer .aplayer-lrc p {
-        
-        display: none;
-        
-        font-size: 12px;
-        font-weight: 700;
-        line-height: 16px !important;
-    }
-
-    .aplayer .aplayer-lrc p.aplayer-lrc-current {
-        
-        display: none;
-        
-        font-size: 15px;
-        color: #42b983;
-    }
-
-    
-    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
-        left: -66px !important;
-    }
-
-    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
-        left: 0px !important;
-    }
-
-    
-</style>
-<div class="">
-    
-    <div class="row">
-        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
-                   server="netease"
-                   type="playlist"
-                   id="503838841"
-                   fixed='true'
-                   autoplay='false'
-                   theme='#42b983'
-                   loop='all'
-                   order='random'
-                   preload='auto'
-                   volume='0.7'
-                   list-folded='true'
-        >
-        </meting-js>
-    </div>
-</div>
-
-<script src="/libs/aplayer/APlayer.min.js"></script>
-<script src="/libs/aplayer/Meting.min.js"></script>
-
-    
 
     <div class="container row center-align"
          style="margin-bottom: 0px !important;">
@@ -1296,13 +1264,13 @@
             
         </div>
         <div class="col s12 m4 l4 social-link social-statis">
-    <a href="https://github.com/blinkfox" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+    <a href="https://github.com/js6288" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
         <i class="fab fa-github"></i>
     </a>
 
 
 
-    <a href="mailto:1181062873@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:linjingshu6288@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fas fa-envelope-open"></i>
     </a>
 
@@ -1312,7 +1280,7 @@
 
 
 
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1181062873" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1181062873" data-position="top" data-delay="50">
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1279897306" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1279897306" data-position="top" data-delay="50">
         <i class="fab fa-qq"></i>
     </a>
 

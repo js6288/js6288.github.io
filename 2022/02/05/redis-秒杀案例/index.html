@@ -8,9 +8,9 @@
     <meta name="description" content="Redis 秒杀案例实现
 写一个简单的springboot + thymeleaf页面示例
 
-&amp;lt;html lang=&#34;en&#34; xmlns:th=&#34;http://www.thymeleaf.org&#34;&gt;
-&amp;lt;head&gt;
-    &amp;lt">
+&amp;lt;html lang=&#34;en&#34; xmlns:th=&#34;http://www.thymeleaf.org&#34;&amp;gt;
+&amp;lt;head&amp;gt;
+ ">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -57,7 +57,9 @@
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 7.3.0"></head>
+<meta name="generator" content="Hexo 7.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
 
 
 <body>
@@ -410,12 +412,32 @@
                 
 
                 
-
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>Update Date:&nbsp;&nbsp;
+                    2025-01-29
+                </div>
                 
 
                 
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
+                    1.6k
+                </div>
+                
 
                 
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
+                    7 Min
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>Read Count:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
             </div>
         </div>
         <hr class="clearfix">
@@ -432,65 +454,65 @@
                 <h1 id="Redis-秒杀案例"><a href="#Redis-秒杀案例" class="headerlink" title="Redis 秒杀案例"></a>Redis 秒杀案例</h1><h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p><img src="http://img-md-js.linjsblog.top/img/image-20220204122953018.png" alt="image-20220204122953018"></p>
 <p>写一个简单的springboot + thymeleaf页面示例</p>
 <pre class="line-numbers language-markup" data-language="markup"><code class="language-markup">
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>en<span class="token punctuation">"</span></span> <span class="token attr-name"><span class="token namespace">xmlns:</span>th</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://www.thymeleaf.org<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">charset</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>UTF-8<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">></span></span>Title<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>base</span> <span class="token attr-name"><span class="token namespace">th:</span>href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>@&#123;/&#125;<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h1</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>en<span class="token punctuation">"</span></span> <span class="token attr-name"><span class="token namespace">xmlns:</span>th</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://www.thymeleaf.org<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">charset</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>UTF-8<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">&gt;</span></span>Title<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>base</span> <span class="token attr-name"><span class="token namespace">th:</span>href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>@{/}<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h1</span><span class="token punctuation">&gt;</span></span>
     iPhone 13 Pro !!! 1元秒杀
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h1</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>form</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>msfrom<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>hidden<span class="token punctuation">"</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>prodid<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>prodid<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>0101<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>button<span class="token punctuation">"</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>miaosha_btn<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>seckill_btn<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>秒杀点我<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>form</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>text/javascript<span class="token punctuation">"</span></span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>jquery/jquery-3.5.1.js<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>text/javascript<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
-    <span class="token function">$</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">"#miaosha_btn"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">click</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h1</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>form</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>msfrom<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>hidden<span class="token punctuation">"</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>prodid<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>prodid<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>0101<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>button<span class="token punctuation">"</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>miaosha_btn<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>seckill_btn<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>秒杀点我<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>form</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>text/javascript<span class="token punctuation">"</span></span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>jquery/jquery-3.5.1.js<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>text/javascript<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript">
+    <span class="token function">$</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">"#miaosha_btn"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">click</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
             <span class="token keyword">var</span> prodid <span class="token operator">=</span> <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">"#prodid"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">val</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-            $<span class="token punctuation">.</span><span class="token function">ajax</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+            $<span class="token punctuation">.</span><span class="token function">ajax</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
                 <span class="token literal-property property">url</span><span class="token operator">:</span> <span class="token string">"http://localhost:8080/doseckill"</span><span class="token punctuation">,</span>
                 <span class="token literal-property property">type</span><span class="token operator">:</span><span class="token string">"post"</span><span class="token punctuation">,</span>
-                <span class="token literal-property property">data</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+                <span class="token literal-property property">data</span><span class="token operator">:</span> <span class="token punctuation">{</span>
                     <span class="token string-property property">"prodid"</span><span class="token operator">:</span>prodid
-                <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+                <span class="token punctuation">}</span><span class="token punctuation">,</span>
                 <span class="token literal-property property">dataType</span><span class="token operator">:</span> <span class="token string">"json"</span><span class="token punctuation">,</span>
-                <span class="token function-variable function">success</span><span class="token operator">:</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-                    <span class="token keyword">if</span> <span class="token punctuation">(</span>data <span class="token operator">===</span> <span class="token string">"false"</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+                <span class="token function-variable function">success</span><span class="token operator">:</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span>data <span class="token operator">===</span> <span class="token string">"false"</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
                         <span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">"抢光了"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
                         <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">"#miaosha_btn"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">"disabled"</span><span class="token punctuation">,</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                    <span class="token punctuation">&#125;</span>
-                <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-                <span class="token function-variable function">error</span><span class="token operator">:</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">resp</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-                <span class="token punctuation">&#125;</span>
-            <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">}</span><span class="token punctuation">,</span>
+                <span class="token function-variable function">error</span><span class="token operator">:</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">resp</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span><span class="token punctuation">)</span>
 
-        <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
-    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
-</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">&gt;</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>controller</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@PostMapping</span><span class="token punctuation">(</span><span class="token string">"/doseckill"</span><span class="token punctuation">)</span>
 <span class="token annotation punctuation">@ResponseBody</span>
-<span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">doseckill</span><span class="token punctuation">(</span><span class="token class-name">String</span> prodid<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">IOException</span> <span class="token punctuation">&#123;</span>
+<span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">doseckill</span><span class="token punctuation">(</span><span class="token class-name">String</span> prodid<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">IOException</span> <span class="token punctuation">{</span>
     <span class="token class-name">String</span> userid <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Random</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">nextInt</span><span class="token punctuation">(</span><span class="token number">50000</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">""</span><span class="token punctuation">;</span>
     <span class="token keyword">boolean</span> isSuccess <span class="token operator">=</span> <span class="token class-name">SecKill_redis</span><span class="token punctuation">.</span><span class="token function">doSecKill</span><span class="token punctuation">(</span>userid<span class="token punctuation">,</span> prodid<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span> <span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">toJSONString</span><span class="token punctuation">(</span>isSuccess<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>秒杀过程</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// 秒杀过程</span>
-<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">boolean</span> <span class="token function">doSecKill</span><span class="token punctuation">(</span><span class="token class-name">String</span> uid<span class="token punctuation">,</span><span class="token class-name">String</span> prodid<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">IOException</span><span class="token punctuation">&#123;</span>
+<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">boolean</span> <span class="token function">doSecKill</span><span class="token punctuation">(</span><span class="token class-name">String</span> uid<span class="token punctuation">,</span><span class="token class-name">String</span> prodid<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">IOException</span><span class="token punctuation">{</span>
     <span class="token comment">//1.uid和prodid非空判断</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>uid <span class="token operator">==</span> <span class="token keyword">null</span>  prodid <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>uid <span class="token operator">==</span> <span class="token keyword">null</span>  prodid <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
         <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">}</span>
     <span class="token comment">//2.连接redis</span>
     <span class="token class-name">Jedis</span> jedis <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Jedis</span><span class="token punctuation">(</span><span class="token string">"192.168.0.2"</span><span class="token punctuation">,</span><span class="token number">6379</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     jedis<span class="token punctuation">.</span><span class="token function">auth</span><span class="token punctuation">(</span><span class="token string">"password"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -503,24 +525,24 @@
 
     <span class="token comment">//4. 获取库存，如果库存为null，秒杀还没又开始</span>
     <span class="token class-name">String</span> kc <span class="token operator">=</span> jedis<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>kcKey<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>kc <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>kc <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
         <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"秒杀还没有开始请等待"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         jedis<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">}</span>
     <span class="token comment">//5. 判断用户是否重复秒杀操作</span>
     <span class="token keyword">if</span><span class="token punctuation">(</span>jedis<span class="token punctuation">.</span><span class="token function">sismember</span><span class="token punctuation">(</span>userKey<span class="token punctuation">,</span>uid<span class="token punctuation">)</span><span class="token comment">//命令判断成员元素是否是集合的成员</span>
-    <span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token punctuation">)</span><span class="token punctuation">{</span>
         <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"已经成功秒杀"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         jedis<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">}</span>
     <span class="token comment">//6 判断如果商品数量，库存数量小于1，秒杀结束</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token class-name">Integer</span><span class="token punctuation">.</span><span class="token function">parseInt</span><span class="token punctuation">(</span>kc<span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token class-name">Integer</span><span class="token punctuation">.</span><span class="token function">parseInt</span><span class="token punctuation">(</span>kc<span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
         <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"秒杀已经结束"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         jedis<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">}</span>
 
     <span class="token comment">//7 秒杀过程</span>
     <span class="token comment">//7.1 库存-1</span>
@@ -530,7 +552,7 @@
     <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"秒杀成功"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     jedis<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>redis 中添加库存</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">set</span> sk:0101:qt <span class="token number">10</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
@@ -545,7 +567,7 @@
 
 <p>ab模拟提交post请求</p>
 <p>在linux中创建postfile文件</p>
-<pre class="line-numbers language-none"><code class="language-none">prodid&#x3D;0101&amp;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-none"><code class="language-none">prodid=0101&amp;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>在postfile所在的目录执行命令，1000个请求100个并发</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">ab <span class="token parameter variable">-n</span> <span class="token number">1000</span> <span class="token parameter variable">-c</span> <span class="token number">100</span> <span class="token parameter variable">-p</span> /home/xm/postfile <span class="token parameter variable">-T</span> application/x-www-form-urlencoded http://192.168.2.2:8080/doseckill<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
@@ -555,17 +577,17 @@
 <p>还出现了连接超时的问题</p>
 <p><img src="http://img-md-js.linjsblog.top/img/image-20220204214624205.png" alt="image-20220204214624205"></p>
 <h2 id="超卖和超时问题解决"><a href="#超卖和超时问题解决" class="headerlink" title="超卖和超时问题解决"></a>超卖和超时问题解决</h2><h3 id="配置JedisPool连接池来解决超时问题"><a href="#配置JedisPool连接池来解决超时问题" class="headerlink" title="配置JedisPool连接池来解决超时问题"></a>配置JedisPool连接池来解决超时问题</h3><p>编写工具类</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">JedisPoolUtil</span> <span class="token punctuation">&#123;</span>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">JedisPoolUtil</span> <span class="token punctuation">{</span>
 
     <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">volatile</span> <span class="token class-name">JedisPool</span> jedisPool <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
 
-    <span class="token keyword">private</span> <span class="token class-name">JedisPoolUtil</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">private</span> <span class="token class-name">JedisPoolUtil</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token punctuation">}</span>
 
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token class-name">JedisPool</span> <span class="token function">getJedisPoolInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">null</span> <span class="token operator">==</span> jedisPool<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-            <span class="token keyword">synchronized</span> <span class="token punctuation">(</span><span class="token class-name">JedisPoolUtil</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-                <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">null</span> <span class="token operator">==</span> jedisPool<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token class-name">JedisPool</span> <span class="token function">getJedisPoolInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">null</span> <span class="token operator">==</span> jedisPool<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token keyword">synchronized</span> <span class="token punctuation">(</span><span class="token class-name">JedisPoolUtil</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">null</span> <span class="token operator">==</span> jedisPool<span class="token punctuation">)</span><span class="token punctuation">{</span>
                     <span class="token class-name">JedisPoolConfig</span> poolConfig <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">JedisPoolConfig</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
                     poolConfig<span class="token punctuation">.</span><span class="token function">setMaxTotal</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
                     poolConfig<span class="token punctuation">.</span><span class="token function">setMaxIdle</span><span class="token punctuation">(</span><span class="token number">32</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -574,147 +596,147 @@
                     poolConfig<span class="token punctuation">.</span><span class="token function">setTestOnBorrow</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
                     jedisPool <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">JedisPool</span><span class="token punctuation">(</span>poolConfig<span class="token punctuation">,</span><span class="token string">"192.168.2.2"</span><span class="token punctuation">,</span><span class="token number">6379</span><span class="token punctuation">,</span><span class="token number">60000</span><span class="token punctuation">,</span><span class="token string">"password"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token punctuation">&#125;</span>
-            <span class="token punctuation">&#125;</span>
-        <span class="token punctuation">&#125;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
         <span class="token keyword">return</span> jedisPool<span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">}</span>
 
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">release</span><span class="token punctuation">(</span><span class="token class-name">JedisPool</span> jedisPool<span class="token punctuation">,</span> <span class="token class-name">Jedis</span> jedis<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">null</span> <span class="token operator">!=</span> jedis<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">release</span><span class="token punctuation">(</span><span class="token class-name">JedisPool</span> jedisPool<span class="token punctuation">,</span> <span class="token class-name">Jedis</span> jedis<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">null</span> <span class="token operator">!=</span> jedis<span class="token punctuation">)</span><span class="token punctuation">{</span>
             jedisPool<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>修改代码，doSecKill方法中通过连接池获取Jedis对象</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// 秒杀过程</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">boolean</span> <span class="token function">doSecKill</span><span class="token punctuation">(</span><span class="token class-name">String</span> uid<span class="token punctuation">,</span><span class="token class-name">String</span> prodid<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">IOException</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">boolean</span> <span class="token function">doSecKill</span><span class="token punctuation">(</span><span class="token class-name">String</span> uid<span class="token punctuation">,</span><span class="token class-name">String</span> prodid<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">IOException</span><span class="token punctuation">{</span>
         <span class="token comment">//1.uid和prodid非空判断</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>uid <span class="token operator">==</span> <span class="token keyword">null</span>  prodid <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>uid <span class="token operator">==</span> <span class="token keyword">null</span>  prodid <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
             <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">}</span>
         <span class="token comment">//2.通过连接池得到jedis对象</span>
         <span class="token class-name">Jedis</span> jedis <span class="token operator">=</span> <span class="token class-name">JedisPoolUtil</span><span class="token punctuation">.</span><span class="token function">getJedisPoolInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getResource</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h3 id="利用乐观锁淘汰用户，解决超卖问题"><a href="#利用乐观锁淘汰用户，解决超卖问题" class="headerlink" title="利用乐观锁淘汰用户，解决超卖问题"></a>利用乐观锁淘汰用户，解决超卖问题</h3><p><img src="http://img-md-js.linjsblog.top/img/image-20220204222739348.png" alt="image-20220204222739348">```java &#x2F;&#x2F; 秒杀过程 public static boolean doSecKill(String uid,String prodid) throws IOException{ &#x2F;&#x2F;1.uid和prodid非空判断 if (uid &#x3D;&#x3D; null prodid &#x3D;&#x3D; null){ return false; } &#x2F;&#x2F;2.通过连接池得到jedis对象 Jedis jedis &#x3D; JedisPoolUtil.getJedisPoolInstance().getResource();</p>
-<pre class="line-numbers language-none"><code class="language-none">    &#x2F;&#x2F;3.拼接Key
-    &#x2F;&#x2F;3.1 库存key
-    String kcKey &#x3D; &quot;sk:&quot;+prodid+&quot;:qt&quot;;
-    &#x2F;&#x2F;3.2 用户key
-    String userKey &#x3D; &quot;sk:&quot;+prodid+&quot;:user&quot;;
+<h3 id="利用乐观锁淘汰用户，解决超卖问题"><a href="#利用乐观锁淘汰用户，解决超卖问题" class="headerlink" title="利用乐观锁淘汰用户，解决超卖问题"></a>利用乐观锁淘汰用户，解决超卖问题</h3><p><img src="http://img-md-js.linjsblog.top/img/image-20220204222739348.png" alt="image-20220204222739348">```java // 秒杀过程 public static boolean doSecKill(String uid,String prodid) throws IOException{ //1.uid和prodid非空判断 if (uid == null prodid == null){ return false; } //2.通过连接池得到jedis对象 Jedis jedis = JedisPoolUtil.getJedisPoolInstance().getResource();</p>
+<pre class="line-numbers language-none"><code class="language-none">    //3.拼接Key
+    //3.1 库存key
+    String kcKey = "sk:"+prodid+":qt";
+    //3.2 用户key
+    String userKey = "sk:"+prodid+":user";
 
-    &#x2F;&#x2F;监视库存
+    //监视库存
     jedis.watch(kcKey);
 
-    &#x2F;&#x2F;4. 获取库存，如果库存为null，秒杀还没又开始
-    String kc &#x3D; jedis.get(kcKey);
-    if (kc &#x3D;&#x3D; null)&#123;
-        System.out.println(&quot;秒杀还没有开始请等待&quot;);
+    //4. 获取库存，如果库存为null，秒杀还没又开始
+    String kc = jedis.get(kcKey);
+    if (kc == null){
+        System.out.println("秒杀还没有开始请等待");
         jedis.close();
         return false;
-    &#125;
-    &#x2F;&#x2F;5. 判断用户是否重复秒杀操作
-    if(jedis.sismember(userKey,uid)&#x2F;&#x2F;命令判断成员元素是否是集合的成员
-    )&#123;
-        System.out.println(&quot;已经成功秒杀&quot;);
+    }
+    //5. 判断用户是否重复秒杀操作
+    if(jedis.sismember(userKey,uid)//命令判断成员元素是否是集合的成员
+    ){
+        System.out.println("已经成功秒杀");
         jedis.close();
         return false;
-    &#125;
-    &#x2F;&#x2F;6 判断如果商品数量，库存数量小于1，秒杀结束
-    if (Integer.parseInt(kc) &lt; 1)&#123;
-        System.out.println(&quot;秒杀已经结束&quot;);
+    }
+    //6 判断如果商品数量，库存数量小于1，秒杀结束
+    if (Integer.parseInt(kc) &lt; 1){
+        System.out.println("秒杀已经结束");
         jedis.close();
         return false;
-    &#125;
+    }
 
-    &#x2F;&#x2F;7 秒杀过程
-    &#x2F;&#x2F; 使用事务
-    Transaction multi &#x3D; jedis.multi();
-    &#x2F;&#x2F;组队操作
+    //7 秒杀过程
+    // 使用事务
+    Transaction multi = jedis.multi();
+    //组队操作
     multi.decr(kcKey);
     multi.sadd(userKey,uid);
-    &#x2F;&#x2F;执行
-    List results &#x3D; multi.exec();
+    //执行
+    List results = multi.exec();
 
-    if (results &#x3D;&#x3D; null  results.size()&#x3D;&#x3D;0)&#123;
-        System.out.println(&quot;秒杀失败了&quot;);
+    if (results == null  results.size()==0){
+        System.out.println("秒杀失败了");
         jedis.close();
-    &#125;
-    System.out.println(&quot;秒杀成功&quot;);
+    }
+    System.out.println("秒杀成功");
     jedis.close();
     return true;
-&#125;
+}
 
 重新测试,观察控制台输出(太长就不截图了)，和redis key的值
 
-![image-20220204230339593](http:&#x2F;&#x2F;img-md-js.linjsblog.top&#x2F;img&#x2F;image-20220204230339593.png)
+![image-20220204230339593](http://img-md-js.linjsblog.top/img/image-20220204230339593.png)
 
 ## 库存遗留问题解决
 
 在测试中增加库存量
 
-![image-20220204230810836](http:&#x2F;&#x2F;img-md-js.linjsblog.top&#x2F;img&#x2F;image-20220204230810836.png)
+![image-20220204230810836](http://img-md-js.linjsblog.top/img/image-20220204230810836.png)
 
 2000个请求300个并发
 
-&#96;&#96;&#96;shell
-ab -n 2000 -c 300 -p &#x2F;home&#x2F;xm&#x2F;postfile -T application&#x2F;x-www-form-urlencoded http:&#x2F;&#x2F;192.168.2.2:8080&#x2F;doseckill
+```shell
+ab -n 2000 -c 300 -p /home/xm/postfile -T application/x-www-form-urlencoded http://192.168.2.2:8080/doseckill
 我们发现库存并没有清零
 这是乐观锁造成的库存遗留问题，部分请求并没能成功执行秒杀，因为事务执行时，重新检测库存数量，发现和最初watch检测的库存数量不一致（乐观锁版本号的机制）
 为了解决这个问题，我们使用Lua脚本解决这个问题
 什么是Lua脚本
-1. Lua是一个小巧的脚本语言，Lua脚本可以很容易的被C&#x2F;C++代码调用，也可以反过来调用C&#x2F;C++的函数，Lua并没有提供强大的库，一个完整的Lua解释器不过200k ,所以Lua不适合作为开发独立应用程序的语言，而是作为嵌入式脚本语言。
+1. Lua是一个小巧的脚本语言，Lua脚本可以很容易的被C/C++代码调用，也可以反过来调用C/C++的函数，Lua并没有提供强大的库，一个完整的Lua解释器不过200k ,所以Lua不适合作为开发独立应用程序的语言，而是作为嵌入式脚本语言。
 
 很多应用程序、游戏使用LUA作为自己的嵌入式脚本语言，以此来实现可配置性、可扩展性。
 
 这其中包括魔兽争霸地图、魔兽世界、博德之门、愤怒的小鸟等众多游戏插件或外挂。
-https:&#x2F;&#x2F;www.w3cschool.cn&#x2F;lua&#x2F;
+https://www.w3cschool.cn/lua/
 
 
 Lua脚本在redis中的优势
 ### 编写Lua脚本
-public class SecKill_redisByScript &#123;
+public class SecKill_redisByScript {
 
-    static String secKillScript &#x3D;
-            &quot;local userid&#x3D;KEYS[1];\r\n&quot; +
-            &quot;local prodid&#x3D;KEYS[2];\r\n&quot; +
-            &quot;local qtkey&#x3D;&#39;sk:&#39;..prodid..:qt;\r\n&quot; +
-            &quot;local usersKey&#x3D;&#39;sk:&#39;..prodid..:user;\r\n&quot; +
-            &quot;local userExists&#x3D;redis.call(sismember,usersKey,userid);\r\n&quot; +
-            &quot;if tonumber(userExists)&#x3D;&#x3D;1 then \r\n&quot; +
-            &quot;   return 2;\r\n&quot; +
-            &quot;end\r\n&quot; +
-            &quot;local num&#x3D; redis.call(get ,qtkey);\r\n&quot; +
-            &quot;if tonumber(num)&lt;&#x3D;0 then \r\n&quot; +
-            &quot;   return 0;\r\n&quot; +
-            &quot;else \r\n&quot; +
-            &quot;   redis.call(decr,qtkey);\r\n&quot; +
-            &quot;   redis.call(sadd,usersKey,userid);\r\n&quot; +
-            &quot;end\r\n&quot; +
-            &quot;return 1&quot; ;
+    static String secKillScript =
+            "local userid=KEYS[1];\r\n" +
+            "local prodid=KEYS[2];\r\n" +
+            "local qtkey='sk:'..prodid..:qt;\r\n" +
+            "local usersKey='sk:'..prodid..:user;\r\n" +
+            "local userExists=redis.call(sismember,usersKey,userid);\r\n" +
+            "if tonumber(userExists)==1 then \r\n" +
+            "   return 2;\r\n" +
+            "end\r\n" +
+            "local num= redis.call(get ,qtkey);\r\n" +
+            "if tonumber(num)&lt;=0 then \r\n" +
+            "   return 0;\r\n" +
+            "else \r\n" +
+            "   redis.call(decr,qtkey);\r\n" +
+            "   redis.call(sadd,usersKey,userid);\r\n" +
+            "end\r\n" +
+            "return 1" ;
 
-    public static boolean doSkillByScript(String userid,String prodid)&#123;
+    public static boolean doSkillByScript(String userid,String prodid){
 
-        Jedis jedis &#x3D; JedisPoolUtil.getJedisPoolInstance().getResource();
+        Jedis jedis = JedisPoolUtil.getJedisPoolInstance().getResource();
 
-        String sha1 &#x3D; jedis.scriptLoad(secKillScript);
-        Object result &#x3D; jedis.evalsha(sha1, 2, userid, prodid);
+        String sha1 = jedis.scriptLoad(secKillScript);
+        Object result = jedis.evalsha(sha1, 2, userid, prodid);
 
-        String reString &#x3D; String.valueOf(result);
-        if (&quot;0&quot;.equals( reString )  ) &#123;
-            System.err.println(&quot;已抢空！！&quot;);
-        &#125;else if(&quot;1&quot;.equals( reString )  )  &#123;
-            System.out.println(&quot;抢购成功！！！！&quot;);
-        &#125;else if(&quot;2&quot;.equals( reString )  )  &#123;
-            System.err.println(&quot;该用户已抢过！！&quot;);
-        &#125;else&#123;
-            System.err.println(&quot;抢购异常！！&quot;);
-        &#125;
+        String reString = String.valueOf(result);
+        if ("0".equals( reString )  ) {
+            System.err.println("已抢空！！");
+        }else if("1".equals( reString )  )  {
+            System.out.println("抢购成功！！！！");
+        }else if("2".equals( reString )  )  {
+            System.err.println("该用户已抢过！！");
+        }else{
+            System.err.println("抢购异常！！");
+        }
         jedis.close();
         return true;
-    &#125;
-&#125;
+    }
+}
 参考：
 尚硅谷-Redis 6 入门到精通 超详细 教程<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
                 
@@ -830,10 +852,10 @@ public class SecKill_redisByScript &#123;
                         <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
                     </ul>
                     <div id="alipay">
-                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                        <img src="/medias/reward/alipay1.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -1101,60 +1123,6 @@ public class SecKill_redisByScript &#123;
 
     <footer class="page-footer bg-color">
     
-        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
-<style>
-    .aplayer .aplayer-lrc p {
-        
-        display: none;
-        
-        font-size: 12px;
-        font-weight: 700;
-        line-height: 16px !important;
-    }
-
-    .aplayer .aplayer-lrc p.aplayer-lrc-current {
-        
-        display: none;
-        
-        font-size: 15px;
-        color: #42b983;
-    }
-
-    
-    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
-        left: -66px !important;
-    }
-
-    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
-        left: 0px !important;
-    }
-
-    
-</style>
-<div class="">
-    
-    <div class="row">
-        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
-                   server="netease"
-                   type="playlist"
-                   id="503838841"
-                   fixed='true'
-                   autoplay='false'
-                   theme='#42b983'
-                   loop='all'
-                   order='random'
-                   preload='auto'
-                   volume='0.7'
-                   list-folded='true'
-        >
-        </meting-js>
-    </div>
-</div>
-
-<script src="/libs/aplayer/APlayer.min.js"></script>
-<script src="/libs/aplayer/Meting.min.js"></script>
-
-    
 
     <div class="container row center-align"
          style="margin-bottom: 0px !important;">
@@ -1193,13 +1161,13 @@ public class SecKill_redisByScript &#123;
             
         </div>
         <div class="col s12 m4 l4 social-link social-statis">
-    <a href="https://github.com/blinkfox" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+    <a href="https://github.com/js6288" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
         <i class="fab fa-github"></i>
     </a>
 
 
 
-    <a href="mailto:1181062873@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:linjingshu6288@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fas fa-envelope-open"></i>
     </a>
 
@@ -1209,7 +1177,7 @@ public class SecKill_redisByScript &#123;
 
 
 
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1181062873" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1181062873" data-position="top" data-delay="50">
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1279897306" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1279897306" data-position="top" data-delay="50">
         <i class="fab fa-qq"></i>
     </a>
 

@@ -16,7 +16,7 @@
 标签的整理、细节的优化
 
 2.前端页面跳转传值
-query &amp;#x3D;&amp;gt; url search">
+query =&amp;gt; url searchParam">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -63,7 +63,9 @@ query &amp;#x3D;&amp;gt; url search">
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 7.3.0"></head>
+<meta name="generator" content="Hexo 7.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
 
 
 <body>
@@ -420,12 +422,32 @@ query &amp;#x3D;&amp;gt; url search">
                 
 
                 
-
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>Update Date:&nbsp;&nbsp;
+                    2025-01-29
+                </div>
                 
 
                 
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
+                    2.3k
+                </div>
+                
 
                 
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
+                    10 Min
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>Read Count:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
             </div>
         </div>
         <hr class="clearfix">
@@ -450,13 +472,13 @@ query &amp;#x3D;&amp;gt; url search">
 <li>标签的整理、细节的优化</li>
 </ol>
 <h3 id="2-前端页面跳转传值"><a href="#2-前端页面跳转传值" class="headerlink" title="2.前端页面跳转传值"></a>2.前端页面跳转传值</h3><ol>
-<li>query &#x3D;&gt; url searchParams，url 后附加参数，传递的值长度有限</li>
+<li>query =&gt; url searchParams，url 后附加参数，传递的值长度有限</li>
 <li>vuex（全局状态管理），搜索页将关键词塞到状态中，搜索结果页从状态取值</li>
 </ol>
 <h3 id="3-Session-共享"><a href="#3-Session-共享" class="headerlink" title="3.Session 共享"></a>3.Session 共享</h3><p>种 session 的时候注意范围，cookie.domain 比如两个域名： aaa.yupi.com bbb.yupi.com 如果要共享 cookie，可以种一个更高层的公共域名，比如 yupi.com</p>
 <h3 id="4-为什么服务器-A-登录后，请求发到服务器-B，不认识该用户？"><a href="#4-为什么服务器-A-登录后，请求发到服务器-B，不认识该用户？" class="headerlink" title="4.为什么服务器 A 登录后，请求发到服务器 B，不认识该用户？"></a>4.为什么服务器 A 登录后，请求发到服务器 B，不认识该用户？</h3><p>用户在 A 登录，所以 session（用户登录信息）存在了 A 上 结果请求 B 时，B 没有用户信息，所以不认识。 <img src="http://img-md-js.linjsblog.top/img/202301032141818.png" alt="image.png"> 解决方案：<strong>共享存储</strong> ，而不是把数据放到单台服务器的内存中 <img src="http://img-md-js.linjsblog.top/img/202301032141373.png" alt="image.png"> 如何共享存储？</p>
 <ol>
-<li>Redis（基于内存的 K &#x2F; V 数据库）此处选择 Redis，因为用户信息读取 &#x2F; 是否登录的判断极其<strong>频繁</strong> ，Redis 基于内存，读写性能很高，简单的数据单机 qps 5w - 10w</li>
+<li>Redis（基于内存的 K / V 数据库）此处选择 Redis，因为用户信息读取 / 是否登录的判断极其<strong>频繁</strong> ，Redis 基于内存，读写性能很高，简单的数据单机 qps 5w - 10w</li>
 <li>MySQL</li>
 <li>文件服务器 ceph</li>
 </ol>
@@ -465,70 +487,70 @@ query &amp;#x3D;&amp;gt; url search">
 <ol>
 <li>引入 redis，能够操作 redis：</li>
 </ol>
-<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token comment">&lt;!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-redis --></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-boot-starter-data-redis<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>2.6.4<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token comment">&lt;!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-redis --&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">&gt;</span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">&gt;</span></span>spring-boot-starter-data-redis<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">&gt;</span></span>2.6.4<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">&gt;</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <ol>
 <li>引入 spring-session 和 redis 的整合，使得自动将 session 存储到 redis 中：</li>
 </ol>
-<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token comment">&lt;!-- https://mvnrepository.com/artifact/org.springframework.session/spring-session-data-redis --></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.session<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-session-data-redis<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>2.6.3<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token comment">&lt;!-- https://mvnrepository.com/artifact/org.springframework.session/spring-session-data-redis --&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">&gt;</span></span>org.springframework.session<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">&gt;</span></span>spring-session-data-redis<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">&gt;</span></span>2.6.3<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">&gt;</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <ol>
 <li>修改 spring-session 存储配置 spring.session.store-type默认是 none，表示存储在单台服务器store-type: redis，表示从 redis 读写 session</li>
 </ol>
 <p>JWT 的优缺点：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/108999941">https://zhuanlan.zhihu.com/p/108999941</a></p>
 <h3 id="6-todo-待优化"><a href="#6-todo-待优化" class="headerlink" title="6.todo 待优化"></a>6.todo 待优化</h3><p>前端：动态展示页面标题、微调格式</p>
-<h2 id="一、页面和功能开发"><a href="#一、页面和功能开发" class="headerlink" title="一、页面和功能开发"></a>一、页面和功能开发</h2><h3 id="1-搜索页面"><a href="#1-搜索页面" class="headerlink" title="1.搜索页面"></a>1.搜索页面</h3><h4 id="（1）-新建UserResultPage-vue，创建页面，同时别忘了在路由里引入这个页面"><a href="#（1）-新建UserResultPage-vue，创建页面，同时别忘了在路由里引入这个页面" class="headerlink" title="（1）.新建UserResultPage.vue，创建页面，同时别忘了在路由里引入这个页面"></a>（1）.新建UserResultPage.vue，创建页面，同时别忘了在路由里引入这个页面</h4><h4 id="（2）-优化SearchPage页面，添加一个搜索按钮，来实现点击提交选中的标签到UserResultPage页面"><a href="#（2）-优化SearchPage页面，添加一个搜索按钮，来实现点击提交选中的标签到UserResultPage页面" class="headerlink" title="（2）.优化SearchPage页面，添加一个搜索按钮，来实现点击提交选中的标签到UserResultPage页面"></a>（2）.优化SearchPage页面，添加一个搜索按钮，来实现点击提交选中的标签到UserResultPage页面</h4><pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">  &lt;div style&#x3D;&quot;padding: 16px&quot;&gt;
-    &lt;van-button block type&#x3D;&quot;primary&quot; @click&#x3D;&quot;doSearchResult&quot;&gt;搜索&lt;&#x2F;van-button&gt;
-  &lt;&#x2F;div&gt;
+<h2 id="一、页面和功能开发"><a href="#一、页面和功能开发" class="headerlink" title="一、页面和功能开发"></a>一、页面和功能开发</h2><h3 id="1-搜索页面"><a href="#1-搜索页面" class="headerlink" title="1.搜索页面"></a>1.搜索页面</h3><h4 id="（1）-新建UserResultPage-vue，创建页面，同时别忘了在路由里引入这个页面"><a href="#（1）-新建UserResultPage-vue，创建页面，同时别忘了在路由里引入这个页面" class="headerlink" title="（1）.新建UserResultPage.vue，创建页面，同时别忘了在路由里引入这个页面"></a>（1）.新建UserResultPage.vue，创建页面，同时别忘了在路由里引入这个页面</h4><h4 id="（2）-优化SearchPage页面，添加一个搜索按钮，来实现点击提交选中的标签到UserResultPage页面"><a href="#（2）-优化SearchPage页面，添加一个搜索按钮，来实现点击提交选中的标签到UserResultPage页面" class="headerlink" title="（2）.优化SearchPage页面，添加一个搜索按钮，来实现点击提交选中的标签到UserResultPage页面"></a>（2）.优化SearchPage页面，添加一个搜索按钮，来实现点击提交选中的标签到UserResultPage页面</h4><pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">  &lt;div style="padding: 16px"&gt;
+    &lt;van-button block type="primary" @click="doSearchResult"&gt;搜索&lt;/van-button&gt;
+  &lt;/div&gt;
 
-import &#123;useRouter&#125; from &#39;vue-router&#39;;
-const router &#x3D; useRouter();
+import {useRouter} from 'vue-router';
+const router = useRouter();
 
-const doSearchResult &#x3D; () &#x3D;&gt; &#123;
-  router.push(&#123;
-    path: &#39;&#x2F;user&#x2F;list&#39;,
-    query: &#123;
+const doSearchResult = () =&gt; {
+  router.push({
+    path: '/user/list',
+    query: {
       tags: activeIds.value
-    &#125;
-  &#125;)
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    }
+  })
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>ps：千万别忘了引入useRouter和定义router常量，我这边没引入但是不报错（比较迷惑人） 显示如下： <img src="http://img-md-js.linjsblog.top/img/202301032141965.png" alt="image.png"> 点击搜索按钮，可观察到路径跳转会带有参数 <img src="http://img-md-js.linjsblog.top/img/202301032141333.png" alt="image.png"></p>
 <h4 id="（3）-完善UserResultPage页面，来显示用户的信息，依旧从vant的组件库寻找合适的组件"><a href="#（3）-完善UserResultPage页面，来显示用户的信息，依旧从vant的组件库寻找合适的组件" class="headerlink" title="（3）.完善UserResultPage页面，来显示用户的信息，依旧从vant的组件库寻找合适的组件"></a>（3）.完善UserResultPage页面，来显示用户的信息，依旧从vant的组件库寻找合适的组件</h4><p>因为用户信息中要包括个人简介，而我们用户中心的数据中并未包含这一字段，现在去添加 具体操作就不演示了，修改表之后DDL语句改变如下 <img src="http://img-md-js.linjsblog.top/img/202301032141059.png" alt="image.png"> 修改数据库之后还并未对后端对应数据库的内容做相应的增加。偷个懒，等下次修改后端时再修改 进入前端的用户对象的规范，也添加这一字段 <img src="http://img-md-js.linjsblog.top/img/202301032141142.png" alt="image.png"> 现在正式进入修改页面环节，在vant文档中复制商品卡片组件 <img src="http://img-md-js.linjsblog.top/img/202301032141450.png" alt="image.png"> <img src="http://img-md-js.linjsblog.top/img/202301032141101.png" alt="image.png"> 复制到UserResultPage页面并修改如下：</p>
-<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">&gt;</span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>van-card</span>
       <span class="token attr-name">:desc</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>mockUser.profile<span class="token punctuation">"</span></span>
-      <span class="token attr-name">:title</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>`$&#123;mockUser.userName&#125; ($&#123;mockUser.planetCode&#125;)`<span class="token punctuation">"</span></span>
+      <span class="token attr-name">:title</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>`${mockUser.userName} (${mockUser.planetCode})`<span class="token punctuation">"</span></span>
       <span class="token attr-name">:thumb</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>mockUser.avatar<span class="token punctuation">"</span></span>
-  <span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span> <span class="token attr-name">#tags</span><span class="token punctuation">></span></span>
-      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>van-tag</span> <span class="token attr-name">plain</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>danger<span class="token punctuation">"</span></span> <span class="token attr-name">v-for</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>tag in user.tags<span class="token punctuation">"</span></span> <span class="token special-attr"><span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token value css language-css"><span class="token property">margin-right</span><span class="token punctuation">:</span> 8px<span class="token punctuation">;</span> <span class="token property">margin-top</span><span class="token punctuation">:</span> 8px</span><span class="token punctuation">"</span></span></span> <span class="token punctuation">></span></span>
-        &#123;&#123;tag&#125;&#125;
-      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>van-tag</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span> <span class="token attr-name">#footer</span><span class="token punctuation">></span></span>
-      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>van-button</span> <span class="token attr-name">size</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>mini<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>联系我<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>van-button</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
-  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>van-card</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">setup</span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
-<span class="token keyword">import</span> <span class="token punctuation">&#123;</span>useRoute<span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">"vue-router"</span><span class="token punctuation">;</span>
-<span class="token keyword">import</span> <span class="token punctuation">&#123;</span>ref<span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">"vue"</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span> <span class="token attr-name">#tags</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>van-tag</span> <span class="token attr-name">plain</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>danger<span class="token punctuation">"</span></span> <span class="token attr-name">v-for</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>tag in user.tags<span class="token punctuation">"</span></span> <span class="token special-attr"><span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token value css language-css"><span class="token property">margin-right</span><span class="token punctuation">:</span> 8px<span class="token punctuation">;</span> <span class="token property">margin-top</span><span class="token punctuation">:</span> 8px</span><span class="token punctuation">"</span></span></span> <span class="token punctuation">&gt;</span></span>
+        {{tag}}
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>van-tag</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span> <span class="token attr-name">#footer</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>van-button</span> <span class="token attr-name">size</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>mini<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>联系我<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>van-button</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>van-card</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">setup</span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript">
+<span class="token keyword">import</span> <span class="token punctuation">{</span>useRoute<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"vue-router"</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span>ref<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"vue"</span><span class="token punctuation">;</span>
 
 <span class="token keyword">const</span> route <span class="token operator">=</span> <span class="token function">useRoute</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">const</span> <span class="token punctuation">&#123;</span>tags<span class="token punctuation">&#125;</span> <span class="token operator">=</span> route<span class="token punctuation">.</span>query<span class="token punctuation">;</span>
+<span class="token keyword">const</span> <span class="token punctuation">{</span>tags<span class="token punctuation">}</span> <span class="token operator">=</span> route<span class="token punctuation">.</span>query<span class="token punctuation">;</span>
 
-<span class="token keyword">const</span> mockUser <span class="token operator">=</span> <span class="token function">ref</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+<span class="token keyword">const</span> mockUser <span class="token operator">=</span> <span class="token function">ref</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
   <span class="token literal-property property">id</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
   <span class="token literal-property property">userName</span><span class="token operator">:</span> <span class="token string">'tianber'</span><span class="token punctuation">,</span>
   <span class="token literal-property property">userAccount</span><span class="token operator">:</span> <span class="token string">'tianber'</span><span class="token punctuation">,</span>
@@ -539,24 +561,24 @@ const doSearchResult &#x3D; () &#x3D;&gt; &#123;
   <span class="token literal-property property">planetCode</span><span class="token operator">:</span> <span class="token string">'981'</span><span class="token punctuation">,</span>
   <span class="token literal-property property">avatar</span><span class="token operator">:</span> <span class="token string">'https://img1.baidu.com/it/u=1645832847,2375824523&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=480&amp;h=480'</span><span class="token punctuation">,</span>
   <span class="token literal-property property">createTime</span><span class="token operator">:</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toDateString</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
-</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
 
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span> <span class="token attr-name">scoped</span><span class="token punctuation">></span></span><span class="token style"><span class="token language-css">
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span> <span class="token attr-name">scoped</span><span class="token punctuation">&gt;</span></span><span class="token style"><span class="token language-css">
 
-</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">&gt;</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>启动，在search路径下选择标签点击搜索，成功跳转到UserResultPage页面，显示如下： <img src="http://img-md-js.linjsblog.top/img/202301032140510.png" alt="image.png"></p>
 <h4 id="4-前端页面已开发完成，现在开发后端，和前端进行对接"><a href="#4-前端页面已开发完成，现在开发后端，和前端进行对接" class="headerlink" title="(4).前端页面已开发完成，现在开发后端，和前端进行对接"></a>(4).前端页面已开发完成，现在开发后端，和前端进行对接</h4><p>对接后端接口，在controller层编写代码</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">//根据标签查询用户</span>
 <span class="token annotation punctuation">@GetMapping</span><span class="token punctuation">(</span><span class="token string">"/search/tags"</span><span class="token punctuation">)</span>
-<span class="token keyword">public</span> <span class="token class-name">BaseResponse</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">List</span><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">></span><span class="token punctuation">></span></span> <span class="token function">searchUsersByTags</span><span class="token punctuation">(</span><span class="token annotation punctuation">@RequestParam</span><span class="token punctuation">(</span>required <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">)</span> <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span> tagNameList<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token class-name">CollectionUtils</span><span class="token punctuation">.</span><span class="token function">isEmpty</span><span class="token punctuation">(</span>tagNameList<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+<span class="token keyword">public</span> <span class="token class-name">BaseResponse</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">List</span><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">&gt;</span><span class="token punctuation">&gt;</span></span> <span class="token function">searchUsersByTags</span><span class="token punctuation">(</span><span class="token annotation punctuation">@RequestParam</span><span class="token punctuation">(</span>required <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">)</span> <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">&gt;</span></span> tagNameList<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token class-name">CollectionUtils</span><span class="token punctuation">.</span><span class="token function">isEmpty</span><span class="token punctuation">(</span>tagNameList<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
         <span class="token keyword">return</span> <span class="token class-name">ResultUtils</span><span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span><span class="token class-name">ErrorCode</span><span class="token punctuation">.</span><span class="token constant">PARAMS_ERROR</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-    <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">></span></span> userList <span class="token operator">=</span> userService<span class="token punctuation">.</span><span class="token function">searchUsersByTags</span><span class="token punctuation">(</span>tagNameList<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">&gt;</span></span> userList <span class="token operator">=</span> userService<span class="token punctuation">.</span><span class="token function">searchUsersByTags</span><span class="token punctuation">(</span>tagNameList<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span> <span class="token class-name">ResultUtils</span><span class="token punctuation">.</span><span class="token function">success</span><span class="token punctuation">(</span>userList<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>debug启动项目，去knife4j接口操作，确保已经登录，传两个参数，回后端看看是否获取参数 <img src="http://img-md-js.linjsblog.top/img/202301032140378.png" alt="image.png"><img src="http://img-md-js.linjsblog.top/img/202301032140925.png" alt="image.png"> 带空参数请求 <img src="http://img-md-js.linjsblog.top/img/202301032140723.png" alt="image.png"> 是我们自己写的报错（请求参数错误)成功！现在回前端对接后端</p>
 <h4 id="5-开发前端接口"><a href="#5-开发前端接口" class="headerlink" title="(5).开发前端接口"></a>(5).开发前端接口</h4><p>首先要在前端引入axios 终端输入</p>
@@ -566,103 +588,103 @@ const doSearchResult &#x3D; () &#x3D;&gt; &#123;
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span> axios <span class="token keyword">from</span> <span class="token string">"axios"</span><span class="token punctuation">;</span>
 
 <span class="token comment">// Set config defaults when creating the instance</span>
-<span class="token keyword">const</span> myAxios <span class="token operator">=</span> axios<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+<span class="token keyword">const</span> myAxios <span class="token operator">=</span> axios<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
     <span class="token literal-property property">baseURL</span><span class="token operator">:</span> <span class="token string">'http://localhost:8080/api'</span><span class="token punctuation">,</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 <span class="token comment">// 添加请求拦截器</span>
-myAxios<span class="token punctuation">.</span>interceptors<span class="token punctuation">.</span>request<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">config</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+myAxios<span class="token punctuation">.</span>interceptors<span class="token punctuation">.</span>request<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">config</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"我要发送请求了,"</span><span class="token punctuation">,</span>config<span class="token punctuation">)</span>
     <span class="token keyword">return</span> config<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">error</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">error</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token comment">// 对请求错误做些什么</span>
     <span class="token keyword">return</span> Promise<span class="token punctuation">.</span><span class="token function">reject</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 <span class="token comment">// 添加响应拦截器</span>
-myAxios<span class="token punctuation">.</span>interceptors<span class="token punctuation">.</span>response<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">response</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+myAxios<span class="token punctuation">.</span>interceptors<span class="token punctuation">.</span>response<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">response</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token comment">// 对响应数据做点什么</span>
     console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"我收到你的响应了,"</span><span class="token punctuation">,</span>response<span class="token punctuation">)</span>
     <span class="token keyword">return</span> response<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">error</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">error</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token comment">// 对响应错误做点什么</span>
     <span class="token keyword">return</span> Promise<span class="token punctuation">.</span><span class="token function">reject</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 <span class="token keyword">export</span> <span class="token keyword">default</span> myAxios<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>在userSearchPage页面新增如下代码用来页面挂载</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token function">onMounted</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token function">onMounted</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
     <span class="token comment">// Make a request for a user with a given ID</span>
-    myAxios<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">'/user/search/tags'</span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span>
-        <span class="token literal-property property">params</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    myAxios<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">'/user/search/tags'</span><span class="token punctuation">,</span><span class="token punctuation">{</span>
+        <span class="token literal-property property">params</span><span class="token operator">:</span> <span class="token punctuation">{</span>
             <span class="token literal-property property">tagNameList</span><span class="token operator">:</span> tags
-        <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
-    <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">response</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">response</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
         console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'/user/search/tags succeed'</span><span class="token punctuation">,</span>response<span class="token punctuation">)</span><span class="token punctuation">;</span>
         Toast<span class="token punctuation">.</span><span class="token function">success</span><span class="token punctuation">(</span><span class="token string">'请求成功'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
-    <span class="token punctuation">.</span><span class="token function">catch</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">error</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">catch</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">error</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
         console<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span><span class="token string">'/user/search/tags error'</span><span class="token punctuation">,</span>error<span class="token punctuation">)</span><span class="token punctuation">;</span>
         Toast<span class="token punctuation">.</span><span class="token function">fail</span><span class="token punctuation">(</span><span class="token string">'请求失败'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p><img src="http://img-md-js.linjsblog.top/img/202301032139009.png" alt="image.png"> 跨域了，我们在后端解决这个问题 <img src="http://img-md-js.linjsblog.top/img/202301032139891.png" alt="image.png"> <strong>踩坑处：这边一开始不要带有参数请求，不然会一直显示跨域（也不知道是什么原因造成的，希望有大佬解答）</strong> 再次运行（刷新） 发现路径后面带有的参数不合规范，带有[]。我们这边可以引入qs去用于参数序列化,处理发送请求的参数 <img src="http://img-md-js.linjsblog.top/img/202301032139793.png" alt="image.png"> <img src="http://img-md-js.linjsblog.top/img/202301032139664.png" alt="image.png"> **踩坑处：这边又踩了大坑，可能由于axios的版本问题，会报错：Uncaught (in promise) ** <strong>{message: ‘options must be an object’, name: ‘AxiosError’, code: ‘ERR_BAD_OPTION_VALUE’, stack: ‘AxiosError: options must be an object\n at Objec…ji.com&#x2F;static&#x2F;js&#x2F;chunk-libs.c096185b.js:42:41367)’}………….</strong> axios版本如果是比较新的，要按照上图所示写，再次刷新成功获取 <img src="http://img-md-js.linjsblog.top/img/202301032139331.png" alt="image.png"> debug启动，打个断点，再次刷新，可以在后端观察到成功获取前端的参数 <img src="http://img-md-js.linjsblog.top/img/202301032139835.png" alt="image.png"> 现在要将数据库对接上，不再使用假数据，首先往数据库里添加假数据（尽量详细) 修改onMounted，修改如下</p>
-<pre class="line-numbers language-none"><code class="language-none">const userList &#x3D; ref([]);&#x2F;&#x2F;存放用户列表
+<p><img src="http://img-md-js.linjsblog.top/img/202301032139009.png" alt="image.png"> 跨域了，我们在后端解决这个问题 <img src="http://img-md-js.linjsblog.top/img/202301032139891.png" alt="image.png"> <strong>踩坑处：这边一开始不要带有参数请求，不然会一直显示跨域（也不知道是什么原因造成的，希望有大佬解答）</strong> 再次运行（刷新） 发现路径后面带有的参数不合规范，带有[]。我们这边可以引入qs去用于参数序列化,处理发送请求的参数 <img src="http://img-md-js.linjsblog.top/img/202301032139793.png" alt="image.png"> <img src="http://img-md-js.linjsblog.top/img/202301032139664.png" alt="image.png"> **踩坑处：这边又踩了大坑，可能由于axios的版本问题，会报错：Uncaught (in promise) ** <strong>{message: ‘options must be an object’, name: ‘AxiosError’, code: ‘ERR_BAD_OPTION_VALUE’, stack: ‘AxiosError: options must be an object\n at Objec…ji.com/static/js/chunk-libs.c096185b.js:42:41367)’}………….</strong> axios版本如果是比较新的，要按照上图所示写，再次刷新成功获取 <img src="http://img-md-js.linjsblog.top/img/202301032139331.png" alt="image.png"> debug启动，打个断点，再次刷新，可以在后端观察到成功获取前端的参数 <img src="http://img-md-js.linjsblog.top/img/202301032139835.png" alt="image.png"> 现在要将数据库对接上，不再使用假数据，首先往数据库里添加假数据（尽量详细) 修改onMounted，修改如下</p>
+<pre class="line-numbers language-none"><code class="language-none">const userList = ref([]);//存放用户列表
 
-onMounted ( async ()&#x3D;&gt;&#123;     &#x2F;&#x2F;异步调用
-  const userListData &#x3D; await myAxios.get(&#39;&#x2F;user&#x2F;search&#x2F;tags&#39;,&#123;
-    params: &#123;
+onMounted ( async ()=&gt;{     //异步调用
+  const userListData = await myAxios.get('/user/search/tags',{
+    params: {
       tagNameList: tags
-    &#125;,
-    paramsSerializer: &#123;
-      serialize: function(params)&#123;
-        &#x2F;&#x2F; return qs.stringify(params,&#123;arrayFormat:&#39;repeat&#39;&#125;)
-        return qs.stringify(params,&#123;indices: false&#125;)
-      &#125;
-    &#125;
-  &#125;)
-      .then(function (response)&#123;
-        console.log(&#39;&#x2F;user&#x2F;search&#x2F;tags succeed&#39;,response);
-        Toast.success(&#39;请求成功!&#39;);
-        return response.data?.data;  &#x2F;&#x2F;返回数据  ?.可选链操作符，避免数据为null或undefined时报错
-      &#125;)
-      .catch(function (error)&#123;
-        console.error(&#39;&#x2F;user&#x2F;search&#x2F;tags error&#39;,error);
-        Toast.fail(&#39;请求失败!&#39;);
-      &#125;)
-  &#x2F;&#x2F; console.log(userListData)
-  if(userListData)&#123;
-    userListData.forEach(user &#x3D;&gt; &#123;
-      if(user.tags)&#123;
-        user.tags &#x3D; JSON.parse(user.tags)
-      &#125;
-    &#125;)
-    userList.value &#x3D; userListData;
-  &#125;
-&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    },
+    paramsSerializer: {
+      serialize: function(params){
+        // return qs.stringify(params,{arrayFormat:'repeat'})
+        return qs.stringify(params,{indices: false})
+      }
+    }
+  })
+      .then(function (response){
+        console.log('/user/search/tags succeed',response);
+        Toast.success('请求成功!');
+        return response.data?.data;  //返回数据  ?.可选链操作符，避免数据为null或undefined时报错
+      })
+      .catch(function (error){
+        console.error('/user/search/tags error',error);
+        Toast.fail('请求失败!');
+      })
+  // console.log(userListData)
+  if(userListData){
+    userListData.forEach(user =&gt; {
+      if(user.tags){
+        user.tags = JSON.parse(user.tags)
+      }
+    })
+    userList.value = userListData;
+  }
+})<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><img src="http://img-md-js.linjsblog.top/img/202301032139754.png" alt="image.png"> forEach函数会显示没有这个函数，写成userListData?.data.forEach编译不会报错但运行会报错，所以不要管编译报错，照着鱼皮的写。 踩坑处：注意数据库里的逻辑删除是不是1（所以数据尽量多写点），我这边由于没仔细看，“男”标签就两个，一个是被逻辑删除了，结果只显示一个，还以为循环出错，查了好久。。。 显示如下： <img src="http://img-md-js.linjsblog.top/img/202301032139981.png" alt="image.png"><img src="http://img-md-js.linjsblog.top/img/202301032139017.png" alt="image.png"></p>
 <h2 id="二、改造用户中心，把单机登录改为分布式-session-登录"><a href="#二、改造用户中心，把单机登录改为分布式-session-登录" class="headerlink" title="二、改造用户中心，把单机登录改为分布式 session 登录"></a>二、改造用户中心，把单机登录改为分布式 session 登录</h2><h4 id="1-安装redis和管理工具quickredis"><a href="#1-安装redis和管理工具quickredis" class="headerlink" title="(1).安装redis和管理工具quickredis"></a>(1).安装redis和管理工具quickredis</h4><p>Redis 5.0.14 下载： 链接：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1XcsAIrdeesQAyQU2lE3cOg">https://pan.baidu.com/s/1XcsAIrdeesQAyQU2lE3cOg</a> 提取码：vkoi redis 管理工具 quick redis：<a target="_blank" rel="noopener" href="https://quick123.net/">https://quick123.net/</a></p>
-<h4 id="2-在springboot里引入redis，能够操作redis"><a href="#2-在springboot里引入redis，能够操作redis" class="headerlink" title="(2).在springboot里引入redis，能够操作redis"></a>(2).在springboot里引入redis，能够操作redis</h4><pre class="line-numbers language-none"><code class="language-none">&lt;!-- https:&#x2F;&#x2F;mvnrepository.com&#x2F;artifact&#x2F;org.springframework.boot&#x2F;spring-boot-starter-data-redis --&gt;
+<h4 id="2-在springboot里引入redis，能够操作redis"><a href="#2-在springboot里引入redis，能够操作redis" class="headerlink" title="(2).在springboot里引入redis，能够操作redis"></a>(2).在springboot里引入redis，能够操作redis</h4><pre class="line-numbers language-none"><code class="language-none">&lt;!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-redis --&gt;
 &lt;dependency&gt;
-    &lt;groupId&gt;org.springframework.boot&lt;&#x2F;groupId&gt;
-    &lt;artifactId&gt;spring-boot-starter-data-redis&lt;&#x2F;artifactId&gt;
-    &lt;version&gt;2.6.4&lt;&#x2F;version&gt;
-&lt;&#x2F;dependency&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-data-redis&lt;/artifactId&gt;
+    &lt;version&gt;2.6.4&lt;/version&gt;
+&lt;/dependency&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h4 id="3-引入-spring-session-和-redis-的整合，使得自动将-session-存储到-redis-中："><a href="#3-引入-spring-session-和-redis-的整合，使得自动将-session-存储到-redis-中：" class="headerlink" title="(3).引入 spring-session 和 redis 的整合，使得自动将 session 存储到 redis 中："></a>(3).引入 spring-session 和 redis 的整合，使得自动将 session 存储到 redis 中：</h4><pre class="line-numbers language-none"><code class="language-none">&lt;!-- https:&#x2F;&#x2F;mvnrepository.com&#x2F;artifact&#x2F;org.springframework.session&#x2F;spring-session-data-redis --&gt;
+<h4 id="3-引入-spring-session-和-redis-的整合，使得自动将-session-存储到-redis-中："><a href="#3-引入-spring-session-和-redis-的整合，使得自动将-session-存储到-redis-中：" class="headerlink" title="(3).引入 spring-session 和 redis 的整合，使得自动将 session 存储到 redis 中："></a>(3).引入 spring-session 和 redis 的整合，使得自动将 session 存储到 redis 中：</h4><pre class="line-numbers language-none"><code class="language-none">&lt;!-- https://mvnrepository.com/artifact/org.springframework.session/spring-session-data-redis --&gt;
 &lt;dependency&gt;
-    &lt;groupId&gt;org.springframework.session&lt;&#x2F;groupId&gt;
-    &lt;artifactId&gt;spring-session-data-redis&lt;&#x2F;artifactId&gt;
-    &lt;version&gt;2.6.3&lt;&#x2F;version&gt;
-&lt;&#x2F;dependency&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    &lt;groupId&gt;org.springframework.session&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-session-data-redis&lt;/artifactId&gt;
+    &lt;version&gt;2.6.3&lt;/version&gt;
+&lt;/dependency&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>修改 spring-session 存储配置 <code>spring.session.store-type</code> 默认是 none，表示存储在单台服务器 store-type: redis，表示从 redis 读写 session ,配置如下： <img src="http://img-md-js.linjsblog.top/img/202301032139093.png" alt="image.png"></p>
 <h4 id="4-测试session共享"><a href="#4-测试session共享" class="headerlink" title="(4).测试session共享"></a>(4).测试session共享</h4><p>为了模拟多服务器，我们需要打包项目，在另一个端口启动，这里是8081 先打包，后在<strong>target目录</strong>下打开终端运行下面的代码</p>
-<pre class="line-numbers language-none"><code class="language-none">java -jar .\user-center-backend-0.0.1-SNAPSHOT.jar --server.port&#x3D;8081<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-none"><code class="language-none">java -jar .\user-center-backend-0.0.1-SNAPSHOT.jar --server.port=8081<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>运行，成功启动8080和8081端口的knife4j接口进行操作，先在8080端口登录并获取当前登录用户信息 <img src="http://img-md-js.linjsblog.top/img/202301032139981.png" alt="image.png"> 在8081端口查看当前登录用户信息，也能查询到 <img src="http://img-md-js.linjsblog.top/img/202301032139533.png" alt="image.png"> 使用QuickRedis查看session是否存入redis中 <img src="http://img-md-js.linjsblog.top/img/202301032139507.png" alt="image.png"></p>
 <h2 id="over-！！！！！！！！！！！"><a href="#over-！！！！！！！！！！！" class="headerlink" title="over ！！！！！！！！！！！"></a>over ！！！！！！！！！！！</h2>
@@ -783,10 +805,10 @@ onMounted ( async ()&#x3D;&gt;&#123;     &#x2F;&#x2F;异步调用
                         <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
                     </ul>
                     <div id="alipay">
-                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                        <img src="/medias/reward/alipay1.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -1050,60 +1072,6 @@ onMounted ( async ()&#x3D;&gt;&#123;     &#x2F;&#x2F;异步调用
 
     <footer class="page-footer bg-color">
     
-        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
-<style>
-    .aplayer .aplayer-lrc p {
-        
-        display: none;
-        
-        font-size: 12px;
-        font-weight: 700;
-        line-height: 16px !important;
-    }
-
-    .aplayer .aplayer-lrc p.aplayer-lrc-current {
-        
-        display: none;
-        
-        font-size: 15px;
-        color: #42b983;
-    }
-
-    
-    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
-        left: -66px !important;
-    }
-
-    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
-        left: 0px !important;
-    }
-
-    
-</style>
-<div class="">
-    
-    <div class="row">
-        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
-                   server="netease"
-                   type="playlist"
-                   id="503838841"
-                   fixed='true'
-                   autoplay='false'
-                   theme='#42b983'
-                   loop='all'
-                   order='random'
-                   preload='auto'
-                   volume='0.7'
-                   list-folded='true'
-        >
-        </meting-js>
-    </div>
-</div>
-
-<script src="/libs/aplayer/APlayer.min.js"></script>
-<script src="/libs/aplayer/Meting.min.js"></script>
-
-    
 
     <div class="container row center-align"
          style="margin-bottom: 0px !important;">
@@ -1142,13 +1110,13 @@ onMounted ( async ()&#x3D;&gt;&#123;     &#x2F;&#x2F;异步调用
             
         </div>
         <div class="col s12 m4 l4 social-link social-statis">
-    <a href="https://github.com/blinkfox" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+    <a href="https://github.com/js6288" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
         <i class="fab fa-github"></i>
     </a>
 
 
 
-    <a href="mailto:1181062873@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:linjingshu6288@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fas fa-envelope-open"></i>
     </a>
 
@@ -1158,7 +1126,7 @@ onMounted ( async ()&#x3D;&gt;&#123;     &#x2F;&#x2F;异步调用
 
 
 
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1181062873" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1181062873" data-position="top" data-delay="50">
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1279897306" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1279897306" data-position="top" data-delay="50">
         <i class="fab fa-qq"></i>
     </a>
 

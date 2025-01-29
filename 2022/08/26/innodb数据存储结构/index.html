@@ -52,7 +52,9 @@
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 7.3.0"></head>
+<meta name="generator" content="Hexo 7.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
 
 
 <body>
@@ -389,12 +391,32 @@
                 
 
                 
-
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>Update Date:&nbsp;&nbsp;
+                    2025-01-29
+                </div>
                 
 
                 
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
+                    11k
+                </div>
+                
 
                 
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
+                    39 Min
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>Read Count:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
             </div>
         </div>
         <hr class="clearfix">
@@ -411,20 +433,20 @@
                 <h1 id="InnoDB数据存储结构"><a href="#InnoDB数据存储结构" class="headerlink" title="InnoDB数据存储结构"></a>InnoDB数据存储结构</h1><h2 id="1-数据库的存储结构：页"><a href="#1-数据库的存储结构：页" class="headerlink" title="1. 数据库的存储结构：页"></a>1. 数据库的存储结构：页</h2><p>索引结构给我们提供了高效的索引方式，不过索引信息以及数据记录都是保存在文件上的，确切说是存储在页结构中。另一方面，索引是在存储引擎中实现的，MySQL服务器上的存储引擎负责对表中数据的读取和写入工作。不同存储引擎中存放的格式一般是不同的，甚至有的存储引擎比如Memory都不用磁盘来存储数据。</p>
 <p>由于InnoDB是MySQL的默认存储引擎，所以本章剖析InnoDB存储引擎的数据存储结构。</p>
 <h3 id="1-1-磁盘和内存交互的基本单位"><a href="#1-1-磁盘和内存交互的基本单位" class="headerlink" title="1.1 磁盘和内存交互的基本单位"></a>1.1 磁盘和内存交互的基本单位</h3><p>lnnoDB将数据划分为若干个页，InnoDB中页的大小默认为<strong>16KB</strong>。</p>
-<p>以页作为磁盘和内存之间交互的基本单位，也就是一次最少从磁盘中读取16KB的内容到内存中，一次最少把内存中的16KB内容刷新到磁盘中。也就是说，<strong>在数据库中，不论读一行，还是读多行，都是将这些行所在的页进行加载。也就是说，数据库管理存储空间的基本单位是页(Page)，数据库I&#x2F;O操作的最小单位是页</strong>。一个页中可以存储多个行记录。</p>
+<p>以页作为磁盘和内存之间交互的基本单位，也就是一次最少从磁盘中读取16KB的内容到内存中，一次最少把内存中的16KB内容刷新到磁盘中。也就是说，<strong>在数据库中，不论读一行，还是读多行，都是将这些行所在的页进行加载。也就是说，数据库管理存储空间的基本单位是页(Page)，数据库I/O操作的最小单位是页</strong>。一个页中可以存储多个行记录。</p>
 <blockquote>
 <p>记录是按照行来存储的，但是数据库的读取并不以行为单位，否则一次读取（也就是一次IO操作）只能处理一行数据，效率会非常低。</p>
 </blockquote>
 <p><img src="http://img-md-js.linjsblog.top/img/202208241633007.png" alt="image-20220824163339116"></p>
 <h3 id="1-2-页结构概述"><a href="#1-2-页结构概述" class="headerlink" title="1.2 页结构概述"></a>1.2 页结构概述</h3><p>页a、页b、页c …页n这些页可以<code>不在物理结构上</code>相连，只要通过<code>双向链表</code>相关联即可。每个数据页中的记录会按照主键值从小到大的顺序组成一个<code>单向链表</code>，每个数据页都会为存储在它里边的记录生成一个<code>页目录</code>，在通过主键查找某条记录的时候可以在页目录中使用<code>二分法</code>快速定位到对应的槽，然后再遍历该槽对应分组中的记录即可快速找到指定的记录。</p>
 <h3 id="1-3-页结构的大小"><a href="#1-3-页结构的大小" class="headerlink" title="1.3 页结构的大小"></a>1.3 页结构的大小</h3><p>不同的数据库管理系统（简称DBMS ）的页大小不同。比如在MySQL的InnoDB存储引擎中，默认页的大小是<code>16KB</code>，我们可以通过下面的命令来进行查看:</p>
-<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">mysql&gt; show variables like &quot;%innodb_page_size%&quot;;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">mysql&gt; show variables like "%innodb_page_size%";<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p><img src="http://img-md-js.linjsblog.top/img/202208241628312.png" alt="image-20220824162844261"></p>
 <p>SQL Server中页的大小为 8KB，而在Oracle中我们用术语“块”(Block)来代表“页”，Oralce支持的块大小为2KB，4KB，8KB，16KB，32KB和64KB。</p>
 <h3 id="1-4-页的上层结构"><a href="#1-4-页的上层结构" class="headerlink" title="1.4 页的上层结构"></a>1.4 页的上层结构</h3><p>另外在数据库中，还存在着区(Extent)、段(Segment)和表空间(Tablespace)的概念。行、页、区、段、表空间的关系如下图所示:</p>
 <p><img src="http://img-md-js.linjsblog.top/img/202208241642406.png" alt="image-20220824164239549"></p>
-<p>区(Extent)是比页大一级的存储结构，在InnoDB存储引擎中，一个区会分配<code>64个连续的页</code>。因为InnoDB中的页大小默认是16KB，所以一个区的大小是64*16KB&#x3D; <code>1MB</code>。</p>
+<p>区(Extent)是比页大一级的存储结构，在InnoDB存储引擎中，一个区会分配<code>64个连续的页</code>。因为InnoDB中的页大小默认是16KB，所以一个区的大小是64*16KB= <code>1MB</code>。</p>
 <p>段(Segment)由一个或多个区组成，区在文件系统是一个连续分配的空间(在InnoDB中是连续的64个页)，不过在段中不要求区与区之间是相邻的。<code>段是数据库中的分配单位</code>，<code>不同类型的数据库对象以不同的段形式存在</code>。当我们创建数据表、索引的时候，就会相应创建对应的段，比如创建一张表时会创建一个表段，创建一个索引时会创建一个索引段。</p>
 <p>表空间（Tablespace）是一个逻辑容器，表空间存储的对象是段，在一个表空间中可以有一个或多个段，但是一个段只能属于一个表空间。数据库由一个或多个表空间组成，表空间从管理上可以划分为<code>系统表空间、用户表空间、撤销表空间、临时表空间</code>等。</p>
 <h2 id="2-页的内部结构"><a href="#2-页的内部结构" class="headerlink" title="2.页的内部结构"></a>2.页的内部结构</h2><p>页如果按类型划分的话，常见的有<code>数据页（保存B+树节点)、系统页、Undo页</code>和<code>事务数据页</code>等。<code>数据页</code>是我们最常使用的页。</p>
@@ -477,7 +499,7 @@
 <p><img src="http://img-md-js.linjsblog.top/img/202208241930409.png" alt="image-20220824193036460"></p>
 <h3 id="第3部分：Page-Directory-页目录-、Page-Header-页面头部"><a href="#第3部分：Page-Directory-页目录-、Page-Header-页面头部" class="headerlink" title="第3部分：Page Directory(页目录)、Page Header(页面头部)"></a>第3部分：Page Directory(页目录)、Page Header(页面头部)</h3><h4 id="1-页目录（Page-Directory）"><a href="#1-页目录（Page-Directory）" class="headerlink" title="1. 页目录（Page Directory）"></a>1. 页目录（Page Directory）</h4><p><strong>为什么需要页目录</strong></p>
 <p>在页中，记录是以单向链表的形式进行存储的。单向链表的特点就是插入、删除非常方便，但是检索效率不高，最差的情况下需要遍历链表上的所有节点才能完成检索。因此在页结构中专门设计了页目录这个模块，专门给记录做一个目录，通过二分查找法的方式进行检索，提升效率。</p>
-<p>需求:根据主键值查找页中的某条记录，如何实现快速查找呢?SELECT*FROM page_demo WHERE c1 &#x3D; 3;</p>
+<p>需求:根据主键值查找页中的某条记录，如何实现快速查找呢?SELECT*FROM page_demo WHERE c1 = 3;</p>
 <p><strong>方式1: 顺序查找</strong> 从Infimum记录（最小记录）开始，沿着链表一直往后找，总有一天会找到（或者找不到)，在找的时候还能投机取巧，因为链表中各个记录的值是按照从小到大顺序排列的，所以当链表的某个节点代表的记录的主键值大于你想要查找的主键值时，你就可以停止查找了，因为该节点后边的节点的主键值依次递增。 如果一个页中存储了非常多的记录，这么查找性能很差。</p>
 <p><strong>方式2: 使用页目录，二分法查找</strong></p>
 <ol>
@@ -548,25 +570,25 @@
 1 row in set (0.01 sec)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>也可以使用如下语法查看具体表使用的行格式:</p>
-<pre class="line-numbers language-none"><code class="language-none">SHOW TABLE STATUS like &#39;表名&#39;\G<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-none"><code class="language-none">SHOW TABLE STATUS like '表名'\G<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <h3 id="3-1-指定行格式的语法"><a href="#3-1-指定行格式的语法" class="headerlink" title="3.1 指定行格式的语法"></a>3.1 指定行格式的语法</h3><p>在创建或修改表的语句中指定行格式:</p>
-<pre class="line-numbers language-none"><code class="language-none">CREATE TABLE 表名(列的信息) ROW_FORMAT&#x3D;行格式名称
-ALTER TABLE 表名 ROW_FORMAT&#x3D;行格式名称<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-none"><code class="language-none">CREATE TABLE 表名(列的信息) ROW_FORMAT=行格式名称
+ALTER TABLE 表名 ROW_FORMAT=行格式名称<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>举例:</p>
 <pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">mysql&gt; CREATE TABLE record_test_table (-col1 VARCHAR(8),
 -&gt;   col2 VARCHAR(8)NOT NULL,
 -&gt;   col3 CHAR(8),
 -&gt;   col4 VARCHAR(8)
--&gt;   )CHARSET&#x3D;ascii ROW_FORMAT&#x3D;COMPACT;
+-&gt;   )CHARSET=ascii ROW_FORMAT=COMPACT;
 Query OK, 0 rows affected (0.03 sec)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>向表中插入两条记录:</p>
 <pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">INSERT INTO record_test_table(col1, col2, col3,col4)
 VALUES
-(&#39;zhangsan&#39;, &#39;lisi&#39; , &#39;wangwu&#39;, &#39;songhk&#39;),
-(&#39;tong&#39;, &#39;chen&#39;,NULL,NULL);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+('zhangsan', 'lisi' , 'wangwu', 'songhk'),
+('tong', 'chen',NULL,NULL);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="3-2-COMPACT行格式"><a href="#3-2-COMPACT行格式" class="headerlink" title="3.2 COMPACT行格式"></a>3.2 COMPACT行格式</h3><p><img src="http://img-md-js.linjsblog.top/img/202208261717306.png" alt="image-20220826171730258"></p>
 <h4 id="3-2-1-变长字段长度列表"><a href="#3-2-1-变长字段长度列表" class="headerlink" title="3.2.1 变长字段长度列表"></a>3.2.1 变长字段长度列表</h4><p>MySQL支持一些变长的数据类型，比如VARCHAR(M)、VARBINARY(M)、TEXT类型，BLOB类型，这些数据类型修饰列称为变长字段，变长字段中存储多少字节的数据不是固定的，所以我们在存储真实数据的时候需要顺便把这些数据占用的字节数也存起来。<strong>在Compact行格式中，把所有变长字段的真实数据占用的字节长度都存放在记录的开头部位，从而形成一个变长字段长度列表。</strong></p>
@@ -586,7 +608,7 @@ VALUES
 <li><p>二进制位的值为0时，代表该列的值不为NULL。</p>
 </li>
 </ol>
-<p>例如:字段a、b、c，其中a是主键，在某一行中存储的数依次是a&#x3D;1、b&#x3D;null、c&#x3D;2。那么Compact行格式中的NULL值列表中存储:01。第一个0表示c不为null，第二个1表示b是null。这里之所以没有a是因为数据库会自动跳过主键，因为主键肯定是非NULL且唯一的，在NULL值列表的数据中就会自动跳过主键。</p>
+<p>例如:字段a、b、c，其中a是主键，在某一行中存储的数依次是a=1、b=null、c=2。那么Compact行格式中的NULL值列表中存储:01。第一个0表示c不为null，第二个1表示b是null。这里之所以没有a是因为数据库会自动跳过主键，因为主键肯定是非NULL且唯一的，在NULL值列表的数据中就会自动跳过主键。</p>
 <p>record_test_table的两条记录的NULL值列表就如下:</p>
 <p><img src="http://img-md-js.linjsblog.top/img/202208261724846.png" alt="image-20220826172405656"></p>
 <p>第一条记录：</p>
@@ -598,7 +620,7 @@ VALUES
 -&gt;c1 INT,
 -&gt;c2 IINl,
 -&gt;c3 VARCHAR( 10000),-&gt; PRIMARY KEY (c1)
--&gt; )CHARSET&#x3D;ascii RoW_FORMAT&#x3D;Compact;
+-&gt; )CHARSET=ascii RoW_FORMAT=Compact;
 
 Query OK, 0 rows affected (0.03 sec)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
@@ -611,7 +633,7 @@ Query OK, 0 rows affected (0.03 sec)<span aria-hidden="true" class="line-numbers
 <p>插入数据</p>
 <pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">INSERT INTO page_demo VALUES
 
-(1,100, &#39;song&#39;),(2，200, &#39;tong&#39;),(3,300, &#39;zhan&#39;),(4，400,&#39;lisi&#39;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+(1,100, 'song'),(2，200, 'tong'),(3,300, 'zhan'),(4，400,'lisi');<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>图示如下：</p>
 <p><img src="http://img-md-js.linjsblog.top/img/202208241914887.png" alt="image-20220824191433878"></p>
@@ -640,7 +662,7 @@ Query OK, 0 rows affected (0.03 sec)<span aria-hidden="true" class="line-numbers
 <ol>
 <li><p>演示：删除操作</p>
 <p>从表中删除掉一条记录，这个链表也是会跟着变化：</p>
-<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">mysql&gt; DELETE FROM page_demo WHERE c1 &#x3D; 2;
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">mysql&gt; DELETE FROM page_demo WHERE c1 = 2;
 
 Query OK, 1 row affected (0.02 sec)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
@@ -651,7 +673,7 @@ Query OK, 1 row affected (0.02 sec)<span aria-hidden="true" class="line-numbers-
 </li>
 <li><p>演示：添加操作</p>
 <p>主键值为2的记录被我们删掉了，但是存储空间却没有回收，如果我们再次把这条记录插入到表中，会发生什么事呢?</p>
-<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">mysql&gt; INSERT INTO page_demo VALUES(2,200, &#39;tong&#39;);
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">mysql&gt; INSERT INTO page_demo VALUES(2,200, 'tong');
 Query OK, 1 row affected (0.00 sec)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>我们看一下记录情况</p>
@@ -669,7 +691,7 @@ Query OK, 1 row affected (0.00 sec)<span aria-hidden="true" class="line-numbers-
 <p>很多DBA喜欢MySQL数据库提供的VARCHAR(M)类型，认为可以存放65535字节。这是真的吗?如果我们使用ascii字符集的话，一个字符就代表一个字节，我们看看VARCHAR(65535)是否可用。</p>
 <pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">CREATE TABLEvarchar_size_demo(
 c VARCHAR(65535)
-)CHARSET&#x3D;ascii ROW_FORMAT&#x3D;Compact;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+)CHARSET=ascii ROW_FORMAT=Compact;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>结果如下:</p>
 <pre class="line-numbers language-none"><code class="language-none">ERROR 1118(42000):Row size too large.The maximum row size for the used tabletype, not counting BLOBs, is 65535.This includes storage overhead, check the manual.You have to change some columns to TEXT or BLOBs<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
@@ -679,7 +701,7 @@ c VARCHAR(65535)
 <p>如果该VARCHAR类型的列没有NOT NULL属性，那最多只能存储65532个字节的数据，因为变长字段的长度占用2个字节，NULL值标识需要占用1个字节。</p>
 <pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">CREATE TABLE varchar_size_demo(
 c VARCHAR(65532)
-)CHARSET&#x3D;ascii ROW_FORMAT&#x3D;Compact;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+)CHARSET=ascii ROW_FORMAT=Compact;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>通过上面的案例，我们可以知道一个页的大小一般是16KB，也就是16384字节，而一个VARCHAR(M)类型的列就最多可以存储65533个字节，这样就可能出现一个页存放不了一条记录，这种现象称为<strong>行溢出</strong>。</p>
 <p>在Compact和Reduntant行格式中，对于占用存储空间非常大的列，在记录的真实数据处只会存储该列的一部分数据，把剩余的数据分散存储在几个其他的页中进行分页存储，然后记录的真实数据处用20个字节存储指向这些页的地址（当然这20个字节中还包括这些分散在其他页面中的数据的占用的字节数），从而可以找到剩余数据所在的页。</p>
@@ -693,7 +715,7 @@ c VARCHAR(65532)
 <p><img src="http://img-md-js.linjsblog.top/img/202208311731348.png" alt="image-20220831173151130"></p>
 <h3 id="3-4-Redundant-行格式"><a href="#3-4-Redundant-行格式" class="headerlink" title="3.4 Redundant 行格式"></a>3.4 Redundant 行格式</h3><p>Redundant是MySQL 5.0版本之前InnoDB的行记录存储方式，MySQL 5.0支持Redundant是为了兼容之前版本的页格式。</p>
 <p>现在我们把表record_test__table的行格式修改为Redundant:</p>
-<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">ALTER TABLE record_test_table ROW_FORMAT&#x3D;Redundant;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">ALTER TABLE record_test_table ROW_FORMAT=Redundant;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>Query OK, 0 rows affected (0.05 sec)</p>
 <p><img src="http://img-md-js.linjsblog.top/img/202208311734045.png" alt="image-20220831173447519"></p>
@@ -723,13 +745,13 @@ c VARCHAR(65532)
 <li>Redundant行格式多了n_field和1byte_offs_flag这两个属性。</li>
 <li>Redundant行格式没有record_type这个属性。</li>
 </ul>
-<h2 id="4-区、段、碎片区"><a href="#4-区、段、碎片区" class="headerlink" title="4. 区、段、碎片区"></a>4. 区、段、碎片区</h2><h3 id="4-1-为什么要有区"><a href="#4-1-为什么要有区" class="headerlink" title="4.1 为什么要有区"></a>4.1 为什么要有区</h3><p>B+树的每一层中的页都会形成一个双向链表，如果是以页为单位来分配存储空间的话，双向链表相邻的两个页之间的物理位置可能离得非常远。我们介绍B+树索引的适用场景的时候特别提到范围查询只需要定位到最左边的记录和最右边的记录，然后沿着双向链表一直扫描就可以了，而如果链表中相邻的两个页物理位置离得非常远，就是所谓的随机I&#x2F;O。再一次强调，磁盘的速度和内存的速度差了好几个数量级，随机I&#x2F;O是非常慢的，所以我们应该尽量让链表中相邻的页的物理位置也相邻，这样进行范围查询的时候才可以使用所谓的顺序I&#x2F;O。</p>
-<p>引入区的概念，一个区就是在物理位置上连续的64个页。因为InnoDB中的页大小默认是16KB，所以一个区的大小是64*16KB&#x3D; 1MB。在表中数据量大的时候，为某个索引分配空间的时候就不再按照页为单位分配了，而是按照区为单位分配，甚至在表中的数据特别多的时候，可以一次性分配多个连续的区。虽然可能造成一点点空间的浪费(数据不足以填充满整个区)，但是从性能角度看，可以消除很多的随机I&#x2F;O，功大于过!</p>
+<h2 id="4-区、段、碎片区"><a href="#4-区、段、碎片区" class="headerlink" title="4. 区、段、碎片区"></a>4. 区、段、碎片区</h2><h3 id="4-1-为什么要有区"><a href="#4-1-为什么要有区" class="headerlink" title="4.1 为什么要有区"></a>4.1 为什么要有区</h3><p>B+树的每一层中的页都会形成一个双向链表，如果是以页为单位来分配存储空间的话，双向链表相邻的两个页之间的物理位置可能离得非常远。我们介绍B+树索引的适用场景的时候特别提到范围查询只需要定位到最左边的记录和最右边的记录，然后沿着双向链表一直扫描就可以了，而如果链表中相邻的两个页物理位置离得非常远，就是所谓的随机I/O。再一次强调，磁盘的速度和内存的速度差了好几个数量级，随机I/O是非常慢的，所以我们应该尽量让链表中相邻的页的物理位置也相邻，这样进行范围查询的时候才可以使用所谓的顺序I/O。</p>
+<p>引入区的概念，一个区就是在物理位置上连续的64个页。因为InnoDB中的页大小默认是16KB，所以一个区的大小是64*16KB= 1MB。在表中数据量大的时候，为某个索引分配空间的时候就不再按照页为单位分配了，而是按照区为单位分配，甚至在表中的数据特别多的时候，可以一次性分配多个连续的区。虽然可能造成一点点空间的浪费(数据不足以填充满整个区)，但是从性能角度看，可以消除很多的随机I/O，功大于过!</p>
 <h3 id="4-2-为什么要有段"><a href="#4-2-为什么要有段" class="headerlink" title="4.2 为什么要有段"></a>4.2 为什么要有段</h3><p>对于范围查询，其实是对B+树叶子节点中的记录进行顺序扫描，而如果不区分叶子节点和非叶子节点，统统把节点代表的页面放到申请到的区中的话，进行范围扫描的效果就大打折扣了。所以InnoDB对B+树的叶子节点和非叶子节点进行了区别对待，也就是说叶子节点有自己独有的区，非叶子节点也有自己独有的区。存放叶子节点的区的集合就算是一个段( segment )，存放非叶子节点的区的集合也算是一个段。也就是说一个索引会生成2个段，一个叶子节点段，一个非叶子节点段。</p>
 <p>除了索引的叶子节点段和非叶子节点段之外，InnoDB中还有为存储一些特殊的数据而定义的段，比如回滚段。所以，常见的段有数据段、索引段、回滚段。数据段即为B+树的叶子节点，索引段即为B+树的非叶子节点。</p>
 <p>在InnoDB存储引擎中，对段的管理都是由引擎自身所完成，DBA不能也没有必要对其进行控制。这从一定程度上简化了DBA对于段的管理。</p>
 <p>段其实不对应表空间中某一个连续的物理区域，而是一个逻辑上的概念，由若千个零散的页面以及一些完整的区组成。</p>
-<h3 id="4-3-为什么要有碎片区"><a href="#4-3-为什么要有碎片区" class="headerlink" title="4.3 为什么要有碎片区"></a>4.3 为什么要有碎片区</h3><p>默认情况下，一个使用InnoDB存储引擎的表只有一个聚簇索引，一个索引会生成2个段，而段是以区为单位申请存储空间的，一个区默认占用1M (64*16Kb&#x3D;1024Kb）存储空间，所以默认情况下一个只存了几条记录的小表也需要2M的存储空间么?以后每次添加一个索引都要多申请2M的存储空间么?这对于存储记录比较少的表简直是天大的浪费。这个问题的症结在于到现在为止我们介绍的区都是非常纯粹的，也就是一个区被整个分配给某一个段，或者说区中的所有页面都是为了存储同一个段的数据而存在的，即使段的数据填不满区中所有的页面，那余下的页面也不能挪作他用。</p>
+<h3 id="4-3-为什么要有碎片区"><a href="#4-3-为什么要有碎片区" class="headerlink" title="4.3 为什么要有碎片区"></a>4.3 为什么要有碎片区</h3><p>默认情况下，一个使用InnoDB存储引擎的表只有一个聚簇索引，一个索引会生成2个段，而段是以区为单位申请存储空间的，一个区默认占用1M (64*16Kb=1024Kb）存储空间，所以默认情况下一个只存了几条记录的小表也需要2M的存储空间么?以后每次添加一个索引都要多申请2M的存储空间么?这对于存储记录比较少的表简直是天大的浪费。这个问题的症结在于到现在为止我们介绍的区都是非常纯粹的，也就是一个区被整个分配给某一个段，或者说区中的所有页面都是为了存储同一个段的数据而存在的，即使段的数据填不满区中所有的页面，那余下的页面也不能挪作他用。</p>
 <p>为了考虑以完整的区为单位分配给某个段对于数据量较小的表太浪费存储空间的这种情况，InnoDB提出了一个碎片(fragment)区的概念。在一个碎片区中，并不是所有的页都是为了存储同一个段的数据而存在的，而是碎片区中的页可以用于不同的目的，比如有些页用于段A，有些页用于段B，有些页甚至哪个段都不属于。碎片区直属于表空间，并不属于任何一个段。</p>
 <p>所以此后为某个段分配存储空间的策略是这样的:</p>
 <ul>
@@ -751,16 +773,16 @@ c VARCHAR(65532)
 <h2 id="5-表空间"><a href="#5-表空间" class="headerlink" title="5. 表空间"></a>5. 表空间</h2><p>表空间可以看做是InnoDB存储引擎逻辑结构的最高层，所有的数据都存放在表空间中。</p>
 <p>表空间是一个逻辑容器，表空间存储的对象是段，在一个表空间中可以有一个或多个段，但是一个段只能属于一个表空间。表空间数据库由一个或多个表空间组成，表空间从管理上可以划分为系统表空间(System tablespace)、独立表空间(File-per-table tablespace)、撤销表空间(Undo Tablespace)和临时表空间(Temporary Tablespace)等。</p>
 <h3 id="5-1-独立表空间"><a href="#5-1-独立表空间" class="headerlink" title="5.1 独立表空间"></a>5.1 独立表空间</h3><p>独立表空间，即每张表有一个独立的表空间，也就是数据和索引信息都会保存在自己的表空间中。独立的表空间(即:单表)可以在不同的数据库之间进行迁移。</p>
-<p>空间可以回收(DROP TABLE操作可自动回收表空间;其他情况，表空间不能自己回收)。如果对于统计分析或是日志表，删除大量数据后可以通过: alter table TableName engine&#x3D;innodb;回收不用的空间。对于使用独立表空间的表，不管怎么删除，表空间的碎片不会太严重的影响性能，而且还有机会处理。</p>
+<p>空间可以回收(DROP TABLE操作可自动回收表空间;其他情况，表空间不能自己回收)。如果对于统计分析或是日志表，删除大量数据后可以通过: alter table TableName engine=innodb;回收不用的空间。对于使用独立表空间的表，不管怎么删除，表空间的碎片不会太严重的影响性能，而且还有机会处理。</p>
 <p><strong>独立表空间结构</strong></p>
 <p>独立表空间由段、区、页组成。前面已经讲解过了。</p>
 <p><strong>真实表空间对应的文件大小</strong></p>
 <p>我们到数据目录里看，会发现一个新建的表对应的.ibd文件只占用了96K，才6个页面大小(MySQL5.7中)，这是因为一开始表空间占用的空间很小，因为表里边都没有数据。不过别忘了这些.ibd文件是自扩展的，随着表中数据的增多，表空间对应的文件也逐渐增大。</p>
 <p><strong>查看InnoDB的表空间类型</strong></p>
-<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">mysql &gt; show variables like &#39;innodb_file_per_table&#39;;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">mysql &gt; show variables like 'innodb_file_per_table';<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p><img src="http://img-md-js.linjsblog.top/img/202208312026403.png" alt="image-20220831202620764"></p>
-<p>你能看到innodb_file_per_table&#x3D;ON，这就意味着每张表都会单独保存为一个.ibd 文件。</p>
+<p>你能看到innodb_file_per_table=ON，这就意味着每张表都会单独保存为一个.ibd 文件。</p>
 <h3 id="5-2-系统表空间"><a href="#5-2-系统表空间" class="headerlink" title="5.2 系统表空间"></a>5.2 系统表空间</h3><p>系统表空间的结构和独立表空间基本类似，只不过由于整个MysQL进程只有一个系统表空间，在系统表空间中会额外记录一些有关整个系统信息的页面，这部分是独立表空间中没有的。</p>
 <p><strong>InnoDB 数据字典</strong></p>
 <p>每当我们向一个表中插入一条记录的时候，MySQL校验过程如下:</p>
@@ -875,10 +897,10 @@ c VARCHAR(65532)
                         <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
                     </ul>
                     <div id="alipay">
-                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                        <img src="/medias/reward/alipay1.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -1118,60 +1140,6 @@ c VARCHAR(65532)
 
     <footer class="page-footer bg-color">
     
-        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
-<style>
-    .aplayer .aplayer-lrc p {
-        
-        display: none;
-        
-        font-size: 12px;
-        font-weight: 700;
-        line-height: 16px !important;
-    }
-
-    .aplayer .aplayer-lrc p.aplayer-lrc-current {
-        
-        display: none;
-        
-        font-size: 15px;
-        color: #42b983;
-    }
-
-    
-    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
-        left: -66px !important;
-    }
-
-    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
-        left: 0px !important;
-    }
-
-    
-</style>
-<div class="">
-    
-    <div class="row">
-        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
-                   server="netease"
-                   type="playlist"
-                   id="503838841"
-                   fixed='true'
-                   autoplay='false'
-                   theme='#42b983'
-                   loop='all'
-                   order='random'
-                   preload='auto'
-                   volume='0.7'
-                   list-folded='true'
-        >
-        </meting-js>
-    </div>
-</div>
-
-<script src="/libs/aplayer/APlayer.min.js"></script>
-<script src="/libs/aplayer/Meting.min.js"></script>
-
-    
 
     <div class="container row center-align"
          style="margin-bottom: 0px !important;">
@@ -1210,13 +1178,13 @@ c VARCHAR(65532)
             
         </div>
         <div class="col s12 m4 l4 social-link social-statis">
-    <a href="https://github.com/blinkfox" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+    <a href="https://github.com/js6288" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
         <i class="fab fa-github"></i>
     </a>
 
 
 
-    <a href="mailto:1181062873@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:linjingshu6288@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fas fa-envelope-open"></i>
     </a>
 
@@ -1226,7 +1194,7 @@ c VARCHAR(65532)
 
 
 
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1181062873" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1181062873" data-position="top" data-delay="50">
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1279897306" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1279897306" data-position="top" data-delay="50">
         <i class="fab fa-qq"></i>
     </a>
 

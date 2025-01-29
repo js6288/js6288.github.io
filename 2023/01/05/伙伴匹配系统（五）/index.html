@@ -59,7 +59,9 @@
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 7.3.0"></head>
+<meta name="generator" content="Hexo 7.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
 
 
 <body>
@@ -408,12 +410,32 @@
                 
 
                 
-
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>Update Date:&nbsp;&nbsp;
+                    2025-01-29
+                </div>
                 
 
                 
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
+                    1.6k
+                </div>
+                
 
                 
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
+                    7 Min
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>Read Count:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
             </div>
         </div>
         <hr class="clearfix">
@@ -438,15 +460,15 @@
  * @return
  */</span>
 <span class="token annotation punctuation">@PostMapping</span><span class="token punctuation">(</span><span class="token string">"/update"</span><span class="token punctuation">)</span>
-<span class="token keyword">public</span> <span class="token class-name">BaseResponse</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Integer</span><span class="token punctuation">></span></span> <span class="token function">updateUser</span><span class="token punctuation">(</span><span class="token annotation punctuation">@RequestBody</span> <span class="token class-name">User</span> user<span class="token punctuation">,</span> <span class="token class-name">HttpServletRequest</span> request<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+<span class="token keyword">public</span> <span class="token class-name">BaseResponse</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Integer</span><span class="token punctuation">&gt;</span></span> <span class="token function">updateUser</span><span class="token punctuation">(</span><span class="token annotation punctuation">@RequestBody</span> <span class="token class-name">User</span> user<span class="token punctuation">,</span> <span class="token class-name">HttpServletRequest</span> request<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token comment">// 1. 校验参数是否为空</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>user <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>user <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">BusinessException</span><span class="token punctuation">(</span><span class="token class-name">ErrorCode</span><span class="token punctuation">.</span><span class="token constant">PARAMS_ERROR</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">}</span>
     <span class="token class-name">User</span> loginUser <span class="token operator">=</span> userService<span class="token punctuation">.</span><span class="token function">getCurrentUser</span><span class="token punctuation">(</span>request<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">int</span> result <span class="token operator">=</span> userService<span class="token punctuation">.</span><span class="token function">updateUser</span><span class="token punctuation">(</span>user<span class="token punctuation">,</span> loginUser<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span> <span class="token class-name">ResultUtils</span><span class="token punctuation">.</span><span class="token function">success</span><span class="token punctuation">(</span>result<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>由于项目中多次用户鉴权，所以我们在service层编写isAdmin方法（包括复写） UserService</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
@@ -486,37 +508,37 @@
      * @return
      */</span>
     <span class="token annotation punctuation">@Override</span>
-    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">updateUser</span><span class="token punctuation">(</span><span class="token class-name">User</span> user<span class="token punctuation">,</span> <span class="token class-name">User</span> loginUser<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">updateUser</span><span class="token punctuation">(</span><span class="token class-name">User</span> user<span class="token punctuation">,</span> <span class="token class-name">User</span> loginUser<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token class-name">Long</span> userId <span class="token operator">=</span> user<span class="token punctuation">.</span><span class="token function">getId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>userId <span class="token operator">&lt;=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>userId <span class="token operator">&lt;=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
             <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">BusinessException</span><span class="token punctuation">(</span><span class="token class-name">ErrorCode</span><span class="token punctuation">.</span><span class="token constant">PARAMS_ERROR</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">}</span>
         <span class="token comment">// 2. 校验权限</span>
         <span class="token comment">// 2.1 管理员可以更新任意信息</span>
         <span class="token comment">// 2.2 用户只能更新自己的信息</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">isAdmin</span><span class="token punctuation">(</span>loginUser<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> userId <span class="token operator">!=</span> loginUser<span class="token punctuation">.</span><span class="token function">getId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">isAdmin</span><span class="token punctuation">(</span>loginUser<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> userId <span class="token operator">!=</span> loginUser<span class="token punctuation">.</span><span class="token function">getId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
             <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">BusinessException</span><span class="token punctuation">(</span><span class="token class-name">ErrorCode</span><span class="token punctuation">.</span><span class="token constant">NO_AUTH</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">}</span>
         <span class="token class-name">User</span> oldUser <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">getById</span><span class="token punctuation">(</span>user<span class="token punctuation">.</span><span class="token function">getId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>oldUser <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>oldUser <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
             <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">BusinessException</span><span class="token punctuation">(</span><span class="token class-name">ErrorCode</span><span class="token punctuation">.</span><span class="token constant">NULL_ERROR</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">}</span>
         <span class="token comment">// 3. 触发更新</span>
          <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>baseMapper<span class="token punctuation">.</span><span class="token function">updateById</span><span class="token punctuation">(</span>user<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">}</span>
 
 <span class="token comment">/**
      * 是否为管理员
      * @param request
      * @return
      */</span>
-    <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">isAdmin</span><span class="token punctuation">(</span><span class="token class-name">HttpServletRequest</span> request<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">isAdmin</span><span class="token punctuation">(</span><span class="token class-name">HttpServletRequest</span> request<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token class-name">User</span> user <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token class-name">User</span><span class="token punctuation">)</span> request<span class="token punctuation">.</span><span class="token function">getSession</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getAttribute</span><span class="token punctuation">(</span><span class="token class-name">UserConstant</span><span class="token punctuation">.</span><span class="token constant">USER_LOGIN_STATE</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>user <span class="token operator">==</span> <span class="token keyword">null</span>  user<span class="token punctuation">.</span><span class="token function">getUserRole</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token class-name">UserConstant</span><span class="token punctuation">.</span><span class="token constant">ADMIN_ROLE</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>user <span class="token operator">==</span> <span class="token keyword">null</span>  user<span class="token punctuation">.</span><span class="token function">getUserRole</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token class-name">UserConstant</span><span class="token punctuation">.</span><span class="token constant">ADMIN_ROLE</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
             <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">}</span>
         <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">}</span>
 
     <span class="token comment">/**
      * 是否为管理员
@@ -524,9 +546,9 @@
      * @return
      */</span>
     <span class="token annotation punctuation">@Override</span>
-    <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">isAdmin</span><span class="token punctuation">(</span><span class="token class-name">User</span> loginUser<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">isAdmin</span><span class="token punctuation">(</span><span class="token class-name">User</span> loginUser<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword">return</span> loginUser<span class="token punctuation">.</span><span class="token function">getUserRole</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token constant">ADMIN_ROLE</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">}</span>
 
     <span class="token comment">/**
      * 获取当前用户
@@ -534,91 +556,91 @@
      * @return
      */</span>
     <span class="token annotation punctuation">@Override</span>
-    <span class="token keyword">public</span> <span class="token class-name">User</span> <span class="token function">getCurrentUser</span><span class="token punctuation">(</span><span class="token class-name">HttpServletRequest</span> request<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>request <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token class-name">User</span> <span class="token function">getCurrentUser</span><span class="token punctuation">(</span><span class="token class-name">HttpServletRequest</span> request<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>request <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
             <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">BusinessException</span><span class="token punctuation">(</span><span class="token class-name">ErrorCode</span><span class="token punctuation">.</span><span class="token constant">PARAMS_ERROR</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">}</span>
         <span class="token class-name">User</span> user <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token class-name">User</span><span class="token punctuation">)</span> request<span class="token punctuation">.</span><span class="token function">getSession</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getAttribute</span><span class="token punctuation">(</span><span class="token constant">USER_LOGIN_STATE</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>user <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>user <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
             <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">BusinessException</span><span class="token punctuation">(</span><span class="token class-name">ErrorCode</span><span class="token punctuation">.</span><span class="token constant">NOT_LOGIN</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">}</span>
         <span class="token keyword">return</span> user<span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h2 id="二、前端页面开发"><a href="#二、前端页面开发" class="headerlink" title="二、前端页面开发"></a>二、前端页面开发</h2><h3 id="1-现在pages包里新建一个登录页面UserLoginPage-vue"><a href="#1-现在pages包里新建一个登录页面UserLoginPage-vue" class="headerlink" title="1.现在pages包里新建一个登录页面UserLoginPage.vue"></a>1.现在pages包里新建一个登录页面UserLoginPage.vue</h3><pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
-  &lt;van-form @submit&#x3D;&quot;onSubmit&quot;&gt;
+  &lt;van-form @submit="onSubmit"&gt;
     &lt;van-cell-group inset&gt;
       &lt;van-field
-          v-model&#x3D;&quot;userAccount&quot;
-          name&#x3D;&quot;userAccount&quot;
-          label&#x3D;&quot;账号&quot;
-          placeholder&#x3D;&quot;请输入账号&quot;
-          :rules&#x3D;&quot;[&#123; required: true, message: &#39;请填写用户名&#39; &#125;]&quot;
-      &#x2F;&gt;
+          v-model="userAccount"
+          name="userAccount"
+          label="账号"
+          placeholder="请输入账号"
+          :rules="[{ required: true, message: '请填写用户名' }]"
+      /&gt;
       &lt;van-field
-          v-model&#x3D;&quot;userPassword&quot;
-          type&#x3D;&quot;password&quot;
-          name&#x3D;&quot;userPassword&quot;
-          label&#x3D;&quot;密码&quot;
-          placeholder&#x3D;&quot;请输入密码&quot;
-          :rules&#x3D;&quot;[&#123; required: true, message: &#39;请填写密码&#39; &#125;]&quot;
-      &#x2F;&gt;
-    &lt;&#x2F;van-cell-group&gt;
-    &lt;div style&#x3D;&quot;margin: 16px;&quot;&gt;
-      &lt;van-button round block type&#x3D;&quot;primary&quot; native-type&#x3D;&quot;submit&quot;&gt;
+          v-model="userPassword"
+          type="password"
+          name="userPassword"
+          label="密码"
+          placeholder="请输入密码"
+          :rules="[{ required: true, message: '请填写密码' }]"
+      /&gt;
+    &lt;/van-cell-group&gt;
+    &lt;div style="margin: 16px;"&gt;
+      &lt;van-button round block type="primary" native-type="submit"&gt;
         提交
-      &lt;&#x2F;van-button&gt;
-    &lt;&#x2F;div&gt;
-  &lt;&#x2F;van-form&gt;
-&lt;&#x2F;template&gt;
+      &lt;/van-button&gt;
+    &lt;/div&gt;
+  &lt;/van-form&gt;
+&lt;/template&gt;
 
 &lt;script setup&gt;
 
-import myAxios from &quot;..&#x2F;plugins&#x2F;myAxios.ts&quot;;
-import &#123;Toast&#125; from &quot;vant&quot;;
-import &#123;ref&#125; from &quot;vue&quot;;
-import &#123;useRouter&#125; from &quot;vue-router&quot;;
+import myAxios from "../plugins/myAxios.ts";
+import {Toast} from "vant";
+import {ref} from "vue";
+import {useRouter} from "vue-router";
 
-const router &#x3D; useRouter();
+const router = useRouter();
 
-const userAccount &#x3D; ref();
-const userPassword &#x3D; ref();
+const userAccount = ref();
+const userPassword = ref();
 
-const onSubmit &#x3D; async () &#x3D;&gt; &#123;
-  &#x2F;&#x2F; console.log(&quot;用户登录&quot;);
-  const res &#x3D; await myAxios.post(&quot;&#x2F;user&#x2F;login&quot;, &#123;
+const onSubmit = async () =&gt; {
+  // console.log("用户登录");
+  const res = await myAxios.post("/user/login", {
     userAccount: userAccount.value,
     userPassword: userPassword.value
-  &#125;);
-  if (res.code &#x3D;&#x3D; 0 &amp;&amp; res.data !&#x3D; null) &#123;
-    Toast.success(&quot;登录成功&quot;);
-    router.replace(&quot;&#x2F;&quot;)
-  &#125; else &#123;
-    Toast.fail(&quot;登录失败&quot;);
-  &#125;
-&#125;;
+  });
+  if (res.code == 0 &amp;&amp; res.data != null) {
+    Toast.success("登录成功");
+    router.replace("/")
+  } else {
+    Toast.fail("登录失败");
+  }
+};
 
-&lt;&#x2F;script&gt;
+&lt;/script&gt;
 
 &lt;style scoped&gt;
 
-&lt;&#x2F;style&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+&lt;/style&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>别忘了在路由里面引入</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span> UserLoginPage <span class="token keyword">from</span> <span class="token string">"../pages/UserLoginPage.vue"</span><span class="token punctuation">;</span> 
 
-<span class="token punctuation">&#123;</span> <span class="token literal-property property">path</span><span class="token operator">:</span> <span class="token string">'/user/login'</span><span class="token punctuation">,</span> <span class="token literal-property property">component</span><span class="token operator">:</span> UserLoginPage <span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">{</span> <span class="token literal-property property">path</span><span class="token operator">:</span> <span class="token string">'/user/login'</span><span class="token punctuation">,</span> <span class="token literal-property property">component</span><span class="token operator">:</span> UserLoginPage <span class="token punctuation">}</span><span class="token punctuation">,</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>这里需要我们在axios.ts里把响应改成data，如下图： <img src="http://img-md-js.linjsblog.top/img/202301051605857.png" alt="image.png"> 运行 ，输入数据，成功登录并跳转的主页，显示如下： <img src="http://img-md-js.linjsblog.top/img/202301051605877.png" alt="image.png"><img src="http://img-md-js.linjsblog.top/img/202301051605177.png" alt="image.png"></p>
-<h3 id="2-登录成功，现在就要去编写用户信息了（动态显示数据库里面的信息），原来是写死的"><a href="#2-登录成功，现在就要去编写用户信息了（动态显示数据库里面的信息），原来是写死的" class="headerlink" title="2.登录成功，现在就要去编写用户信息了（动态显示数据库里面的信息），原来是写死的"></a>2.登录成功，现在就要去编写用户信息了（动态显示数据库里面的信息），原来是写死的</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token function">onMounted</span><span class="token punctuation">(</span><span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=></span><span class="token punctuation">&#123;</span>
+<h3 id="2-登录成功，现在就要去编写用户信息了（动态显示数据库里面的信息），原来是写死的"><a href="#2-登录成功，现在就要去编写用户信息了（动态显示数据库里面的信息），原来是写死的" class="headerlink" title="2.登录成功，现在就要去编写用户信息了（动态显示数据库里面的信息），原来是写死的"></a>2.登录成功，现在就要去编写用户信息了（动态显示数据库里面的信息），原来是写死的</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token function">onMounted</span><span class="token punctuation">(</span><span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=&gt;</span><span class="token punctuation">{</span>
   <span class="token keyword">const</span> res <span class="token operator">=</span> <span class="token keyword">await</span> myAxios<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">'/user/current'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token keyword">if</span> <span class="token punctuation">(</span>res<span class="token punctuation">.</span>code <span class="token operator">===</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>res<span class="token punctuation">.</span>code <span class="token operator">===</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
     user<span class="token punctuation">.</span>value <span class="token operator">=</span>res<span class="token punctuation">.</span>data<span class="token punctuation">;</span>
     Toast<span class="token punctuation">.</span><span class="token function">success</span><span class="token punctuation">(</span><span class="token string">'获取用户信息成功'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">&#125;</span><span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+  <span class="token punctuation">}</span><span class="token keyword">else</span> <span class="token punctuation">{</span>
     Toast<span class="token punctuation">.</span><span class="token function">fail</span><span class="token punctuation">(</span><span class="token string">'获取用户信息成功'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>但是登录不会种下cookie，意味着后端不能获取登录用户信息，就不能动态展示用户信息页 <img src="http://img-md-js.linjsblog.top/img/202301051606065.png" alt="image.png"> 在myAxios.ts中添加以下代码：（注意要在定义的变量，即myAxios之后粘贴)</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">myAxios<span class="token punctuation">.</span>defaults<span class="token punctuation">.</span>withCredentials <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span> <span class="token comment">// 允许携带 cookie</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
@@ -626,102 +648,102 @@ const onSubmit &#x3D; async () &#x3D;&gt; &#123;
 <p>在后端接口添加允许携带 cookie 的配置 <img src="http://img-md-js.linjsblog.top/img/202301051606029.png" alt="image.png"> 同时后端设置 cookie 的作用域 <img src="http://img-md-js.linjsblog.top/img/202301051606386.png" alt="image.png"> 登录，再次点击个人，发现cookie已经带有了，只是页面还没有显示 <img src="http://img-md-js.linjsblog.top/img/202301051606293.png" alt="image.png"> 查看操作台报错，发现是createTime的字符转变导致的，直接删去，后面再处理 <img src="http://img-md-js.linjsblog.top/img/202301051607757.png" alt="image.png"> 再次刷新，页面成功的显示 <img src="http://img-md-js.linjsblog.top/img/202301051607628.png" alt="image.png"></p>
 <h3 id="3-完善修改用户信息"><a href="#3-完善修改用户信息" class="headerlink" title="3.完善修改用户信息"></a>3.完善修改用户信息</h3><p>发现每个页面都要获取当前的用户信息，所以我们把这个方法提取出来 在src目录下建立services包，并创建user.ts编写代码</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span> myAxios <span class="token keyword">from</span> <span class="token string">"../plugins/myAxios"</span><span class="token punctuation">;</span>
-<span class="token keyword">import</span> <span class="token punctuation">&#123;</span>getCurrentUserState<span class="token punctuation">,</span> setCurrentUserState<span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">"../states/user"</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span>getCurrentUserState<span class="token punctuation">,</span> setCurrentUserState<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"../states/user"</span><span class="token punctuation">;</span>
 
 <span class="token comment">/**
  * 获取用户信息
- * @returns &#123;Promise&lt;nullany>&#125;
+ * @returns {Promise&lt;nullany&gt;}
  */</span>
-<span class="token keyword">export</span> <span class="token keyword">const</span> <span class="token function-variable function">getCurrentUser</span> <span class="token operator">=</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+<span class="token keyword">export</span> <span class="token keyword">const</span> <span class="token function-variable function">getCurrentUser</span> <span class="token operator">=</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
     <span class="token keyword">const</span> user <span class="token operator">=</span> <span class="token function">getCurrentUserState</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>user<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>user<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword">return</span> user<span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">}</span>
     <span class="token comment">//从远程处获取用户信息</span>
     <span class="token keyword">const</span> res <span class="token operator">=</span> <span class="token keyword">await</span> myAxios<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">"/user/current"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>res<span class="token punctuation">.</span>code <span class="token operator">==</span> <span class="token number">0</span> <span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>res<span class="token punctuation">.</span>code <span class="token operator">==</span> <span class="token number">0</span> <span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token comment">// setCurrentUserState(res.data);</span>
         <span class="token keyword">return</span> res<span class="token punctuation">.</span>data<span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">}</span>
     <span class="token keyword">return</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>同时在src目录下建立states包，并创建user.ts编写代码（定义两个方法）</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span> <span class="token punctuation">&#123;</span>UserType<span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">"../models/user"</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span> <span class="token punctuation">{</span>UserType<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"../models/user"</span><span class="token punctuation">;</span>
 
 <span class="token keyword">let</span> <span class="token literal-property property">currentUser</span><span class="token operator">:</span> UserType<span class="token punctuation">;</span>
 
-<span class="token keyword">const</span> <span class="token function-variable function">setCurrentUserState</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter"><span class="token literal-property property">user</span><span class="token operator">:</span>UserType</span><span class="token punctuation">)</span> <span class="token operator">=></span><span class="token punctuation">&#123;</span>
+<span class="token keyword">const</span> <span class="token function-variable function">setCurrentUserState</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter"><span class="token literal-property property">user</span><span class="token operator">:</span>UserType</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span><span class="token punctuation">{</span>
     currentUser <span class="token operator">=</span>user<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
+<span class="token punctuation">}</span>
 
-<span class="token keyword">const</span> getCurrentUserState <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token parameter">UserType</span> <span class="token operator">=></span><span class="token punctuation">&#123;</span>
+<span class="token keyword">const</span> getCurrentUserState <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token parameter">UserType</span> <span class="token operator">=&gt;</span><span class="token punctuation">{</span>
     <span class="token keyword">return</span> currentUser<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
+<span class="token punctuation">}</span>
 
-<span class="token keyword">export</span> <span class="token punctuation">&#123;</span>
+<span class="token keyword">export</span> <span class="token punctuation">{</span>
     setCurrentUserState<span class="token punctuation">,</span>
     getCurrentUserState<span class="token punctuation">,</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>由于提取了获取用户信息的代码，所以用户页原来编写的代码需要修改为下图 <img src="http://img-md-js.linjsblog.top/img/202301051607614.png" alt="image.png"> 最后就是要编写用户修改页面了，发送修改用户信息请求。 完整代码如下</p>
 <pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
-  &lt;van-form @submit&#x3D;&quot;onSubmit&quot;&gt;
+  &lt;van-form @submit="onSubmit"&gt;
       &lt;van-field
-          v-model&#x3D;&quot;editUser.currentValue&quot;
-          :name&#x3D;&quot;editUser.editKey&quot;
-          :label&#x3D;&quot;editUser.editName&quot;
-          :placeholder&#x3D;&quot;&#39;请输入$&#123;editUser.editName&#125;&#39;&quot;
-      &#x2F;&gt;
-    &lt;div style&#x3D;&quot;margin: 16px;&quot;&gt;
-      &lt;van-button round block type&#x3D;&quot;primary&quot; native-type&#x3D;&quot;submit&quot;&gt;
+          v-model="editUser.currentValue"
+          :name="editUser.editKey"
+          :label="editUser.editName"
+          :placeholder="'请输入${editUser.editName}'"
+      /&gt;
+    &lt;div style="margin: 16px;"&gt;
+      &lt;van-button round block type="primary" native-type="submit"&gt;
         提交
-      &lt;&#x2F;van-button&gt;
-    &lt;&#x2F;div&gt;
-  &lt;&#x2F;van-form&gt;
-&lt;&#x2F;template&gt;
+      &lt;/van-button&gt;
+    &lt;/div&gt;
+  &lt;/van-form&gt;
+&lt;/template&gt;
 
-&lt;script setup lang&#x3D;&quot;ts&quot;&gt;
-import &#123;useRoute, useRouter&#125; from &quot;vue-router&quot;;
-import &#123;ref&#125; from &quot;vue&quot;;
-import myAxios from &quot;..&#x2F;plugins&#x2F;myAxios&quot;;
-import &#123;Toast&#125; from &quot;vant&quot;;
-import &#123;getCurrentUser&#125; from &quot;..&#x2F;services&#x2F;user&quot;;
+&lt;script setup lang="ts"&gt;
+import {useRoute, useRouter} from "vue-router";
+import {ref} from "vue";
+import myAxios from "../plugins/myAxios";
+import {Toast} from "vant";
+import {getCurrentUser} from "../services/user";
 
-const route &#x3D; useRoute();
-const router &#x3D;useRouter();
+const route = useRoute();
+const router =useRouter();
 
-const editUser &#x3D; ref(&#123;
+const editUser = ref({
   editKey: route.query.editKey,
   currentValue: route.query.currentValue,
   editName: route.query.editName,
-&#125;)
+})
 
-&#x2F;&#x2F; 不可以写在外面，否则页面不显示内容，还没有报错信息，原因未知
-&#x2F;&#x2F; const currentUser &#x3D; await getCurrentUser();
+// 不可以写在外面，否则页面不显示内容，还没有报错信息，原因未知
+// const currentUser = await getCurrentUser();
 
-const onSubmit &#x3D; async () &#x3D;&gt; &#123;
-  &#x2F;&#x2F; 异步方法必须添加 await 才可以拿到数据, 否则拿到的是 promise 对象
-  const currentUser &#x3D; await getCurrentUser();
-  console.log(&quot;-------UserEditPage&quot;, currentUser);
-  const res &#x3D; await myAxios.post(&quot;&#x2F;user&#x2F;update&quot;, &#123;
-    &quot;id&quot;: currentUser.id,
-    [editUser.value.editKey]: editUser.value.currentValue &#x2F;&#x2F; 动态取值
-  &#125;)
-  console.log(&quot;修改用户信息&quot;, res);
-  if (res.code &#x3D;&#x3D; 0 &amp;&amp; res.data &gt; 0) &#123;
-    Toast.success(&quot;修改成功&quot;);
-    router.replace(&quot;&#x2F;user&quot;);
-  &#125; else &#123;
-    Toast.fail(&quot;修改失败&quot;);
-  &#125;
-&#125;;
+const onSubmit = async () =&gt; {
+  // 异步方法必须添加 await 才可以拿到数据, 否则拿到的是 promise 对象
+  const currentUser = await getCurrentUser();
+  console.log("-------UserEditPage", currentUser);
+  const res = await myAxios.post("/user/update", {
+    "id": currentUser.id,
+    [editUser.value.editKey]: editUser.value.currentValue // 动态取值
+  })
+  console.log("修改用户信息", res);
+  if (res.code == 0 &amp;&amp; res.data &gt; 0) {
+    Toast.success("修改成功");
+    router.replace("/user");
+  } else {
+    Toast.fail("修改失败");
+  }
+};
 
-&lt;&#x2F;script&gt;
+&lt;/script&gt;
 
 &lt;style scoped&gt;
 
-&lt;&#x2F;style&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+&lt;/style&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="4-测试如下：其中会有报错，好像大多是由于ts造成的，但是都不会影响代码的运行实现"><a href="#4-测试如下：其中会有报错，好像大多是由于ts造成的，但是都不会影响代码的运行实现" class="headerlink" title="4.测试如下：其中会有报错，好像大多是由于ts造成的，但是都不会影响代码的运行实现"></a>4.测试如下：其中会有报错，好像大多是由于ts造成的，但是都不会影响代码的运行实现</h3><p><img src="http://img-md-js.linjsblog.top/img/202301051608289.png" alt="image.png"><img src="http://img-md-js.linjsblog.top/img/202301051610020.png" alt="image.png"> <strong>注意踩坑处：</strong> 1.语法糖是支持写在外面的，但是这里面运用就不显示页面 <img src="http://img-md-js.linjsblog.top/img/202301051608028.png" alt="image.png"></p>
 <h3 id="5-关于调用缓存去获取当前用户信息的问题"><a href="#5-关于调用缓存去获取当前用户信息的问题" class="headerlink" title="5.关于调用缓存去获取当前用户信息的问题"></a>5.关于调用缓存去获取当前用户信息的问题</h3><p><img src="http://img-md-js.linjsblog.top/img/202301051609255.png" alt="image.png"> 这边就很玄学，鱼皮使用了缓存，结果获取不到最新的用户信息，而我这边可以。。。 <strong>建议：在小系统（用户少）中尽量不要使用缓存，可以使用路由守卫，从远程获取</strong> <strong>踩坑处</strong>：如果前端在用户页的信息中并未设定editKey的话，就无法修改信息（更新内容为空），这需要我们在后端去控制、筛选前端所传入的参数 后端会有类似以下报错 <img src="http://img-md-js.linjsblog.top/img/202301051609668.png" alt="image.png"></p>
@@ -835,10 +857,10 @@ const onSubmit &#x3D; async () &#x3D;&gt; &#123;
                         <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
                     </ul>
                     <div id="alipay">
-                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                        <img src="/medias/reward/alipay1.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -1118,60 +1140,6 @@ const onSubmit &#x3D; async () &#x3D;&gt; &#123;
 
     <footer class="page-footer bg-color">
     
-        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
-<style>
-    .aplayer .aplayer-lrc p {
-        
-        display: none;
-        
-        font-size: 12px;
-        font-weight: 700;
-        line-height: 16px !important;
-    }
-
-    .aplayer .aplayer-lrc p.aplayer-lrc-current {
-        
-        display: none;
-        
-        font-size: 15px;
-        color: #42b983;
-    }
-
-    
-    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
-        left: -66px !important;
-    }
-
-    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
-        left: 0px !important;
-    }
-
-    
-</style>
-<div class="">
-    
-    <div class="row">
-        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
-                   server="netease"
-                   type="playlist"
-                   id="503838841"
-                   fixed='true'
-                   autoplay='false'
-                   theme='#42b983'
-                   loop='all'
-                   order='random'
-                   preload='auto'
-                   volume='0.7'
-                   list-folded='true'
-        >
-        </meting-js>
-    </div>
-</div>
-
-<script src="/libs/aplayer/APlayer.min.js"></script>
-<script src="/libs/aplayer/Meting.min.js"></script>
-
-    
 
     <div class="container row center-align"
          style="margin-bottom: 0px !important;">
@@ -1210,13 +1178,13 @@ const onSubmit &#x3D; async () &#x3D;&gt; &#123;
             
         </div>
         <div class="col s12 m4 l4 social-link social-statis">
-    <a href="https://github.com/blinkfox" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+    <a href="https://github.com/js6288" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
         <i class="fab fa-github"></i>
     </a>
 
 
 
-    <a href="mailto:1181062873@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:linjingshu6288@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fas fa-envelope-open"></i>
     </a>
 
@@ -1226,7 +1194,7 @@ const onSubmit &#x3D; async () &#x3D;&gt; &#123;
 
 
 
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1181062873" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1181062873" data-position="top" data-delay="50">
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1279897306" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1279897306" data-position="top" data-delay="50">
         <i class="fab fa-qq"></i>
     </a>
 

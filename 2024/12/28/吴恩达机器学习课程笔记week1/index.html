@@ -52,7 +52,9 @@
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 7.3.0"></head>
+<meta name="generator" content="Hexo 7.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
 
 
 <body>
@@ -367,6 +369,14 @@
                                 <span class="chip bg-color">人工智能</span>
                             </a>
                         
+                            <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">
+                                <span class="chip bg-color">机器学习</span>
+                            </a>
+                        
+                            <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">
+                                <span class="chip bg-color">深度学习</span>
+                            </a>
+                        
                             <a href="/tags/AI/">
                                 <span class="chip bg-color">AI</span>
                             </a>
@@ -377,10 +387,6 @@
                         
                             <a href="/tags/%E5%90%B4%E6%81%A9%E8%BE%BE/">
                                 <span class="chip bg-color">吴恩达</span>
-                            </a>
-                        
-                            <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">
-                                <span class="chip bg-color">机器学习</span>
                             </a>
                         
                     </div>
@@ -413,12 +419,32 @@
                 
 
                 
-
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>Update Date:&nbsp;&nbsp;
+                    2025-01-29
+                </div>
                 
 
                 
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
+                    4.2k
+                </div>
+                
 
                 
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
+                    16 Min
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>Read Count:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
             </div>
         </div>
         <hr class="clearfix">
@@ -464,12 +490,12 @@
 </blockquote>
 <h3 id="2-2-有监督学习"><a href="#2-2-有监督学习" class="headerlink" title="2-2 有监督学习"></a>2-2 有监督学习</h3><p>“有监督学习”指的是学习从 输入 <em>x</em> (一个或多个) 映射到 输出 <em>y</em> 的算法。有监督学习算法的关键在于首先要提供正确的样本示例供算法学习，然后算法便可以针对未见过的输入，输出相应的预测结果。下面是一些有监督学习的在现实生活中的示例</p>
 <ul>
-<li>垃圾邮件过滤器：email –&gt; 垃圾邮件?(0&#x2F;1)</li>
+<li>垃圾邮件过滤器：email –&gt; 垃圾邮件?(0/1)</li>
 <li>语音识别：语音 –&gt; 文本</li>
 <li>机器翻译：英文 –&gt; 中文</li>
-<li>广告投递：广告、用户信息 –&gt; 用户点击?(0&#x2F;1)</li>
+<li>广告投递：广告、用户信息 –&gt; 用户点击?(0/1)</li>
 <li>自动驾驶：图片、雷达信息 –&gt; 其他车辆位置</li>
-<li>视觉检测：手机图片 –&gt; 有缺陷?(0&#x2F;1)</li>
+<li>视觉检测：手机图片 –&gt; 有缺陷?(0/1)</li>
 </ul>
 <p><strong>回归问题示例：房价预测</strong></p>
 <p>  “房价预测”就是根据房子的面积计算价格。下图中的“红叉”就是预先提供的有正确映射关系的样本，“蓝色拟合线”就相当于算法学习输入样本，最后通过拟合线得到房价便是“预测”，这便是“有监督学习”的完整流程。注意到这个回归问题的输出(房价)可以是任意数字，于是便有无穷种可能。 <img src="http://img-md-js.linjsblog.top/img/202412231107016.png" alt="image-20241223110749793"></p>
@@ -478,7 +504,7 @@
 <p>曲线拟合：根据拟合曲线，可以预测房屋面积 750 feet^2^ 对应的价格大约为200k</p>
 </blockquote>
 <p><strong>分类问题示例：乳腺癌检测</strong></p>
-<p>  乳腺癌检测问题就是根据输入的一系列信息，如肿瘤块的大小、患者年龄、肿瘤块的厚度、细胞大小的均匀性、细胞形状的均匀性等，来判断是否为恶性肿瘤(0表示良性&#x2F;1表示恶性)。下面给出“单输入的乳腺癌检测”、“两输入的乳腺癌检测”示意图：</p>
+<p>  乳腺癌检测问题就是根据输入的一系列信息，如肿瘤块的大小、患者年龄、肿瘤块的厚度、细胞大小的均匀性、细胞形状的均匀性等，来判断是否为恶性肿瘤(0表示良性/1表示恶性)。下面给出“单输入的乳腺癌检测”、“两输入的乳腺癌检测”示意图：</p>
 <p>单输入的乳腺癌检测：输入是“肿瘤的大小”，输出是“良性”、“恶性-类型1”、“恶性-类型2”。 两输入的乳腺癌检测：输入是“肿瘤的大小”、“患者年龄”，输出是“良性”、“恶性”。</p>
 <p><img src="http://img-md-js.linjsblog.top/img/202412231120895.png" alt="image-20241223112035841"></p>
 <p>​ 单输入的乳腺癌检测问题</p>
@@ -493,21 +519,21 @@
 <p>异常检测(Anomaly detection)：。有非常多的应用，比如在金融系统的诈骗检测中，异常时间、异常交易可能是欺诈。</p>
 <p>降维(Dimensionality reduction)：在尽可能丢失少的信息的前提下，将大数据集压缩成小得多的数据集。</p>
 </blockquote>
-<p>Question: Of the following examples, which would you address using an unsupervised learning algorithm? × Given email labeled as spam&#x2F;not spam, learn a spam filter. √ Given a set of news articles found on the web, group them into sets of articles about the same story. √ Given a database of customer data, automatically discover market segments and group customers into different market segments. × Given a dataset of patients diagnosed as either having diabetes or not, learn to classify new patients as having diabetes or not.</p>
+<p>Question: Of the following examples, which would you address using an unsupervised learning algorithm? × Given email labeled as spam/not spam, learn a spam filter. √ Given a set of news articles found on the web, group them into sets of articles about the same story. √ Given a database of customer data, automatically discover market segments and group customers into different market segments. × Given a dataset of patients diagnosed as either having diabetes or not, learn to classify new patients as having diabetes or not.</p>
 <p>知识点：有监督学习给数据和标签，重点在于对新输入预测出标签；无监督学习只给数据，重点在于自行分组。</p>
 <p>下面给出“聚类”的3个示例，后续会再介绍“异常检测”和“降维”这两种无监督学习的示例：</p>
 <p><strong>聚类算法示例1：新闻分类</strong>   “谷歌新闻”的任务就是将每天数十万的新闻进行聚类，找到提到相似词的文章并将其分组。很酷的是，聚类算法可以自己计算出哪些词暗示了这些文章属于同一个组，并且谷歌新闻的员工也没有事先告诉算法有哪些组。如下图所示，panda、twin、zoo都是相似的词，这些文章被归为一类。</p>
 <p><img src="http://img-md-js.linjsblog.top/img/202412231359063.png" alt="image-20241223135945000"></p>
 <p><strong>聚类算法示例2：基因分类</strong></p>
-<p>  下图所示的基因图谱，每一列表示一个人的全部基因，每一行表示一种基因，不同的颜色表示该基因的活跃程度，这些基因包括瞳孔颜色、身高、不爱吃西蓝花&#x2F;包菜&#x2F;莴苣等。聚类算法仅根据这些基因数据，将人进行分组，进而找出“基因上很相似的人”。</p>
+<p>  下图所示的基因图谱，每一列表示一个人的全部基因，每一行表示一种基因，不同的颜色表示该基因的活跃程度，这些基因包括瞳孔颜色、身高、不爱吃西蓝花/包菜/莴苣等。聚类算法仅根据这些基因数据，将人进行分组，进而找出“基因上很相似的人”。</p>
 <p><img src="http://img-md-js.linjsblog.top/img/202412231400700.png" alt="img"></p>
 <p><strong>聚类算法示例3：客户分群</strong></p>
 <p>  还有一个很常见的聚类算法示例就是，根据客户信息数据库，将不同的客户划分进不同的细分市场，以便更有效的服务客户。比如深度学习团队“dot AI” 想知道 dot AI社区 中的人们，参加课程、订阅通知、参加AI活动等的动机是什么。于是通过调研团队便发现了拥有不同动机的人，比如：提升技能、发展事业、紧随AI潮流、或者哪个都不是。这个例子中调研团队就相当于无监督学习算法。</p>
 <p><img src="http://img-md-js.linjsblog.top/img/202412231400464.png" alt="img"></p>
 <h2 id="3-线性回归模型"><a href="#3-线性回归模型" class="headerlink" title="3 线性回归模型"></a>3 线性回归模型</h2><h3 id="3-1-线性回归模型"><a href="#3-1-线性回归模型" class="headerlink" title="3-1 线性回归模型"></a>3-1 线性回归模型</h3><ul>
 <li>Training Set(数据集)：用于训练模型的数据集。</li>
-<li>_x_：input variable(输入变量) &#x2F; feature(特征) &#x2F; input feature(输入特征)，也就是“特征值”。</li>
-<li>_y_：output variable(输出变量) &#x2F; target variable(目标变量)，也就是“目标值”。</li>
+<li>_x_：input variable(输入变量) / feature(特征) / input feature(输入特征)，也就是“特征值”。</li>
+<li>_y_：output variable(输出变量) / target variable(目标变量)，也就是“目标值”。</li>
 <li>_m_：表示训练样本的数量。</li>
 <li>(<em>x</em>,<em>y</em>)：单个训练样本。</li>
 <li>(x^(i)^ ,y^(i)^) :第 i 个训练样本。上标加括号是为了和求幂次区别开来。</li>
@@ -517,7 +543,7 @@
 <ul>
 <li>以前把 <em>f</em> 叫做hypothesis(假设)，但是老师不建议这种叫法，而是称之为function(函数)。</li>
 </ul>
-<p>  上图给出了整个“有监督学习”的流程，也就是“learning algorithm”根据输入的“训练集”得到一个 函数模型_f_，于是便可以通过 <em>f</em> 来对 输入_x_ 进行预测 输出$ \hat{y} $ 。而“线性回归模型”就是假设 函数模型_f_ 为一条直线，因为简单易用，这可能是世界上使用最广泛的学习算法，后续也会在其他机器学习模型中见到线性回归模型。   “线性回归”只是解决回归问题的方法之一，其他方法会在Course2中会介绍。现在以上一小节“房价预测”问题举例，若使用“线性回归模型”假设 <em>f</em> 就是一条直线，于是该模型就可以写成 $$ f_{w,b}(x)&#x3D;wx+b $$</p>
+<p>  上图给出了整个“有监督学习”的流程，也就是“learning algorithm”根据输入的“训练集”得到一个 函数模型_f_，于是便可以通过 <em>f</em> 来对 输入_x_ 进行预测 输出$ \hat{y} $ 。而“线性回归模型”就是假设 函数模型_f_ 为一条直线，因为简单易用，这可能是世界上使用最广泛的学习算法，后续也会在其他机器学习模型中见到线性回归模型。   “线性回归”只是解决回归问题的方法之一，其他方法会在Course2中会介绍。现在以上一小节“房价预测”问题举例，若使用“线性回归模型”假设 <em>f</em> 就是一条直线，于是该模型就可以写成 $$ f_{w,b}(x)=wx+b $$</p>
 <blockquote>
 <p>表示函数 <em>f</em> 以 <em>x</em> 为函数输入，其输出$\hat{y}$取决于_w_和_b_的值</p>
 <ul>
@@ -527,7 +553,7 @@
 </blockquote>
 <p><img src="http://img-md-js.linjsblog.top/img/202412231742784.png" alt="img"></p>
 <h3 id="3-2-代价函数"><a href="#3-2-代价函数" class="headerlink" title="3-2 代价函数"></a>3-2 代价函数</h3><p>显然，虽然现在已经构建好了“线性回归模型”，但是过训练集的直线有无数种，如何找出 与训练数据最拟合的线 还不明确，于是本节就来介绍 代价函数(cost funtion)。在机器学习中，代价函数用于 衡量模型的好坏，最简单、最常用的代价函数是“平均误差代价函数”(Squared error cost function)：</p>
-<p>$$ J(w,b) &#x3D; \frac{1}{2m} \sum_{i&#x3D;1}^m (\hat{y}^{(i)} - \hat{y}^{(i)}) ^{2} &#x3D; \frac{1}{2m} \sum_{i&#x3D;1}^m (f_{w,b}(x^{(i)}) - y^{(i)})^2 $$</p>
+<p>$$ J(w,b) = \frac{1}{2m} \sum_{i=1}^m (\hat{y}^{(i)} - \hat{y}^{(i)}) ^{2} = \frac{1}{2m} \sum_{i=1}^m (f_{w,b}(x^{(i)}) - y^{(i)})^2 $$</p>
 <blockquote>
 <ul>
 <li>$w$、$b$: 模型的参数</li>
@@ -538,7 +564,7 @@
 <li>除以 $2m$：按照惯例，机器学习中的平均代价函数会除以 2m 而非 m ，这是为了使后续的计算更加简洁。</li>
 </ul>
 </blockquote>
-<p>现在来直观的看一下，最小化代价函数如何找到与训练数据最拟合的线。首先简化模型，设置参数 $b &#x3D; 0$ ，并假设训练数据只有三个点。下图给出了不同的 $w$ 所对应不同的 代价$J (w)$，显然在 $w &#x3D; 1$ 处代价最小，直线也最拟合： $$ \min_w J(w) &#x3D; \frac{1}{2m} \sum_{i&#x3D;1}^m (\hat{y}^{(i)} - \hat{y}^{(i)}) ^{2} &#x3D; \frac{1}{2m} \sum_{i&#x3D;1}^m (wx^{(i)} - y^{(i)})^{2} $$ <img src="http://img-md-js.linjsblog.top/img/202412232040779.png" alt="image-20241223204005657"></p>
+<p>现在来直观的看一下，最小化代价函数如何找到与训练数据最拟合的线。首先简化模型，设置参数 $b = 0$ ，并假设训练数据只有三个点。下图给出了不同的 $w$ 所对应不同的 代价$J (w)$，显然在 $w = 1$ 处代价最小，直线也最拟合： $$ \min_w J(w) = \frac{1}{2m} \sum_{i=1}^m (\hat{y}^{(i)} - \hat{y}^{(i)}) ^{2} = \frac{1}{2m} \sum_{i=1}^m (wx^{(i)} - y^{(i)})^{2} $$ <img src="http://img-md-js.linjsblog.top/img/202412232040779.png" alt="image-20241223204005657"></p>
 <p><img src="http://img-md-js.linjsblog.top/img/202412232040250.png" alt="image-20241223204050148"></p>
 <p>通过尝试不同的w最终绘制出J(w)曲线</p>
 <p><img src="http://img-md-js.linjsblog.top/img/202412232043970.png" alt="img"></p>
@@ -546,15 +572,15 @@
 <p><img src="http://img-md-js.linjsblog.top/img/202412232357781.png" alt="image-20241223235706685"></p>
 <blockquote>
 <p>课程资料：<a target="_blank" rel="noopener" href="https://github.com/kaieye/2022-Machine-Learning-Specialization">https://github.com/kaieye/2022-Machine-Learning-Specialization</a></p>
-<p>文件路径：Supervised Machine Learning Regression and Classification&#x2F;week1&#x2F;4.Regression Model</p>
+<p>文件路径：Supervised Machine Learning Regression and Classification/week1/4.Regression Model</p>
 </blockquote>
 <p>虽然现在距离完成“线性回归问题”非常接近了，但是上述是通过人眼来直观的寻找代价函数的最小点，实际上要画出有足够多细节的3D图需要计算大量的 $J(w,b)$，而很多 $J(w,b)$点 都是没用的，这显然不划算。下一节就来介绍如何通过计算有限的 $J(w,b)$点 来找到代价函数最小点。</p>
 <h2 id="4-梯度下降法"><a href="#4-梯度下降法" class="headerlink" title="4 梯度下降法"></a>4 梯度下降法</h2><h3 id="4-1-梯度下降法"><a href="#4-1-梯度下降法" class="headerlink" title="4-1 梯度下降法"></a>4-1 梯度下降法</h3><p>梯度下降(Gradient Desent)常用于寻找某函数(比如代价函数)的最大值、最小值。梯度下降不仅用于线性拟合，也用于训练如神经网络(Course2)等深度学习模型、以及一些最大型、最复杂的人工智能模型。下面以前面的 $\min_{w,b} J(w,b)$ 来举例，梯度下降算法的步骤为：</p>
 <ol>
-<li><p>选择初始点，一般在取值范围内选取简单的整数，如 $w &#x3D; 1 , b &#x3D; 0$。</p>
+<li><p>选择初始点，一般在取值范围内选取简单的整数，如 $w = 1 , b = 0$。</p>
 </li>
-<li><p>沿着 $J$ 的“负梯度”方向，不断迭代计算 $w $、$b$。之所以沿着“负梯度”方向，是因为沿该方向下降速度最快(steepest descent, 最速下降)。如下：(<strong>注意这个等号是计算机语言的赋值符号</strong>) $$ w&#x3D;w-\alpha \frac {\partial}{\partial w} J(w,b) $$</p>
-<p>$$ b &#x3D; b - \alpha \frac {\partial}{\partial b} J(w,b) $$</p>
+<li><p>沿着 $J$ 的“负梯度”方向，不断迭代计算 $w $、$b$。之所以沿着“负梯度”方向，是因为沿该方向下降速度最快(steepest descent, 最速下降)。如下：(<strong>注意这个等号是计算机语言的赋值符号</strong>) $$ w=w-\alpha \frac {\partial}{\partial w} J(w,b) $$</p>
+<p>$$ b = b - \alpha \frac {\partial}{\partial b} J(w,b) $$</p>
 </li>
 </ol>
 <blockquote>
@@ -566,7 +592,7 @@
 <ol start="3">
 <li>直到 $w$和$b$的负梯度 都为0(或者0的邻域内)，即可认为找到 $J$的最低点。</li>
 </ol>
-<p>下面两张图很直观的给出了整个梯度下降法的过程。在下 图1 中，首先固定 b &#x3D; 0，只分析 w 对代价函数 J ( w ) 的影响。可以发现，若当前 w 在最低点右侧，由于“负梯度”小于0，于是下一个 w 将向左移动；反之若当前 w 在最低点左侧，由于“负梯度”大于0，下一个w 将向右迭代。只要选择合适的学习率α，最终就可以找到最低点所在的w。在 图2 中，则进一步同时考虑 w 和b，可以发现每次也是沿着“负梯度”下降最快的方向，最终可以到达最低点所在处。这个迭代的过程就是“梯度下降”，类似于“下山”的过程</p>
+<p>下面两张图很直观的给出了整个梯度下降法的过程。在下 图1 中，首先固定 b = 0，只分析 w 对代价函数 J ( w ) 的影响。可以发现，若当前 w 在最低点右侧，由于“负梯度”小于0，于是下一个 w 将向左移动；反之若当前 w 在最低点左侧，由于“负梯度”大于0，下一个w 将向右迭代。只要选择合适的学习率α，最终就可以找到最低点所在的w。在 图2 中，则进一步同时考虑 w 和b，可以发现每次也是沿着“负梯度”下降最快的方向，最终可以到达最低点所在处。这个迭代的过程就是“梯度下降”，类似于“下山”的过程</p>
 <p><img src="http://img-md-js.linjsblog.top/img/202412242127029.png" alt="img"></p>
 <p><img src="http://img-md-js.linjsblog.top/img/202412242128696.png" alt="img"></p>
 <h3 id="4-2-学习率α"><a href="#4-2-学习率α" class="headerlink" title="4-2 学习率α"></a>4-2 学习率α</h3><p>学习率α 的选取会对梯度下降的效果产生影响，如果α选的不好，可能会导致无法实现梯度下降</p>
@@ -581,10 +607,10 @@
 <p><img src="http://img-md-js.linjsblog.top/img/202412242224348.png" alt="img"></p>
 <p><img src="http://img-md-js.linjsblog.top/img/202412242225064.png" alt="img"></p>
 <h3 id="4-3-用于线性回归的梯度下降"><a href="#4-3-用于线性回归的梯度下降" class="headerlink" title="4-3 用于线性回归的梯度下降"></a>4-3 用于线性回归的梯度下降</h3><p>介绍完梯度下降法，现在来总结一下，将前面的线性回归模型、代价函数、梯度下降算法结合起来，按照下面公式不断迭代直至其收敛：</p>
-<p>到目前为止，在这个课程中，你已经开发了一个线性模型来预测 $f_{w,b}(x^{(i)})$: $$ Linears \ regression \ model:\ f_{w,b} &#x3D; wx + b \tag{1}\ $$</p>
-<p>在线性回归中，通过最小化我们的预测$f_{w,b}(x^{(i)})$, 和实际数据 $y^{(i)}$之间的误差来利用输入训练数据来拟合参数$w$,$b$。该方法被称为损失函数（代价函数） $J(w,b)$。在训练中，你测量所有训练样本的成本 $$ Cost \ function: \ J(w,b) &#x3D; \frac{1}{2m} \sum_{i&#x3D;1}^{m} (f_{w,b}(x^{(i)}) - y^{(i)})^2 \tag{2} \ $$</p>
-<p>在课程中，梯度下降定义如下： $$ \begin{align_} \text{repeat}&amp;\text{ until convergence:} \; \lbrace \newline \; w &amp;&#x3D; w - \alpha \frac{\partial J(w,b)}{\partial w} \tag{3} \; \newline b &amp;&#x3D; b - \alpha \frac{\partial J(w,b)}{\partial b} \newline \rbrace \end{align_} $$ 其中，参数$w,b$被同时更新，梯度定义为：</p>
-<p>$$ \begin{align} \frac{\partial J(w,b)}{\partial w} &amp;&#x3D; \frac{1}{m} \sum\limits_{i &#x3D; 0}^{m-1} (f_{w,b}(x^{(i)}) - y^{(i)})x^{(i)} \tag{4}\ \frac{\partial J(w,b)}{\partial b} &amp;&#x3D; \frac{1}{m} \sum\limits_{i &#x3D; 0}^{m-1} (f_{w,b}(x^{(i)}) - y^{(i)}) \tag{5}\ \end{align} $$</p>
+<p>到目前为止，在这个课程中，你已经开发了一个线性模型来预测 $f_{w,b}(x^{(i)})$: $$ Linears \ regression \ model:\ f_{w,b} = wx + b \tag{1}\ $$</p>
+<p>在线性回归中，通过最小化我们的预测$f_{w,b}(x^{(i)})$, 和实际数据 $y^{(i)}$之间的误差来利用输入训练数据来拟合参数$w$,$b$。该方法被称为损失函数（代价函数） $J(w,b)$。在训练中，你测量所有训练样本的成本 $$ Cost \ function: \ J(w,b) = \frac{1}{2m} \sum_{i=1}^{m} (f_{w,b}(x^{(i)}) - y^{(i)})^2 \tag{2} \ $$</p>
+<p>在课程中，梯度下降定义如下： $$ \begin{align_} \text{repeat}&amp;\text{ until convergence:} \; \lbrace \newline \; w &amp;= w - \alpha \frac{\partial J(w,b)}{\partial w} \tag{3} \; \newline b &amp;= b - \alpha \frac{\partial J(w,b)}{\partial b} \newline \rbrace \end{align_} $$ 其中，参数$w,b$被同时更新，梯度定义为：</p>
+<p>$$ \begin{align} \frac{\partial J(w,b)}{\partial w} &amp;= \frac{1}{m} \sum\limits_{i = 0}^{m-1} (f_{w,b}(x^{(i)}) - y^{(i)})x^{(i)} \tag{4}\ \frac{\partial J(w,b)}{\partial b} &amp;= \frac{1}{m} \sum\limits_{i = 0}^{m-1} (f_{w,b}(x^{(i)}) - y^{(i)}) \tag{5}\ \end{align} $$</p>
 <p>可以通过在代价（w,b）的等高线图上绘制迭代代价来显示梯度下降的执行过程。</p>
 <p><img src="http://img-md-js.linjsblog.top/img/202412242351353.png" alt="image-20241224235153206"></p>
 <p>从“等高线图”的角度来看，梯度下降法的迭代过程可能如下图红色箭头所示，从起始点不断收敛到最小值，并且注意到这个过程也是越来越慢的：</p>
@@ -662,6 +688,14 @@
                                     <span class="chip bg-color">人工智能</span>
                                 </a>
                             
+                                <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">
+                                    <span class="chip bg-color">机器学习</span>
+                                </a>
+                            
+                                <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">
+                                    <span class="chip bg-color">深度学习</span>
+                                </a>
+                            
                                 <a href="/tags/AI/">
                                     <span class="chip bg-color">AI</span>
                                 </a>
@@ -672,10 +706,6 @@
                             
                                 <a href="/tags/%E5%90%B4%E6%81%A9%E8%BE%BE/">
                                     <span class="chip bg-color">吴恩达</span>
-                                </a>
-                            
-                                <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">
-                                    <span class="chip bg-color">机器学习</span>
                                 </a>
                             
                         </div>
@@ -712,10 +742,10 @@
                         <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
                     </ul>
                     <div id="alipay">
-                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                        <img src="/medias/reward/alipay1.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -792,6 +822,18 @@
                             
                         </span>
                     </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">
+                        <span class="chip bg-color">人工智能</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">
+                        <span class="chip bg-color">机器学习</span>
+                    </a>
+                    
                 </div>
                 
             </div>
@@ -986,60 +1028,6 @@
 
     <footer class="page-footer bg-color">
     
-        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
-<style>
-    .aplayer .aplayer-lrc p {
-        
-        display: none;
-        
-        font-size: 12px;
-        font-weight: 700;
-        line-height: 16px !important;
-    }
-
-    .aplayer .aplayer-lrc p.aplayer-lrc-current {
-        
-        display: none;
-        
-        font-size: 15px;
-        color: #42b983;
-    }
-
-    
-    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
-        left: -66px !important;
-    }
-
-    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
-        left: 0px !important;
-    }
-
-    
-</style>
-<div class="">
-    
-    <div class="row">
-        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
-                   server="netease"
-                   type="playlist"
-                   id="503838841"
-                   fixed='true'
-                   autoplay='false'
-                   theme='#42b983'
-                   loop='all'
-                   order='random'
-                   preload='auto'
-                   volume='0.7'
-                   list-folded='true'
-        >
-        </meting-js>
-    </div>
-</div>
-
-<script src="/libs/aplayer/APlayer.min.js"></script>
-<script src="/libs/aplayer/Meting.min.js"></script>
-
-    
 
     <div class="container row center-align"
          style="margin-bottom: 0px !important;">
@@ -1078,13 +1066,13 @@
             
         </div>
         <div class="col s12 m4 l4 social-link social-statis">
-    <a href="https://github.com/blinkfox" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+    <a href="https://github.com/js6288" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
         <i class="fab fa-github"></i>
     </a>
 
 
 
-    <a href="mailto:1181062873@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:linjingshu6288@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fas fa-envelope-open"></i>
     </a>
 
@@ -1094,7 +1082,7 @@
 
 
 
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1181062873" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1181062873" data-position="top" data-delay="50">
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1279897306" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1279897306" data-position="top" data-delay="50">
         <i class="fab fa-qq"></i>
     </a>
 

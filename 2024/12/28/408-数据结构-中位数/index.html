@@ -8,7 +8,7 @@
     <meta name="description" content="408-数据结构-中位数
 2011统考真题
 
-一个长度为 L(L≥1) 的升序序列 S ，处在第 ⌈L&amp;#x2F;2⌉ 个位置的数称为 S 的中位数。例如，若序列 S1&amp;#x3D;⟨11,13,15,17,19⟩ ，则 S1 的中位数是 1">
+一个长度为 L(L≥1) 的升序序列 S ，处在第 ⌈L/2⌉ 个位置的数称为 S 的中位数。例如，若序列 S1=⟨11,13,15,17,19⟩ ，则 S1 的中位数是 15 。两个序列的中位">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -55,7 +55,9 @@
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 7.3.0"></head>
+<meta name="generator" content="Hexo 7.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
 
 
 <body>
@@ -400,12 +402,32 @@
                 
 
                 
-
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>Update Date:&nbsp;&nbsp;
+                    2025-01-29
+                </div>
                 
 
                 
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
+                    374
+                </div>
+                
 
                 
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
+                    1 Min
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>Read Count:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
             </div>
         </div>
         <hr class="clearfix">
@@ -422,7 +444,7 @@
                 <h1 id="408-数据结构-中位数"><a href="#408-数据结构-中位数" class="headerlink" title="408-数据结构-中位数"></a>408-数据结构-中位数</h1><blockquote>
 <p>2011统考真题</p>
 </blockquote>
-<p>一个长度为 L(L≥1) 的升序序列 S ，处在第 ⌈L&#x2F;2⌉ 个位置的数称为 S 的中位数。例如，若序列 S1&#x3D;⟨11,13,15,17,19⟩ ，则 S1 的中位数是 15 。两个序列的中位数是含它们所有元素的升序序列的中位数。例如，若序列 S2&#x3D;⟨2,4,6,8,20⟩ ，则 S1 和 S2 的中位数是 11 。现有两个等长的升序序列 A 和 B ，试设计一个在时间和空间两方面都尽可能高效的算法，找出两个序列 A 和 B 的中位数。要求：</p>
+<p>一个长度为 L(L≥1) 的升序序列 S ，处在第 ⌈L/2⌉ 个位置的数称为 S 的中位数。例如，若序列 S1=⟨11,13,15,17,19⟩ ，则 S1 的中位数是 15 。两个序列的中位数是含它们所有元素的升序序列的中位数。例如，若序列 S2=⟨2,4,6,8,20⟩ ，则 S1 和 S2 的中位数是 11 。现有两个等长的升序序列 A 和 B ，试设计一个在时间和空间两方面都尽可能高效的算法，找出两个序列 A 和 B 的中位数。要求：</p>
 <p>⑴ 给出算法的基本设计思想。</p>
 <p>⑵ 根据设计思想，采用C或C++或Java语言描述，关键之处给出注释。</p>
 <p>⑶ 说明你所设计算法的时间复杂度和空间复杂度。</p>
@@ -433,24 +455,24 @@
 </ul>
 <p><strong>方法一：双指针</strong></p>
 <p>对两个序列从小到大顺序一次访问，当访问到两个序列长度的一半时，为中位数</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">int findMidNum(vector&lt;int&gt;&amp; s1,vector&lt;int&gt;&amp; s2)&#123;
-    int len1 &#x3D; s1.size();
-    int len2 &#x3D; s2.size();
-    int m &#x3D; (len1+len2)&gt;&gt;1;
-    int mid_index &#x3D; (len1+len2)%2 &#x3D;&#x3D; 0 ? m-1 : m;
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">int findMidNum(vector&lt;int&gt;&amp; s1,vector&lt;int&gt;&amp; s2){
+    int len1 = s1.size();
+    int len2 = s2.size();
+    int m = (len1+len2)&gt;&gt;1;
+    int mid_index = (len1+len2)%2 == 0 ? m-1 : m;
 
-    int j &#x3D; 0,k &#x3D; 0,min &#x3D; 0;
-    for (int i &#x3D; 0; i &lt;&#x3D; mid_index; ++i) &#123;
-        if (s1[j] &gt;&#x3D; s2[k])&#123;
-            min &#x3D; s2[k];
+    int j = 0,k = 0,min = 0;
+    for (int i = 0; i &lt;= mid_index; ++i) {
+        if (s1[j] &gt;= s2[k]){
+            min = s2[k];
             k++;
-        &#125;else&#123;
-            min &#x3D; s1[j];
+        }else{
+            min = s1[j];
             j++;
-        &#125;
-    &#125;
+        }
+    }
     return min;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <ul>
 <li>空间复杂度：O(1);</li>
@@ -559,10 +581,10 @@
                         <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
                     </ul>
                     <div id="alipay">
-                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                        <img src="/medias/reward/alipay1.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -818,60 +840,6 @@
 
     <footer class="page-footer bg-color">
     
-        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
-<style>
-    .aplayer .aplayer-lrc p {
-        
-        display: none;
-        
-        font-size: 12px;
-        font-weight: 700;
-        line-height: 16px !important;
-    }
-
-    .aplayer .aplayer-lrc p.aplayer-lrc-current {
-        
-        display: none;
-        
-        font-size: 15px;
-        color: #42b983;
-    }
-
-    
-    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
-        left: -66px !important;
-    }
-
-    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
-        left: 0px !important;
-    }
-
-    
-</style>
-<div class="">
-    
-    <div class="row">
-        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
-                   server="netease"
-                   type="playlist"
-                   id="503838841"
-                   fixed='true'
-                   autoplay='false'
-                   theme='#42b983'
-                   loop='all'
-                   order='random'
-                   preload='auto'
-                   volume='0.7'
-                   list-folded='true'
-        >
-        </meting-js>
-    </div>
-</div>
-
-<script src="/libs/aplayer/APlayer.min.js"></script>
-<script src="/libs/aplayer/Meting.min.js"></script>
-
-    
 
     <div class="container row center-align"
          style="margin-bottom: 0px !important;">
@@ -910,13 +878,13 @@
             
         </div>
         <div class="col s12 m4 l4 social-link social-statis">
-    <a href="https://github.com/blinkfox" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+    <a href="https://github.com/js6288" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
         <i class="fab fa-github"></i>
     </a>
 
 
 
-    <a href="mailto:1181062873@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:linjingshu6288@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fas fa-envelope-open"></i>
     </a>
 
@@ -926,7 +894,7 @@
 
 
 
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1181062873" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1181062873" data-position="top" data-delay="50">
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1279897306" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1279897306" data-position="top" data-delay="50">
         <i class="fab fa-qq"></i>
     </a>
 

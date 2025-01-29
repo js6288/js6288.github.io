@@ -52,7 +52,9 @@
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 7.3.0"></head>
+<meta name="generator" content="Hexo 7.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
 
 
 <body>
@@ -425,12 +427,32 @@
                 
 
                 
-
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>Update Date:&nbsp;&nbsp;
+                    2025-01-29
+                </div>
                 
 
                 
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
+                    4.5k
+                </div>
+                
 
                 
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
+                    16 Min
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>Read Count:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
             </div>
         </div>
         <hr class="clearfix">
@@ -444,7 +466,7 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="【硬盘购买科普】-SATA-M-2-NGFF-NVME等是什么意思，解读硬盘的总线、协议和接口"><a href="#【硬盘购买科普】-SATA-M-2-NGFF-NVME等是什么意思，解读硬盘的总线、协议和接口" class="headerlink" title="【硬盘购买科普】 SATA M.2 NGFF NVME等是什么意思，解读硬盘的总线、协议和接口"></a>【硬盘购买科普】 SATA M.2 NGFF NVME等是什么意思，解读硬盘的总线、协议和接口</h2><h3 id="前景提要"><a href="#前景提要" class="headerlink" title="前景提要"></a>前景提要</h3><p>当硬件小白在各大平台购买硬盘时，总会碰到各种各样的名词：M.2、SATA、NGFF、NVME、PCIe、AHCI等等不熟悉的名词，这些和固态硬盘有关的英文到底时什么意思，如果你在网络上搜索有关硬盘的科普，你能找到SATA硬盘最快500MB&#x2F;s,m2又分为SATA和MVNe两种NVMe可以跑到4GB&#x2F;s,大多时类似不太详尽系统的描述，网络上都讲过的东西在cv一遍旧没有什么意思了。所以这篇文章将从计组的角度，探究关于硬盘—<strong>协议(protocol)<strong>、</strong>总线（Bus）</strong>、**接口(Interface)**三者之间的关系，让大家对硬盘的接口和协议的了解会更加深刻。</p>
+                <h2 id="【硬盘购买科普】-SATA-M-2-NGFF-NVME等是什么意思，解读硬盘的总线、协议和接口"><a href="#【硬盘购买科普】-SATA-M-2-NGFF-NVME等是什么意思，解读硬盘的总线、协议和接口" class="headerlink" title="【硬盘购买科普】 SATA M.2 NGFF NVME等是什么意思，解读硬盘的总线、协议和接口"></a>【硬盘购买科普】 SATA M.2 NGFF NVME等是什么意思，解读硬盘的总线、协议和接口</h2><h3 id="前景提要"><a href="#前景提要" class="headerlink" title="前景提要"></a>前景提要</h3><p>当硬件小白在各大平台购买硬盘时，总会碰到各种各样的名词：M.2、SATA、NGFF、NVME、PCIe、AHCI等等不熟悉的名词，这些和固态硬盘有关的英文到底时什么意思，如果你在网络上搜索有关硬盘的科普，你能找到SATA硬盘最快500MB/s,m2又分为SATA和MVNe两种NVMe可以跑到4GB/s,大多时类似不太详尽系统的描述，网络上都讲过的东西在cv一遍旧没有什么意思了。所以这篇文章将从计组的角度，探究关于硬盘—<strong>协议(protocol)<strong>、</strong>总线（Bus）</strong>、**接口(Interface)**三者之间的关系，让大家对硬盘的接口和协议的了解会更加深刻。</p>
 <p><img src="http://img-md-js.linjsblog.top/img/202406101055881.jpg" alt="dd6ec6fea0c2924e679e3fd4f0dfa68"></p>
 <hr>
 <h3 id="一、总线和协议"><a href="#一、总线和协议" class="headerlink" title="一、总线和协议"></a>一、总线和协议</h3><p>在这之前我们先介绍几个相关概念。</p>
@@ -489,7 +511,7 @@
 <p><img src="http://img-md-js.linjsblog.top/img/202406101347615.png" alt="image-20240610134755674"></p>
 <hr>
 <h4 id="常见总线：SATA总线、PCIE总线、SAS总线"><a href="#常见总线：SATA总线、PCIE总线、SAS总线" class="headerlink" title="常见总线：SATA总线、PCIE总线、SAS总线"></a>常见总线：SATA总线、PCIE总线、SAS总线</h4><p><img src="http://img-md-js.linjsblog.top/img/202406101350630.png" alt="image-20240610135038418"></p>
-<p><strong>SATA总线</strong>的版本目前普及的比较广的是：<strong>SATA 3.0</strong> 理论带宽6Gbps，8:10编码，换算windows内显示的传输速度就是600MB&#x2F;S</p>
+<p><strong>SATA总线</strong>的版本目前普及的比较广的是：<strong>SATA 3.0</strong> 理论带宽6Gbps，8:10编码，换算windows内显示的传输速度就是600MB/S</p>
 <p><img src="http://img-md-js.linjsblog.top/img/202406101351717.png" alt="image-20240610135146871"></p>
 <p><strong>PCIe总线</strong>的版本目前普及的比较广是PCIe3.0和4.0，具体的带宽如图，PCIe的带宽和长度有关系，也就是上面那个乘几：×4的速率就是×1的四倍，×16的速度就是×4的四倍</p>
 <p><img src="http://img-md-js.linjsblog.top/img/202406101356227.png" alt="image-20240610135641976"></p>
@@ -503,7 +525,7 @@
 <p><img src="http://img-md-js.linjsblog.top/img/202406101405513.png" alt="image-20240610140531259"></p>
 <p><strong>SATA接口</strong>分为两部分：一个是<strong>长一点的供电</strong>，另一个<strong>短一点的则是数据</strong>，供电接驳在电脑电源上，数据则是用<strong>SATA数据线</strong>接驳到主板上。</p>
 <p><img src="http://img-md-js.linjsblog.top/img/202406101407874.png" alt="image-20240610140732227"></p>
-<p>由于SATA3总线速率上限就是600MB&#x2F;S，再加上各种损耗和干扰，实际上这个接口的速度最多就只能跑到五百多兆每秒，所以凡是使用SATA3总线作为传输载体的硬盘，无论是固态硬盘还是机械硬盘，其速率都不可能突破五百多兆每秒。</p>
+<p>由于SATA3总线速率上限就是600MB/S，再加上各种损耗和干扰，实际上这个接口的速度最多就只能跑到五百多兆每秒，所以凡是使用SATA3总线作为传输载体的硬盘，无论是固态硬盘还是机械硬盘，其速率都不可能突破五百多兆每秒。</p>
 <p><img src="http://img-md-js.linjsblog.top/img/202406101409480.png" alt="image-20240610140953281"></p>
 <p><strong>2.mSATA</strong></p>
 <p>下一个接口是mSATA: 同样是SATA总线 AHCI协议;这个接口在一些已经淘汰的老旧笔记本上非常常见, 其诞生的目的就是给接口的固态缩小体积。机械硬盘2.5寸基本上是填满的，而sata固态，如果你拆开，你会发现真正的硬盘基本上只有很小的一块儿。</p>
@@ -522,11 +544,11 @@
 <p>今天在逛淘宝找移动硬盘盒的时候，🤣大家能发现商家的图片什么问题吗</p>
 <p><img src="http://img-md-js.linjsblog.top/img/202406101428015.jpg" alt="036fa6f1d2c382cc8bb6c517557d92c"></p>
 <p>好我们继续：</p>
-<p>m2接口既可以走SATA总线AHCI协议，那此时它和普通的SATA硬盘没有区别，速率同样会被限制在550MB&#x2F;S左右，就是体积小一点。</p>
+<p>m2接口既可以走SATA总线AHCI协议，那此时它和普通的SATA硬盘没有区别，速率同样会被限制在550MB/S左右，就是体积小一点。</p>
 <p><img src="http://img-md-js.linjsblog.top/img/202406101432000.png" alt="image-20240610143211901"></p>
 <p>m2接口也可以走PCIE总线AHCI协议，比如说数量比较稀少的三星SM951 AHCI版本。速率上限由PCIe版本和长度决定.</p>
 <p><img src="http://img-md-js.linjsblog.top/img/202406101434258.png" alt="image-20240610143431321"></p>
-<p>除此之外,<strong>M.2</strong>还可以走<strong>PCIe总线NVMe协议</strong>,速率上限同样由PCIe版本和长度决定,这个也是目前<strong>用途最广泛的组合</strong>,大部分固态硬盘都是*_PCIe3.0_4*_，那也就是4GB&#x2F;S以内了，目前PCIe4.0_4的固态开始逐渐普及。那速度上限就是8GB&#x2F;S以内了</p>
+<p>除此之外,<strong>M.2</strong>还可以走<strong>PCIe总线NVMe协议</strong>,速率上限同样由PCIe版本和长度决定,这个也是目前<strong>用途最广泛的组合</strong>,大部分固态硬盘都是*_PCIe3.0_4*_，那也就是4GB/S以内了，目前PCIe4.0_4的固态开始逐渐普及。那速度上限就是8GB/S以内了</p>
 <p>M.2接口又分为B-key和M-Key两种，B-key的豁口在左边 M-key则是在右边，扩展：有些固态为了兼容两个接口同时有b-key和m-key，例如SN500，现在不多见了。</p>
 <p><img src="http://img-md-js.linjsblog.top/img/202406101444529.png" alt="image-20240610144429360"></p>
 <p>B-key被称为Socket2，支持SATA总线和PCIe_2，M-key则是被称为Socke3，支持SATA总线和PCIe_4。这里我要提醒一下大家，不能通过外形去判断M.2支持什么总线和协议，有的主板的B-key可能只能走SATA不能走PCIe总线，而有的M-key可能只能走PCIe 不能走SATA。具体你这个接口能走什么总线还是要看你主板官网的描述和主板的接口说明书。</p>
@@ -556,49 +578,49 @@
 <h4 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h4><p>接下来我选几个例子配合接口总线协议图讲解一下。注意以下分析的速率都只是硬盘的接口理论，速率上限不是实际的硬盘运行速度，实际这个硬盘能跑多快还是要看硬盘本身的设计和用料了。</p>
 <p><img src="http://img-md-js.linjsblog.top/img/202406101535107.png" alt="image-20240610153543978"></p>
 <p><img src="http://img-md-js.linjsblog.top/img/202406101605053.png" alt="image-20240610160505989"></p>
-<p>如上图：传统的SATA3机械西数蓝盘1T，SATA接口 SATA3.0总线 AHCI协议，速率上限600MB&#x2F;S</p>
+<p>如上图：传统的SATA3机械西数蓝盘1T，SATA接口 SATA3.0总线 AHCI协议，速率上限600MB/S</p>
 <hr>
 <p><img src="http://img-md-js.linjsblog.top/img/202406101538942.png" alt="image-20240610153808776"></p>
 <p><img src="http://img-md-js.linjsblog.top/img/202406101605053.png" alt="image-20240610160505989"></p>
-<p>传统的SATA3固态铠侠 TC10 SATA接口 SATA3.0总线 AHCI协议 速率上限600MB&#x2F;S</p>
+<p>传统的SATA3固态铠侠 TC10 SATA接口 SATA3.0总线 AHCI协议 速率上限600MB/S</p>
 <hr>
 <p><img src="C:\Users\ljs\Pictures\study\202406101540281.png" alt="image-20240610154020313"></p>
 <p><img src="http://img-md-js.linjsblog.top/img/202406101607449.png" alt="image-20240610160720507"></p>
-<p>三星860EVO M.2版本，M.2 B&amp;M-key接口 SATA3.0总线 AHCI协议，速率上限600MB&#x2F;S</p>
+<p>三星860EVO M.2版本，M.2 B&amp;M-key接口 SATA3.0总线 AHCI协议，速率上限600MB/S</p>
 <hr>
 <p><img src="http://img-md-js.linjsblog.top/img/202406101541135.png" alt="image-20240610154153894"></p>
 <p><img src="http://img-md-js.linjsblog.top/img/202406101608146.png" alt="image-20240610160846965"></p>
-<p>三星SM951 ACHI版本，M.2 M-Key接口，PCIe3.0*4总线 AHCI协议，速率上限4GB&#x2F;S</p>
+<p>三星SM951 ACHI版本，M.2 M-Key接口，PCIe3.0*4总线 AHCI协议，速率上限4GB/S</p>
 <hr>
 <p><img src="http://img-md-js.linjsblog.top/img/202406101543381.png" alt="image-20240610154307235"></p>
 <p><img src="http://img-md-js.linjsblog.top/img/202406101610238.png" alt="image-20240610161039167"></p>
-<p>三星XP941 M.2 M-Key接口 PCIe2.0*4总线 NVMe协议 速率上限2GB&#x2F;S</p>
+<p>三星XP941 M.2 M-Key接口 PCIe2.0*4总线 NVMe协议 速率上限2GB/S</p>
 <hr>
 <p><img src="http://img-md-js.linjsblog.top/img/202406101544943.png" alt="image-20240610154422021"></p>
 <p><img src="http://img-md-js.linjsblog.top/img/202406101611687.png" alt="image-20240610161142753"></p>
-<p>西部数据SN500 M.2 B&amp;M-Key接口 PCIe3.0*2总线 NVMe协议 速率上限2GB&#x2F;S</p>
+<p>西部数据SN500 M.2 B&amp;M-Key接口 PCIe3.0*2总线 NVMe协议 速率上限2GB/S</p>
 <hr>
 <p><img src="http://img-md-js.linjsblog.top/img/202406101545757.png" alt="image-20240610154528548"></p>
 <p><img src="http://img-md-js.linjsblog.top/img/202406101610238.png" alt="image-20240610161039167"></p>
-<p>西部数据SN750 M.2 M-Key接口 PCIe3.0*4总线 NVMe协议 速率上限4GB&#x2F;S</p>
+<p>西部数据SN750 M.2 M-Key接口 PCIe3.0*4总线 NVMe协议 速率上限4GB/S</p>
 <hr>
 <p><img src="http://img-md-js.linjsblog.top/img/202406101546721.png" alt="image-20240610154652542"></p>
 <p><img src="http://img-md-js.linjsblog.top/img/202406101614026.png" alt="image-20240610161039167"></p>
-<p>三星980PRO M.2 M-Key接口 PCIe4.0*4总线 NVMe协议 速率上限8GB&#x2F;S</p>
+<p>三星980PRO M.2 M-Key接口 PCIe4.0*4总线 NVMe协议 速率上限8GB/S</p>
 <hr>
 <p><img src="http://img-md-js.linjsblog.top/img/202406101549180.png" alt="image-20240610154924648"></p>
 <p><img src="http://img-md-js.linjsblog.top/img/202406101616137.png" alt="image-20240610161654797"></p>
-<p>三星983ZET PCIe接口 PCIe3.0*4总线 NVMe协议 速率上限4GB&#x2F;S</p>
+<p>三星983ZET PCIe接口 PCIe3.0*4总线 NVMe协议 速率上限4GB/S</p>
 <hr>
 <p><img src="http://img-md-js.linjsblog.top/img/202406101550413.png" alt="image-20240610155028069"></p>
-<p>Intel910 PCIe接口 PCIe2.0*8总线 SCSI协议 速率上限4GB&#x2F;S</p>
+<p>Intel910 PCIe接口 PCIe2.0*8总线 SCSI协议 速率上限4GB/S</p>
 <hr>
 <p><img src="http://img-md-js.linjsblog.top/img/202406101551245.png" alt="image-20240610155128768"></p>
-<p>希捷银河4T SAS接口 SAS3.0总线 SCSI协议 速率上限1.2GB&#x2F;S</p>
+<p>希捷银河4T SAS接口 SAS3.0总线 SCSI协议 速率上限1.2GB/S</p>
 <hr>
 <p><img src="http://img-md-js.linjsblog.top/img/202406101554609.png" alt="image-20240610155403431"></p>
 <p><img src="http://img-md-js.linjsblog.top/img/202406101619373.png" alt="image-20240610161924999"></p>
-<p>Intel P4510 U.2接口 PCIe3.0*4总线 NVMe协议 速率上限4GB&#x2F;S</p>
+<p>Intel P4510 U.2接口 PCIe3.0*4总线 NVMe协议 速率上限4GB/S</p>
 <hr>
 <p>以上的硬盘例子，再加上之前那张协议总线接口的结构图稍微加以研究，基本上就能搞清楚一个硬盘以及它的接口。最快能跑到多快了，希望大家在看完这篇文章后，能够对硬盘的协议总线以及接口有一个大概的认知，将来选择硬盘的时候不会再被接口和协议迷惑。OK，关于固态硬盘的总线协议接口，我们就算全部介绍完毕了。</p>
 <p>参考文献：</p>
@@ -737,10 +759,10 @@
                         <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
                     </ul>
                     <div id="alipay">
-                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                        <img src="/medias/reward/alipay1.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -1036,60 +1058,6 @@
 
     <footer class="page-footer bg-color">
     
-        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
-<style>
-    .aplayer .aplayer-lrc p {
-        
-        display: none;
-        
-        font-size: 12px;
-        font-weight: 700;
-        line-height: 16px !important;
-    }
-
-    .aplayer .aplayer-lrc p.aplayer-lrc-current {
-        
-        display: none;
-        
-        font-size: 15px;
-        color: #42b983;
-    }
-
-    
-    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
-        left: -66px !important;
-    }
-
-    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
-        left: 0px !important;
-    }
-
-    
-</style>
-<div class="">
-    
-    <div class="row">
-        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
-                   server="netease"
-                   type="playlist"
-                   id="503838841"
-                   fixed='true'
-                   autoplay='false'
-                   theme='#42b983'
-                   loop='all'
-                   order='random'
-                   preload='auto'
-                   volume='0.7'
-                   list-folded='true'
-        >
-        </meting-js>
-    </div>
-</div>
-
-<script src="/libs/aplayer/APlayer.min.js"></script>
-<script src="/libs/aplayer/Meting.min.js"></script>
-
-    
 
     <div class="container row center-align"
          style="margin-bottom: 0px !important;">
@@ -1128,13 +1096,13 @@
             
         </div>
         <div class="col s12 m4 l4 social-link social-statis">
-    <a href="https://github.com/blinkfox" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+    <a href="https://github.com/js6288" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
         <i class="fab fa-github"></i>
     </a>
 
 
 
-    <a href="mailto:1181062873@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:linjingshu6288@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fas fa-envelope-open"></i>
     </a>
 
@@ -1144,7 +1112,7 @@
 
 
 
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1181062873" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1181062873" data-position="top" data-delay="50">
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1279897306" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1279897306" data-position="top" data-delay="50">
         <i class="fab fa-qq"></i>
     </a>
 

@@ -53,7 +53,9 @@
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 7.3.0"></head>
+<meta name="generator" content="Hexo 7.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
 
 
 <body>
@@ -398,12 +400,32 @@
                 
 
                 
-
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>Update Date:&nbsp;&nbsp;
+                    2025-01-29
+                </div>
                 
 
                 
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
+                    1.4k
+                </div>
+                
 
                 
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
+                    6 Min
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>Read Count:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
             </div>
         </div>
         <hr class="clearfix">
@@ -419,30 +441,30 @@
             <div id="articleContent">
                 <h1 id="redis6-新数据类型-Bitmaps-HyperLogLog-Geospatial"><a href="#redis6-新数据类型-Bitmaps-HyperLogLog-Geospatial" class="headerlink" title="redis6 新数据类型 Bitmaps,HyperLogLog,Geospatial"></a>redis6 新数据类型 Bitmaps,HyperLogLog,Geospatial</h1><p><strong>1.Bitmaps</strong></p>
 <p>(1)Bitmaps并不是实际的数据类型，而是定义在String类型上的一个面向字节操作的集合。因为字符串是二进制安全的块，他们的最大长度是512M。</p>
-<p>(2)Bitmaps单独提供了一套命令， 所以在Redis中使用Bitmaps和使用字符串的方法不太相同。 可以把Bitmaps想象成一个以位为单位的数组， 数组的每个单元只能存储0和1， 数组的下标在Bitmaps中叫做偏移量。</p>
+<p>(2)Bitmaps单独提供了一套命令，&nbsp;所以在Redis中使用Bitmaps和使用字符串的方法不太相同。 可以把Bitmaps想象成一个以位为单位的数组， 数组的每个单元只能存储0和1， 数组的下标在Bitmaps中叫做偏移量。</p>
 <p><img src="http://img-md-js.linjsblog.top/img/3073170888b1b94f8805c7036924009d.png" alt="3073170888b1b94f8805c7036924009d.png"></p>
 <p>命令</p>
 <p><strong>setbit</strong></p>
-<p>实例 </p>
+<p>实例&nbsp;</p>
 <p>每个独立用户是否访问过网站放在Bitmaps中，将访问的用户记为1，没有访问的用户记为0，用户偏移量作为用户id。</p>
-<p>setbit \<key> \<offset> \<value></p>
-<p>设置键的第offset个位的值（从0算起） ， 假设现在有20个用户，userid&#x3D;1， 6， 11， 16， 19的用户对网站进行了访问， 那么当前Bitmaps初始化结果如图所示。</p>
+<p>setbit \<key> \<offset> \<value></value></offset></key></p>
+<p>设置键的第offset个位的值（从0算起） ， 假设现在有20个用户，userid=1， 6， 11， 16， 19的用户对网站进行了访问， 那么当前Bitmaps初始化结果如图所示。</p>
 <p><img src="http://img-md-js.linjsblog.top/img/11abeb9c7d31764a59fb7740475e1537.png" alt="11abeb9c7d31764a59fb7740475e1537.png"></p>
 <p>unique:users:202100101 代表2021-01-01这天的独立访问用户的Bitmaps：</p>
 <p><img src="http://img-md-js.linjsblog.top/img/c025f42db37439af46f961e6569de3d0.png" alt="c025f42db37439af46f961e6569de3d0.png"></p>
 <p><strong>getbit</strong></p>
-<p>getbit \<key> \<offset> \<value>  获取bitmap中某个偏移量的值</p>
+<p>getbit \<key> \<offset> \<value>&nbsp; 获取bitmap中某个偏移量的值</value></offset></key></p>
 <p>实例</p>
 <p><img src="http://img-md-js.linjsblog.top/img/5c51112536fd2b96174dc58fcf185988.png" alt="5c51112536fd2b96174dc58fcf185988.png"></p>
 <p><strong>bitcount</strong></p>
-<p>bitcount \<key> [start end]   统计字符串从start字节到end<strong>字节</strong>比特值为1的数量</p>
+<p>bitcount \<key> [start end]&nbsp; &nbsp;统计字符串从start字节到end<strong>字节</strong>比特值为1的数量</key></p>
 <p><img src="http://img-md-js.linjsblog.top/img/2115c236863c22c4ab599f51fef4ad1e.png" alt="2115c236863c22c4ab599f51fef4ad1e.png"></p>
 <p><img src="http://img-md-js.linjsblog.top/img/374eb6ab007405885c203c4bc2385d07.png" alt="374eb6ab007405885c203c4bc2385d07.png"></p>
 <p><strong>bitop</strong></p>
-<p>bitop and(or&#x2F;not&#x2F;xor) \<destkey> [key…]</p>
-<p>bitop 是一个复合操作，它可以 做多个Bitmap的  and（交集）、or（并集）、not（非）、xor（异或）操作并将结果保存在destkey中。</p>
+<p>bitop and(or/not/xor) \<destkey> [key…]</destkey></p>
+<p>bitop&nbsp;是一个复合操作，它可以 做多个Bitmap的&nbsp; and（交集）、or（并集）、not（非）、xor（异或）操作并将结果保存在destkey中。</p>
 <p>实例：</p>
-<p>2021-11-04日访问网站的userid&#x3D;1,2,5,9</p>
+<p>2021-11-04日访问网站的userid=1,2,5,9</p>
 <pre class="line-numbers language-none"><code class="language-none">127.0.0.1:6379&gt; setbit unique:user:20211104 1 1
 (integer) 0
 127.0.0.1:6379&gt; setbit unique:user:20211104 2 1
@@ -451,9 +473,9 @@
 (integer) 0
 127.0.0.1:6379&gt; setbit unique:user:20211104 9 1
 (integer) 0
-127.0.0.1:6379&gt;  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+127.0.0.1:6379&gt;&nbsp;&nbsp;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p> 2021-11-03日访问网站的userid&#x3D;0,1,4,9</p>
+<p>&nbsp;2021-11-03日访问网站的userid=0,1,4,9</p>
 <pre class="line-numbers language-none"><code class="language-none">127.0.0.1:6379&gt; setbit unique:user:20211103 0 1
 (integer) 0
 127.0.0.1:6379&gt; setbit unique:user:20211103 1 1
@@ -465,7 +487,7 @@
 127.0.0.1:6379&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>计算两天都访问过网站的用户数量</p>
-<pre class="line-numbers language-none"><code class="language-none">127.0.0.1:6379&gt; bitop and unique:user:20211104_03 unique:user:20211103  unique:user:20211104<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-none"><code class="language-none">127.0.0.1:6379&gt; bitop and unique:user:20211104_03 unique:user:20211103&nbsp;&nbsp;unique:user:20211104<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p><img src="http://img-md-js.linjsblog.top/img/f9e80c20f88815d8e5e8f3df5b2f65e3.png" alt="f9e80c20f88815d8e5e8f3df5b2f65e3.png"></p>
 <p><strong>2.HyperLogLog</strong></p>
@@ -476,31 +498,31 @@
 <p>比如数据集{1,3,5,7,5,7,8}，那么这个数据集的基数集为{1,3,5,7,8}，基数(不重复元素)为5。基数估计就是在误差可接受范围内快速计算基数</p>
 <p>命令</p>
 <p><strong>pfadd</strong></p>
-<p>pfadd \<key> \<element> [element…]      添加指定元素到HyperLogLog中</p>
+<p>pfadd \<key> \<element> [element…]&nbsp; &nbsp; &nbsp; 添加指定元素到HyperLogLog中</element></key></p>
 <p>将所有元素添加到指定的HyperLogLog中。如果执行命令后HLL估计的近似基数发生变化，则返回1，否则返回0</p>
-<pre class="line-numbers language-none"><code class="language-none">127.0.0.1:6379&gt; pfadd program &quot;java&quot;
+<pre class="line-numbers language-none"><code class="language-none">127.0.0.1:6379&gt; pfadd program "java"
 (integer) 1
-127.0.0.1:6379&gt; pfadd program &quot;php&quot;
+127.0.0.1:6379&gt; pfadd program "php"
 (integer) 1
-127.0.0.1:6379&gt; pfadd program &quot;java&quot;
+127.0.0.1:6379&gt; pfadd program "java"
 (integer) 0
-127.0.0.1:6379&gt; pfadd program &quot;c++&quot; &quot;c&quot;
+127.0.0.1:6379&gt; pfadd program "c++" "c"
 (integer) 1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>pfcount</strong></p>
-<p>pfcount \<key> [key…] 计算HLL的近似基数，可以计算多个HLL，比如用HLL存储每天的UV</p>
+<p>pfcount \<key> [key…]&nbsp;计算HLL的近似基数，可以计算多个HLL，比如用HLL存储每天的UV</key></p>
 <pre class="line-numbers language-none"><code class="language-none">127.0.0.1:6379&gt; pfcount program
 (integer) 4<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p><strong>pfmerge</strong></p>
-<p>pfmerge \<destkey> \<sourcekey> [sourcekey …] 将一个或多个HLL合并后的结果存储在另一个HLL，比如每月活跃用户可以使用每天活跃用户来合并计算可得</p>
-<pre class="line-numbers language-none"><code class="language-none">127.0.0.1:6379&gt; pfadd k1 &quot;a&quot; &quot;b&quot; &quot;c&quot;
+<p>pfmerge \<destkey> \<sourcekey> [sourcekey …]&nbsp;将一个或多个HLL合并后的结果存储在另一个HLL，比如每月活跃用户可以使用每天活跃用户来合并计算可得</sourcekey></destkey></p>
+<pre class="line-numbers language-none"><code class="language-none">127.0.0.1:6379&gt; pfadd k1 "a" "b" "c"
 (integer) 1
 127.0.0.1:6379&gt; pfcount k1
 (integer) 3
-127.0.0.1:6379&gt; pfadd k2 &quot;c&quot; &quot;d&quot; &quot;e&quot; &quot;f&quot;
+127.0.0.1:6379&gt; pfadd k2 "c" "d" "e" "f"
 (integer) 1
-127.0.0.1:6379&gt; pfadd k3 &quot;g&quot; &quot;h&quot; &quot;h&quot;
+127.0.0.1:6379&gt; pfadd k3 "g" "h" "h"
 (integer) 1
 127.0.0.1:6379&gt; pfcount k2
 (integer) 4
@@ -519,28 +541,28 @@ OK
 <p><strong>geoadd</strong> 添加地理坐标</p>
 <pre class="line-numbers language-none"><code class="language-none">127.0.0.1:6379&gt; geoadd china:city 121.47 31.23 shanghai
 (integer) 1
-127.0.0.1:6379&gt; geoadd china:city 106.50 29.53 chongqing 114.05 22.52 shenzhen 116.38  38.90 beijing
+127.0.0.1:6379&gt; geoadd china:city 106.50 29.53 chongqing 114.05 22.52 shenzhen 116.38&nbsp;&nbsp;38.90 beijing
 (integer) 3<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>geopos</strong> 获得指定地区的坐标值</p>
 <pre class="line-numbers language-none"><code class="language-none">127.0.0.1:6379&gt; geopos china:city shanghai
-1) 1) &quot;121.47000163793563843&quot;
-   2) &quot;31.22999903975783553&quot;
+1) 1) "121.47000163793563843"
+&nbsp;&nbsp;&nbsp;2) "31.22999903975783553"
 127.0.0.1:6379&gt; geopos china:city shenzhen chongqing
-1) 1) &quot;114.04999762773513794&quot;
-   2) &quot;22.5200000879503861&quot;
-2) 1) &quot;106.49999767541885376&quot;
-   2) &quot;29.52999957900659211&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+1) 1) "114.04999762773513794"
+&nbsp;&nbsp;&nbsp;2) "22.5200000879503861"
+2) 1) "106.49999767541885376"
+&nbsp;&nbsp;&nbsp;2) "29.52999957900659211"<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>geodist</strong> 获取两个位置之间的直线距离</p>
 <pre class="line-numbers language-none"><code class="language-none">127.0.0.1:6379&gt; geodist china:city shanghai beijing km
-&quot;970.3997&quot;
+"970.3997"
 127.0.0.1:6379&gt; geodist china:city shanghai beijing m
-&quot;970399.6506&quot;
+"970399.6506"
 127.0.0.1:6379&gt; geodist china:city shanghai beijing ft
-&quot;3183725.8880&quot;
+"3183725.8880"
 127.0.0.1:6379&gt; geodist china:city shanghai beijing mi
-&quot;602.9799&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+"602.9799"<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>单位：</p>
 <p>m表示单位为米[默认值]。</p>
@@ -550,8 +572,8 @@ OK
 <p>如果用户没有显示的指定参数，那么geodist默认使用米作为单位</p>
 <p><strong>georadius</strong> 以给定的经纬度为中心，找出某一半径内的元素</p>
 <pre class="line-numbers language-none"><code class="language-none">127.0.0.1:6379&gt; georadius china:city 110 30 1000 km
-1) &quot;chongqing&quot;
-2) &quot;shenzhen&quot;
+1) "chongqing"
+2) "shenzhen"
 127.0.0.1:6379&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
                 
             </div>
@@ -658,10 +680,10 @@ OK
                         <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
                     </ul>
                     <div id="alipay">
-                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                        <img src="/medias/reward/alipay1.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -929,60 +951,6 @@ OK
 
     <footer class="page-footer bg-color">
     
-        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
-<style>
-    .aplayer .aplayer-lrc p {
-        
-        display: none;
-        
-        font-size: 12px;
-        font-weight: 700;
-        line-height: 16px !important;
-    }
-
-    .aplayer .aplayer-lrc p.aplayer-lrc-current {
-        
-        display: none;
-        
-        font-size: 15px;
-        color: #42b983;
-    }
-
-    
-    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
-        left: -66px !important;
-    }
-
-    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
-        left: 0px !important;
-    }
-
-    
-</style>
-<div class="">
-    
-    <div class="row">
-        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
-                   server="netease"
-                   type="playlist"
-                   id="503838841"
-                   fixed='true'
-                   autoplay='false'
-                   theme='#42b983'
-                   loop='all'
-                   order='random'
-                   preload='auto'
-                   volume='0.7'
-                   list-folded='true'
-        >
-        </meting-js>
-    </div>
-</div>
-
-<script src="/libs/aplayer/APlayer.min.js"></script>
-<script src="/libs/aplayer/Meting.min.js"></script>
-
-    
 
     <div class="container row center-align"
          style="margin-bottom: 0px !important;">
@@ -1021,13 +989,13 @@ OK
             
         </div>
         <div class="col s12 m4 l4 social-link social-statis">
-    <a href="https://github.com/blinkfox" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+    <a href="https://github.com/js6288" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
         <i class="fab fa-github"></i>
     </a>
 
 
 
-    <a href="mailto:1181062873@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:linjingshu6288@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fas fa-envelope-open"></i>
     </a>
 
@@ -1037,7 +1005,7 @@ OK
 
 
 
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1181062873" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1181062873" data-position="top" data-delay="50">
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1279897306" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1279897306" data-position="top" data-delay="50">
         <i class="fab fa-qq"></i>
     </a>
 

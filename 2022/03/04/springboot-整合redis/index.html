@@ -7,7 +7,7 @@
     <meta name="keywords" content="springboot 整合redis, 小小舒的爪哇天地">
     <meta name="description" content="springboot 整合redis1.创建springboot工程引入依赖
 &amp;lt;dependency&amp;gt;
-    &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;&amp;#x2F;groupId&amp;g">
+&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;lt;groupId&amp;gt;org.springframework.boo">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -54,7 +54,9 @@
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 7.3.0"></head>
+<meta name="generator" content="Hexo 7.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
 
 
 <body>
@@ -373,12 +375,12 @@
                                 <span class="chip bg-color">redis</span>
                             </a>
                         
-                            <a href="/tags/Spring-Boot/">
-                                <span class="chip bg-color">Spring Boot</span>
-                            </a>
-                        
                             <a href="/tags/%E5%B0%9A%E7%A1%85%E8%B0%B7/">
                                 <span class="chip bg-color">尚硅谷</span>
+                            </a>
+                        
+                            <a href="/tags/Spring-Boot/">
+                                <span class="chip bg-color">Spring Boot</span>
                             </a>
                         
                     </div>
@@ -407,12 +409,32 @@
                 
 
                 
-
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>Update Date:&nbsp;&nbsp;
+                    2025-01-29
+                </div>
                 
 
                 
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
+                    902
+                </div>
+                
 
                 
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
+                    5 Min
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>Read Count:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
             </div>
         </div>
         <hr class="clearfix">
@@ -428,103 +450,103 @@
             <div id="articleContent">
                 <h1 id="springboot-整合redis"><a href="#springboot-整合redis" class="headerlink" title="springboot 整合redis"></a>springboot 整合redis</h1><p>1.创建springboot工程引入依赖</p>
 <pre class="line-numbers language-none"><code class="language-none">&lt;dependency&gt;
-    &lt;groupId&gt;org.springframework.boot&lt;&#x2F;groupId&gt;
-    &lt;artifactId&gt;spring-boot-starter-data-redis&lt;&#x2F;artifactId&gt;
-&lt;&#x2F;dependency&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;spring-boot-starter-data-redis&lt;/artifactId&gt;
+&lt;/dependency&gt;
 
 &lt;dependency&gt;
-    &lt;groupId&gt;org.apache.commons&lt;&#x2F;groupId&gt;
-    &lt;artifactId&gt;commons-pool2&lt;&#x2F;artifactId&gt;
-&lt;&#x2F;dependency&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;org.apache.commons&lt;/groupId&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;commons-pool2&lt;/artifactId&gt;
+&lt;/dependency&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>2.application.yml配置redis配置</p>
 <pre class="line-numbers language-none"><code class="language-none">spring:
-  redis:
-    host: 120.25.84.170
-    port: 6379
-    # 数据库索引（默认为0）
-    database: 0
-    # 连接超时时间
-    timeout: 1800000
-    lettuce:
-      pool:
-        # 连接池的最大连接数
-        max-active: 20
-        # 最大阻塞等待时间（使用负值表示没有限制）
-        max-wait: 1
-        # 连接池中的最大空闲连接
-        max-idle: 5
-        # 最小空闲连接
-        min-idle: 0
-  application:
-    name: springboot_redis_demo<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+&nbsp;&nbsp;redis:
+&nbsp;&nbsp;&nbsp;&nbsp;host: 120.25.84.170
+&nbsp;&nbsp;&nbsp;&nbsp;port: 6379
+&nbsp;&nbsp;&nbsp;&nbsp;# 数据库索引（默认为0）
+&nbsp;&nbsp;&nbsp;&nbsp;database: 0
+&nbsp;&nbsp;&nbsp;&nbsp;# 连接超时时间
+&nbsp;&nbsp;&nbsp;&nbsp;timeout: 1800000
+&nbsp;&nbsp;&nbsp;&nbsp;lettuce:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pool:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# 连接池的最大连接数
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;max-active: 20
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# 最大阻塞等待时间（使用负值表示没有限制）
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;max-wait: 1
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# 连接池中的最大空闲连接
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;max-idle: 5
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# 最小空闲连接
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;min-idle: 0
+&nbsp;&nbsp;application:
+&nbsp;&nbsp;&nbsp;&nbsp;name: springboot_redis_demo<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>3.创建redis配置类</p>
 <pre class="line-numbers language-none"><code class="language-none">@EnableCaching
 @Configuration
-public class RedisConfig extends CachingConfigurerSupport &#123;
+public class RedisConfig extends CachingConfigurerSupport {
 
-    @Bean
-    public RedisTemplate&lt;String, Object&gt; redisTemplate(RedisConnectionFactory factory) &#123;
-        RedisTemplate&lt;String, Object&gt; template &#x3D; new RedisTemplate&lt;&gt;();
-        RedisSerializer&lt;String&gt; redisSerializer &#x3D; new StringRedisSerializer();
-        Jackson2JsonRedisSerializer jackson2JsonRedisSerializer &#x3D; new Jackson2JsonRedisSerializer(Object.class);
-        ObjectMapper om &#x3D; new ObjectMapper();
-        om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
-        om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
-        jackson2JsonRedisSerializer.setObjectMapper(om);
-        template.setConnectionFactory(factory);
-        &#x2F;&#x2F;key序列化方式
-        template.setKeySerializer(redisSerializer);
-        &#x2F;&#x2F;value序列化
-        template.setValueSerializer(jackson2JsonRedisSerializer);
-        &#x2F;&#x2F;value hashmap序列化
-        template.setHashValueSerializer(jackson2JsonRedisSerializer);
-        return template;
-    &#125;
+&nbsp;&nbsp;&nbsp;&nbsp;@Bean
+&nbsp;&nbsp;&nbsp;&nbsp;public RedisTemplate&lt;String, Object&gt; redisTemplate(RedisConnectionFactory factory) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RedisTemplate&lt;String, Object&gt; template = new RedisTemplate&lt;&gt;();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RedisSerializer&lt;String&gt; redisSerializer = new StringRedisSerializer();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ObjectMapper om = new ObjectMapper();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jackson2JsonRedisSerializer.setObjectMapper(om);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;template.setConnectionFactory(factory);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//key序列化方式
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;template.setKeySerializer(redisSerializer);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//value序列化
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;template.setValueSerializer(jackson2JsonRedisSerializer);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//value hashmap序列化
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;template.setHashValueSerializer(jackson2JsonRedisSerializer);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return template;
+&nbsp;&nbsp;&nbsp;&nbsp;}
 
-    @Bean
-    public CacheManager cacheManager(RedisConnectionFactory factory) &#123;
-        RedisSerializer&lt;String&gt; redisSerializer &#x3D; new StringRedisSerializer();
-        Jackson2JsonRedisSerializer jackson2JsonRedisSerializer &#x3D; new Jackson2JsonRedisSerializer(Object.class);
-        &#x2F;&#x2F;解决查询缓存转换异常的问题
-        ObjectMapper om &#x3D; new ObjectMapper();
-        om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
-        om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
-        jackson2JsonRedisSerializer.setObjectMapper(om);
-        &#x2F;&#x2F; 配置序列化（解决乱码的问题）,过期时间600秒
-        RedisCacheConfiguration config &#x3D; RedisCacheConfiguration.defaultCacheConfig()
-                .entryTtl(Duration.ofSeconds(600))
-                .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(redisSerializer))
-                .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(jackson2JsonRedisSerializer))
-                .disableCachingNullValues();
-        RedisCacheManager cacheManager &#x3D; RedisCacheManager.builder(factory)
-                .cacheDefaults(config)
-                .build();
-        return cacheManager;
-    &#125;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+&nbsp;&nbsp;&nbsp;&nbsp;@Bean
+&nbsp;&nbsp;&nbsp;&nbsp;public CacheManager cacheManager(RedisConnectionFactory factory) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RedisSerializer&lt;String&gt; redisSerializer = new StringRedisSerializer();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//解决查询缓存转换异常的问题
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ObjectMapper om = new ObjectMapper();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jackson2JsonRedisSerializer.setObjectMapper(om);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// 配置序列化（解决乱码的问题）,过期时间600秒
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RedisCacheConfiguration config = RedisCacheConfiguration.defaultCacheConfig()
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.entryTtl(Duration.ofSeconds(600))
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(redisSerializer))
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(jackson2JsonRedisSerializer))
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.disableCachingNullValues();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RedisCacheManager cacheManager = RedisCacheManager.builder(factory)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.cacheDefaults(config)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.build();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return cacheManager;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>4.测试一下</p>
 <p>在RedisTestController增加测试方法</p>
 <pre class="line-numbers language-none"><code class="language-none">@RestController
-@RequestMapping(&quot;&#x2F;redisTest&quot;)
-public class RedisTestController &#123;
+@RequestMapping("/redisTest")
+public class RedisTestController {
 
-    @Autowired
-    private RedisTemplate redisTemplate;
+&nbsp;&nbsp;&nbsp;&nbsp;@Autowired
+&nbsp;&nbsp;&nbsp;&nbsp;private RedisTemplate redisTemplate;
 
-    @GetMapping
-    public String testRedis()&#123;
-        redisTemplate.opsForValue().set(&quot;name&quot;,&quot;lucy&quot;);
-        String name &#x3D; (String) redisTemplate.opsForValue().get(&quot;name&quot;);
-        return name;
-    &#125;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+&nbsp;&nbsp;&nbsp;&nbsp;@GetMapping
+&nbsp;&nbsp;&nbsp;&nbsp;public String testRedis(){
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;redisTemplate.opsForValue().set("name","lucy");
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String name = (String) redisTemplate.opsForValue().get("name");
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return name;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>5.启动springboot启动类</p>
 <p>浏览器输入</p>
-<pre class="line-numbers language-none"><code class="language-none">http:&#x2F;&#x2F;localhost:8080&#x2F;redisTest<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-none"><code class="language-none">http://localhost:8080/redisTest<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p><img src="http://img-md-js.linjsblog.top/img/1bc7f20cd1e5ce0c15a22d59e51fee68.png" alt="1bc7f20cd1e5ce0c15a22d59e51fee68.png"></p>
 
@@ -599,12 +621,12 @@ public class RedisTestController &#123;
                                     <span class="chip bg-color">redis</span>
                                 </a>
                             
-                                <a href="/tags/Spring-Boot/">
-                                    <span class="chip bg-color">Spring Boot</span>
-                                </a>
-                            
                                 <a href="/tags/%E5%B0%9A%E7%A1%85%E8%B0%B7/">
                                     <span class="chip bg-color">尚硅谷</span>
+                                </a>
+                            
+                                <a href="/tags/Spring-Boot/">
+                                    <span class="chip bg-color">Spring Boot</span>
                                 </a>
                             
                         </div>
@@ -641,10 +663,10 @@ public class RedisTestController &#123;
                         <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
                     </ul>
                     <div id="alipay">
-                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                        <img src="/medias/reward/alipay1.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -729,12 +751,12 @@ public class RedisTestController &#123;
                         <span class="chip bg-color">redis</span>
                     </a>
                     
-                    <a href="/tags/Spring-Boot/">
-                        <span class="chip bg-color">Spring Boot</span>
-                    </a>
-                    
                     <a href="/tags/%E5%B0%9A%E7%A1%85%E8%B0%B7/">
                         <span class="chip bg-color">尚硅谷</span>
+                    </a>
+                    
+                    <a href="/tags/Spring-Boot/">
+                        <span class="chip bg-color">Spring Boot</span>
                     </a>
                     
                     <a href="/tags/lua/">
@@ -924,60 +946,6 @@ public class RedisTestController &#123;
 
     <footer class="page-footer bg-color">
     
-        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
-<style>
-    .aplayer .aplayer-lrc p {
-        
-        display: none;
-        
-        font-size: 12px;
-        font-weight: 700;
-        line-height: 16px !important;
-    }
-
-    .aplayer .aplayer-lrc p.aplayer-lrc-current {
-        
-        display: none;
-        
-        font-size: 15px;
-        color: #42b983;
-    }
-
-    
-    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
-        left: -66px !important;
-    }
-
-    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
-        left: 0px !important;
-    }
-
-    
-</style>
-<div class="">
-    
-    <div class="row">
-        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
-                   server="netease"
-                   type="playlist"
-                   id="503838841"
-                   fixed='true'
-                   autoplay='false'
-                   theme='#42b983'
-                   loop='all'
-                   order='random'
-                   preload='auto'
-                   volume='0.7'
-                   list-folded='true'
-        >
-        </meting-js>
-    </div>
-</div>
-
-<script src="/libs/aplayer/APlayer.min.js"></script>
-<script src="/libs/aplayer/Meting.min.js"></script>
-
-    
 
     <div class="container row center-align"
          style="margin-bottom: 0px !important;">
@@ -1016,13 +984,13 @@ public class RedisTestController &#123;
             
         </div>
         <div class="col s12 m4 l4 social-link social-statis">
-    <a href="https://github.com/blinkfox" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+    <a href="https://github.com/js6288" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
         <i class="fab fa-github"></i>
     </a>
 
 
 
-    <a href="mailto:1181062873@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:linjingshu6288@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fas fa-envelope-open"></i>
     </a>
 
@@ -1032,7 +1000,7 @@ public class RedisTestController &#123;
 
 
 
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1181062873" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1181062873" data-position="top" data-delay="50">
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1279897306" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1279897306" data-position="top" data-delay="50">
         <i class="fab fa-qq"></i>
     </a>
 
