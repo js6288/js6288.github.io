@@ -524,9 +524,9 @@
             
             <tag> 毕业论文 </tag>
             
-            <tag> Spring Boot </tag>
-            
             <tag> MySQL </tag>
+            
+            <tag> Spring Boot </tag>
             
             <tag> 毕业设计 </tag>
             
@@ -1066,11 +1066,11 @@
             
             <tag> Java </tag>
             
+            <tag> MySQL </tag>
+            
             <tag> Spring Boot </tag>
             
             <tag> vue </tag>
-            
-            <tag> MySQL </tag>
             
         </tags>
       
@@ -1122,13 +1122,13 @@
             
             <tag> Java </tag>
             
+            <tag> MySQL </tag>
+            
             <tag> mybatis </tag>
             
             <tag> Spring Boot </tag>
             
             <tag> mybatis-plus </tag>
-            
-            <tag> MySQL </tag>
             
         </tags>
       
@@ -1441,6 +1441,16 @@
           
       </categories>
       
+      
+        <tags>
+            
+            <tag> MySQL </tag>
+            
+            <tag> InnoDB </tag>
+            
+            <tag> 数据结构 </tag>
+            
+        </tags>
       
     </entry>
     
@@ -2465,9 +2475,9 @@
       
       <categories>
           
-          <category> 学习笔记 </category>
-          
           <category> 设计模式 </category>
+          
+          <category> 学习笔记 </category>
           
           <category> 实习面试 </category>
           
@@ -2617,9 +2627,9 @@
             
             <tag> redis </tag>
             
-            <tag> 尚硅谷 </tag>
-            
             <tag> Spring Boot </tag>
+            
+            <tag> 尚硅谷 </tag>
             
             <tag> lua </tag>
             
@@ -2652,9 +2662,9 @@
             
             <tag> redis </tag>
             
-            <tag> 尚硅谷 </tag>
-            
             <tag> Spring Boot </tag>
+            
+            <tag> 尚硅谷 </tag>
             
         </tags>
       
