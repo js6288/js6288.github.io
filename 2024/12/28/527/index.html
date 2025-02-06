@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="Test, 小小舒的爪哇天地">
-    <meta name="description" content="$$ Modified \ cost \ fuction: \min_{\vec w,b} J(\vec w,b)= \underbrace{\frac{1}{m} \sum_{i=1}^{m}L(f_{\vec w,b}(\vec x^{">
+    <meta name="description" content="$$\text{Loss Function: } \quad L(f(\vec{x}), y) = -y \log(f(\vec{x})) - (1 - y) \log(1 - f(\vec{x}))\\\text{Cost Functio">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -393,14 +393,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>Update Date:&nbsp;&nbsp;
-                    2025-01-29
+                    2025-02-03
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
-                    59
+                    241
                 </div>
                 
 
@@ -430,10 +430,56 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>$$ Modified \ cost \ fuction: \min_{\vec w,b} J(\vec w,b)= \underbrace{\frac{1}{m} \sum_{i=1}^{m}L(f_{\vec w,b}(\vec x^{(i)}),y^{(i)})}<em>{\text{orginal cost}} \ + \ \underbrace{\frac{\lambda}{2m} \sum_{i=1}^{m} w_j^2 }</em>{\text{regularization term}}</p>
-<ul>
-<li>\underbrace{\frac{\lambda}{2m} \sum_{i=1}^{m}b^2}_{\text{no use}} $$</li>
-</ul>
+                <p>$$<br>\text{Loss Function: } \quad L(f(\vec{x}), y) = -y \log(f(\vec{x})) - (1 - y) \log(1 - f(\vec{x}))<br>\\<br>\text{Cost Function: } \quad<br>\begin{aligned}<br>&amp; J(\mathbf{W}, \mathbf{B}) = \frac{1}{m} \sum_{i=1}^m L(f(\vec{x}), y), \\<br>&amp; \mathbf{W} = [\mathbf{W}^{[1]}, \mathbf{W}^{[2]}, \mathbf{W}^{[3]}], \\<br>&amp; \mathbf{B} = [\mathbf{\tilde{b}}^{[1]}, \mathbf{\tilde{b}}^{[2]}, \mathbf{\tilde{b}}^{[3]}].<br>\end{aligned}<br>$$</p>
+<p><strong>表格测试</strong></p>
+<table>
+<thead>
+<tr>
+<th>激活函数</th>
+<th>公式</th>
+<th>优点</th>
+<th>缺点</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Sigmoid</strong></td>
+<td>$ \frac{1}{1+e^{-x}} $</td>
+<td>输出概率，平滑可导</td>
+<td>梯度消失，非零均值</td>
+<td>二分类输出层</td>
+</tr>
+<tr>
+<td><strong>Tanh</strong></td>
+<td>$ \frac{e^x - e^{-x}}{e^x + e^{-x}} $</td>
+<td>零均值，输出范围更大</td>
+<td>梯度消失</td>
+<td>隐藏层或需要中心化输出</td>
+</tr>
+<tr>
+<td><strong>ReLU</strong></td>
+<td>$ \max(0, x) $</td>
+<td>计算高效，缓解梯度消失</td>
+<td>死亡神经元，负区间无响应</td>
+<td>隐藏层（最常用）</td>
+</tr>
+<tr>
+<td><strong>Leaky ReLU</strong></td>
+<td>$ \max(\alpha x, x) $</td>
+<td>缓解死亡神经元问题</td>
+<td>需人工设置 ( \alpha )</td>
+<td>深层网络隐藏层</td>
+</tr>
+<tr>
+<td><strong>Softmax</strong></td>
+<td>$ \frac{e^{x_i}}{\sum_j e^{x_j}} $</td>
+<td>输出概率分布</td>
+<td>仅用于多分类输出层</td>
+<td>多分类输出层</td>
+</tr>
+</tbody></table>
+<hr>
+<p><img src="http://img-md-js.linjsblog.top/img/202502032326746.png" alt="从二元分类推广到多分类"></p>
 
                 
             </div>
@@ -802,6 +848,21 @@
 
 </main>
 
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$','$$'], ['\\[','\\]']],
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+        },
+        TeX: {
+            extensions: ["AMSmath.js", "AMSsymbols.js"] // 手动加载 AMS 扩展
+        }
+    });
+</script>
 
 
 
