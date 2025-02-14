@@ -4,12 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="线程死锁问题, 小小舒的爪哇天地">
-    <meta name="description" content="线程死锁问题什么是死锁？
-不同的线程分别占用对方需要的同步资源不放弃，都在等待对方放弃自己需要的同步资源，就形成了线程的死锁。
-出现死锁后，不会出现异常，不会出现提示，只是所用线程都处于阻塞状态，无法继续
-
-演示死锁问题接下来我们演示死锁问">
+    <meta name="keywords" content="吴恩达机器学习 course2 week4 决策树, 小小舒的爪哇天地">
+    <meta name="description" content="吴恩达机器学习 course2 week4 决策树1 什么是决策树 “神经网络”和“决策树/决策树集合”都被广泛应用于很多商业应用，并且在各类机器学习比赛中也取得了很好的成绩。但相比于“神经网络”，“决策树/决策树集合”却并没有在学术界引起">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -21,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>线程死锁问题 | 小小舒的爪哇天地</title>
+    <title>吴恩达机器学习 course2 week4 决策树 | 小小舒的爪哇天地</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
 
@@ -340,12 +336,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/20.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/18.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">线程死锁问题</h1>
+                    <h1 class="description center-align post-title">吴恩达机器学习 course2 week4 决策树</h1>
                 </div>
             </div>
         </div>
@@ -367,9 +363,33 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">No tag</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">
+                                <span class="chip bg-color">人工智能</span>
+                            </a>
+                        
+                            <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">
+                                <span class="chip bg-color">机器学习</span>
+                            </a>
+                        
+                            <a href="/tags/deep-learning/">
+                                <span class="chip bg-color">deep learning</span>
+                            </a>
+                        
+                            <a href="/tags/tensorflow/">
+                                <span class="chip bg-color">tensorflow</span>
+                            </a>
+                        
+                            <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">
+                                <span class="chip bg-color">深度学习</span>
+                            </a>
+                        
+                            <a href="/tags/%E5%86%B3%E7%AD%96%E6%A0%91/">
+                                <span class="chip bg-color">决策树</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
@@ -377,8 +397,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" class="post-category">
-                                多线程
+                            <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                机器学习
                             </a>
                         
                     </div>
@@ -390,28 +410,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2022-07-31
+                    2025-02-15
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>Update Date:&nbsp;&nbsp;
-                    2025-01-29
+                    2025-02-15
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
-                    981
+                    4.2k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
-                    3 Min
+                    15 Min
                 </div>
                 
 
@@ -434,129 +454,168 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="线程死锁问题"><a href="#线程死锁问题" class="headerlink" title="线程死锁问题"></a>线程死锁问题</h1><h2 id="什么是死锁？"><a href="#什么是死锁？" class="headerlink" title="什么是死锁？"></a>什么是死锁？</h2><ol>
-<li>不同的线程分别占用对方需要的同步资源不放弃，都在等待对方放弃自己需要的同步资源，就形成了线程的死锁。</li>
-<li>出现死锁后，不会出现异常，不会出现提示，只是所用线程都处于阻塞状态，无法继续</li>
-</ol>
-<h2 id="演示死锁问题"><a href="#演示死锁问题" class="headerlink" title="演示死锁问题"></a>演示死锁问题</h2><p>接下来我们演示死锁问题</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ThreadTest</span> <span class="token punctuation">{</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-
-        <span class="token class-name">StringBuffer</span> s1 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">StringBuffer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token class-name">StringBuffer</span> s2 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">StringBuffer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">new</span> <span class="token class-name">Thread</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-&gt;</span><span class="token punctuation">{</span>
-            <span class="token keyword">synchronized</span> <span class="token punctuation">(</span>s1<span class="token punctuation">)</span><span class="token punctuation">{</span>
-                s1<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"a"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                s2<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"1"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token keyword">synchronized</span> <span class="token punctuation">(</span>s2<span class="token punctuation">)</span><span class="token punctuation">{</span>
-                    s1<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"b"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                    s2<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"2"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>s1<span class="token punctuation">)</span><span class="token punctuation">;</span>
-                    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>s2<span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token punctuation">}</span>
-            <span class="token punctuation">}</span>
-        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-        <span class="token keyword">new</span> <span class="token class-name">Thread</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-&gt;</span><span class="token punctuation">{</span>
-            <span class="token keyword">synchronized</span> <span class="token punctuation">(</span>s2<span class="token punctuation">)</span><span class="token punctuation">{</span>
-                s1<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"c"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                s2<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"3"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token keyword">synchronized</span> <span class="token punctuation">(</span>s1<span class="token punctuation">)</span><span class="token punctuation">{</span>
-                    s1<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"d"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                    s2<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"4"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>s1<span class="token punctuation">)</span><span class="token punctuation">;</span>
-                    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>s2<span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token punctuation">}</span>
-            <span class="token punctuation">}</span>
-        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>上述代码<strong>可能</strong>导致死锁，为了提高出现死锁的概率，我们在线程拿到第一个锁后睡一下</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ThreadTest</span> <span class="token punctuation">{</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-
-        <span class="token class-name">StringBuffer</span> s1 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">StringBuffer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token class-name">StringBuffer</span> s2 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">StringBuffer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">new</span> <span class="token class-name">Thread</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-&gt;</span><span class="token punctuation">{</span>
-            <span class="token keyword">synchronized</span> <span class="token punctuation">(</span>s1<span class="token punctuation">)</span><span class="token punctuation">{</span>
-                s1<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"a"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                s2<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"1"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token keyword">try</span> <span class="token punctuation">{</span>
-                    <span class="token class-name">Thread</span><span class="token punctuation">.</span><span class="token function">sleep</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">InterruptedException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                    e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token punctuation">}</span>
-                <span class="token keyword">synchronized</span> <span class="token punctuation">(</span>s2<span class="token punctuation">)</span><span class="token punctuation">{</span>
-                    s1<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"b"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                    s2<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"2"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>s1<span class="token punctuation">)</span><span class="token punctuation">;</span>
-                    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>s2<span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token punctuation">}</span>
-            <span class="token punctuation">}</span>
-        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-        <span class="token keyword">new</span> <span class="token class-name">Thread</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-&gt;</span><span class="token punctuation">{</span>
-            <span class="token keyword">synchronized</span> <span class="token punctuation">(</span>s2<span class="token punctuation">)</span><span class="token punctuation">{</span>
-                s1<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"c"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                s2<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"3"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token keyword">try</span> <span class="token punctuation">{</span>
-                    <span class="token class-name">Thread</span><span class="token punctuation">.</span><span class="token function">sleep</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">InterruptedException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                    e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token punctuation">}</span>
-                <span class="token keyword">synchronized</span> <span class="token punctuation">(</span>s1<span class="token punctuation">)</span><span class="token punctuation">{</span>
-                    s1<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"d"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                    s2<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"4"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>s1<span class="token punctuation">)</span><span class="token punctuation">;</span>
-                    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>s2<span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token punctuation">}</span>
-            <span class="token punctuation">}</span>
-        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>​ 当第一个线程拿到锁s1时，第二个线程进入方法拿到锁s2，线程1sleep后因为s2被线程2占用，而线程2想要拿s1锁被线1占用，双方都想拿到对方的锁，而自己又无法释放自己的锁，从而造成无法向下执行，进而造成死锁</p>
-<p>上面的例子符合产生死锁的四个必要条件：</p>
-<ol>
-<li>互斥条件：该资源任意一个时刻只由一个线程占用。</li>
-<li>请求与保持条件：一个线程因请求资源而阻塞时，对已获得的资源保持不放。</li>
-<li>不剥夺条件:线程已获得的资源在未使用完之前不能被其他线程强行剥夺，只有自己使用完毕后才释放资源。</li>
-<li>循环等待条件:若干线程之间形成一种头尾相接的循环等待资源关系。</li>
-</ol>
-<h2 id="如何预防和避免线程死锁"><a href="#如何预防和避免线程死锁" class="headerlink" title="如何预防和避免线程死锁?"></a>如何预防和避免线程死锁?</h2><p><strong>如何预防死锁？</strong> 破坏死锁的产生的必要条件即可：</p>
-<ol>
-<li><strong>破坏请求与保持条件</strong> ：一次性申请所有的资源。</li>
-<li><strong>破坏不剥夺条件</strong> ：占用部分资源的线程进一步申请其他资源时，如果申请不到，可以主动释放它占有的资源。</li>
-<li><strong>破坏循环等待条件</strong> ：靠按序申请资源来预防。按某一顺序申请资源，释放资源则反序释放。破坏循环等待条件。</li>
-</ol>
-<p><strong>如何避免死锁？</strong></p>
-<p>避免死锁就是在资源分配时，借助于算法（比如银行家算法）对资源分配进行计算评估，使其进入安全状态。</p>
+                <h1 id="吴恩达机器学习-course2-week4-决策树"><a href="#吴恩达机器学习-course2-week4-决策树" class="headerlink" title="吴恩达机器学习 course2 week4 决策树"></a>吴恩达机器学习 course2 week4 决策树</h1><h2 id="1-什么是决策树"><a href="#1-什么是决策树" class="headerlink" title="1 什么是决策树"></a>1 什么是决策树</h2><p> “神经网络”和“决策树/决策树集合”都被广泛应用于很多商业应用，并且在各类机器学习比赛中也取得了很好的成绩。但相比于“神经网络”，“决策树/决策树集合”却并没有在学术界引起很多关注。本周就来介绍“决策树/决策树集合”这个非常强大的工具。</p>
+<p>【问题1】“识别猫”：二元分类，对于给定的特征，判断是否为猫。</p>
+<ul>
+<li>输入特征：“耳朵形状”、“脸型”、“胡须”。</li>
+<li>输出：是否为猫。</li>
+<li>默认数据集：三个“二元输入特征”，对应一个“二元输出结果”。</li>
+</ul>
+<p><img src="http://img-md-js.linjsblog.top/img/202502091317699.png" alt="img"></p>
+<p> “<strong>决策树(decision tree)”采用“二叉树”的结构</strong>，从根节点(root node)开始，不断地进行一系列判断，最终到达叶子节点(leaf node)，也就是预测结果。上面的“识别猫”问题将贯穿本周，用于帮助我们理解“决策树”中的概念。比如针对“识别猫”的数据集，我们可以构建如下所示的“决策树”，此时有一个新的输入，就可以按照该“决策树”进行推理<br><img src="http://img-md-js.linjsblog.top/img/202502091317810.png" alt="图1"></p>
+<p><img src="http://img-md-js.linjsblog.top/img/202502091318893.png" alt="图2"></p>
+<p>可以看到按照“决策树”的判断过程，这个新的输入最终被预测为猫，符合预期。但显然，对于当前给定的训练集，若没有其他约束条件的话，上述问题的决策树显然不止一种，如下图：</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202502091318922.png" alt="img"></p>
+<p>在上述这些不同的决策树当中，某些性能很好、某些性能很差。所以“决策树学习算法”就是，在所有可能的决策树中，找出<strong>当前数据集所对应的性能最好的决策树模型</strong>。下面是我们需要考虑的两条准则：</p>
 <blockquote>
-<p><strong>安全状态</strong> 指的是系统能够按照某种线程推进顺序（P1、P2、P3…..Pn）来为每个线程分配所需资源，直到满足每个线程对资源的最大需求，使每个线程都可顺利完成。称&lt;P1、P2、P3…..Pn&gt;序列为安全序列。</p>
+<ol>
+<li><p><strong>如何选择在每个节点使用什么特征进行拆分？</strong></p>
+<p>希望拆分后，能尽可能的区分不同的结果 y ，理想状态就是所有子集都各自是不同种类 y  的集合。也就是拆分后，希望尽可能的减少信息的“不确定度”。比如在图1中，由于使用“Ear shape”进行拆分可以<strong>使“猫”尽量集中于同一个子集中</strong>，“不确定度”最小，“<strong>纯度</strong>”最大（maximize purity），所以选择其为根节点。后面会介绍如何计算这种“不确定度”。</p>
+</li>
+<li><p><strong>什么时候停止拆分？</strong></p>
+</li>
+</ol>
+<ul>
+<li>子集被完全区分。</li>
+<li>达到设置的最大深度。</li>
+<li>降低的“不确定度”低于某个阈值。</li>
+<li>当前节点的子集大小低于某个阈值(某个数)。</li>
+</ul>
+<p>注1：树不应太深、太大，否则有过拟合的风险。</p>
+<p>注2：第二节会详细介绍构建“决策树”的步骤</p>
 </blockquote>
-<p>我们把线程2的代码改成这样就不会产生死锁了</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">new</span> <span class="token class-name">Thread</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-&gt;</span><span class="token punctuation">{</span>
-           <span class="token keyword">synchronized</span> <span class="token punctuation">(</span>s1<span class="token punctuation">)</span><span class="token punctuation">{</span>
-               s1<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"c"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-               s2<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"3"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-               <span class="token keyword">try</span> <span class="token punctuation">{</span>
-                   <span class="token class-name">Thread</span><span class="token punctuation">.</span><span class="token function">sleep</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-               <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">InterruptedException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                   e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-               <span class="token punctuation">}</span>
-               <span class="token keyword">synchronized</span> <span class="token punctuation">(</span>s2<span class="token punctuation">)</span><span class="token punctuation">{</span>
-                   s1<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"d"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                   s2<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"4"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                   <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>s1<span class="token punctuation">)</span><span class="token punctuation">;</span>
-                   <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>s2<span class="token punctuation">)</span><span class="token punctuation">;</span>
-               <span class="token punctuation">}</span>
-           <span class="token punctuation">}</span>
-       <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-   <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="2-单个决策树"><a href="#2-单个决策树" class="headerlink" title="2  单个决策树"></a>2  单个决策树</h2><h3 id="2-1-纯度"><a href="#2-1-纯度" class="headerlink" title="2-1 纯度"></a>2-1 纯度</h3><p>  前面提到希望每次在节点进行拆分时，都尽可能的降低信息的“不确定度”，也就是尽可能提升信息的“**纯度(purity)<strong>”。这个“不确定度”使用“</strong>熵(entropy)**”来进行计算，下面是“熵”的计算公式和曲线。由于“熵”的物理意义就是“信息的不确定度/不纯的程度”，所以机器学习中又喜欢称“熵”为“杂质(impurity)”。这些都只是花里胡哨的名字而已，只需要记住：</p>
+<p>熵”就是“杂质”，表示信息的混乱程度，也就是“不纯”的程度。</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202502120057648.png" alt="img"><br>$$<br>Entropy: H(P)=-\sum_{all \ i}p_ilog_{2}(p_i) \implies H(p_1) = - p_1 \log_2(p_1) - (1 - p_1) \log_2(1 - p_1)<br>$$</p>
+<p>注意，除了“熵”之外，还有其他方法来衡量“信息不纯的程度”，比如开源软件包中会提供“Gini指数”。它表示从数据集中随机选择两个样本，其类别标签不一致的概率，下面是其计算公式。但是为了首先掌握决策树的构建过程，而不是让过多的琐碎的概念困扰，本课程我们就<strong>只用“熵”来表示信息的“不纯度”</strong>。</p>
+<p>$$<br>\text{Gini index:} \quad G(P) = 1 - \sum_{all \ i} p_i^2 \implies G(p_1) = 1 - p_1^2 - (1 - p_1)^2 = 2p_1(1 - p_1)<br>$$</p>
+<h3 id="2-2-选择拆分信息增益"><a href="#2-2-选择拆分信息增益" class="headerlink" title="2-2 选择拆分信息增益"></a>2-2 选择拆分信息增益</h3><p>在构建决策树时，如何选择在节点上分割哪些特征。关键在于选择能够最大降低熵或杂质的特征。每次拆分都应最大程度的减少信息的不确定度，也就是“熵”（或最大化纯度），而减少的“熵”的大小则被称为“信息增益”。</p>
+<p>选择根节点——三个特征的信息增益计算</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202502121132382.png" alt="img"></p>
+<p>显然，在三种“二元输入特征”中，“Ear shape”的“信息增益”最大，所以选为根节点。<br>$$<br>Information \ Gain = H(p₁^{root}) - (w^{left}H(p₁^{left}) + w^{right}H(p₁^{right}))<br>$$</p>
+<ul>
+<li>$H(p₁^{root})$: 拆分前的不确定度</li>
+<li>$w^{left}$: 拆分后，左分支的集合的比例</li>
+<li>$w^{right}$: 拆分后，右分支的集合比例</li>
+<li>$H(p₁^{left})$: 拆分后，左分支的不确定度</li>
+<li>$H(p₁^{right})$: 拆分后，右分支的不确定度</li>
+</ul>
+<p><img src="http://img-md-js.linjsblog.top/img/202502121336167.png" alt="image-20250212133646092"></p>
+<h3 id="2-3-整合（构建决策树——二元输入特征）"><a href="#2-3-整合（构建决策树——二元输入特征）" class="headerlink" title="2-3 整合（构建决策树——二元输入特征）"></a>2-3 整合（构建决策树——二元输入特征）</h3><p>构建（二元输入特征）决策树的过程：</p>
+<ol>
+<li>在根节点，找出最大的“信息增益”所对应的特征，作为拆分标准。</li>
+<li>创建左右分支，各自找出剩余特征中“信息增益”最大的，作为各自的拆分标准。</li>
+<li>不断向下进行拆分，直到：<ul>
+<li>熵”为0，也就是完全分类。</li>
+<li>达到预设的最大深度。<strong>可以使用“验证集”选择最合适的深度</strong>。</li>
+<li>所有剩余特征的“信息增益”都低于某个阈值。</li>
+<li>子集的大小低于某个阈值(某个数)。</li>
+</ul>
+</li>
+</ol>
+<p>注1：停止拆分是为了保证树不会变的太大、太笨重，进而降低过拟合的风险。<br>注2：上述算法可以使用“递归”。<br>注3：在构建过程中，<strong>左右分支可能会选取相同的特征</strong>。</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202502122220687.gif" alt="img"></p>
+<h3 id="2-4-独热编码One-hot-构建决策树——多元输入特征"><a href="#2-4-独热编码One-hot-构建决策树——多元输入特征" class="headerlink" title="2-4 独热编码One-hot(构建决策树——多元输入特征)"></a>2-4 独热编码One-hot(构建决策树——多元输入特征)</h3><p>  若想针对“多元输入特征”构建决策树，可能会有如下针对“二元输入特征”决策树的改进思路：</p>
+<ol>
+<li>创建多分支【不推荐】。整体思路和前面一样，只不过某些节点可能是多分支，但由于每个输入特征的可选种类不一定相同，这种方法会增加计算难度和代码量。</li>
+<li>将“多元特征”转换成“<strong>独热码</strong>(One-hot)”【<strong>推荐</strong>】：不仅可以继续使用之前二元特征的决策树思路，甚至也可以转换成神经网络的训练模式。</li>
+</ol>
+<p>比如下面的“耳朵形状(Ear shape)”有三种可能取值“尖的(Pointy)”、“松软的(Floppy)”、“椭圆形的(Oval)”，将其转换成独热码后，相当于将1个“三元输入特征”转化成3个“二元输入特征”，于是我们只需要对训练集进行一小步预处理，即可复用上述“二元输入特征”的思路：</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202502122231145.png" alt="img"></p>
+<h3 id="2-5-连续有价值的功能（构建决策树——连续的输入特征）"><a href="#2-5-连续有价值的功能（构建决策树——连续的输入特征）" class="headerlink" title="2-5 连续有价值的功能（构建决策树——连续的输入特征）"></a>2-5 连续有价值的功能（构建决策树——连续的输入特征）</h3><p>和上一小节类似，也是将“连续输入特征”转换成“二元输入特征”，然后继续进行构建。但不同的是，“多元特征”只需在最开始进行预处理，而在没被当前所在分支使用前，<strong>“连续输入特征”需要在每个节点都进行一次计算</strong>。具体来说，就是选择一个阈值，<strong>依照该阈值对当前节点的集合进行拆分，可以使“信息增益”最大</strong>，不同节点所计算的阈值可能不同。于是，就可以将“连续输入特征”转换成判断大小的“二元输入特征”。比如在“识别猫”问题中，引入“重量”这一连续取值的输入特征，由于选取“9”作为阈值可以使“信息增益”最大，于是便将“重量”这一“连续输入特征”，转换成“是否小于等于9磅？”这个“二元输入特征”：<br><img src="http://img-md-js.linjsblog.top/img/202502122334531.png" alt="img"></p>
+<p>Choose the 9 mid-points between the 10 examples as possible splits, and find the split that gives the highest<br>information gain.</p>
+<h3 id="2-6-回归树"><a href="#2-6-回归树" class="headerlink" title="2-6 回归树"></a>2-6 回归树</h3><p>将“决策树(decision trees)”算法推广到“<strong>回归树(regression trees)<strong>”，也就是</strong>将“决策树”的预测结果扩展到连续的取值</strong>。和之前的“拆分后尽可能减少信息的不确定度”类似，<strong>“回归树”使用“方差(variance)”来衡量信息的不确定度</strong>。于是，拆分后的方差为左右两分支的方差的加权平均，权值也是 <strong>左右分支的子集大小</strong> 占 <strong>拆分前集合大小</strong> 的比例。相应的“信息增益”为：</p>
+<p>$$<br>Information \ gain=V(s^{root})−(w^{left}V(s^{left})+w^{right}V(s^{right}))<br>$$</p>
+<ul>
+<li>$V(s^{root})$: 拆分前的集合数据的方差。</li>
+<li>$w^{left}$: 拆分后，左分支的集合的比例</li>
+<li>$w^{right}$: 拆分后，右分支的集合的比例</li>
+<li>$V(s^{left})$: 拆分后，左分支的集合数据的方差</li>
+<li>$V(s^{right})$: 拆分后，右分支的集合数据的方差</li>
+</ul>
+<p>“信息增益”只是一个泛在的概念，虽然上述定义和<strong>2-1</strong>不同，但物理意义相通</p>
+<p>回到“识别猫”问题，现在将“重量”作为需要预测的结果(如下左图)。于是，在每次进行拆分时，就使用“方差”来计算“信息增益”，并选择“信息增益”最大的特征作为当前节点的拆分标准。最后达到终止拆分条件，“决策树”构建完成时，直接<strong>使用最终分类的均值作为以后的预测值</strong>：</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202502130005381.png" alt="img"></p>
+<p> 每次拆分都尽可能的减少方差</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202502130005048.png" alt="img"></p>
+<p>使用均值作为当前分支的预测结果</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202502130007858.png" alt="img"></p>
+<h2 id="3-决策树集合"><a href="#3-决策树集合" class="headerlink" title="3 决策树集合"></a>3 决策树集合</h2><p>上一节已经详细的讨论了如何构建单个“决策树”。事实上，如果训练很多“决策树”组成“**决策树集合(dicision tree ensemble)**”，那么会得到更准确、更稳定的预测结果。下面就来介绍几种构建“决策树集合”的方法。</p>
+<h3 id="3-1-使用多个决策树"><a href="#3-1-使用多个决策树" class="headerlink" title="3-1 使用多个决策树"></a>3-1 使用多个决策树</h3><p>使用单个决策树完成任务时，有一个很大的缺点：<strong>单个决策树对于训练集的微小变化非常敏感</strong>。比如下图中，只是替换了训练集中的单个样本，就导致训练出完全不一样的决策树：</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202502141623194.png" alt="img"></p>
+<p>对于一个新的输入，不同的决策树很可能会有不同的预测结果。于是为了使算法更强壮，我们就需要创建不同的训练集，构建出不同的决策树组成“决策树集合(dicision tree ensemble)”。对于新的输入，使用这个“决策树集合”对所有输出结果进行投票，选择最有可能的结果，于是就可以降低算法对于单个决策树的依赖程度，也就可以降低了对于数据的敏感程度：</p>
+<p><img src="http://img-md-js.linjsblog.top/img/202502141623223.png" alt="img"></p>
+<h3 id="3-2-有放回抽样（袋装决策树）"><a href="#3-2-有放回抽样（袋装决策树）" class="headerlink" title="3-2 有放回抽样（袋装决策树）"></a>3-2 有放回抽样（袋装决策树）</h3><p>最简单的<strong>构建不同训练集</strong>的方法，就是“**有放回抽样(sampling with replacement)**”。假设原始训练集大小为 m，每次训练前都随机地有放回抽取 m 次样本，作为本次的训练集：<br><img src="http://img-md-js.linjsblog.top/img/202502141902785.png" alt="img"></p>
+<p>于是我们便可以创建出，有微小不同的多个训练集。注意到，<strong>单次的抽取结果中，可以有重复的样本</strong>。上面这种方法就称为“<strong>袋装决策树</strong>(<strong>bagged decision tree</strong>)”：</p>
+<p>“<strong>袋装决策树</strong>”创建方法：</p>
+<ul>
+<li><p>假设原始训练集大小为 m </p>
+</li>
+<li><p>并且“决策树集合”的大小为 B (bag)，于是</p>
+<pre class="line-numbers language-none"><code class="language-none">for b = 1 to B:
+    1. 从原始训练集有放回抽取m次，形成本次训练集。
+    2. 然后使用该训练集训练单个决策树。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
-<p>我们分析一下上面的代码为什么避免了死锁的发生?</p>
-<p>线程 1 首先获得到 s1 的监视器锁,这时候线程 2 就获取不到了。然后线程 1 再去获取 s2 的监视器锁，可以获取到。然后线程 1 释放了对 s1、s2 的监视器锁的占用，线程 2 获取到就可以执行了。这样就破坏了破坏循环等待条件，因此避免了死锁。</p>
+<p>注：B  一般取64~128，选取更大的 B  可能会提升算法性能，但当 B  超过100后就不会有太大的性能增益。</p>
+</li>
+</ul>
+<h3 id="3-3-随机森林算法"><a href="#3-3-随机森林算法" class="headerlink" title="3-3 随机森林算法"></a>3-3 随机森林算法</h3><p>“袋装决策树”有个缺点，就是很多决策树在根节点或者根节点附近的区域都非常相似。于是为了避免这个问题，在上述“袋装决策树”的基础上，<strong>训练单个决策树时，对于每个节点都会从  n  个特征中随机选取 k 个特征组成子集,</strong> 然后在这个子集中选取最大的“信息增益”(k &lt; n)。一般来说，都会取 $k = \sqrt{n}$ . 于是，每次的训练集都是随机选取的，单个决策树的每个节点特征都是从随机选取的子集中选取的，这便称为“<strong>随机森林</strong>(random forest)”。</p>
+<p>正是这些由“随机选取”产生的微小变动组合在一起，使得“随机森林”比单个决策树更加健壮，于是训练集的任何微小变化都不会对随机森林的输出有太大的影响。</p>
+<p>“<strong>随机森林</strong>”创建方法：</p>
+<pre class="line-numbers language-none"><code class="language-none">for b = 1 to B:
+    1. 从原始训练集有放回抽取m次，形成本次训练集。
+    2. 然后使用该训练集训练单个决策树。
+          选择单个节点拆分标准时，随机选取k个特征进行计算。
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>注：B  一般取64~128，选取更大的 B  可能会提升算法性能，但当 B  超过100后就不会有太大的性能增益。</p>
+<p>注2：一般取 $ k=\sqrt{n}$</p>
+<h3 id="3-4-XGBoost-算法"><a href="#3-4-XGBoost-算法" class="headerlink" title="3-4 XGBoost 算法"></a>3-4 XGBoost 算法</h3><p>下面介绍比“随机森林(Random forest)”更强的算法——梯度提升树(Gradient boost tree)。<strong>每次抽取新的训练集时，都以更高概率选择上一次决策树训练出错的样本</strong>。这就是“增强(boosting)”的含义，类似于“<strong>刻意练习</strong>”。具体的增加多少概率的数学过程是非常复杂的，本课程不过多讨论，会用就行。“**XGBoost(eXtreme Gradient Boosting, 极限梯度提升算法)**”就是“梯度提升树”的一种，下面是其特点：</p>
+<ul>
+<li>XGBoost已经集成好开源库，调用简单。</li>
+<li>非常快速和高效。</li>
+<li>内置了选择单次训练集的方法，所以无需手动为每次训练生成训练集。</li>
+<li>对于“拆分标准”、“停止拆分标准”有很好的默认选项。</li>
+<li>内置了正则化防止过拟合。</li>
+<li>机器学习竞赛中表现出色，如Kaggle。“XGBoost”和“深度学习”算法是在竞赛表现优异的两大算法。</li>
+</ul>
+<p>（如果您改为弹奏这首曲子，然后将注意力集中在曲子中您还没有弹得那么好的部分，并一遍又一遍地练习那些较小的部分。我们将查看决策树，到目前为止我们已经训练过，并查看我们在哪些方面还做得不够好。然后在构建下一个决策树时，我们将更多地关注我们还没有做好的例子。因此，我们不是查看所有训练示例，而是更多地关注示例的子集，这些示例还没有做得很好，并获得新的决策树，下一个决策树报告集成以尝试在它们上做得很好。）</p>
+<p>  多年以来，研究人员提出了很多构建决策树、选取决策树样本的方法。迄今为止，构建决策树集合最常用的方法就是“XGBoost算法”。它运行速度快、开源、易于使用，在很多机器学习比赛、商业应用中广泛使用。XGBoost的内部实现原理非常复杂，所以大家都是直接调用封装好的XGBoost库：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># 分类问题</span>
+<span class="token keyword">from</span> xgboost <span class="token keyword">import</span> XGBClassfier
+model <span class="token operator">=</span> XGBClassfier<span class="token punctuation">(</span><span class="token punctuation">)</span>
+model<span class="token punctuation">.</span>fit<span class="token punctuation">(</span>X_train<span class="token punctuation">,</span> y_train<span class="token punctuation">)</span>
+y_pred <span class="token operator">=</span> model<span class="token punctuation">.</span>predict<span class="token punctuation">(</span>X_test<span class="token punctuation">)</span>
+
+<span class="token comment"># 回归问题</span>
+<span class="token keyword">from</span> xgboost <span class="token keyword">import</span> XGBRegressor
+model <span class="token operator">=</span> XGBRegressor<span class="token punctuation">(</span><span class="token punctuation">)</span>
+model<span class="token punctuation">.</span>fit<span class="token punctuation">(</span>X_train<span class="token punctuation">,</span> y_train<span class="token punctuation">)</span>
+y_pred <span class="token operator">=</span> model<span class="token punctuation">.</span>predict<span class="token punctuation">(</span>X_test<span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h3 id="3-5-何时使用决策树"><a href="#3-5-何时使用决策树" class="headerlink" title="3-5 何时使用决策树"></a>3-5 何时使用决策树</h3><p>总结一下“决策树/决策树集合”、“神经网络”各自的适用场景：</p>
+<p>决策树/决策树集合：</p>
+<ul>
+<li><p>适用于“<strong>结构化数据</strong>”，如“房价预测”问题。不建议处理“非结构化数据”，如“图像”、“视频”、“音频”、“文本”等。并且可以处理分类问题、回归问题。</p>
+</li>
+<li><p><strong>训练速度非常快</strong>。</p>
+</li>
+<li><p>对于人类来说<strong>更容易理解</strong>，比如小型的决策树可以直接打印出来查看决策过程。</p>
+</li>
+<li><p>缺点是一次只能训练一个决策树，且<strong>不支持传统的迁移学习</strong>。</p>
+</li>
+</ul>
+<p>神经网络：</p>
+<ul>
+<li>适合处理<strong>所有类型的数据</strong>，无论是“结构化数据”还是“非结构化数据”，或者是两者的混合数据。也可以处理分类问题、回归问题。</li>
+<li><strong>训练速度较慢</strong>。</li>
+<li>使用<strong>迁移学习</strong>可以快速完成“预训练”。</li>
+<li><strong>可连接性好</strong>。几个神经网络可以很容易的串联或并联在一起，组成一个更大的模型进行训练。</li>
+</ul>
+<p>注1：老师建议训练“决策树”时直接调用XGBoost库，尽管可能会需要更多的运算资源，但是非常快捷、准确。<br>注2：“结构化数据”指的是那些可以使用电子表格表示的数据。</p>
 
                 
             </div>
@@ -583,7 +642,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://js6288.github.io/2022/07/31/%E7%BA%BF%E7%A8%8B%E6%AD%BB%E9%94%81%E9%97%AE%E9%A2%98/">https://js6288.github.io/2022/07/31/%E7%BA%BF%E7%A8%8B%E6%AD%BB%E9%94%81%E9%97%AE%E9%A2%98/</a>
+                    <a href="https://js6288.github.io/2025/02/15/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%90%B4%E6%81%A9%E8%BE%BEcourse2week4/">https://js6288.github.io/2025/02/15/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%90%B4%E6%81%A9%E8%BE%BEcourse2week4/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -620,7 +679,31 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">No tag</span>
+                            
+                                <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">
+                                    <span class="chip bg-color">人工智能</span>
+                                </a>
+                            
+                                <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">
+                                    <span class="chip bg-color">机器学习</span>
+                                </a>
+                            
+                                <a href="/tags/deep-learning/">
+                                    <span class="chip bg-color">deep learning</span>
+                                </a>
+                            
+                                <a href="/tags/tensorflow/">
+                                    <span class="chip bg-color">tensorflow</span>
+                                </a>
+                            
+                                <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">
+                                    <span class="chip bg-color">深度学习</span>
+                                </a>
+                            
+                                <a href="/tags/%E5%86%B3%E7%AD%96%E6%A0%91/">
+                                    <span class="chip bg-color">决策树</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -697,17 +780,18 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
+                <i class="far fa-dot-circle"></i>&nbsp;Current
+            </div>
             <div class="card">
-                <a href="/2022/07/31/lock-%E9%94%81-%E5%85%A5%E9%97%A8/">
+                <a href="/2025/02/15/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%90%B4%E6%81%A9%E8%BE%BEcourse2week4/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="Lock 锁">
+                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="吴恩达机器学习 course2 week4 决策树">
                         
-                        <span class="card-title">Lock 锁</span>
+                        <span class="card-title">吴恩达机器学习 course2 week4 决策树</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -717,24 +801,49 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-07-31
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-02-15
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/JUC/" class="post-category">
-                                    JUC
-                                </a>
-                            
-                            <a href="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" class="post-category">
-                                    多线程
+                            <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                    机器学习
                                 </a>
                             
                             
                         </span>
                     </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">
+                        <span class="chip bg-color">人工智能</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">
+                        <span class="chip bg-color">机器学习</span>
+                    </a>
+                    
+                    <a href="/tags/deep-learning/">
+                        <span class="chip bg-color">deep learning</span>
+                    </a>
+                    
+                    <a href="/tags/tensorflow/">
+                        <span class="chip bg-color">tensorflow</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">
+                        <span class="chip bg-color">深度学习</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%86%B3%E7%AD%96%E6%A0%91/">
+                        <span class="chip bg-color">决策树</span>
+                    </a>
+                    
                 </div>
                 
             </div>
@@ -746,13 +855,13 @@
                 Next&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/07/30/%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5/">
+                <a href="/2025/02/09/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%90%B4%E6%81%A9%E8%BE%BEcourse2week3/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="线程同步">
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="吴恩达机器学习 Course2 week3 使用机器学习的建议">
                         
-                        <span class="card-title">线程同步</span>
+                        <span class="card-title">吴恩达机器学习 Course2 week3 使用机器学习的建议</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -763,19 +872,47 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-07-30
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-02-09
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" class="post-category">
-                                    多线程
+                            <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                    机器学习
                                 </a>
                             
                             
                         </span>
                     </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">
+                        <span class="chip bg-color">人工智能</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">
+                        <span class="chip bg-color">机器学习</span>
+                    </a>
+                    
+                    <a href="/tags/deep-learning/">
+                        <span class="chip bg-color">deep learning</span>
+                    </a>
+                    
+                    <a href="/tags/tensorflow/">
+                        <span class="chip bg-color">tensorflow</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">
+                        <span class="chip bg-color">深度学习</span>
+                    </a>
+                    
+                    <a href="/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/">
+                        <span class="chip bg-color">神经网络</span>
+                    </a>
+                    
                 </div>
                 
             </div>
@@ -897,6 +1034,21 @@
 
 </main>
 
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$','$$'], ['\\[','\\]']],
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+        },
+        TeX: {
+            extensions: ["AMSmath.js", "AMSsymbols.js"] // 手动加载 AMS 扩展
+        }
+    });
+</script>
 
 
 
