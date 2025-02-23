@@ -4,6 +4,47 @@
   
     
     <entry>
+      <title>吴恩达机器学习 course3 week1 无监督学习</title>
+      <link href="/2025/02/23/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%90%B4%E6%81%A9%E8%BE%BEcourse3week1/"/>
+      <url>/2025/02/23/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%90%B4%E6%81%A9%E8%BE%BEcourse3week1/</url>
+      
+        <content type="html"><![CDATA[<h1 id="吴恩达机器学习-course3-week1-无监督学习"><a href="#吴恩达机器学习-course3-week1-无监督学习" class="headerlink" title="吴恩达机器学习 course3 week1 无监督学习"></a>吴恩达机器学习 course3 week1 无监督学习</h1><h2 id="1-关于-course-3"><a href="#1-关于-course-3" class="headerlink" title="1 关于 course 3"></a>1 关于 course 3</h2><p>前面的Course1、Course2一直在讨论“<strong>有监督</strong>的机器学习”，Course3就来介绍不一样的内容：</p><ul><li>Week1-**无监督机器学习(unsupervised learning)<strong>：主要学习“</strong>聚类(clustering)<strong>”及“</strong>异常检测(anomaly detection)**”，这两种技术都广泛应用于商业软件中。</li><li>Week2-**推荐系统(recommender systems)**：“推荐系统”是机器学习最重要的商业应用之一，影响的产值达到数十亿美元，但在学术界却并没有取得相应的关注。常见于购物网站、流媒体视频等“为你推荐/猜你喜欢”的功能，学完后将理解广告的推荐策略。</li><li>Week3-**强化学习(reinforcement learning)**：“强化学习”是一项新的技术，和前面提到的技术相比，商业应用没有那么广泛。但这是一项令人兴奋的技术，它向人们展示了学习算法可以做的事情，比如打游戏、控制机器人等。课程最后将使用“强化学习”模拟一个月球着陆器。</li></ul><h2 id="2-聚类算法"><a href="#2-聚类算法" class="headerlink" title="2 聚类算法"></a>2 聚类算法</h2><h3 id="2-1-什么是聚类"><a href="#2-1-什么是聚类" class="headerlink" title="2-1 什么是聚类"></a>2-1 什么是聚类</h3><p>聚类是一种<strong>无监督</strong>学习算法，它通过分析数据点之间的相似性，自动将相似的数据点<strong>分组</strong>。与监督学习不同，聚类没有目标标签，只依据输入特征进行分析。聚类的应用广泛，包括新闻文章分类、DNA数据分析、天文学中的星系识别等。聚类帮助我们发现数据中的潜在结构，识别出相似特征的群体，广泛应用于各个领域。</p><p><img src="http://img-md-js.linjsblog.top/img/202502151824662.png" alt="img"></p><h3 id="2-2-K-means算法"><a href="#2-2-K-means算法" class="headerlink" title="2-2 K-means算法"></a>2-2 K-means算法</h3><p>“K-means算法”是最常见的聚类算法，下面简单介绍一下“K-means算法”的原理。如下图所示，假设现在数据集中有30个未标记的训练样本，要求将数据分成两类。于是，我们可以先随机初始化两个“<strong>质心</strong>(centroid)”，然后不断的重复下面的步骤，直到质心的位置不再变化，也就是“收敛”：</p><blockquote><ol><li>为所有样本<strong>分配“质心”</strong>。也就是将当前样本，分配给距离最近的“质心”。</li><li><strong>移动</strong>每一个<strong>“质心”</strong>。使用当前质心的所有样本计算出新的质心位置。</li></ol></blockquote><p><img src="http://img-md-js.linjsblog.top/img/202502181332849.png" alt="img"></p><h4 id="数学符号"><a href="#数学符号" class="headerlink" title="数学符号"></a><strong>数学符号</strong></h4><ul><li>样本数量为m 、特征的数量为n 、质心的数量为 K 。</li><li>$\vec{x}^{(i)}$: 是n维向量，用于表示第i个样本的位置</li><li>$\vec\mu_{k}$: 是n维向量，用于表示第k个质心的位置</li><li>$c^{(i)}$: 一个值，取值范围1~K, 表示第i个样本$\vec{x}^{(i)}$对应的质心索引，该质心到$\vec{x}^{(i)}$的距离最短</li><li>$\vec{u}<em>{c^{(i)}}$: 表示第 i 个样本$\vec{x}^{(i)}$ 所对应的质心 $c^{(i)}$的位置。等价于$\vec\mu</em>{k}$，只不过为了强调是$\vec{x}^{(i)}$所对应的质心</li><li>$\left|{x}^{(i)} - \mu_{k}  \right|$: 二阶范数，表示第 i 个样本$\vec{x}^{(i)}$ 和第 k  个质心之间的欧式距离.但实际在代码中为减少计算量，通常使用该距离的平方，写成范数是为了数学形式的简便。</li><li>$X = \left{ \vec{x}^{(1)};\vec{x}^{(2)}…\vec{x}^{(n)}; \right}$ :是 m × n  二维矩阵，每一行表示一个样本的位置</li><li>$\vec{c} = \left{ c^{(1)},c^{(2)}…c^{(m)} \right}$:  是 m 维向量，每个数都表示一个样本对应的质心索引。</li></ul><p>但“随机初始化”有一定的风险，因为不同的初始化会导致不同的聚类结果，所以很多迭代过程都会陷入到“局部最优解”中，如下图所示。所以解决方法就是将上述过程运行50~1000次，每次运行结束时都计算本次的<strong>代价函数</strong>，最终就可以<strong>找出代价最低的聚类结果</strong>。下面给出完整的“K-means算法”步骤：<br><img src="http://img-md-js.linjsblog.top/img/202502181743431.png" alt="img"></p><p><strong>完整的K-means算法</strong>：</p><ol><li>设定重复次数(如100次)：</li></ol><p>​1. <strong>随机选择 K  个不同的样本作为 K 个质心的初始位置</strong>：$\vec{\mu}_1,\vec{\mu}_2,…,\vec{\mu}_K $</p><p>​2. 然后不断重复：{</p><p>​1. 分配质心.针对 m 个样本,重复 m 次,利用X、M计算出距离当前样本最近的质心<strong>索引</strong>.最后得到$\vec{c}$ 。</p><p>​2. 移动质心.针对 K 个质心，重复 K 次，利用 $\vec{c} $计算出每个质心的新位置，并移动。质心的新位置等于该质心对应的<strong>所有样本位置的平均值</strong>。</p><p>​}直到质心不再移动或移动步长很小(收敛)；  </p><p>​3. 计算并保存当前结果的代价。</p><ol start="2"><li>找出代价最小的聚类结果。</li></ol><blockquote><p>注1：特征数量为n 、样本数量为m 、质心数量为K 。<br>注2：运行次数超过1000后，计算成本很高，但带来的收益很小，所以一般运行50~1000次即可。</p></blockquote><p>最后注意，若某次迭代结束后，某质心没有被分配到样本，如下图所示，那么：</p><p><img src="http://img-md-js.linjsblog.top/img/202502181915545.png" alt="img"></p><p>去掉一个质心，也就是令 K = K − 1【常用】。<br>重新初始化质心位置，重新迭代。</p><h3 id="2-3-代价函数"><a href="#2-3-代价函数" class="headerlink" title="2-3 代价函数"></a>2-3 代价函数</h3><p>  上述介绍的整个“K-means算法”的过程，和“梯度下降法”相似，实质上也是在寻找特定代价函数的最小值。这个代价函数就是样本和其质点的<strong>距离的平方和的平均</strong>，在某些文献中也被称为“失真函数(distoration function)”：<br>$$<br>Cost \ Function/<br>Distoration\ Function = J(\vec{c},M) = \frac{1}{m} \sum_{i=1}^{m} \left| x^{(i)}- \mu_{c^{(i)}} \right| ^{2}<br>$$<br>所以，K-means算法实际上就是想让上述的距离的平均平方和最小。<strong>每次迭代中，代价函数都应该下降或不变</strong>，若代价不变或者下降的非常小则表明算法收敛，若代价上升则意味着代码有bug。</p><h3 id="2-4-选择聚类数量"><a href="#2-4-选择聚类数量" class="headerlink" title="2-4 选择聚类数量"></a>2-4 选择聚类数量</h3><p><img src="http://img-md-js.linjsblog.top/img/202502182135100.png" alt="img"></p><p> 由于“K-means算法”属于“无监督学习”，所以聚类数量 K  是很主观的指标，没有绝对正确的聚类数量。比如上图中，聚类数量是2、3、4，都非常合理。另外，<strong>聚类数量越多，代价函数的全局最小值越小</strong>，极端情况下令 K=m, 显然代价为0最小。但通常来说，我们使用下面两种方法选择聚类数量K:</p><blockquote><ol><li><p>肘法(elbow method)”【不推荐】：画出代价函数的全局最小值$ J_{min}$ 随着 K  变化的曲线，找出曲线“拐点(肘部)”所对应的 K 作为最佳的聚类数量。但缺点是在大多数情况下，曲线都很平滑，找不到“拐点”。</p></li><li><p><strong>面向需求</strong>【推荐】：通常当前的算法都会有后续的应用，所以可以根据应用需求选取相应的聚类数量。比如前面的“选择T恤尺码”问题，可以看设计需要选择3种尺码还是5种尺码，当然更多的尺码也意味着更多的成本，所以可以都运行一下，综合考虑最后结果再选择聚类数量。</p></li></ol></blockquote><h3 id="2-5-图像压缩"><a href="#2-5-图像压缩" class="headerlink" title="2-5 图像压缩"></a>2-5 图像压缩</h3><p>来使用K-means算法来实现图像压缩</p><p>见课程代码 <strong>C3_W1_KMeans_Assignment</strong></p><h2 id="3-异常检测"><a href="#3-异常检测" class="headerlink" title="3 异常检测"></a>3 异常检测</h2><p>下面来学习第二种商业应用广泛的“<strong>无监督学习</strong>”算法——“**异常检测(anomaly detection)**”。</p><h3 id="3-1-发现异常事件"><a href="#3-1-发现异常事件" class="headerlink" title="3-1 发现异常事件"></a>3-1 发现异常事件</h3><p>应用</p><blockquote><p>问题1】“飞机引擎检测”：根据输入特征，检测新制造的引擎是否有问题。</p><ul><li><p>输入特征：“发动机温度”、“振动强度”。实际显然会有更多的特征，这里做出了简化。</p></li><li><p>输出：是否异常。</p></li><li><p>训练集：m 个正常引擎的特征。</p></li></ul><p>【问题2】“金融欺诈监测”：持续监测用户特征，判断是否有可能的欺诈行为。</p><ul><li><p>输入特征：正常用户的登录频率、单次访问网页数量、单次交易数量、单次发帖数量、打字速度等。</p></li><li><p>输出：查看某个新用户是否具有欺诈行为。</p></li></ul><p>【问题3】“服务器监测”：监测数据中心的服务器是否正常运行。</p><ul><li>输入特征：内存使用量、磁盘读写次数、CPU负载、网络流量等。</li><li>输出：判断服务器是否出现异常行为，比如被黑客攻击等。</li></ul></blockquote><p> “异常检测”通常使用“**(概率)密度估计**(density estimation)”的方法。也就是，“异常检测”算法首先使用<strong>未标记的正常事件</strong>数据集进行训练(下图红叉)，学习正常样本的概率分布，然后<strong>计算新样本</strong> $x_{test}$ <strong>出现的概率</strong>  ，若其出现的概率小于设定好的阈值$p(x_{test} )&lt;\varepsilon$ ,显然就可以认为这是一个异常事件, </p><p><img src="http://img-md-js.linjsblog.top/img/202502221742846.png" alt="img"></p><p>椭圆越是外圈，概率就越低；接下来几个小结会详细介绍如何从训练集中确定哪些区域概率较高，哪些区域概率较低</p><h3 id="3-2-高斯正态分布"><a href="#3-2-高斯正态分布" class="headerlink" title="3-2 高斯正态分布"></a>3-2 高斯正态分布</h3><p>注：“高斯分布(Gaussian distribution)”别称“正态分布(Normal distribution)”、“钟形分布(Bell-shaped distribution)”，以下皆称“高斯分布”。<br>$$<br>p(x) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}<br>$$<br><img src="http://img-md-js.linjsblog.top/img/202502222112483.png" alt="img"></p><p>通过上述可以看到，高斯分布由均值$u$和方差$\sigma^2$ 完全确定，于是针对某单个特征，我们就可以计算其均值和方差，来对当前特征进行高斯估计(假设样本$x^{(i)}$只有一个特征)：<br><img src="http://img-md-js.linjsblog.top/img/202502222129237.png" alt="img"></p><h3 id="3-3-异常检测算法"><a href="#3-3-异常检测算法" class="headerlink" title="3-3 异常检测算法"></a>3-3 异常检测算法</h3><p>于是，根据上一节对单个特征进行高斯估计的公式，可以很容易的推广到具有多特征的样本，于是就可以写出下面“异常检测”算法的完整步骤。以<strong>3-1</strong>的“飞机引擎检测”问题举例，首先使用正常样本分别对特征$x_1,x_2$进行概率估计，获得整体的概率统计后，就可以直接计算$p(x_{test})$来判断其是否为异常事件：</p><p><strong>“异常检测”算法的完整步骤</strong>：</p><ol><li><p>定义训练集，注意全部为正常样本。假设样本总数为 m 、特征总数为 n </p></li><li><p>对每个特征分别进行统计分析，然后将其相乘得到某样本的综合概率分布。这里<strong>假设所有特征都服从高斯分布，并且相互独立</strong>。就算不独立，算法表现依旧良好：<br>$$<br>\mu_j = \frac{1}{m} \sum_{i=1}^{m} x_j^{(i)}, \quad \sigma_j^2 = \frac{1}{m} \sum_{i=1}^{m} (x_j^{(i)} - \mu_j)^2, \quad j=1,2,…,n.<br>$$</p></li><li><p>对于新的输入$\vec x_{new}$ , 根据$p(\vec{x})$计算其概率。若$p(\vec{x}<em>{new}) &lt; \varepsilon$  则认为是异常事件<br>$$<br>p(\vec{x}) = p(x_1; \mu_1, \sigma_1^2) * p(x_2; \mu_2, \sigma_2^2) * \ldots * p(x_n; \mu_n, \sigma_n^2) = \prod</em>{j=1}^{n} p(x_j; \mu_j, \sigma_j^2)<br>\<br>= \prod_{j=1}^{n} \frac{1}{\sqrt{2 \pi} \sigma_j} exp(- \frac{(x_i-\mu_j)^2} {2\sigma_j^2})<br>$$</p></li></ol><p><img src="http://img-md-js.linjsblog.top/img/202502222234751.png" alt="img"></p><p>下一小节来介绍如何选取合适的判断阈值 $\varepsilon $</p><h3 id="3-4-开发与评估异常检测系统（选取判断阈值-varepsilon-）"><a href="#3-4-开发与评估异常检测系统（选取判断阈值-varepsilon-）" class="headerlink" title="3-4 开发与评估异常检测系统（选取判断阈值$\varepsilon $）"></a>3-4 开发与评估异常检测系统（选取判断阈值$\varepsilon $）</h3><p>显然在开发系统时，如果有一个具体的评估系统性能的指标，就很容易帮助我们改进系统，这就是“实数评估(real-number evaluation)”。由于 $ \varepsilon$也是“异常检测”的模型参数，于是这启示我们借鉴“有监督学习”中的“验证集”这一概念，来选择最合适的模型参数 $\varepsilon$。我们可以将“是否异常”看成是一种标签，来进行如下拆分，注意“训练集”是全部都为正常样本的无标签数据：</p><p><strong>【异常样本足够】三拆分：训练集、验证集、测试集。</strong></p><ul><li>原始训练集：10000正常样本 + 20异常样本。</li><li>训练集：6000正常样本。用于拟合正常样本的概率分布。</li><li>验证集：2000正常样本+10异常样本。用于挑选最合适的 ε或者改进特征。</li><li>测试集：2000正常样本+10异常样本。用于最后评估系统性能。</li></ul><p><strong>【异常样本极少】二拆分：训练集、验证集。</strong></p><ul><li>原始训练集：10000正常样本 + 2异常样本。</li><li>训练集：6000正常样本。用于拟合正常样本的概率分布。</li><li>验证集：4000正常样本+2异常样本。用于挑选最合适的 ε 或者改进特征。</li></ul><p>注1：上述“二拆分”没有“测试集”评估系统性能，可能会有“过拟合”的风险。<br>注2：由于训练集没有标签，所以上述依旧是“无监督学习”。</p><p>进行上述拆分后，注意到上述“验证集”、“训练集”都属于Course2-Week3提到的“<strong>倾斜数据集</strong>”，于是就可以使用“准确率/召回率”、“<strong>F1 score</strong>”来评判系统在“验证集”、“测试集”上的性能。一个可行的代码思路是：</p><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># 1. 训练结束后，计算验证集中所有样本对应的概率p_cv(0~1)。</span><span class="token comment"># 2. 计算每个步长所对应的“F1 score”：</span>step <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token builtin">max</span><span class="token punctuation">(</span>p_cv<span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token builtin">min</span><span class="token punctuation">(</span>p_cv<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token number">1000</span><span class="token keyword">for</span> epsilon <span class="token keyword">in</span> numpy<span class="token punctuation">.</span>arange<span class="token punctuation">(</span><span class="token builtin">min</span><span class="token punctuation">(</span>p_cv<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token builtin">max</span><span class="token punctuation">(</span>p_cv<span class="token punctuation">)</span><span class="token punctuation">,</span> step<span class="token punctuation">)</span><span class="token punctuation">:</span>    <span class="token comment"># 计算当前 epsilon 下的“F1 score”</span><span class="token comment"># 3. 找出最大的“F1 score”所对应的epsilon即可。</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="3-5-异常检测与监督学习对比"><a href="#3-5-异常检测与监督学习对比" class="headerlink" title="3-5 异常检测与监督学习对比"></a>3-5 异常检测与监督学习对比</h3><p>  既然3-4节引入了“验证集”，将异常样本标记为1、正常样本标记为0，那为什么不使用前面的“有监督学习”完成检测异常样本的任务呢？这是因为两者的问题重心不同。总结一句话，“异常检测”尝试检测出“<strong>新异常</strong>”；“有监督学习”只检测“<strong>旧异常</strong>”。下面给出两者的对比：</p><p><strong>异常检测-无监督学习：</strong></p><ul><li>异常样本极少。</li><li>异常的种类很多，异常样本无法覆盖到所有的异常；并且时常出现“新异常”。</li></ul><blockquote><p>​如“金融欺诈监测”，每隔几个月都会出现全新的欺诈策略。<br>​如“飞机引擎检测”，希望能检测到全新的缺陷。<br>​如“服务器监测”，因为有人维护，所以黑客每次的入侵方式都不一样。许多系统安全相关的软件都使用“异常检测”。</p></blockquote><p><strong>有监督学习：</strong></p><ul><li>异常样本很多，甚至和正常样本一样多。</li><li>异常样本覆盖全面，以后出现的异常几乎都是之前出现过的。</li></ul><blockquote><p>​如“垃圾邮件分类器”，内容无外乎保险、毒品、商品推销等。<br>​如“产品缺陷检测”，流水线产品的缺陷几乎已经都是固定种类的，比如擦痕检测。<br>​如“天气预报”，因为天气的种类是固定的：晴天、雨天等。<br>​如“疾病检测”，看看病人是否有特定类型的疾病。</p></blockquote><h3 id="3-6-选择恰当的特征"><a href="#3-6-选择恰当的特征" class="headerlink" title="3-6 选择恰当的特征"></a>3-6 选择恰当的特征</h3><p>在“有监督学习”中，即使选取的特征没那么恰当也没关系，因为算法可以从数据集的标签中学到如何重新缩放特征。但“无监督学习”的训练集没有标签，这就意味着 <strong>相比于“有监督学习”，选择恰当的特征对于“无监督学习”来说更重要</strong>。和前面类似，改进特征的方法主要有“特征变换”、“误差分析”：</p><p><strong>特征变换：寻找更合适的概率分布</strong></p><p>若原始特征不是高斯分布，那显然会引入很大的误差，于是：</p><p><img src="http://img-md-js.linjsblog.top/img/202502231751792.png" alt="image-20250223175154645"></p><ol><li>通过数学变换将其变换成高斯分布。常见的改进方法有取对数log(x+c), c为常数；幂次x^n, n为任意实数</li><li>使用其他分布进行拟合。</li></ol><p>注：上述两种方法原理相通，只不过方法二需要了解常见的统计分布。</p><p><strong>误差分析</strong></p><p>如果在“验证集”上表现不佳，那么也可以进行“误差分析”，分析出现错误的原因，对症下药进行改进：</p><ol><li><strong>引入新特征</strong>：比如在“金融欺诈监测”中，检查某个被遗漏的异常样本，发现指标“交易次数$x_1$ ”略高但在正常范围内，但是打字速度非常快，那么就可以添加新的特征“打字速度$ x_2 $”。</li><li><strong>组合旧特征</strong>：比如在“服务器监测”中，检查某个被遗漏的异常样本，所有指标都在合理范围内，只是“CPU负载$x_3$ ，略高且“网络流量$x_4$”略低，那么就可以组合这两个特征“CPU负载/网络流量$=x_5$” 。</li></ol><p><img src="http://img-md-js.linjsblog.top/img/202502231851441.png" alt="img"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 机器学习 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 人工智能 </tag>
+            
+            <tag> 机器学习 </tag>
+            
+            <tag> deep learning </tag>
+            
+            <tag> tensorflow </tag>
+            
+            <tag> 深度学习 </tag>
+            
+            <tag> machine learning </tag>
+            
+            <tag> Python </tag>
+            
+            <tag> K-means </tag>
+            
+            <tag> 异常检测 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>吴恩达机器学习 course2 week4 决策树</title>
       <link href="/2025/02/15/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%90%B4%E6%81%A9%E8%BE%BEcourse2week4/"/>
       <url>/2025/02/15/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%90%B4%E6%81%A9%E8%BE%BEcourse2week4/</url>
@@ -31,6 +72,10 @@
             <tag> 深度学习 </tag>
             
             <tag> 决策树 </tag>
+            
+            <tag> 随机森林 </tag>
+            
+            <tag> XGBoost </tag>
             
         </tags>
       
@@ -66,6 +111,12 @@
             <tag> 深度学习 </tag>
             
             <tag> 神经网络 </tag>
+            
+            <tag> 精确度和召回率 </tag>
+            
+            <tag> 偏差和方差 </tag>
+            
+            <tag> 倾斜数据集 </tag>
             
         </tags>
       
@@ -701,9 +752,9 @@
       
         <tags>
             
-            <tag> 计算机网络 </tag>
-            
             <tag> 装机 </tag>
+            
+            <tag> 计算机网络 </tag>
             
             <tag> OpenSSH </tag>
             
@@ -2580,9 +2631,9 @@
       
       <categories>
           
-          <category> 设计模式 </category>
-          
           <category> 学习笔记 </category>
+          
+          <category> 设计模式 </category>
           
           <category> 实习面试 </category>
           
@@ -2732,9 +2783,9 @@
             
             <tag> redis </tag>
             
-            <tag> Spring Boot </tag>
-            
             <tag> 尚硅谷 </tag>
+            
+            <tag> Spring Boot </tag>
             
             <tag> lua </tag>
             
@@ -2767,9 +2818,9 @@
             
             <tag> redis </tag>
             
-            <tag> Spring Boot </tag>
-            
             <tag> 尚硅谷 </tag>
+            
+            <tag> Spring Boot </tag>
             
         </tags>
       
