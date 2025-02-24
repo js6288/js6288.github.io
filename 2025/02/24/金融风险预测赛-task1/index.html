@@ -1,0 +1,1636 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="金融风险预测赛 Task1, 小小舒的爪哇天地">
+    <meta name="description" content="金融风险预测赛 Task1比赛地址：https://tianchi.aliyun.com/competition/entrance/531830/introduction
+一、赛题赛题以预测用户贷款是否违约为任务，数据集报名后可见并可下载，">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>金融风险预测赛 Task1 | 小小舒的爪哇天地</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    
+
+
+    <!-- bg-cover style     -->
+
+
+
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" type="text/css" href="/css/matery.css">
+<link rel="stylesheet" type="text/css" href="/css/my.css">
+<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+
+
+
+
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/css/post.css">
+
+
+
+
+    
+        <link rel="stylesheet" type="text/css" href="/css/reward.css">
+    
+
+
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 7.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">小小舒的爪哇天地</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>Index</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>Tags</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>Categories</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>Archives</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>About</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>Contact</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>Friends</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="Search" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <li>
+    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
+      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">小小舒的爪哇天地</div>
+        <div class="logo-desc">
+            
+            Life is coding, I will debug it.
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			Index
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			Tags
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			Categories
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			Archives
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			About
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			Contact
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			Friends
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/7.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">金融风险预测赛 Task1</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">
+                                <span class="chip bg-color">人工智能</span>
+                            </a>
+                        
+                            <a href="/tags/deep-learning/">
+                                <span class="chip bg-color">deep learning</span>
+                            </a>
+                        
+                            <a href="/tags/machine-learning/">
+                                <span class="chip bg-color">machine learning</span>
+                            </a>
+                        
+                            <a href="/tags/python/">
+                                <span class="chip bg-color">python</span>
+                            </a>
+                        
+                            <a href="/tags/pandas/">
+                                <span class="chip bg-color">pandas</span>
+                            </a>
+                        
+                            <a href="/tags/numpy/">
+                                <span class="chip bg-color">numpy</span>
+                            </a>
+                        
+                            <a href="/tags/%E9%87%91%E8%9E%8D/">
+                                <span class="chip bg-color">金融</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE/" class="post-category">
+                                个人项目
+                            </a>
+                        
+                            <a href="/categories/%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                机器学习
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
+                    2025-02-24
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
+                    3.1k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
+                    12 Min
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>Read Count:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="金融风险预测赛-Task1"><a href="#金融风险预测赛-Task1" class="headerlink" title="金融风险预测赛 Task1"></a>金融风险预测赛 Task1</h1><p>比赛地址：<a target="_blank" rel="noopener" href="https://tianchi.aliyun.com/competition/entrance/531830/introduction">https://tianchi.aliyun.com/competition/entrance/531830/introduction</a></p>
+<h2 id="一、赛题"><a href="#一、赛题" class="headerlink" title="一、赛题"></a>一、赛题</h2><p>赛题以预测用户贷款是否违约为任务，数据集报名后可见并可下载，该数据来自某信贷平台的贷款记录，总数据量超过120w，包含47列变量信息，其中15列为匿名变量。为了保证比赛的公平性，将会从中抽取80万条作为训练集，20万条作为测试集A，20万条作为测试集B，同时会对employmentTitle、purpose、postCode和title等信息进行脱敏。</p>
+<p><strong>字段表</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center"><strong>Field</strong></th>
+<th align="center"><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">id</td>
+<td align="center">为贷款清单分配的唯一信用证标识</td>
+</tr>
+<tr>
+<td align="center">loanAmnt</td>
+<td align="center">贷款金额</td>
+</tr>
+<tr>
+<td align="center">term</td>
+<td align="center">贷款期限（year）</td>
+</tr>
+<tr>
+<td align="center">interestRate</td>
+<td align="center">贷款利率</td>
+</tr>
+<tr>
+<td align="center">installment</td>
+<td align="center">分期付款金额</td>
+</tr>
+<tr>
+<td align="center">grade</td>
+<td align="center">贷款等级</td>
+</tr>
+<tr>
+<td align="center">subGrade</td>
+<td align="center">贷款等级之子级</td>
+</tr>
+<tr>
+<td align="center">employmentTitle</td>
+<td align="center">就业职称</td>
+</tr>
+<tr>
+<td align="center">employmentLength</td>
+<td align="center">就业年限（年）</td>
+</tr>
+<tr>
+<td align="center">homeOwnership</td>
+<td align="center">借款人在登记时提供的房屋所有权状况</td>
+</tr>
+<tr>
+<td align="center">annualIncome</td>
+<td align="center">年收入</td>
+</tr>
+<tr>
+<td align="center">verificationStatus</td>
+<td align="center">验证状态</td>
+</tr>
+<tr>
+<td align="center">issueDate</td>
+<td align="center">贷款发放的月份</td>
+</tr>
+<tr>
+<td align="center">purpose</td>
+<td align="center">借款人在贷款申请时的贷款用途类别</td>
+</tr>
+<tr>
+<td align="center">postCode</td>
+<td align="center">借款人在贷款申请中提供的邮政编码的前3位数字</td>
+</tr>
+<tr>
+<td align="center">regionCode</td>
+<td align="center">地区编码</td>
+</tr>
+<tr>
+<td align="center">dti</td>
+<td align="center">债务收入比</td>
+</tr>
+<tr>
+<td align="center">delinquency_2years</td>
+<td align="center">借款人过去2年信用档案中逾期30天以上的违约事件数</td>
+</tr>
+<tr>
+<td align="center">ficoRangeLow</td>
+<td align="center">借款人在贷款发放时的fico所属的下限范围</td>
+</tr>
+<tr>
+<td align="center">ficoRangeHigh</td>
+<td align="center">借款人在贷款发放时的fico所属的上限范围</td>
+</tr>
+<tr>
+<td align="center">openAcc</td>
+<td align="center">借款人信用档案中未结信用额度的数量</td>
+</tr>
+<tr>
+<td align="center">pubRec</td>
+<td align="center">贬损公共记录的数量</td>
+</tr>
+<tr>
+<td align="center">pubRecBankruptcies</td>
+<td align="center">公开记录清除的数量</td>
+</tr>
+<tr>
+<td align="center">revolBal</td>
+<td align="center">信贷周转余额合计</td>
+</tr>
+<tr>
+<td align="center">revolUtil</td>
+<td align="center">循环额度利用率，或借款人使用的相对于所有可用循环信贷的信贷金额</td>
+</tr>
+<tr>
+<td align="center">totalAcc</td>
+<td align="center">借款人信用档案中当前的信用额度总数</td>
+</tr>
+<tr>
+<td align="center">initialListStatus</td>
+<td align="center">贷款的初始列表状态</td>
+</tr>
+<tr>
+<td align="center">applicationType</td>
+<td align="center">表明贷款是个人申请还是与两个共同借款人的联合申请</td>
+</tr>
+<tr>
+<td align="center">earliesCreditLine</td>
+<td align="center">借款人最早报告的信用额度开立的月份</td>
+</tr>
+<tr>
+<td align="center">title</td>
+<td align="center">借款人提供的贷款名称</td>
+</tr>
+<tr>
+<td align="center">policyCode</td>
+<td align="center">公开可用的策略_代码=1新产品不公开可用的策略_代码=2</td>
+</tr>
+<tr>
+<td align="center">n系列匿名特征</td>
+<td align="center">匿名特征n0-n14，为一些贷款人行为计数特征的处理</td>
+</tr>
+</tbody></table>
+<h2 id="二、预测指标"><a href="#二、预测指标" class="headerlink" title="二、预测指标"></a>二、预测指标</h2><p>提交结果为每个测试样本是1的<strong>概率</strong>，也就是y为1的概率。评价方法为AUC评估模型效果（越大越好）。</p>
+<p>AUC（Area Under Curve）被定义为 ROC曲线 下与坐标轴围成的面积。</p>
+<ol>
+<li><p>混淆矩阵，精确度，召回率<img src="http://img-md-js.linjsblog.top/img/202502241137020.png" alt="img"></p>
+<ul>
+<li><strong>True Positive</strong>(真阳性)：实际为1，预测为1。预测正确。</li>
+<li>False Positive(假阳性)：实际为0，预测为1。预测错误。</li>
+<li>False Negative(假阴性)：实际为1，预测为0。预测错误。</li>
+<li>True Negative(真阴性)：实际为0，预测为0。预测正确。</li>
+</ul>
+</li>
+<li><p><strong>F1 score</strong>是“准确率”和“召回率”的调和平均数<br>$$<br>Harmonic \ Mean \ of \ P \&amp; R : F1 \ score = \frac{1}{\frac{1}{2} (\frac{1}{P} + \frac{1}{R}) } = 2 \frac{PR}{P+R}<br>$$</p>
+</li>
+<li><p><strong>ROC</strong>（Receiver Operating Characteristic）</p>
+<p>ROC空间将假正例率（FPR）定义为 X 轴，真正例率（TPR）定义为 Y 轴</p>
+<p><strong>TPR</strong>：在所有实际为正例的样本中，被正确地判断为正例之比率<br>$$<br>TPR= \frac{TP}{TP+FN} = Recall<br>$$<br><strong>FPR</strong>：在所有实际为负例的样本中，被错误地判断为正例之比率。<br>$$<br>FPR = \frac{FP}{FP+TN}<br>$$<br><img src="http://img-md-js.linjsblog.top/img/202502241145935.jpeg" alt="img"></p>
+</li>
+<li><p><strong>AUC</strong>（Area Under Curve）被定义为 ROC曲线 下与坐标轴围成的面积，显然这个面积的数值不会大于1。又由于ROC曲线一般都处于y=x这条直线的上方，所以AUC的取值范围在0.5和1之间。AUC越接近1.0，检测方法真实性越高;等于0.5时，则真实性最低，无应用价值。</p>
+<ul>
+<li><strong>AUC值</strong>范围从0到1，表示模型区分正类和负类的能力：<ul>
+<li><strong>AUC = 1</strong>：完美分类器，能够完全区分正类和负类。</li>
+<li><strong>AUC = 0.5</strong>：随机猜测水平，无法区分正类和负类。</li>
+<li><strong>AUC &lt; 0.5</strong>：比随机猜测还差，但这种情况很少见。</li>
+</ul>
+</li>
+<li><strong>AUC的优点</strong>：<ul>
+<li>不依赖于特定的阈值选择，因为它考虑了所有可能的阈值。</li>
+<li>对不平衡数据集也有较好的表现。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>KS</strong>（Kolmogorov-Smirnov）统计量是另一种用于评估分类模型性能的方法，尤其在金融风险评估等领域广泛应用。<strong>KS统计量</strong>衡量的是模型预测的概率分布中，正类和负类累积分布函数的最大差异。具体来说，它找到最大距离点来衡量两个分布之间的差异。<strong>累积分布函数（CDF）</strong>：对于给定的阈值，计算出正类和负类样本的累积概率分布。</p>
+<h4 id="KS值的计算"><a href="#KS值的计算" class="headerlink" title="KS值的计算"></a>KS值的计算</h4><ul>
+<li><p>假设我们有一个模型输出的概率或分数，分别对正类和负类样本进行排序并计算其累积分布。</p>
+</li>
+<li><p><strong>KS值</strong> = max(TPR - FPR)，即在所有可能的阈值下，正类和负类累积分布函数的最大差异。</p>
+</li>
+<li><p>KS值范围：从0到1。</p>
+<ul>
+<li><strong>KS = 1</strong>：模型能完美区分正类和负类。</li>
+<li><strong>KS接近0</strong>：模型几乎没有区分能力，类似于随机猜测。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>KS（%）</th>
+<th>好坏区分能力</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>20以下</td>
+<td>不建议采用</td>
+</tr>
+<tr>
+<td>20-40</td>
+<td>较好</td>
+</tr>
+<tr>
+<td>41-50</td>
+<td>良好</td>
+</tr>
+<tr>
+<td>51-60</td>
+<td>很强</td>
+</tr>
+<tr>
+<td>61-75</td>
+<td>非常强</td>
+</tr>
+<tr>
+<td>75以上</td>
+<td>过于高，疑似存在问题</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>KS的优点：</p>
+<ul>
+<li>直观地反映了模型区分正类和负类的能力。</li>
+<li>在金融领域常用于评估信用评分模型的表现。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="比较AUC和KS"><a href="#比较AUC和KS" class="headerlink" title="比较AUC和KS"></a>比较AUC和KS</h3><ol>
+<li><strong>应用场景</strong>：<ul>
+<li><strong>AUC</strong>：广泛应用于各种分类任务，尤其是需要全面评估模型在不同阈值下的性能时。</li>
+<li><strong>KS</strong>：特别适用于金融、保险等行业，用于评估模型区分高风险客户和低风险客户的能力。</li>
+</ul>
+</li>
+<li><strong>解释性</strong>：<ul>
+<li><strong>AUC</strong>：提供了一个整体的模型性能度量，不依赖于具体的阈值选择。</li>
+<li><strong>KS</strong>：强调了模型在某个特定阈值下的最佳区分能力，更直观地反映了模型在该点上的表现。</li>
+</ul>
+</li>
+<li><strong>计算复杂度</strong>：<ul>
+<li><strong>AUC</strong>：需要计算所有可能的阈值下的TPR和FPR，并计算曲线下面积。</li>
+<li><strong>KS</strong>：只需要找到正类和负类累积分布函数的最大差异点。</li>
+</ul>
+</li>
+<li><strong>使用场景</strong>：<ul>
+<li>如果你关心模型在整个阈值范围内的表现，<strong>AUC</strong>是一个更好的选择。</li>
+<li>如果你更关注模型在一个特定阈值下的最佳区分能力，<strong>KS</strong>可能更适合。</li>
+</ul>
+</li>
+</ol>
+<h2 id="三、数据读取和分类指标计算测试"><a href="#三、数据读取和分类指标计算测试" class="headerlink" title="三、数据读取和分类指标计算测试"></a>三、数据读取和分类指标计算测试</h2><h3 id="数据读取测试"><a href="#数据读取测试" class="headerlink" title="数据读取测试"></a>数据读取测试</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> pandas <span class="token keyword">as</span> pd
+
+<span class="token comment"># pandas 读取数据</span>
+train <span class="token operator">=</span> pd<span class="token punctuation">.</span>read_csv<span class="token punctuation">(</span><span class="token string">'./data/train.csv'</span><span class="token punctuation">)</span>
+test <span class="token operator">=</span> pd<span class="token punctuation">.</span>read_csv<span class="token punctuation">(</span><span class="token string">'./data/testA.csv'</span><span class="token punctuation">)</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span>train<span class="token punctuation">.</span>shape<span class="token punctuation">)</span> <span class="token comment">#(800000, 47)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>test<span class="token punctuation">.</span>shape<span class="token punctuation">)</span> <span class="token comment">#(200000, 46)</span>
+
+train<span class="token punctuation">.</span>head<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="分类指标计算测试"><a href="#分类指标计算测试" class="headerlink" title="分类指标计算测试"></a>分类指标计算测试</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment">## 混淆矩阵</span>
+<span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+<span class="token keyword">from</span> sklearn<span class="token punctuation">.</span>metrics <span class="token keyword">import</span> confusion_matrix<span class="token punctuation">,</span>accuracy_score
+<span class="token keyword">from</span> sklearn <span class="token keyword">import</span> metrics
+y_pred <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+y_true <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'混淆矩阵:\n'</span><span class="token punctuation">,</span>confusion_matrix<span class="token punctuation">(</span>y_true<span class="token punctuation">,</span> y_pred<span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none">混淆矩阵:
+ [[1 1]
+ [1 1]]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment">## accuracy</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"ACC"</span><span class="token punctuation">,</span> accuracy_score<span class="token punctuation">(</span>y_true<span class="token punctuation">,</span>y_pred<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment"># 0.5</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment">## Precision,Recall,F1-score</span>
+y_pred <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span>
+y_true <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Precision'</span><span class="token punctuation">,</span>metrics<span class="token punctuation">.</span>precision_score<span class="token punctuation">(</span>y_true<span class="token punctuation">,</span> y_pred<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Recall'</span><span class="token punctuation">,</span>metrics<span class="token punctuation">.</span>recall_score<span class="token punctuation">(</span>y_true<span class="token punctuation">,</span> y_pred<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'F1-score:'</span><span class="token punctuation">,</span>metrics<span class="token punctuation">.</span>f1_score<span class="token punctuation">(</span>y_true<span class="token punctuation">,</span> y_pred<span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none">Precision 0.5
+Recall 0.5
+F1-score: 0.5<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+
+
+<p><strong>PR曲线</strong></p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment">## P-R曲线</span>
+<span class="token keyword">import</span> matplotlib<span class="token punctuation">.</span>pyplot <span class="token keyword">as</span> plt
+<span class="token keyword">from</span> sklearn<span class="token punctuation">.</span>metrics <span class="token keyword">import</span> precision_recall_curve
+y_pred <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span>
+y_true <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span>
+precision<span class="token punctuation">,</span> recall<span class="token punctuation">,</span> thresholds <span class="token operator">=</span> precision_recall_curve<span class="token punctuation">(</span>y_true<span class="token punctuation">,</span> y_pred<span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>title<span class="token punctuation">(</span><span class="token string">"P-R curve"</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>xlabel<span class="token punctuation">(</span><span class="token string">'precision'</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>ylabel<span class="token punctuation">(</span><span class="token string">'recall'</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>precision<span class="token punctuation">,</span> recall<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><img src="http://img-md-js.linjsblog.top/img/202502241258720.png" alt="image-20250224125823660"></p>
+<p><strong>ROC 曲线</strong></p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment">## ROC曲线</span>
+<span class="token keyword">from</span> sklearn<span class="token punctuation">.</span>metrics <span class="token keyword">import</span> roc_curve
+y_pred <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span>
+y_true <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span>
+FPR<span class="token punctuation">,</span>TPR<span class="token punctuation">,</span>thresholds<span class="token operator">=</span>roc_curve<span class="token punctuation">(</span>y_true<span class="token punctuation">,</span> y_pred<span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>title<span class="token punctuation">(</span><span class="token string">'ROC'</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>FPR<span class="token punctuation">,</span> TPR<span class="token punctuation">,</span><span class="token string">'b'</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token string">'r--'</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>ylabel<span class="token punctuation">(</span><span class="token string">'TPR'</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>xlabel<span class="token punctuation">(</span><span class="token string">'FPR'</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><img src="http://img-md-js.linjsblog.top/img/202502241306199.png" alt="image-20250224130630144"></p>
+<p><strong>AUC</strong></p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment">## AUC</span>
+<span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+<span class="token keyword">from</span> sklearn<span class="token punctuation">.</span>metrics <span class="token keyword">import</span> roc_auc_score
+y_true <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+y_scores <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">0.1</span><span class="token punctuation">,</span> <span class="token number">0.4</span><span class="token punctuation">,</span> <span class="token number">0.35</span><span class="token punctuation">,</span> <span class="token number">0.8</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'AUC socre:'</span><span class="token punctuation">,</span>roc_auc_score<span class="token punctuation">(</span>y_true<span class="token punctuation">,</span> y_scores<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment"># 0.75</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>KS</strong></p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment">## KS值 在实际操作时往往使用ROC曲线配合求出KS值</span>
+<span class="token keyword">from</span> sklearn<span class="token punctuation">.</span>metrics <span class="token keyword">import</span> roc_curve
+y_pred <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span>
+y_true <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span>
+FPR<span class="token punctuation">,</span>TPR<span class="token punctuation">,</span>thresholds<span class="token operator">=</span>roc_curve<span class="token punctuation">(</span>y_true<span class="token punctuation">,</span> y_pred<span class="token punctuation">)</span>
+KS<span class="token operator">=</span><span class="token builtin">abs</span><span class="token punctuation">(</span>FPR<span class="token operator">-</span>TPR<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token builtin">max</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'KS值：'</span><span class="token punctuation">,</span>KS<span class="token punctuation">)</span> <span class="token comment">#KS值： 0.5238095238095237</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h2 id="扩展-评分卡"><a href="#扩展-评分卡" class="headerlink" title="扩展 评分卡"></a>扩展 评分卡</h2><p>评分卡是一张拥有分数刻度会让相应阈值的表。信用评分卡是用于用户信用的一张刻度表。以下代码是一个非标准评分卡的代码流程，用于刻画用户的信用评分。评分卡是金融风控中常用的一种对于用户信用进行刻画的手段哦！</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment">#评分卡 不是标准评分卡</span>
+<span class="token keyword">def</span> <span class="token function">Score</span><span class="token punctuation">(</span>prob<span class="token punctuation">,</span>P0<span class="token operator">=</span><span class="token number">600</span><span class="token punctuation">,</span>PDO<span class="token operator">=</span><span class="token number">20</span><span class="token punctuation">,</span>badrate<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">,</span>goodrate<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    P0 <span class="token operator">=</span> P0
+    PDO <span class="token operator">=</span> PDO
+    theta0 <span class="token operator">=</span> badrate<span class="token operator">/</span>goodrate
+    B <span class="token operator">=</span> PDO<span class="token operator">/</span>np<span class="token punctuation">.</span>log<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span>
+    A <span class="token operator">=</span> P0 <span class="token operator">+</span> B<span class="token operator">*</span>np<span class="token punctuation">.</span>log<span class="token punctuation">(</span><span class="token number">2</span><span class="token operator">*</span>theta0<span class="token punctuation">)</span>
+    score <span class="token operator">=</span> A<span class="token operator">-</span>B<span class="token operator">*</span>np<span class="token punctuation">.</span>log<span class="token punctuation">(</span>prob<span class="token operator">/</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">-</span>prob<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> score<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<p>这段代码定义了一个用于计算信用评分（Score）的函数，基于给定的概率（<code>prob</code>），并使用了类似于标准评分卡模型的方法。让我们逐步解析这个函数及其各个组成部分。</p>
+<h3 id="函数定义"><a href="#函数定义" class="headerlink" title="函数定义"></a>函数定义</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">Score</span><span class="token punctuation">(</span>prob<span class="token punctuation">,</span> P0<span class="token operator">=</span><span class="token number">600</span><span class="token punctuation">,</span> PDO<span class="token operator">=</span><span class="token number">20</span><span class="token punctuation">,</span> badrate<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">,</span> goodrate<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">)</span><span class="token punctuation">:</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ul>
+<li><strong>参数</strong>：<ul>
+<li><code>prob</code>: 模型预测的违约概率。</li>
+<li><code>P0</code>: 基准分数，默认值为600。这是当违约概率为基准比率时的分数。</li>
+<li><code>PDO</code>: Points to Double the Odds (PDO)，表示几率加倍所需的分数变化，默认值为20。例如，如果PDO为20，则意味着每增加20分，违约几率减半。</li>
+<li><code>badrate</code>: 坏样本（违约样本）的比例。</li>
+<li><code>goodrate</code>: 好样本（正常样本）的比例。</li>
+</ul>
+</li>
+</ul>
+<h3 id="变量初始化和计算"><a href="#变量初始化和计算" class="headerlink" title="变量初始化和计算"></a>变量初始化和计算</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python">P0 <span class="token operator">=</span> P0
+PDO <span class="token operator">=</span> PDO
+theta0 <span class="token operator">=</span> badrate <span class="token operator">/</span> goodrate
+B <span class="token operator">=</span> PDO <span class="token operator">/</span> np<span class="token punctuation">.</span>log<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span>
+A <span class="token operator">=</span> P0 <span class="token operator">+</span> B <span class="token operator">*</span> np<span class="token punctuation">.</span>log<span class="token punctuation">(</span><span class="token number">2</span> <span class="token operator">*</span> theta0<span class="token punctuation">)</span>
+score <span class="token operator">=</span> A <span class="token operator">-</span> B <span class="token operator">*</span> np<span class="token punctuation">.</span>log<span class="token punctuation">(</span>prob <span class="token operator">/</span> <span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">-</span> prob<span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ol>
+<li><p><strong><code>P0</code> 和 <code>PDO</code></strong>:</p>
+<ul>
+<li>这些是直接从输入参数传递过来的默认值或用户指定的值。</li>
+</ul>
+</li>
+<li><p><strong><code>theta0</code></strong>:</p>
+<ul>
+<li><code>theta0</code> 是坏样本率与好样本率的比值（即违约几率）。它反映了在基准情况下（通常是训练数据集中的整体违约率）的违约概率。</li>
+<li>公式：<code>theta0 = badrate / goodrate</code></li>
+</ul>
+</li>
+<li><p><strong><code>B</code></strong>:</p>
+<ul>
+<li><code>B</code> 是一个常数，用于将对数几率转换为分数。它是PDO除以自然对数2的结果，因为PDO定义了几率加倍时的分数变化。</li>
+<li>公式：<code>B = PDO / np.log(2)</code></li>
+</ul>
+</li>
+<li><p><strong><code>A</code></strong>:</p>
+<ul>
+<li><code>A</code> 是一个偏移量，确保在基准违约概率下的分数等于基准分数 <code>P0</code>。</li>
+<li>公式：<code>A = P0 + B * np.log(2 * theta0)</code></li>
+<li>这里的 <code>np.log(2 * theta0)</code> 是为了调整基准违约概率下的分数。</li>
+</ul>
+</li>
+<li><p><strong><code>score</code></strong>:</p>
+<ul>
+<li><code>score</code> 是最终计算出的信用评分，基于输入的概率 <code>prob</code>。</li>
+<li>公式：<code>score = A - B * np.log(prob / (1 - prob))</code></li>
+<li>这里 <code>np.log(prob / (1 - prob))</code> 是对数几率（log-odds），它衡量了某个事件发生的可能性相对于不发生的可能性的比率。</li>
+</ul>
+</li>
+</ol>
+<h3 id="详细解释"><a href="#详细解释" class="headerlink" title="详细解释"></a>详细解释</h3><ul>
+<li><p><strong>对数几率（Log-Odds）</strong>:</p>
+<ul>
+<li>对数几率是指某个事件发生概率与其不发生概率之比的对数。公式为：<code>log(odds) = log(prob / (1 - prob))</code></li>
+<li>在信用评分中，这通常表示某个人违约的可能性与其不违约的可能性之比。</li>
+</ul>
+</li>
+<li><p><strong>PDO（Points to Double the Odds）</strong>:</p>
+<ul>
+<li>PDO 表示当违约几率翻倍时，分数应增加多少。通过设置PDO，可以控制评分卡的灵敏度。</li>
+<li>例如，如果PDO为20，则每增加20分，违约几率减少一半。</li>
+</ul>
+</li>
+<li><p><strong>基准分数（P0）</strong>:</p>
+<ul>
+<li>基准分数是在基准违约概率下的分数。它通常设置为一个较高的值（如600），以便在实际应用中得到合理的分数范围。</li>
+</ul>
+</li>
+</ul>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><p>假设我们有一个违约概率 <code>prob = 0.1</code>，并且我们知道 <code>badrate = 0.2</code> 和 <code>goodrate = 0.8</code>：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+
+<span class="token keyword">def</span> <span class="token function">Score</span><span class="token punctuation">(</span>prob<span class="token punctuation">,</span> P0<span class="token operator">=</span><span class="token number">600</span><span class="token punctuation">,</span> PDO<span class="token operator">=</span><span class="token number">20</span><span class="token punctuation">,</span> badrate<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">,</span> goodrate<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    theta0 <span class="token operator">=</span> badrate <span class="token operator">/</span> goodrate
+    B <span class="token operator">=</span> PDO <span class="token operator">/</span> np<span class="token punctuation">.</span>log<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span>
+    A <span class="token operator">=</span> P0 <span class="token operator">+</span> B <span class="token operator">*</span> np<span class="token punctuation">.</span>log<span class="token punctuation">(</span><span class="token number">2</span> <span class="token operator">*</span> theta0<span class="token punctuation">)</span>
+    score <span class="token operator">=</span> A <span class="token operator">-</span> B <span class="token operator">*</span> np<span class="token punctuation">.</span>log<span class="token punctuation">(</span>prob <span class="token operator">/</span> <span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">-</span> prob<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> score
+
+<span class="token comment"># 示例调用</span>
+prob <span class="token operator">=</span> <span class="token number">0.1</span>
+badrate <span class="token operator">=</span> <span class="token number">0.2</span>
+goodrate <span class="token operator">=</span> <span class="token number">0.8</span>
+score <span class="token operator">=</span> Score<span class="token punctuation">(</span>prob<span class="token punctuation">,</span> P0<span class="token operator">=</span><span class="token number">600</span><span class="token punctuation">,</span> PDO<span class="token operator">=</span><span class="token number">20</span><span class="token punctuation">,</span> badrate<span class="token operator">=</span>badrate<span class="token punctuation">,</span> goodrate<span class="token operator">=</span>goodrate<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"Score: </span><span class="token interpolation"><span class="token punctuation">{</span>score<span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>在这个例子中，<code>theta0</code> 为 <code>0.2 / 0.8 = 0.25</code>，然后根据上述公式计算出最终的信用评分。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>该函数通过给定的违约概率 <code>prob</code>，结合基准分数 <code>P0</code>、PDO、坏样本率 <code>badrate</code> 和好样本率 <code>goodrate</code>，计算出一个信用评分。这个评分卡方法允许你灵活地调整评分卡的基准点和灵敏度，并且可以根据具体业务需求进行定制。</p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        Author:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">qwq小小舒</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        Link:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://js6288.github.io/2025/02/24/%E9%87%91%E8%9E%8D%E9%A3%8E%E9%99%A9%E9%A2%84%E6%B5%8B%E8%B5%9B-task1/">https://js6288.github.io/2025/02/24/%E9%87%91%E8%9E%8D%E9%A3%8E%E9%99%A9%E9%A2%84%E6%B5%8B%E8%B5%9B-task1/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        Reprint policy:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    All articles in this blog are used except for special statements
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    reprint policy. If reproduced, please indicate source
+                    <a href="/about" target="_blank">qwq小小舒</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>Copied successfully, please follow the reprint policy of this article</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">more</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">
+                                    <span class="chip bg-color">人工智能</span>
+                                </a>
+                            
+                                <a href="/tags/deep-learning/">
+                                    <span class="chip bg-color">deep learning</span>
+                                </a>
+                            
+                                <a href="/tags/machine-learning/">
+                                    <span class="chip bg-color">machine learning</span>
+                                </a>
+                            
+                                <a href="/tags/python/">
+                                    <span class="chip bg-color">python</span>
+                                </a>
+                            
+                                <a href="/tags/pandas/">
+                                    <span class="chip bg-color">pandas</span>
+                                </a>
+                            
+                                <a href="/tags/numpy/">
+                                    <span class="chip bg-color">numpy</span>
+                                </a>
+                            
+                                <a href="/tags/%E9%87%91%E8%9E%8D/">
+                                    <span class="chip bg-color">金融</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay1.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;Current
+            </div>
+            <div class="card">
+                <a href="/2025/02/24/%E9%87%91%E8%9E%8D%E9%A3%8E%E9%99%A9%E9%A2%84%E6%B5%8B%E8%B5%9B-task1/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="金融风险预测赛 Task1">
+                        
+                        <span class="card-title">金融风险预测赛 Task1</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-02-24
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE/" class="post-category">
+                                    个人项目
+                                </a>
+                            
+                            <a href="/categories/%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                    机器学习
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">
+                        <span class="chip bg-color">人工智能</span>
+                    </a>
+                    
+                    <a href="/tags/deep-learning/">
+                        <span class="chip bg-color">deep learning</span>
+                    </a>
+                    
+                    <a href="/tags/machine-learning/">
+                        <span class="chip bg-color">machine learning</span>
+                    </a>
+                    
+                    <a href="/tags/python/">
+                        <span class="chip bg-color">python</span>
+                    </a>
+                    
+                    <a href="/tags/pandas/">
+                        <span class="chip bg-color">pandas</span>
+                    </a>
+                    
+                    <a href="/tags/numpy/">
+                        <span class="chip bg-color">numpy</span>
+                    </a>
+                    
+                    <a href="/tags/%E9%87%91%E8%9E%8D/">
+                        <span class="chip bg-color">金融</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                Next&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2025/02/23/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%90%B4%E6%81%A9%E8%BE%BEcourse3week1/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="吴恩达机器学习 course3 week1 无监督学习">
+                        
+                        <span class="card-title">吴恩达机器学习 course3 week1 无监督学习</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-02-23
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                    机器学习
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">
+                        <span class="chip bg-color">人工智能</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">
+                        <span class="chip bg-color">机器学习</span>
+                    </a>
+                    
+                    <a href="/tags/deep-learning/">
+                        <span class="chip bg-color">deep learning</span>
+                    </a>
+                    
+                    <a href="/tags/tensorflow/">
+                        <span class="chip bg-color">tensorflow</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">
+                        <span class="chip bg-color">深度学习</span>
+                    </a>
+                    
+                    <a href="/tags/machine-learning/">
+                        <span class="chip bg-color">machine learning</span>
+                    </a>
+                    
+                    <a href="/tags/Python/">
+                        <span class="chip bg-color">Python</span>
+                    </a>
+                    
+                    <a href="/tags/K-means/">
+                        <span class="chip bg-color">K-means</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B/">
+                        <span class="chip bg-color">异常检测</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;TOC</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$','$$'], ['\\[','\\]']],
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+        },
+        TeX: {
+            extensions: ["AMSmath.js", "AMSsymbols.js"] // 手动加载 AMS 扩展
+        }
+    });
+</script>
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2019-2025</span>
+            
+            <a href="/about" target="_blank">qwq小小舒</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            
+            <br>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;Total visits:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;Total visitors:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/js6288" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:linjingshu6288@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1279897306" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1279897306" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;Search</span>
+            <input type="search" id="searchInput" name="s" placeholder="Please enter a search keyword"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 白天和黑夜主题 -->
+<div class="stars-con">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>  
+</div>
+
+<script>
+    function switchNightMode() {
+        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
+        setTimeout(function () {
+            $('body').hasClass('DarkMode') 
+            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
+            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
+            
+            setTimeout(function () {
+            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
+                $(this).remove()
+            })
+            }, 2e3)
+        })
+    }
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+    
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
