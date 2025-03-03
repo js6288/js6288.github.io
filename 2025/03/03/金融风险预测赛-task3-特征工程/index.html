@@ -1,0 +1,2060 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="金融风险预测赛 task3 特征工程, 小小舒的爪哇天地">
+    <meta name="description" content="金融风险预测赛-task3-特征工程
+比赛地址：https://tianchi.aliyun.com/competition/entrance/531830/introduction
+
+1 主要内容
+数据预处理
+缺失值的填充
+时间格式处理
+">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>金融风险预测赛 task3 特征工程 | 小小舒的爪哇天地</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    
+
+
+    <!-- bg-cover style     -->
+
+
+
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" type="text/css" href="/css/matery.css">
+<link rel="stylesheet" type="text/css" href="/css/my.css">
+<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+
+
+
+
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/css/post.css">
+
+
+
+
+    
+        <link rel="stylesheet" type="text/css" href="/css/reward.css">
+    
+
+
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 7.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">小小舒的爪哇天地</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>Index</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>Tags</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>Categories</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>Archives</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>About</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>Contact</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>Friends</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="Search" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <li>
+    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
+      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">小小舒的爪哇天地</div>
+        <div class="logo-desc">
+            
+            Life is coding, I will debug it.
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			Index
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			Tags
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			Categories
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			Archives
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			About
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			Contact
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			Friends
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/13.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">金融风险预测赛 task3 特征工程</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">
+                                <span class="chip bg-color">人工智能</span>
+                            </a>
+                        
+                            <a href="/tags/deep-learning/">
+                                <span class="chip bg-color">deep learning</span>
+                            </a>
+                        
+                            <a href="/tags/machine-learning/">
+                                <span class="chip bg-color">machine learning</span>
+                            </a>
+                        
+                            <a href="/tags/%E5%86%B3%E7%AD%96%E6%A0%91/">
+                                <span class="chip bg-color">决策树</span>
+                            </a>
+                        
+                            <a href="/tags/python/">
+                                <span class="chip bg-color">python</span>
+                            </a>
+                        
+                            <a href="/tags/pandas/">
+                                <span class="chip bg-color">pandas</span>
+                            </a>
+                        
+                            <a href="/tags/numpy/">
+                                <span class="chip bg-color">numpy</span>
+                            </a>
+                        
+                            <a href="/tags/%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B/">
+                                <span class="chip bg-color">特征工程</span>
+                            </a>
+                        
+                            <a href="/tags/LightGBM/">
+                                <span class="chip bg-color">LightGBM</span>
+                            </a>
+                        
+                            <a href="/tags/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/">
+                                <span class="chip bg-color">数据处理</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE/" class="post-category">
+                                个人项目
+                            </a>
+                        
+                            <a href="/categories/%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                机器学习
+                            </a>
+                        
+                            <a href="/categories/%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                深度学习
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
+                    2025-03-03
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
+                    6.5k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
+                    26 Min
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>Read Count:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="金融风险预测赛-task3-特征工程"><a href="#金融风险预测赛-task3-特征工程" class="headerlink" title="金融风险预测赛-task3-特征工程"></a>金融风险预测赛-task3-特征工程</h1><blockquote>
+<p>比赛地址：<a target="_blank" rel="noopener" href="https://tianchi.aliyun.com/competition/entrance/531830/introduction">https://tianchi.aliyun.com/competition/entrance/531830/introduction</a></p>
+</blockquote>
+<h2 id="1-主要内容"><a href="#1-主要内容" class="headerlink" title="1 主要内容"></a>1 主要内容</h2><ul>
+<li>数据预处理<ul>
+<li>缺失值的填充</li>
+<li>时间格式处理</li>
+<li>对象类型特征转换到数值</li>
+</ul>
+</li>
+<li>异常值处理<ul>
+<li>基于3segama原则</li>
+<li>基于箱型图</li>
+</ul>
+</li>
+<li>数据分箱<ul>
+<li>固定宽度分箱</li>
+<li>分位数分箱<ul>
+<li>离散数值型数据分箱</li>
+<li>连续数值型数据分箱</li>
+</ul>
+</li>
+<li>卡方分箱（选做作业）</li>
+</ul>
+</li>
+<li>特征交互<ul>
+<li>特征和特征之间组合</li>
+<li>特征和特征之间衍生</li>
+<li>其他特征衍生的尝试（选做作业）</li>
+</ul>
+</li>
+<li>特征编码<ul>
+<li>one-hot编码</li>
+<li>label-encode编码</li>
+</ul>
+</li>
+<li>特征选择<ul>
+<li>1 Filter</li>
+<li>2 Wrapper （RFE）</li>
+<li>3 Embedded</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-数据预处理"><a href="#2-数据预处理" class="headerlink" title="2 数据预处理"></a>2 数据预处理</h2><h3 id="导入包并读取数据"><a href="#导入包并读取数据" class="headerlink" title="导入包并读取数据"></a>导入包并读取数据</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> pandas <span class="token keyword">as</span> pd
+<span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+<span class="token keyword">import</span> matplotlib<span class="token punctuation">.</span>pyplot <span class="token keyword">as</span> plt
+<span class="token keyword">import</span> seaborn <span class="token keyword">as</span> sns
+<span class="token keyword">import</span> datetime
+<span class="token keyword">from</span> tqdm <span class="token keyword">import</span> tqdm
+<span class="token keyword">from</span> sklearn<span class="token punctuation">.</span>preprocessing <span class="token keyword">import</span> LabelEncoder
+<span class="token keyword">from</span> sklearn<span class="token punctuation">.</span>feature_selection <span class="token keyword">import</span> SelectKBest
+<span class="token keyword">from</span> sklearn<span class="token punctuation">.</span>feature_selection <span class="token keyword">import</span> chi2
+<span class="token keyword">from</span> sklearn<span class="token punctuation">.</span>preprocessing <span class="token keyword">import</span> MinMaxScaler
+<span class="token keyword">import</span> xgboost <span class="token keyword">as</span> xgb
+<span class="token keyword">import</span> lightgbm <span class="token keyword">as</span> lgb
+<span class="token keyword">from</span> catboost <span class="token keyword">import</span> CatBoostRegressor
+<span class="token keyword">import</span> warnings
+<span class="token keyword">from</span> sklearn<span class="token punctuation">.</span>model_selection <span class="token keyword">import</span> StratifiedKFold<span class="token punctuation">,</span> KFold
+<span class="token keyword">from</span> sklearn<span class="token punctuation">.</span>metrics <span class="token keyword">import</span> accuracy_score<span class="token punctuation">,</span> f1_score<span class="token punctuation">,</span> roc_auc_score<span class="token punctuation">,</span> log_loss
+warnings<span class="token punctuation">.</span>filterwarnings<span class="token punctuation">(</span><span class="token string">'ignore'</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">data_train <span class="token operator">=</span> pd<span class="token punctuation">.</span>read_csv<span class="token punctuation">(</span><span class="token string">'data/train.csv'</span><span class="token punctuation">)</span>
+data_test_a <span class="token operator">=</span> pd<span class="token punctuation">.</span>read_csv<span class="token punctuation">(</span><span class="token string">'data/testA.csv'</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h3 id="特征预处理"><a href="#特征预处理" class="headerlink" title="特征预处理"></a>特征预处理</h3><ul>
+<li><p>数据EDA部分我们已经对数据的大概和某些特征分布有了了解，数据预处理部分一般我们要处理一些EDA阶段分析出来的问题，这里介绍了数据缺失值的填充，时间格式特征的转化处理，某些对象类别特征的处理。</p>
+</li>
+<li><p>首先我们查找出数据中的对象特征和数值特征</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># numerical_fea 是一个列表，包含 data_train 中所有非 object 类型的列名（即数值型列）</span>
+numerical_fea  <span class="token operator">=</span> <span class="token builtin">list</span><span class="token punctuation">(</span>data_train<span class="token punctuation">.</span>select_dtypes<span class="token punctuation">(</span>exclude<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">'object'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">.</span>columns<span class="token punctuation">)</span>
+<span class="token comment"># 使用 filter 函数和 lambda 表达式来筛选出那些不在 numerical_fea 列表中的列名。</span>
+category_fea <span class="token operator">=</span> <span class="token builtin">list</span><span class="token punctuation">(</span><span class="token builtin">filter</span><span class="token punctuation">(</span><span class="token keyword">lambda</span> x<span class="token punctuation">:</span> x <span class="token keyword">not</span> <span class="token keyword">in</span> numerical_fea<span class="token punctuation">,</span> <span class="token builtin">list</span><span class="token punctuation">(</span>data_train<span class="token punctuation">.</span>columns<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+label <span class="token operator">=</span> <span class="token string">'isDefault'</span>
+numerical_fea<span class="token punctuation">.</span>remove<span class="token punctuation">(</span>label<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+<p>在比赛中数据预处理是必不可少的一部分，对于缺失值的填充往往会影响比赛的结果，在比赛中不妨尝试多种填充然后比较结果选择结果最优的一种； 比赛数据相比真实场景的数据相对要“干净”一些，但是还是会有一定的“脏”数据存在，清洗一些异常值往往会获得意想不到的效果。</p>
+<p><strong>缺失值填充</strong></p>
+<ul>
+<li><p>把所有缺失值替换为指定的值0</p>
+<p>data_train = data_train.fillna(0)</p>
+</li>
+<li><p>向用缺失值上面的值替换缺失值</p>
+<p>data_train = data_train.fillna(axis=0,method=’ffill’)</p>
+</li>
+<li><p>纵向用缺失值下面的值替换缺失值,且设置最多只填充两个连续的缺失值</p>
+<p>data_train = data_train.fillna(axis=0,method=’bfill’,limit=2)</p>
+</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># 按照中位数填充数值型特征</span>
+data_train<span class="token punctuation">[</span>numerical_fea<span class="token punctuation">]</span> <span class="token operator">=</span> data_train<span class="token punctuation">[</span>numerical_fea<span class="token punctuation">]</span><span class="token punctuation">.</span>fillna<span class="token punctuation">(</span> data_train<span class="token punctuation">[</span>numerical_fea<span class="token punctuation">]</span><span class="token punctuation">.</span>median <span class="token punctuation">)</span>
+data_test_a<span class="token punctuation">[</span>numerical_fea<span class="token punctuation">]</span> <span class="token operator">=</span> data_test_a<span class="token punctuation">[</span>numerical_fea<span class="token punctuation">]</span><span class="token punctuation">.</span>fillna<span class="token punctuation">(</span> data_test_a<span class="token punctuation">[</span>numerical_fea<span class="token punctuation">]</span><span class="token punctuation">.</span>median <span class="token punctuation">)</span>
+
+<span class="token comment">#按照众数填充类别型特征</span>
+data_train<span class="token punctuation">[</span>category_fea<span class="token punctuation">]</span> <span class="token operator">=</span> data_train<span class="token punctuation">[</span>category_fea<span class="token punctuation">]</span><span class="token punctuation">.</span>fillna<span class="token punctuation">(</span>data_train<span class="token punctuation">[</span>category_fea<span class="token punctuation">]</span><span class="token punctuation">.</span>mode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+data_test_a<span class="token punctuation">[</span>category_fea<span class="token punctuation">]</span> <span class="token operator">=</span> data_test_a<span class="token punctuation">[</span>category_fea<span class="token punctuation">]</span><span class="token punctuation">.</span>fillna<span class="token punctuation">(</span>data_train<span class="token punctuation">[</span>category_fea<span class="token punctuation">]</span><span class="token punctuation">.</span>mode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment">#查看类别特征</span>
+category_fea<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token punctuation">[</span><span class="token string">'grade'</span><span class="token punctuation">,</span> <span class="token string">'subGrade'</span><span class="token punctuation">,</span> <span class="token string">'employmentLength'</span><span class="token punctuation">,</span> <span class="token string">'issueDate'</span><span class="token punctuation">,</span> <span class="token string">'earliesCreditLine'</span><span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>对象型类别特征需要进行预处理，其中[‘issueDate’]为时间格式特征</p>
+<h3 id="时间格式处理"><a href="#时间格式处理" class="headerlink" title="时间格式处理"></a>时间格式处理</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment">#转化成时间格式</span>
+<span class="token keyword">for</span> data <span class="token keyword">in</span> <span class="token punctuation">[</span>data_train<span class="token punctuation">,</span> data_test_a<span class="token punctuation">]</span><span class="token punctuation">:</span>
+    data<span class="token punctuation">[</span><span class="token string">'issueDate'</span><span class="token punctuation">]</span> <span class="token operator">=</span> pd<span class="token punctuation">.</span>to_datetime<span class="token punctuation">(</span>data<span class="token punctuation">[</span><span class="token string">'issueDate'</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token builtin">format</span><span class="token operator">=</span><span class="token string">'%Y-%m-%d'</span><span class="token punctuation">)</span>
+    startdate <span class="token operator">=</span> datetime<span class="token punctuation">.</span>datetime<span class="token punctuation">.</span>strptime<span class="token punctuation">(</span><span class="token string">'2007-06-01'</span><span class="token punctuation">,</span> <span class="token string">'%Y-%m-%d'</span><span class="token punctuation">)</span>
+    <span class="token comment">#构造时间特征</span>
+    data<span class="token punctuation">[</span><span class="token string">'issueDateDT'</span><span class="token punctuation">]</span> <span class="token operator">=</span> data<span class="token punctuation">[</span><span class="token string">'issueDate'</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token builtin">apply</span><span class="token punctuation">(</span><span class="token keyword">lambda</span> x<span class="token punctuation">:</span> x<span class="token operator">-</span>startdate<span class="token punctuation">)</span><span class="token punctuation">.</span>dt<span class="token punctuation">.</span>days<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">employmentLength_to_int</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">if</span> pd<span class="token punctuation">.</span>isnull<span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> s
+    <span class="token keyword">else</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> np<span class="token punctuation">.</span>int8<span class="token punctuation">(</span>s<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token keyword">for</span> data <span class="token keyword">in</span> <span class="token punctuation">[</span>data_train<span class="token punctuation">,</span> data_test_a<span class="token punctuation">]</span><span class="token punctuation">:</span>
+    data<span class="token punctuation">[</span><span class="token string">'employmentLength'</span><span class="token punctuation">]</span><span class="token punctuation">.</span>replace<span class="token punctuation">(</span>to_replace<span class="token operator">=</span><span class="token string">'10+ years'</span><span class="token punctuation">,</span> value<span class="token operator">=</span><span class="token string">'10 years'</span><span class="token punctuation">,</span> inplace<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+    data<span class="token punctuation">[</span><span class="token string">'employmentLength'</span><span class="token punctuation">]</span><span class="token punctuation">.</span>replace<span class="token punctuation">(</span><span class="token string">'&lt; 1 year'</span><span class="token punctuation">,</span> <span class="token string">'0 years'</span><span class="token punctuation">,</span> inplace<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+    data<span class="token punctuation">[</span><span class="token string">'employmentLength'</span><span class="token punctuation">]</span> <span class="token operator">=</span> data<span class="token punctuation">[</span><span class="token string">'employmentLength'</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token builtin">apply</span><span class="token punctuation">(</span>employmentLength_to_int<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><img src="http://img-md-js.linjsblog.top/img/202503021925811.png" alt="image-20250302192508690"></p>
+<ul>
+<li>对earliesCreditLine进行预处理</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">data_train<span class="token punctuation">[</span><span class="token string">'earliesCreditLine'</span><span class="token punctuation">]</span><span class="token punctuation">.</span>sample<span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="http://img-md-js.linjsblog.top/img/202503021927717.png" alt="image-20250302192755668"></p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">for</span> data <span class="token keyword">in</span> <span class="token punctuation">[</span>data_train<span class="token punctuation">,</span>data_test_a<span class="token punctuation">]</span><span class="token punctuation">:</span>
+    data<span class="token punctuation">[</span><span class="token string">'earliesCreditLine'</span><span class="token punctuation">]</span> <span class="token operator">=</span> data<span class="token punctuation">[</span><span class="token string">'earliesCreditLine'</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token builtin">apply</span><span class="token punctuation">(</span><span class="token keyword">lambda</span> s<span class="token punctuation">:</span> <span class="token builtin">int</span><span class="token punctuation">(</span>s<span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">4</span><span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">#取字符串s的最后四个字符（假定这四个字符代表年份），并将其转换为整数。</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+
+
+<h3 id="类别特征处理"><a href="#类别特征处理" class="headerlink" title="类别特征处理"></a>类别特征处理</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># 部分类别特征</span>
+cate_features <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'grade'</span><span class="token punctuation">,</span> <span class="token string">'subGrade'</span><span class="token punctuation">,</span> <span class="token string">'employmentTitle'</span><span class="token punctuation">,</span> <span class="token string">'homeOwnership'</span><span class="token punctuation">,</span> <span class="token string">'verificationStatus'</span><span class="token punctuation">,</span> <span class="token string">'purpose'</span><span class="token punctuation">,</span> <span class="token string">'postCode'</span><span class="token punctuation">,</span> <span class="token string">'regionCode'</span><span class="token punctuation">,</span> \
+                 <span class="token string">'applicationType'</span><span class="token punctuation">,</span> <span class="token string">'initialListStatus'</span><span class="token punctuation">,</span> <span class="token string">'title'</span><span class="token punctuation">,</span> <span class="token string">'policyCode'</span><span class="token punctuation">]</span>
+<span class="token keyword">for</span> f <span class="token keyword">in</span> cate_features<span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>f<span class="token punctuation">,</span> <span class="token string">'类型数：'</span><span class="token punctuation">,</span> data<span class="token punctuation">[</span>f<span class="token punctuation">]</span><span class="token punctuation">.</span>nunique<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none">grade 类型数： 7
+subGrade 类型数： 35
+employmentTitle 类型数： 79282
+homeOwnership 类型数： 6
+verificationStatus 类型数： 3
+purpose 类型数： 14
+postCode 类型数： 889
+regionCode 类型数： 51
+applicationType 类型数： 2
+initialListStatus 类型数： 2
+title 类型数： 12058
+policyCode 类型数： 1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>像等级这种类别特征，是有优先级的可以labelencode或者自映射</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">for</span> data <span class="token keyword">in</span> <span class="token punctuation">[</span>data_train<span class="token punctuation">,</span> data_test_a<span class="token punctuation">]</span><span class="token punctuation">:</span>
+    data<span class="token punctuation">[</span><span class="token string">'grade'</span><span class="token punctuation">]</span> <span class="token operator">=</span> data<span class="token punctuation">[</span><span class="token string">'grade'</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token builtin">map</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token string">'A'</span><span class="token punctuation">:</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token string">'B'</span><span class="token punctuation">:</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token string">'C'</span><span class="token punctuation">:</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token string">'D'</span><span class="token punctuation">:</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token string">'E'</span><span class="token punctuation">:</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token string">'F'</span><span class="token punctuation">:</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token string">'G'</span><span class="token punctuation">:</span><span class="token number">7</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># 类型数在2之上，又不是高维稀疏的,且纯分类特征</span>
+<span class="token keyword">for</span> data <span class="token keyword">in</span> <span class="token punctuation">[</span>data_train<span class="token punctuation">,</span>data_test_a<span class="token punctuation">]</span><span class="token punctuation">:</span>
+    data <span class="token operator">=</span> pd<span class="token punctuation">.</span>get_dummies<span class="token punctuation">(</span>data<span class="token punctuation">,</span>columns<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">'subGrade'</span><span class="token punctuation">,</span> <span class="token string">'homeOwnership'</span><span class="token punctuation">,</span> <span class="token string">'verificationStatus'</span><span class="token punctuation">,</span> <span class="token string">'purpose'</span><span class="token punctuation">,</span> <span class="token string">'regionCode'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>drop_first<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p><code>pd.get_dummies</code> 是 Pandas 库中的一个函数，用于将分类变量转换为哑变量（也称为虚拟变量或指示变量）。哑变量是通过将分类变量的每个可能值转换为一个新的二进制列（0 或 1）来表示该值是否出现在原始数据中。这种方法常用于机器学习和统计建模，因为大多数算法需要数值输入而不是分类输入。(类似于独热编码)</p>
+<h3 id="异常值处理"><a href="#异常值处理" class="headerlink" title="异常值处理"></a>异常值处理</h3><ul>
+<li>当你发现异常值后，一定要先分清是什么原因导致的异常值，然后再考虑如何处理。首先，如果这一异常值并不代表一种规律性的，而是极其偶然的现象，或者说你并不想研究这种偶然的现象，这时可以将其删除。其次，如果异常值存在且代表了一种真实存在的现象，那就不能随便删除。在现有的欺诈场景中很多时候欺诈数据本身相对于正常数据勒说就是异常的，我们要把这些异常点纳入，重新拟合模型，研究其规律。能用监督的用监督模型，不能用的还可以考虑用异常检测的算法来做。</li>
+<li>注意test的数据不能删。</li>
+</ul>
+<h4 id="检测异常的方法一：均方差"><a href="#检测异常的方法一：均方差" class="headerlink" title="检测异常的方法一：均方差"></a>检测异常的方法一：均方差</h4><p>在统计学中，如果一个数据分布近似正态，那么大约 68% 的数据值会在均值的一个标准差范围内，大约 95% 会在两个标准差范围内，大约 99.7% 会在三个标准差范围内。</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">find_outliers_by_3segama</span><span class="token punctuation">(</span>data<span class="token punctuation">,</span>fea<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment"># 计算指定列的标准差</span>
+    data_std <span class="token operator">=</span> np<span class="token punctuation">.</span>std<span class="token punctuation">(</span>data<span class="token punctuation">[</span>fea<span class="token punctuation">]</span><span class="token punctuation">)</span>
+    <span class="token comment"># 计算指定列的均值。</span>
+    data_mean <span class="token operator">=</span> np<span class="token punctuation">.</span>mean<span class="token punctuation">(</span>data<span class="token punctuation">[</span>fea<span class="token punctuation">]</span><span class="token punctuation">)</span>
+    <span class="token comment"># 定义了异常值的边界范围，通常为3倍标准差</span>
+    outliers_cut_off <span class="token operator">=</span> data_std <span class="token operator">*</span> <span class="token number">3</span>
+    <span class="token comment"># 下限，低于该值的数据被视为异常值。</span>
+    lower_rule <span class="token operator">=</span> data_mean <span class="token operator">-</span> outliers_cut_off
+    <span class="token comment"># 上限，高于该值的数据被视为异常值。</span>
+    upper_rule <span class="token operator">=</span> data_mean <span class="token operator">+</span> outliers_cut_off
+    <span class="token comment"># 标记异常值 如果数据点大于 upper_rule 或小于 lower_rule，则标记为 '异常值'。 否则，标记为 '正常值'</span>
+    data<span class="token punctuation">[</span>fea<span class="token operator">+</span><span class="token string">'_outliers'</span><span class="token punctuation">]</span> <span class="token operator">=</span> data<span class="token punctuation">[</span>fea<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token builtin">apply</span><span class="token punctuation">(</span><span class="token keyword">lambda</span> x<span class="token punctuation">:</span><span class="token builtin">str</span><span class="token punctuation">(</span><span class="token string">'异常值'</span><span class="token punctuation">)</span> <span class="token keyword">if</span> x <span class="token operator">&gt;</span> upper_rule <span class="token keyword">or</span> x <span class="token operator">&lt;</span> lower_rule <span class="token keyword">else</span> <span class="token string">'正常值'</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> data<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>得到特征的异常值后可以进一步分析变量异常值和目标变量的关系</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">data_train <span class="token operator">=</span> data_train<span class="token punctuation">.</span>copy<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">for</span> fea <span class="token keyword">in</span> numerical_fea<span class="token punctuation">:</span>
+    data_train <span class="token operator">=</span> find_outliers_by_3segama<span class="token punctuation">(</span>data_train<span class="token punctuation">,</span>fea<span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data_train<span class="token punctuation">[</span>fea<span class="token operator">+</span><span class="token string">'_outliers'</span><span class="token punctuation">]</span><span class="token punctuation">.</span>value_counts<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data_train<span class="token punctuation">.</span>groupby<span class="token punctuation">(</span>fea<span class="token operator">+</span><span class="token string">'_outliers'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token string">'isDefault'</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token builtin">sum</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'*'</span><span class="token operator">*</span><span class="token number">10</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none">id_outliers
+正常值    800000
+Name: count, dtype: int64
+id_outliers
+正常值    159610
+Name: isDefault, dtype: int64
+**********
+loanAmnt_outliers
+正常值    800000
+Name: count, dtype: int64
+loanAmnt_outliers
+正常值    159610
+Name: isDefault, dtype: int64
+**********
+term_outliers
+正常值    800000
+Name: count, dtype: int64
+term_outliers
+正常值    159610
+Name: isDefault, dtype: int64
+**********
+interestRate_outliers
+正常值    794259
+异常值      5741
+Name: count, dtype: int64
+interestRate_outliers
+异常值      2916
+正常值    156694
+Name: isDefault, dtype: int64
+**********
+installment_outliers
+正常值    792046
+异常值      7954
+Name: count, dtype: int64
+installment_outliers
+异常值      2152
+正常值    157458
+Name: isDefault, dtype: int64
+**********
+employmentTitle_outliers
+正常值    800000
+Name: count, dtype: int64
+employmentTitle_outliers
+正常值    159610
+Name: isDefault, dtype: int64
+**********
+homeOwnership_outliers
+正常值    799701
+异常值       299
+Name: count, dtype: int64
+homeOwnership_outliers
+异常值        62
+正常值    159548
+Name: isDefault, dtype: int64
+**********
+annualIncome_outliers
+正常值    793973
+异常值      6027
+Name: count, dtype: int64
+annualIncome_outliers
+异常值       756
+正常值    158854
+Name: isDefault, dtype: int64
+**********
+verificationStatus_outliers
+正常值    800000
+Name: count, dtype: int64
+verificationStatus_outliers
+正常值    159610
+Name: isDefault, dtype: int64
+**********
+purpose_outliers
+正常值    783003
+异常值     16997
+Name: count, dtype: int64
+purpose_outliers
+异常值      3635
+正常值    155975
+Name: isDefault, dtype: int64
+**********
+postCode_outliers
+正常值    798931
+异常值      1069
+Name: count, dtype: int64
+postCode_outliers
+异常值       221
+正常值    159389
+Name: isDefault, dtype: int64
+**********
+regionCode_outliers
+正常值    799994
+异常值         6
+Name: count, dtype: int64
+regionCode_outliers
+异常值         1
+正常值    159609
+Name: isDefault, dtype: int64
+**********
+dti_outliers
+正常值    798440
+异常值      1560
+Name: count, dtype: int64
+dti_outliers
+异常值       466
+正常值    159144
+Name: isDefault, dtype: int64
+**********
+delinquency_2years_outliers
+正常值    778245
+异常值     21755
+Name: count, dtype: int64
+delinquency_2years_outliers
+异常值      5089
+正常值    154521
+Name: isDefault, dtype: int64
+**********
+ficoRangeLow_outliers
+正常值    788261
+异常值     11739
+Name: count, dtype: int64
+ficoRangeLow_outliers
+异常值       778
+正常值    158832
+Name: isDefault, dtype: int64
+**********
+ficoRangeHigh_outliers
+正常值    788261
+异常值     11739
+Name: count, dtype: int64
+ficoRangeHigh_outliers
+异常值       778
+正常值    158832
+Name: isDefault, dtype: int64
+**********
+openAcc_outliers
+正常值    790889
+异常值      9111
+Name: count, dtype: int64
+openAcc_outliers
+异常值      2195
+正常值    157415
+Name: isDefault, dtype: int64
+**********
+pubRec_outliers
+正常值    792471
+异常值      7529
+Name: count, dtype: int64
+pubRec_outliers
+异常值      1701
+正常值    157909
+Name: isDefault, dtype: int64
+**********
+pubRecBankruptcies_outliers
+正常值    794120
+异常值      5880
+Name: count, dtype: int64
+pubRecBankruptcies_outliers
+异常值      1423
+正常值    158187
+Name: isDefault, dtype: int64
+**********
+revolBal_outliers
+正常值    790001
+异常值      9999
+Name: count, dtype: int64
+revolBal_outliers
+异常值      1359
+正常值    158251
+Name: isDefault, dtype: int64
+**********
+revolUtil_outliers
+正常值    799948
+异常值        52
+Name: count, dtype: int64
+revolUtil_outliers
+异常值        23
+正常值    159587
+Name: isDefault, dtype: int64
+**********
+totalAcc_outliers
+正常值    791663
+异常值      8337
+Name: count, dtype: int64
+totalAcc_outliers
+异常值      1668
+正常值    157942
+Name: isDefault, dtype: int64
+**********
+initialListStatus_outliers
+正常值    800000
+Name: count, dtype: int64
+initialListStatus_outliers
+正常值    159610
+Name: isDefault, dtype: int64
+**********
+applicationType_outliers
+正常值    784586
+异常值     15414
+Name: count, dtype: int64
+applicationType_outliers
+异常值      3875
+正常值    155735
+Name: isDefault, dtype: int64
+**********
+title_outliers
+正常值    775134
+异常值     24866
+Name: count, dtype: int64
+title_outliers
+异常值      3900
+正常值    155710
+Name: isDefault, dtype: int64
+**********
+policyCode_outliers
+正常值    800000
+Name: count, dtype: int64
+policyCode_outliers
+正常值    159610
+Name: isDefault, dtype: int64
+**********
+n0_outliers
+正常值    782773
+异常值     17227
+Name: count, dtype: int64
+n0_outliers
+异常值      3485
+正常值    156125
+Name: isDefault, dtype: int64
+**********
+n1_outliers
+正常值    790500
+异常值      9500
+Name: count, dtype: int64
+n1_outliers
+异常值      2491
+正常值    157119
+Name: isDefault, dtype: int64
+**********
+n2_outliers
+正常值    789067
+异常值     10933
+Name: count, dtype: int64
+n2_outliers
+异常值      3205
+正常值    156405
+Name: isDefault, dtype: int64
+**********
+n3_outliers
+正常值    789067
+异常值     10933
+Name: count, dtype: int64
+n3_outliers
+异常值      3205
+正常值    156405
+Name: isDefault, dtype: int64
+**********
+n4_outliers
+正常值    788660
+异常值     11340
+Name: count, dtype: int64
+n4_outliers
+异常值      2476
+正常值    157134
+Name: isDefault, dtype: int64
+**********
+n5_outliers
+正常值    790355
+异常值      9645
+Name: count, dtype: int64
+n5_outliers
+异常值      1858
+正常值    157752
+Name: isDefault, dtype: int64
+**********
+n6_outliers
+正常值    786006
+异常值     13994
+Name: count, dtype: int64
+n6_outliers
+异常值      3182
+正常值    156428
+Name: isDefault, dtype: int64
+**********
+n7_outliers
+正常值    788430
+异常值     11570
+Name: count, dtype: int64
+n7_outliers
+异常值      2746
+正常值    156864
+Name: isDefault, dtype: int64
+**********
+n8_outliers
+正常值    789625
+异常值     10375
+Name: count, dtype: int64
+n8_outliers
+异常值      2131
+正常值    157479
+Name: isDefault, dtype: int64
+**********
+n9_outliers
+正常值    786384
+异常值     13616
+Name: count, dtype: int64
+n9_outliers
+异常值      3953
+正常值    155657
+Name: isDefault, dtype: int64
+**********
+n10_outliers
+正常值    788979
+异常值     11021
+Name: count, dtype: int64
+n10_outliers
+异常值      2639
+正常值    156971
+Name: isDefault, dtype: int64
+**********
+n11_outliers
+正常值    799434
+异常值       566
+Name: count, dtype: int64
+n11_outliers
+异常值       112
+正常值    159498
+Name: isDefault, dtype: int64
+**********
+n12_outliers
+正常值    797585
+异常值      2415
+Name: count, dtype: int64
+n12_outliers
+异常值       545
+正常值    159065
+Name: isDefault, dtype: int64
+**********
+n13_outliers
+正常值    788907
+异常值     11093
+Name: count, dtype: int64
+n13_outliers
+异常值      2482
+正常值    157128
+Name: isDefault, dtype: int64
+**********
+n14_outliers
+正常值    788884
+异常值     11116
+Name: count, dtype: int64
+n14_outliers
+异常值      3364
+正常值    156246
+Name: isDefault, dtype: int64
+**********<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>​     </p>
+<p>   例如可以看到异常值在两个变量上的分布几乎复合整体的分布，如果异常值都属于为1的用户数据里面代表什么呢？      可能意味着异常值与较高的违约率之间存在某种关联</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment">#删除异常值</span>
+<span class="token keyword">for</span> fea <span class="token keyword">in</span> numerical_fea<span class="token punctuation">:</span>
+    data_train <span class="token operator">=</span> data_train<span class="token punctuation">[</span>data_train<span class="token punctuation">[</span>fea<span class="token operator">+</span><span class="token string">'_outliers'</span><span class="token punctuation">]</span><span class="token operator">==</span><span class="token string">'正常值'</span><span class="token punctuation">]</span>
+    <span class="token comment"># 在每次过滤操作后，调用 reset_index(drop=True) 方法重新设置 DataFrame 的索引，并丢弃旧的索引</span>
+    data_train <span class="token operator">=</span> data_train<span class="token punctuation">.</span>reset_index<span class="token punctuation">(</span>drop<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h4 id="检测异常的方法二：箱型图"><a href="#检测异常的方法二：箱型图" class="headerlink" title="检测异常的方法二：箱型图"></a>检测异常的方法二：箱型图</h4><ul>
+<li>总结一句话：四分位数会将数据分为三个点和四个区间，IQR = Q3 -Q1，下触须=Q1 − 1.5 * IQR，上触须=Q3 + 1.5 * IQR；</li>
+</ul>
+<p><strong>四分位数（Quartiles）</strong></p>
+<p>四分位数是将数据集分成四个等份的三个点：</p>
+<ul>
+<li><strong>Q1（第一四分位数）</strong>：表示第25百分位数，即有25%的数据小于或等于这个值。</li>
+<li><strong>Q2（第二四分位数，中位数）</strong>：表示第50百分位数，即有50%的数据小于或等于这个值。</li>
+<li><strong>Q3（第三四分位数）</strong>：表示第75百分位数，即有75%的数据小于或等于这个值。</li>
+</ul>
+<p>IQR（Interquartile Range，四分位距）定义为 Q3 和 Q1 之间的差值：IQR=<em>Q</em>3−<em>Q</em>1</p>
+<p><strong>箱型图的上下触须</strong></p>
+<p>在箱型图中，通常使用以下公式来确定“触须”的范围（也就是正常值的范围）：</p>
+<ul>
+<li><strong>下触须（Lower Whisker）</strong>： 下触须=Q1−1.5×IQR下触须=<em>Q</em>1−1.5×IQR</li>
+<li><strong>上触须（Upper Whisker）</strong>： 上触须=Q3+1.5×IQR上触须=<em>Q</em>3+1.5×IQR</li>
+</ul>
+<p>任何低于下触须或高于上触须的数据点都被认为是异常值（离群点）</p>
+<p>这种方法简单且直观，适用于大多数单变量异常值检测任务。如果需要处理多变量异常值检测，可能需要更复杂的算法和技术。</p>
+<h2 id="3-数据分箱"><a href="#3-数据分箱" class="headerlink" title="3 数据分箱"></a>3 数据分箱</h2><ul>
+<li>特征分箱的目的：<ul>
+<li>从模型效果上来看，特征分箱主要是为了降低变量的复杂性，减少变量噪音对模型的影响，提高自变量和因变量的相关度。从而使模型更加稳定。</li>
+</ul>
+</li>
+<li>数据分桶的对象：<ul>
+<li>将连续变量离散化</li>
+<li>将多状态的离散变量合并成少状态</li>
+</ul>
+</li>
+<li>分箱的原因：<ul>
+<li>数据的特征内的值跨度可能比较大，对有监督和无监督中如k-均值聚类它使用欧氏距离作为相似度函数来测量数据点之间的相似度。都会造成大吃小的影响，其中一种解决方法是对计数值进行区间量化即数据分桶也叫做数据分箱，然后使用量化后的结果。</li>
+</ul>
+</li>
+<li>分箱的优点：<ul>
+<li>处理缺失值：当数据源可能存在缺失值，此时可以把null单独作为一个分箱。</li>
+<li>处理异常值：当数据中存在离群点时，可以把其通过分箱离散化处理，从而提高变量的鲁棒性（抗干扰能力）。例如，age若出现200这种异常值，可分入“age &gt; 60”这个分箱里，排除影响。</li>
+<li>业务解释性：我们习惯于线性判断变量的作用，当x越来越大，y就越来越大。但实际x与y之间经常存在着非线性关系，此时可经过WOE变换。</li>
+</ul>
+</li>
+<li>特别要注意一下分箱的基本原则：<ul>
+<li>（1）最小分箱占比不低于5%</li>
+<li>（2）箱内不能全部是好客户</li>
+<li>（3）连续箱单调</li>
+</ul>
+</li>
+</ul>
+<h3 id="固定宽度分箱"><a href="#固定宽度分箱" class="headerlink" title="固定宽度分箱"></a>固定宽度分箱</h3><p>当数值横跨多个数量级时，最好按照 10 的幂（或任何常数的幂）来进行分组：0到9、10到 99、100到999、1000到9999，等等。固定宽度分箱非常容易计算，但如果计数值中有比较大的缺口，就会产生很多没有任何数据的空箱子。</p>
+<pre class="line-numbers language-none"><code class="language-none"># 通过除法映射到间隔均匀的分箱中，每个分箱的取值范围都是loanAmnt/1000
+data['loanAmnt_bin1'] = np.floor_divide(data['loanAmnt'], 1000)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+
+
+<pre class="line-numbers language-none"><code class="language-none"># 通过对数函数映射到指数宽度分箱
+data['loanAmnt_bin2'] = np.floor(np.log10(data['loanAmnt']))<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h3 id="等频分箱"><a href="#等频分箱" class="headerlink" title="等频分箱"></a>等频分箱</h3><pre class="line-numbers language-none"><code class="language-none"># 分位数分箱：指将数据分成若干个区间，每个区间的样本数量相同，但区间的宽度可能不同
+data['loanAmnt_bin3'] = pd.qcut(data['loanAmnt'], 10, labels=False)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+
+
+<h3 id="卡方分箱"><a href="#卡方分箱" class="headerlink" title="卡方分箱"></a>卡方分箱</h3><p>卡方分箱是一种基于卡方检验的分箱方法，主要用于分类问题。它通过合并相邻区间来减少区间的数量，直到满足某种停止条件（如卡方统计量小于某个阈值）。这种方法能够有效地发现特征与目标变量之间的关系。</p>
+<h4 id="基本步骤"><a href="#基本步骤" class="headerlink" title="基本步骤"></a>基本步骤</h4><ol>
+<li><strong>初始化</strong>：将所有数据点放入一个初始区间。</li>
+<li><strong>计算卡方统计量</strong>：计算每个相邻区间的卡方统计量。</li>
+<li><strong>合并区间</strong>：选择卡方统计量最小的一对相邻区间进行合并。</li>
+<li><strong>重复步骤2和3</strong>：直到满足停止条件（如最大区间数或最小卡方统计量）。</li>
+</ol>
+<blockquote>
+<p><strong>卡方统计量的定义</strong>:</p>
+<h4 id="1-卡方统计量的定义"><a href="#1-卡方统计量的定义" class="headerlink" title="1. 卡方统计量的定义"></a>1. 卡方统计量的定义</h4><p>卡方统计量通常用符号 $\chi ^2$ 表示</p>
+</blockquote>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>不同的分箱方法适用于不同的场景：</p>
+<ul>
+<li><strong>等宽分箱</strong>：适用于数据分布均匀的情况，简单易实现。</li>
+<li><strong>等频分箱</strong>：适用于数据分布不均匀的情况，确保每个区间包含大致相同的样本数量。</li>
+<li><strong>自定义分箱</strong>：适用于有特定业务需求或领域知识的情况。</li>
+<li><strong>卡方分箱</strong>：适用于分类问题，基于卡方检验合并相邻区间，能够有效发现特征与目标变量之间的关系。</li>
+<li><strong>决策树分箱</strong>：基于决策树算法自动找到最佳的分箱边界，适用于需要自动化分箱的情况。</li>
+</ul>
+<h2 id="4-特征交互"><a href="#4-特征交互" class="headerlink" title="4 特征交互"></a>4 特征交互</h2><p><strong>特征交互（Feature Interaction）</strong> 是指在机器学习模型中，两个或多个特征共同作用对目标变量产生影响的现象。简单来说，特征交互指的是特征之间的相互关系如何影响模型的预测结果，而不是单个特征独立地影响目标变量。</p>
+<ul>
+<li>交互特征的构造非常简单，使用起来却代价不菲。如果线性模型中包含有交互特征对，那它的训练时间和评分时间就会从 O(n) 增加到 O(n2)，其中 n 是单一特征的数量。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">for</span> col <span class="token keyword">in</span> <span class="token punctuation">[</span><span class="token string">'grade'</span><span class="token punctuation">,</span> <span class="token string">'subGrade'</span><span class="token punctuation">]</span><span class="token punctuation">:</span> 
+    <span class="token comment"># 对于每一个列名（'grade' 和 'subGrade'）</span>
+    
+    temp_dict <span class="token operator">=</span> data_train<span class="token punctuation">.</span>groupby<span class="token punctuation">(</span><span class="token punctuation">[</span>col<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token string">'isDefault'</span><span class="token punctuation">]</span><span class="token punctuation">.</span>agg<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'mean'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">.</span>reset_index<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>rename<span class="token punctuation">(</span>columns<span class="token operator">=</span><span class="token punctuation">{</span><span class="token string">'mean'</span><span class="token punctuation">:</span> col <span class="token operator">+</span> <span class="token string">'_target_mean'</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token comment"># 1. 使用 groupby 按照当前列（'grade' 或 'subGrade'）进行分组。</span>
+    <span class="token comment"># 2. 计算每组中 'isDefault' 列的平均值。</span>
+    <span class="token comment"># 3. 使用 reset_index() 将分组结果转换为 DataFrame。</span>
+    <span class="token comment"># 4. 重命名聚合后的列名为 col + '_target_mean' （例如 'grade_target_mean' 或 'subGrade_target_mean'）。</span>
+    
+    temp_dict<span class="token punctuation">.</span>index <span class="token operator">=</span> temp_dict<span class="token punctuation">[</span>col<span class="token punctuation">]</span><span class="token punctuation">.</span>values
+    <span class="token comment"># 将临时 DataFrame 的索引设置为当前列的值（即 'grade' 或 'subGrade' 的值）。</span>
+    
+    temp_dict <span class="token operator">=</span> temp_dict<span class="token punctuation">[</span>col <span class="token operator">+</span> <span class="token string">'_target_mean'</span><span class="token punctuation">]</span><span class="token punctuation">.</span>to_dict<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token comment"># 将包含目标均值的 Series 转换为字典，键是类别值，值是对应的 'isDefault' 平均值。</span>
+
+    data_train<span class="token punctuation">[</span>col <span class="token operator">+</span> <span class="token string">'_target_mean'</span><span class="token punctuation">]</span> <span class="token operator">=</span> data_train<span class="token punctuation">[</span>col<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token builtin">map</span><span class="token punctuation">(</span>temp_dict<span class="token punctuation">)</span>
+    <span class="token comment"># 使用 map 函数将训练集中的 'grade' 或 'subGrade' 列映射到其对应的 'isDefault' 平均值，并创建新列存储结果。</span>
+
+    data_test_a<span class="token punctuation">[</span>col <span class="token operator">+</span> <span class="token string">'_target_mean'</span><span class="token punctuation">]</span> <span class="token operator">=</span> data_test_a<span class="token punctuation">[</span>col<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token builtin">map</span><span class="token punctuation">(</span>temp_dict<span class="token punctuation">)</span>
+    <span class="token comment"># 同样地，对测试集进行相同的映射操作，创建新列存储结果。</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># 对训练集和测试集进行循环处理</span>
+<span class="token keyword">for</span> df <span class="token keyword">in</span> <span class="token punctuation">[</span>data_train<span class="token punctuation">,</span> data_test_a<span class="token punctuation">]</span><span class="token punctuation">:</span>
+    <span class="token comment"># 对每个指定的列名 'n0', 'n1', ..., 'n14' 进行循环</span>
+    <span class="token keyword">for</span> item <span class="token keyword">in</span> <span class="token punctuation">[</span><span class="token string">'n0'</span><span class="token punctuation">,</span><span class="token string">'n1'</span><span class="token punctuation">,</span><span class="token string">'n2'</span><span class="token punctuation">,</span><span class="token string">'n4'</span><span class="token punctuation">,</span><span class="token string">'n5'</span><span class="token punctuation">,</span><span class="token string">'n6'</span><span class="token punctuation">,</span><span class="token string">'n7'</span><span class="token punctuation">,</span><span class="token string">'n8'</span><span class="token punctuation">,</span><span class="token string">'n9'</span><span class="token punctuation">,</span><span class="token string">'n10'</span><span class="token punctuation">,</span><span class="token string">'n11'</span><span class="token punctuation">,</span><span class="token string">'n12'</span><span class="token punctuation">,</span><span class="token string">'n13'</span><span class="token punctuation">,</span><span class="token string">'n14'</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+        <span class="token comment"># 计算 'grade' 列相对于 'item' 列分组后 'grade' 的均值，并创建新列存储结果</span>
+        df<span class="token punctuation">[</span><span class="token string">'grade_to_mean_'</span> <span class="token operator">+</span> item<span class="token punctuation">]</span> <span class="token operator">=</span> df<span class="token punctuation">[</span><span class="token string">'grade'</span><span class="token punctuation">]</span> <span class="token operator">/</span> df<span class="token punctuation">.</span>groupby<span class="token punctuation">(</span><span class="token punctuation">[</span>item<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token string">'grade'</span><span class="token punctuation">]</span><span class="token punctuation">.</span>transform<span class="token punctuation">(</span><span class="token string">'mean'</span><span class="token punctuation">)</span>
+        
+        <span class="token comment"># 计算 'grade' 列相对于 'item' 列分组后 'grade' 的标准差，并创建新列存储结果</span>
+        df<span class="token punctuation">[</span><span class="token string">'grade_to_std_'</span> <span class="token operator">+</span> item<span class="token punctuation">]</span> <span class="token operator">=</span> df<span class="token punctuation">[</span><span class="token string">'grade'</span><span class="token punctuation">]</span> <span class="token operator">/</span> df<span class="token punctuation">.</span>groupby<span class="token punctuation">(</span><span class="token punctuation">[</span>item<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token string">'grade'</span><span class="token punctuation">]</span><span class="token punctuation">.</span>transform<span class="token punctuation">(</span><span class="token string">'std'</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>这里给出一些特征交互的思路，但特征和特征间的交互衍生出新的特征还远远不止于此，抛砖引玉，希望大家多多探索。请学习者尝试其他的特征交互方法。</p>
+<h2 id="5-特征编码"><a href="#5-特征编码" class="headerlink" title="5 特征编码"></a>5 特征编码</h2><p><strong>标签编码（Label Encoding）</strong> 是一种将类别数据转换为数值形式的技术，常用于机器学习中处理分类变量。由于大多数机器学习算法只能处理数值型数据，因此需要将类别特征转换为数值型特征。标签编码是实现这一目标的一种简单而有效的方法。</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment">#label-encode:subGrade,postCode,title</span>
+<span class="token comment"># 高维类别特征需要进行转换</span>
+
+<span class="token comment"># 对指定的列进行标签编码</span>
+<span class="token keyword">for</span> col <span class="token keyword">in</span> tqdm<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'employmentTitle'</span><span class="token punctuation">,</span> <span class="token string">'postCode'</span><span class="token punctuation">,</span> <span class="token string">'title'</span><span class="token punctuation">,</span><span class="token string">'subGrade'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment"># 初始化 LabelEncoder</span>
+    le <span class="token operator">=</span> LabelEncoder<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token comment"># 合并训练集和测试集中的该列数据，并转换为字符串类型</span>
+    combined_data <span class="token operator">=</span> <span class="token builtin">list</span><span class="token punctuation">(</span>data_train<span class="token punctuation">[</span>col<span class="token punctuation">]</span><span class="token punctuation">.</span>astype<span class="token punctuation">(</span><span class="token builtin">str</span><span class="token punctuation">)</span><span class="token punctuation">.</span>values<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token builtin">list</span><span class="token punctuation">(</span>data_test_a<span class="token punctuation">[</span>col<span class="token punctuation">]</span><span class="token punctuation">.</span>astype<span class="token punctuation">(</span><span class="token builtin">str</span><span class="token punctuation">)</span><span class="token punctuation">.</span>values<span class="token punctuation">)</span>
+    <span class="token comment"># 拟合 LabelEncoder</span>
+    le<span class="token punctuation">.</span>fit<span class="token punctuation">(</span>combined_data<span class="token punctuation">)</span>
+    <span class="token comment"># 对训练集和测试集中的该列进行转换</span>
+    data_train<span class="token punctuation">[</span>col<span class="token punctuation">]</span> <span class="token operator">=</span> le<span class="token punctuation">.</span>transform<span class="token punctuation">(</span><span class="token builtin">list</span><span class="token punctuation">(</span>data_train<span class="token punctuation">[</span>col<span class="token punctuation">]</span><span class="token punctuation">.</span>astype<span class="token punctuation">(</span><span class="token builtin">str</span><span class="token punctuation">)</span><span class="token punctuation">.</span>values<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    data_test_a<span class="token punctuation">[</span>col<span class="token punctuation">]</span> <span class="token operator">=</span> le<span class="token punctuation">.</span>transform<span class="token punctuation">(</span><span class="token builtin">list</span><span class="token punctuation">(</span>data_test_a<span class="token punctuation">[</span>col<span class="token punctuation">]</span><span class="token punctuation">.</span>astype<span class="token punctuation">(</span><span class="token builtin">str</span><span class="token punctuation">)</span><span class="token punctuation">.</span>values<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Label Encoding 完成'</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h4 id="逻辑回归等模型要单独增加的特征工程"><a href="#逻辑回归等模型要单独增加的特征工程" class="headerlink" title="逻辑回归等模型要单独增加的特征工程"></a>逻辑回归等模型要单独增加的特征工程</h4><ul>
+<li>对特征做<strong>归一化</strong>，去除相关性高的特征</li>
+<li>归一化目的是让训练过程更好更快的收敛，避免特征大吃小的问题</li>
+<li>去除相关性是增加模型的可解释性，加快预测过程。</li>
+</ul>
+<blockquote>
+<ol>
+<li>除以最大值：所有特征除以各自的范围最大值，使得特征值范围都在0~1之间。于是$0.15 \leq \frac {x_1}{2000} \leq 1$、 $0 \leq \frac{x_2}{5} \leq 1$</li>
+<li>均值归一化(Mean normalization)：使得特征值范围大致为-1~1。假设$x_1$ 的平均值为 $\mu_1 =600、x_2的平均值为 \mu_2 = 2.3 \ ，于是-0.18 \leq \frac{x_1-\mu_1}{2000-300} \leq 0.82、-0.46 \leq \frac{x_2 - \mu_2}{5-0} \leq 0.54$</li>
+<li>Z-score归一化(Z-score normalization)【推荐】：使得特征值服从标准正态分布。假设$x_1$的平均值和标准差分别为$\mu_1 = 600，\sigma_1 = 450 ，x_2 $ 的平均值和标准差分别为$\mu_2 = 2.3，\sigma_2 = 1.4 $ 于是  $-0.67 \leq \frac{x_1 - \mu_1}{\sigma_1} \leq 3.1  $  ,  $-1.6 \leq \frac{x_2- \mu_2}{\sigma_2 } \leq 1.9 $</li>
+</ol>
+</blockquote>
+<h2 id="6-特征选择"><a href="#6-特征选择" class="headerlink" title="6 特征选择"></a>6 特征选择</h2><ul>
+<li>特征选择技术可以精简掉无用的特征，以降低最终模型的复杂性，它的最终目的是得到一个简约模型，在不降低预测准确率或对预测准确率影响不大的情况下提高计算速度。特征选择不是为了减少训练时间（实际上，一些技术会增加总体训练时间），而是为了减少模型评分时间。</li>
+</ul>
+<p>特征选择的方法：</p>
+<blockquote>
+<ul>
+<li>1 Filter<ul>
+<li>方差选择法</li>
+<li>相关系数法（pearson 相关系数）</li>
+<li>卡方检验</li>
+<li>互信息法</li>
+</ul>
+</li>
+<li>2 Wrapper （RFE）<ul>
+<li>递归特征消除法</li>
+</ul>
+</li>
+<li>3 Embedded<ul>
+<li>基于惩罚项的特征选择法</li>
+<li>基于树模型的特征选择</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h3 id="Filter"><a href="#Filter" class="headerlink" title="Filter"></a>Filter</h3><p>基于特征间的关系进行筛选</p>
+<h4 id="方差选择法"><a href="#方差选择法" class="headerlink" title="方差选择法"></a>方差选择法</h4><p>方差选择法中，先要计算各个特征的方差，然后根据设定的阈值，选择方差大于阈值的特征</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> sklearn<span class="token punctuation">.</span>feature_selection <span class="token keyword">import</span> VarianceThreshold
+
+<span class="token comment"># 使用 VarianceThreshold 进行特征选择</span>
+selector <span class="token operator">=</span> VarianceThreshold<span class="token punctuation">(</span>threshold<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">)</span>
+transformed_train <span class="token operator">=</span> selector<span class="token punctuation">.</span>fit_transform<span class="token punctuation">(</span>train<span class="token punctuation">,</span> target_train<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="相关系数法"><a href="#相关系数法" class="headerlink" title="相关系数法"></a>相关系数法</h4><p>Pearson 相关系数 皮尔森相关系数是一种最简单的，可以帮助理解特征和响应变量之间关系的方法，该方法衡量的是变量之间的线性相关性。 结果的取值区间为 [-1，1] ， -1 表示完全的负相关， +1表示完全的正相关，0 表示没有线性相关。</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> sklearn<span class="token punctuation">.</span>feature_selection <span class="token keyword">import</span> SelectKBest
+<span class="token keyword">from</span> scipy<span class="token punctuation">.</span>stats <span class="token keyword">import</span> pearsonr
+<span class="token comment">#选择K个最好的特征，返回选择特征后的数据</span>
+<span class="token comment">#第一个参数为计算评估特征是否好的函数，该函数输入特征矩阵和目标向量，</span>
+<span class="token comment">#输出二元组（评分，P值）的数组，数组第i项为第i个特征的评分和P值。在此定义为计算相关系数</span>
+<span class="token comment">#参数k为选择的特征个数</span>
+
+SelectKBest<span class="token punctuation">(</span>k<span class="token operator">=</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">.</span>fit_transform<span class="token punctuation">(</span>train<span class="token punctuation">,</span>target_train<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="卡方检验"><a href="#卡方检验" class="headerlink" title="卡方检验"></a>卡方检验</h4><ul>
+<li>经典的卡方检验是用于检验自变量对因变量的相关性。 假设自变量有N种取值，因变量有M种取值，考虑自变量等于i且因变量等于j的样本频数的观察值与期望的差距。 其统计量如下： χ2=∑(A−T)2/T，其中A为实际值，T为理论值</li>
+<li>(注：卡方只能运用在正定矩阵上，否则会报错Input X must be non-negative)</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> sklearn<span class="token punctuation">.</span>feature_selection <span class="token keyword">import</span> SelectKBest
+<span class="token keyword">from</span> sklearn<span class="token punctuation">.</span>feature_selection <span class="token keyword">import</span> chi2
+<span class="token comment">#参数k为选择的特征个数</span>
+
+SelectKBest<span class="token punctuation">(</span>chi2<span class="token punctuation">,</span> k<span class="token operator">=</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">.</span>fit_transform<span class="token punctuation">(</span>train<span class="token punctuation">,</span>target_train<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="互信息法"><a href="#互信息法" class="headerlink" title="互信息法"></a>互信息法</h4><ul>
+<li><p>经典的互信息也是评价自变量对因变量的相关性的。 在feature_selection库的SelectKBest类结合最大信息系数法可以用于选择特征，相关代码如下：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> sklearn<span class="token punctuation">.</span>feature_selection <span class="token keyword">import</span> SelectKBest
+<span class="token keyword">from</span> minepy <span class="token keyword">import</span> MINE
+<span class="token comment">#由于MINE的设计不是函数式的，定义mic方法将其为函数式的，</span>
+<span class="token comment">#返回一个二元组，二元组的第2项设置成固定的P值0.5</span>
+<span class="token keyword">def</span> <span class="token function">mic</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    m <span class="token operator">=</span> MINE<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    m<span class="token punctuation">.</span>compute_score<span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span>m<span class="token punctuation">.</span>mic<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">0.5</span><span class="token punctuation">)</span>
+<span class="token comment">#参数k为选择的特征个数</span>
+SelectKBest<span class="token punctuation">(</span><span class="token keyword">lambda</span> X<span class="token punctuation">,</span> Y<span class="token punctuation">:</span> array<span class="token punctuation">(</span><span class="token builtin">map</span><span class="token punctuation">(</span><span class="token keyword">lambda</span> x<span class="token punctuation">:</span>mic<span class="token punctuation">(</span>x<span class="token punctuation">,</span> Y<span class="token punctuation">)</span><span class="token punctuation">,</span> X<span class="token punctuation">.</span>T<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>T<span class="token punctuation">,</span> k<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">.</span>fit_transform<span class="token punctuation">(</span>train<span class="token punctuation">,</span>target_train<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+<h3 id="Wrapper（Recursive-feature-elimination，RFE）"><a href="#Wrapper（Recursive-feature-elimination，RFE）" class="headerlink" title="Wrapper（Recursive feature elimination，RFE）"></a>Wrapper（Recursive feature elimination，RFE）</h3><ul>
+<li><strong>递归特征消除法</strong> 递归消除特征法使用一个基模型来进行多轮训练，每轮训练后，消除若干权值系数的特征，再基于新的特征集进行下一轮训练。 在feature_selection库的RFE类可以用于选择特征，相关代码如下（以逻辑回归为例）：</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> sklearn<span class="token punctuation">.</span>feature_selection <span class="token keyword">import</span> RFE
+<span class="token keyword">from</span> sklearn<span class="token punctuation">.</span>linear_model <span class="token keyword">import</span> LogisticRegression
+<span class="token comment">#递归特征消除法，返回特征选择后的数据</span>
+<span class="token comment">#参数estimator为基模型:常用的基模型包括 LogisticRegression、LinearSVC、RandomForestClassifier</span>
+<span class="token comment">#参数n_features_to_select为选择的特征个数</span>
+
+RFE<span class="token punctuation">(</span>estimator<span class="token operator">=</span>LogisticRegression<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> n_features_to_select<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">.</span>fit_transform<span class="token punctuation">(</span>train<span class="token punctuation">,</span>target_train<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>RFE 的核心思想是利用模型的特征重要性评分来决定哪些特征应该被保留或移除。</strong></p>
+<h3 id="Embedded"><a href="#Embedded" class="headerlink" title="Embedded"></a>Embedded</h3><ul>
+<li>基于惩罚项的特征选择法 使用带惩罚项的基模型，除了筛选出特征外，同时也进行了降维。 在feature_selection库的SelectFromModel类结合逻辑回归模型可以用于选择特征，相关代码如下：</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> sklearn<span class="token punctuation">.</span>feature_selection <span class="token keyword">import</span> SelectFromModel
+<span class="token keyword">from</span> sklearn<span class="token punctuation">.</span>linear_model <span class="token keyword">import</span> LogisticRegression
+<span class="token comment">#带L1惩罚项的逻辑回归作为基模型的特征选择</span>
+
+SelectFromModel<span class="token punctuation">(</span>LogisticRegression<span class="token punctuation">(</span>penalty<span class="token operator">=</span><span class="token string">"l1"</span><span class="token punctuation">,</span> C<span class="token operator">=</span><span class="token number">0.1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>fit_transform<span class="token punctuation">(</span>train<span class="token punctuation">,</span>target_train<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>基于树模型的特征选择 树模型中GBDT也可用来作为基模型进行特征选择。 在feature_selection库的SelectFromModel类结合GBDT模型可以用于选择特征，相关代码如下：</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> sklearn<span class="token punctuation">.</span>feature_selection <span class="token keyword">import</span> SelectFromModel
+<span class="token keyword">from</span> sklearn<span class="token punctuation">.</span>ensemble <span class="token keyword">import</span> GradientBoostingClassifier
+<span class="token comment">#GBDT作为基模型的特征选择</span>
+SelectFromModel<span class="token punctuation">(</span>GradientBoostingClassifier<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>fit_transform<span class="token punctuation">(</span>train<span class="token punctuation">,</span>target_train<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>**<code>GradientBoostingClassifier</code>**：这是 <code>scikit-learn</code> 提供的一个梯度提升决策树分类器，适用于分类任务</p>
+<p>本数据集中我们删除非入模特征后，并对缺失值填充，然后用计算协方差的方式看一下特征间相关性，然后进行模型训练</p>
+<pre class="line-numbers language-none"><code class="language-none"># 删除不需要的数据
+for data in [data_train, data_test_a]:
+    data.drop(['issueDate'], axis=1,inplace=True)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none">"纵向用缺失值上面的值替换缺失值"
+data_train = data_train.fillna(method='ffill')<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        Author:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">qwq小小舒</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        Link:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://js6288.github.io/2025/03/03/%E9%87%91%E8%9E%8D%E9%A3%8E%E9%99%A9%E9%A2%84%E6%B5%8B%E8%B5%9B-task3-%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B/">https://js6288.github.io/2025/03/03/%E9%87%91%E8%9E%8D%E9%A3%8E%E9%99%A9%E9%A2%84%E6%B5%8B%E8%B5%9B-task3-%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        Reprint policy:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    All articles in this blog are used except for special statements
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    reprint policy. If reproduced, please indicate source
+                    <a href="/about" target="_blank">qwq小小舒</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>Copied successfully, please follow the reprint policy of this article</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">more</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">
+                                    <span class="chip bg-color">人工智能</span>
+                                </a>
+                            
+                                <a href="/tags/deep-learning/">
+                                    <span class="chip bg-color">deep learning</span>
+                                </a>
+                            
+                                <a href="/tags/machine-learning/">
+                                    <span class="chip bg-color">machine learning</span>
+                                </a>
+                            
+                                <a href="/tags/%E5%86%B3%E7%AD%96%E6%A0%91/">
+                                    <span class="chip bg-color">决策树</span>
+                                </a>
+                            
+                                <a href="/tags/python/">
+                                    <span class="chip bg-color">python</span>
+                                </a>
+                            
+                                <a href="/tags/pandas/">
+                                    <span class="chip bg-color">pandas</span>
+                                </a>
+                            
+                                <a href="/tags/numpy/">
+                                    <span class="chip bg-color">numpy</span>
+                                </a>
+                            
+                                <a href="/tags/%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B/">
+                                    <span class="chip bg-color">特征工程</span>
+                                </a>
+                            
+                                <a href="/tags/LightGBM/">
+                                    <span class="chip bg-color">LightGBM</span>
+                                </a>
+                            
+                                <a href="/tags/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/">
+                                    <span class="chip bg-color">数据处理</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay1.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;Current
+            </div>
+            <div class="card">
+                <a href="/2025/03/03/%E9%87%91%E8%9E%8D%E9%A3%8E%E9%99%A9%E9%A2%84%E6%B5%8B%E8%B5%9B-task3-%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="金融风险预测赛 task3 特征工程">
+                        
+                        <span class="card-title">金融风险预测赛 task3 特征工程</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-03-03
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE/" class="post-category">
+                                    个人项目
+                                </a>
+                            
+                            <a href="/categories/%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                    机器学习
+                                </a>
+                            
+                            <a href="/categories/%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                    深度学习
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">
+                        <span class="chip bg-color">人工智能</span>
+                    </a>
+                    
+                    <a href="/tags/deep-learning/">
+                        <span class="chip bg-color">deep learning</span>
+                    </a>
+                    
+                    <a href="/tags/machine-learning/">
+                        <span class="chip bg-color">machine learning</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%86%B3%E7%AD%96%E6%A0%91/">
+                        <span class="chip bg-color">决策树</span>
+                    </a>
+                    
+                    <a href="/tags/python/">
+                        <span class="chip bg-color">python</span>
+                    </a>
+                    
+                    <a href="/tags/pandas/">
+                        <span class="chip bg-color">pandas</span>
+                    </a>
+                    
+                    <a href="/tags/numpy/">
+                        <span class="chip bg-color">numpy</span>
+                    </a>
+                    
+                    <a href="/tags/%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B/">
+                        <span class="chip bg-color">特征工程</span>
+                    </a>
+                    
+                    <a href="/tags/LightGBM/">
+                        <span class="chip bg-color">LightGBM</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/">
+                        <span class="chip bg-color">数据处理</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                Next&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2025/02/27/%E9%87%91%E8%9E%8D%E9%A3%8E%E9%99%A9%E9%A2%84%E6%B5%8B%E8%B5%9B-task2-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="金融风险预测赛 Task2 数据分析">
+                        
+                        <span class="card-title">金融风险预测赛 Task2 数据分析</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-02-27
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE/" class="post-category">
+                                    个人项目
+                                </a>
+                            
+                            <a href="/categories/%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                    机器学习
+                                </a>
+                            
+                            <a href="/categories/%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                    深度学习
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">
+                        <span class="chip bg-color">人工智能</span>
+                    </a>
+                    
+                    <a href="/tags/deep-learning/">
+                        <span class="chip bg-color">deep learning</span>
+                    </a>
+                    
+                    <a href="/tags/machine-learning/">
+                        <span class="chip bg-color">machine learning</span>
+                    </a>
+                    
+                    <a href="/tags/python/">
+                        <span class="chip bg-color">python</span>
+                    </a>
+                    
+                    <a href="/tags/pandas/">
+                        <span class="chip bg-color">pandas</span>
+                    </a>
+                    
+                    <a href="/tags/numpy/">
+                        <span class="chip bg-color">numpy</span>
+                    </a>
+                    
+                    <a href="/tags/%E9%87%91%E8%9E%8D/">
+                        <span class="chip bg-color">金融</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">
+                        <span class="chip bg-color">数据分析</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;TOC</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$','$$'], ['\\[','\\]']],
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+        },
+        TeX: {
+            extensions: ["AMSmath.js", "AMSsymbols.js"] // 手动加载 AMS 扩展
+        }
+    });
+</script>
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2019-2025</span>
+            
+            <a href="/about" target="_blank">qwq小小舒</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            
+            <br>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;Total visits:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;Total visitors:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/js6288" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:linjingshu6288@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1279897306" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1279897306" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;Search</span>
+            <input type="search" id="searchInput" name="s" placeholder="Please enter a search keyword"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 白天和黑夜主题 -->
+<div class="stars-con">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>  
+</div>
+
+<script>
+    function switchNightMode() {
+        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
+        setTimeout(function () {
+            $('body').hasClass('DarkMode') 
+            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
+            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
+            
+            setTimeout(function () {
+            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
+                $(this).remove()
+            })
+            }, 2e3)
+        })
+    }
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+    
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
