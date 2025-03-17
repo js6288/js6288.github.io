@@ -419,14 +419,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
-                    2.3k
+                    2.7k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
-                    8 Min
+                    9 Min
                 </div>
                 
 
@@ -496,6 +496,16 @@
 <p><img src="http://img-md-js.linjsblog.top/img/202503101545211.png" alt="image-20250310154546146"></p>
 <h2 id="卷积和池化输出尺寸计算"><a href="#卷积和池化输出尺寸计算" class="headerlink" title="卷积和池化输出尺寸计算"></a>卷积和池化输出尺寸计算</h2><p>假设输入图片的高和宽一致，卷积核的宽和高一致，那么输入图像的尺寸与输出图像的尺寸有如下关系：</p>
 <p>其中，Fin 是输入图像、k 是卷积核的大小、p 是图像填充的大小、s 是卷积核的步幅、Fo 是输出、⌊6.6⌋ 是向下取整的意思，比如结果是 6.6，那么向下取整就是 6<br>$$<br>F_o = \left\lfloor \frac{F_{in} - k + 2p}{s} \right\rfloor + 1<br>$$</p>
+<h3 id="参数个数计算"><a href="#参数个数计算" class="headerlink" title="参数个数计算"></a>参数个数计算</h3><p>卷积层params = Co×(Ci×Kw×Kh +1)</p>
+<p>其中，Co代表输入的通道数，Ci代表输出的通道数，Kw×Kh为卷积核的大小，若卷积核有偏置项（Bias）则＋1，没有则不加。</p>
+<p>池化层可以不用算参数量</p>
+<p>全连接层=params = （ I + 1 ) × O<br>其中，I 为输入向量的维度也可以称作输入特征图的大小，O为输出向量的维度</p>
+<h3 id="计算量FLOPs"><a href="#计算量FLOPs" class="headerlink" title="计算量FLOPs"></a>计算量FLOPs</h3><h4 id="卷积层"><a href="#卷积层" class="headerlink" title="卷积层"></a>卷积层</h4><p>计算公式如下：<br>FLOPs = [Ci×Kw×Kh+(Ci×Kw×Kh-1) +1]×W×H×Co =</p>
+<p>其中Ci×Kw×Kh为一次卷积的乘法预算的计算量，(Ci×Kw×Kh-1)为一次卷积加法运算的计算量，+1为偏置项，W与H为特征图（feture map）的长和宽。</p>
+<p>简化为：2×Ci×Kw×Kh×W×H×Co</p>
+<h4 id="池化层"><a href="#池化层" class="headerlink" title="池化层"></a>池化层</h4><p>计算公式如下：<br>FLOPs = H × W × Ci<br>其中H，W为特征图的（feture map)的高和宽，Ci为输入的通道数。</p>
+<h4 id="全连接层"><a href="#全连接层" class="headerlink" title="全连接层"></a>全连接层</h4><p>计算公式如下：<br>FLOPs = [I + (I-1) + 1] × O = 2 × I × O<br>其中I为一次乘法，I-1为一次加法，+1为加上一个偏置项</p>
+<h4 id="易混淆概念区分"><a href="#易混淆概念区分" class="headerlink" title="易混淆概念区分"></a>易混淆概念区分</h4><p><strong>FLOPS（Floating Point Operations per Second）</strong><br>FLOPS 表示单位时间内的浮点运算次数，是衡量计算机系统或计算设备处理能力的一种指标。而浮点运算次数指的是乘法、除法、加法、减法等的次数。<br><strong>FLOPs（Floating Point Operations）</strong><br>FLOPs 指的是模型中的浮点运算操作总数，也常称为计算量。主要用于衡量模型的计算复杂度。通常是衡量模型在一次前向传播过程中需要执行多少次浮点运算的总量。</p>
 
                 
             </div>
