@@ -504,10 +504,7 @@
 </ul>
 </blockquote>
 <p>于是对于这种情况，就需要将“线性回归模型”转换成“<strong>逻辑回归模型</strong>”，代价函数中的“平方误差”也要转换成“<strong>二元交叉熵”</strong>：<br>$$<br>\text{Logistic model:} \quad \hat{y}^{(i,j)} = f_{\vec{w}, \vec{b}, X}(\vec{x}^{(i)}) = g(\vec{w}^{(j)} \vec{x}^{(i)} + b^{(j)}) = \frac{1}{1 + e^{-(\vec{w}^{(j)} \vec{x}^{(i)} + b^{(j)})}}<br>$$</p>
-<p>$$<br>\text{Cost function: } \min_{W, \vec{b}, X} J(W, \vec{b}, X) = \sum_{(i,j): r(i,j)=1}^{m} \left[ -y^{(i,j)} \log(\hat{y}^{(i,j)}) - (1 - y^{(i,j)}) \log(1 - \hat{y}^{(i,j)}) \right]<br>$$<br>$$</p>
-<ul>
-<li>\frac{\lambda}{2} \sum_{j=1}^{n_u} \sum_{k=1}^{n} (w_k^{(j)})^2 + \frac{\lambda}{2} \sum_{j=1}^{n_m} \sum_{k=1}^{n} (x_k^{(i)})^2,<br>$$</li>
-</ul>
+<p>$$<br>\text{Cost function: } \min_{W, \vec{b}, X} J(W, \vec{b}, X) = \sum_{(i,j): r(i,j)=1}^{m} \left[ -y^{(i,j)} \log(\hat{y}^{(i,j)}) - (1 - y^{(i,j)}) \log(1 - \hat{y}^{(i,j)}) \right]<br>$$<br>$$<br>+\frac{\lambda}{2} \sum_{j=1}^{n_u} \sum_{k=1}^{n} (w_k^{(j)})^2 + \frac{\lambda}{2} \sum_{j=1}^{n_m} \sum_{k=1}^{n} (x_k^{(i)})^2,<br>$$</p>
 <h2 id="1-5-均值归一化"><a href="#1-5-均值归一化" class="headerlink" title="1.5 均值归一化"></a>1.5 均值归一化</h2><p>上面已经介绍“协同过滤算法”的线性回归形式和逻辑回归形式，但在执行这个算法之前，首先还需要进行数据预处理——“均值归一化(mean normalization)”，会使算法的效果更好。这是因为新用户没有对任何电影做出评分，于是对于“代价函数”中的“误差项”不起作用，再加上“正则项”会进行减小用户参数的影响，于是新用户的参数$\vec w^{(j)}$全为0(一般初始化$b^{(j)}$为0)，此时对于任何电影的评分也就是全是0。也就是说：</p>
 <ol>
 <li>不进行“均值归一化”，新用户的默认评分全是0(全都不喜欢)，这就没法推荐了。</li>
