@@ -698,13 +698,14 @@ cost_fn <span class="token operator">=</span> tf<span class="token punctuation">
 <p><img src="https://img-md-js.linjsblog.top/img/202504062333455.png" alt="img"></p>
 <h2 id="3-2-PCA代码实现"><a href="#3-2-PCA代码实现" class="headerlink" title="3.2 PCA代码实现"></a>3.2 PCA代码实现</h2><p>在Python中，主要使用 <code>scikit-learn</code>库来实现PCA。下面是两个代码示例：</p>
 <p>使用PCA将2维数据压缩成2维数据，只是为了展示压缩后新坐标轴相互垂直。</p>
+<p><img src="https://img-md-js.linjsblog.top/img/202504072121046.png" alt="image-20250407211949906"></p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> sklearn<span class="token punctuation">.</span>decomposition <span class="token keyword">import</span> PCA
 <span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
 <span class="token comment">######################## 将2维数据压缩成1维 #########################</span>
 X <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token operator">-</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
 pca_1 <span class="token operator">=</span> PCA<span class="token punctuation">(</span>n_components<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span>                     <span class="token comment"># 设置压缩后维度</span>
 pca_1<span class="token punctuation">.</span>fit<span class="token punctuation">(</span>X<span class="token punctuation">)</span>                                    <span class="token comment"># PCA压缩维度</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>pca_1<span class="token punctuation">.</span>explained_variance_ratio_<span class="token punctuation">)</span>          <span class="token comment"># 0.992</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>pca_1<span class="token punctuation">.</span>explained_variance_ratio_<span class="token punctuation">)</span>          <span class="token comment"># 0.992  表示当选择一个轴时，这会捕获原始数据集中99.2%中的可变性或信息</span>
 X_trans_1 <span class="token operator">=</span> pca_1<span class="token punctuation">.</span>transform<span class="token punctuation">(</span>X<span class="token punctuation">)</span>                  <span class="token comment"># 计算压缩后坐标(投影)</span>
 X_reduced_1 <span class="token operator">=</span> pca<span class="token punctuation">.</span>inverse_transform<span class="token punctuation">(</span>X_trans_1<span class="token punctuation">)</span>  <span class="token comment"># 重构</span>
 <span class="token comment"># X_trans_1 : array([</span>
@@ -729,6 +730,11 @@ X_reduced_2 <span class="token operator">=</span> pca<span class="token punctuat
 <span class="token comment">#             [-2.22189802,  0.25133484] ,</span>
 <span class="token comment">#             [-3.6053038 , -0.04224385])</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>下图是把二维数据降维成一维数据</p>
+<p><img src="https://img-md-js.linjsblog.top/img/202504072141517.png" alt="image-20250407214106250"></p>
+<p>PCA(n_components=2) 时（大致重建原视数据）</p>
+<p><img src="https://img-md-js.linjsblog.top/img/202504072152775.png" alt="image-20250407215246521"></p>
 
                 
             </div>
