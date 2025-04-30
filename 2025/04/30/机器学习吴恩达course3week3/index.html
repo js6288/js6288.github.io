@@ -1,0 +1,1374 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="吴恩达机器学习 course3 week3 强化学习, 小小舒的爪哇天地">
+    <meta name="description" content="吴恩达机器学习 course3 week3 强化学习1.1 什么是强化学习
+使用强化学习控制遥控直升飞机做特技动作(斯坦福大学) 来源：http://heli.stanford.edu/
+
+
+ “强化学习(reinforcement lea">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>吴恩达机器学习 course3 week3 强化学习 | 小小舒的爪哇天地</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    
+
+
+    <!-- bg-cover style     -->
+
+
+
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" type="text/css" href="/css/matery.css">
+<link rel="stylesheet" type="text/css" href="/css/my.css">
+<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+
+
+
+
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/css/post.css">
+
+
+
+
+    
+        <link rel="stylesheet" type="text/css" href="/css/reward.css">
+    
+
+
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 7.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">小小舒的爪哇天地</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>Index</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>Tags</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>Categories</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>Archives</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>About</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>Contact</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>Friends</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="Search" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <li>
+    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
+      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">小小舒的爪哇天地</div>
+        <div class="logo-desc">
+            
+            Life is coding, I will debug it.
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			Index
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			Tags
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			Categories
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			Archives
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			About
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			Contact
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			Friends
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/14.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">吴恩达机器学习 course3 week3 强化学习</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">
+                                <span class="chip bg-color">人工智能</span>
+                            </a>
+                        
+                            <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">
+                                <span class="chip bg-color">机器学习</span>
+                            </a>
+                        
+                            <a href="/tags/tensorflow/">
+                                <span class="chip bg-color">tensorflow</span>
+                            </a>
+                        
+                            <a href="/tags/machine-learning/">
+                                <span class="chip bg-color">machine learning</span>
+                            </a>
+                        
+                            <a href="/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/">
+                                <span class="chip bg-color">强化学习</span>
+                            </a>
+                        
+                            <a href="/tags/RL/">
+                                <span class="chip bg-color">RL</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                机器学习
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
+                    2025-04-30
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
+                    5.3k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
+                    19 Min
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>Read Count:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="吴恩达机器学习-course3-week3-强化学习"><a href="#吴恩达机器学习-course3-week3-强化学习" class="headerlink" title="吴恩达机器学习 course3 week3 强化学习"></a>吴恩达机器学习 course3 week3 强化学习</h1><h2 id="1-1-什么是强化学习"><a href="#1-1-什么是强化学习" class="headerlink" title="1.1 什么是强化学习"></a>1.1 什么是强化学习</h2><blockquote>
+<p>使用强化学习控制遥控直升飞机做特技动作(斯坦福大学) 来源：<a target="_blank" rel="noopener" href="http://heli.stanford.edu/">http://heli.stanford.edu/</a></p>
+<p><img src="https://img-md-js.linjsblog.top/img/202504081933739.gif" alt="img"></p>
+</blockquote>
+<p> <strong>“强化学习(reinforcement learning)”</strong>已经被应用于直升机控制，可以让其做“倒飞”等各种特技动作(aerobatic maneuvers)，如上图。显然我们不可能使用“有监督学习”来控制直升机，因为整个飞行空间是连续的，<strong>标签数据空间会非常庞大进而制造困难大</strong>。而“强化学习”的关键思想在于，并不告诉算法对于每个输入的正确输出(事实上也做不到)，而是指定一个“<strong>奖励函数(reward function)<strong>”，来告诉算法执行的结果如何，“强化学习”算法的工作就是</strong>自动找出“最大化奖励”</strong>的动作。也就是，在训练时只给出“奖励函数(reward function)”，而不是最佳动作。这可以在设计系统时具有更多的灵活性。比如对于“直升机控制”来说，可以设置奖励为：</p>
+<ol>
+<li>正向反馈(positive reward)：直升机飞行稳定时，+1分。</li>
+<li>负向反馈(negative reward)：直升机坠毁，-1000分。</li>
+</ol>
+<p>“强化学习”的应用场景有：</p>
+<blockquote>
+<ol>
+<li>机器人控制。比如直升机特技飞行、机器狗跨越障碍等。</li>
+<li>工厂优化。如何安排工厂中流程来最大限度的提升 吞吐量/效率。</li>
+<li>金融(股票)交易。比如要想在10天内抛售100万手股票，如何效益最大化的完成股票交易。</li>
+<li>玩游戏。比如挑起、国际象棋、纸牌、电子游戏等等。</li>
+</ol>
+</blockquote>
+<p>  尽管“强化学习”不如“有监督学习”应用广泛，目前尚未在商业界取得广泛应用，但也是机器学习算法的“支柱”之一。下面是目前“强化学习”的一些缺点：</p>
+<blockquote>
+<ol>
+<li>很多研究成果都是针对模拟环境的，而针对“实际机器人”的“强化学习”要困难的多。</li>
+<li>应用场景少。相比于“有/无监督学习”，“强化学习”的应用场景很少，目前大多数局限在机器人控制领域。</li>
+</ol>
+<p>注：“强化学习”既不是“有监督学习”，也不是“无监督学习”。</p>
+</blockquote>
+<h2 id="1-2-示例：火星探测器"><a href="#1-2-示例：火星探测器" class="headerlink" title="1.2 示例：火星探测器"></a>1.2 示例：火星探测器</h2><p>“火星探测器”：找出火星车在每个状态应该执行的最佳动作，直到到达“状态1”或“状态6”。最终目标是最大化奖励</p>
+<ul>
+<li>状态(state)：假设有6个状态。每个状态可以认为是不同的地点，“状态1”或“状态6”为“任务终点(terminal state)”。下图中火星车的起始位置为“状态4”。</li>
+<li>动作(action)：每个状态都可以执行“向左”、“向右”两种状态。</li>
+<li>奖励(reward)：到达“状态1”奖励100、到达“状态6”奖励40、其他状态奖励为0。</li>
+<li>折扣因子：$\gamma=0.5$</li>
+</ul>
+<p><img src="https://img-md-js.linjsblog.top/img/202504162151340.png" alt="img"></p>
+<h2 id="数学符号"><a href="#数学符号" class="headerlink" title="数学符号"></a>数学符号</h2><p>下面是这节会用到的一些数学符号，简单看一眼，用到的时候来查就行。</p>
+<ul>
+<li>$s/ \vec s$ : 机器人的当前状态。</li>
+<li>$a/ \vec a$: 机器人在当前状态执行的动作。</li>
+<li>$R(s)$: 机器人在当前状态得到的奖励。</li>
+<li>$s’$: 机器人执行动作 a 后进入的的下一状态。</li>
+<li>$a’$: 机器人在下一状态执行的动作。</li>
+<li>$\gamma$: 0~1之间，奖励的折扣因子(discount factor)。很多算法会定义为0.9左右。</li>
+<li>$\pi(s)=a$: 强化学习的策略，表示在“状态s”下应该执行的“最佳动作a”。</li>
+<li>$p$: 0~1之间，表示机器人执行动作后，没有到达预期状态，反而由于某些随机因素到达相反状态的概率。</li>
+<li>强化学习四大核心要素：当前状态、动作、奖励、下一状态。</li>
+</ul>
+<h2 id="1-3-强化学习的回报"><a href="#1-3-强化学习的回报" class="headerlink" title="1.3 强化学习的回报"></a>1.3 强化学习的回报</h2><p>强化学习的“<strong>回报</strong>(return)”是每一步所获得的 <strong>“奖励(reward)”的加权和</strong>，权重就是步数幂次的“<strong>折扣因子</strong> γ ”，“奖励”显然取决于每一次的“动作(action)”。比如下面从“状态1”不断执行动作，最终到达任务终点“状态n”，回报为：<br>$$<br>Return = R_1 + \gamma R_2 + \gamma^2 R_3 +…+ \gamma^n R_n(terminal \ state)<br>$$<br>折扣因子 $\gamma $ 越大，表示有“耐心”走向更远的“大奖励”。下图给出了折扣因子对最佳策略(黄色箭头)的影响，可以发现 $\gamma $  较大时，状态5的最佳策略会是更远处的“大奖励”。</p>
+<p><img src="https://img-md-js.linjsblog.top/img/202504162316659.png" alt="img"></p>
+<p><img src="https://img-md-js.linjsblog.top/img/202504162315003.png" alt="img"></p>
+<p><img src="https://img-md-js.linjsblog.top/img/202504162316997.png" alt="img"></p>
+<p>若系统中出现“负奖励”，折扣因子实际上会激励系统将负奖励尽可能推迟到未来，算法会尽可能的推迟该“负奖励”。</p>
+<h2 id="1-4-决策：强化学习中的策略"><a href="#1-4-决策：强化学习中的策略" class="headerlink" title="1.4 决策：强化学习中的策略"></a>1.4 决策：强化学习中的策略</h2><p><strong>策略</strong> $\pi$ (policy/controler)”是一个“状态”到“动作”的映射函数，表示在“状态$s$”下，为了“<strong>最大化回报</strong>”所应该执行的“<strong>最佳动作</strong>$a$”：<br>$$<br>\pi(s) =a<br>$$<br>上述决策过程被称为“马尔可夫决策过程(Markov Decision Process, MDP)”。<strong>“马尔可夫决策过程”是指未来只取决于当前状态，而不取决于任何之前的状态</strong>。</p>
+<h2 id="1-5-审查关键概念"><a href="#1-5-审查关键概念" class="headerlink" title="1.5 审查关键概念"></a>1.5 审查关键概念</h2><p>通过火星探测器的例子，我们了解了强化学习问题的状态、行动、奖励和折扣系数等关键概念，并解释了如何计算回报。同时，我们还探讨了如何将这些概念应用于其他领域，如驾驶自主直升机和下棋等。</p>
+<blockquote>
+<p>【问题1】“火星探测器”：找出火星车在每个状态应该执行的最佳动作，直到到达“状态1”或“状态6”。最终目标是最大化奖励</p>
+<ul>
+<li>状态(state)：假设有6个状态。每个状态可以认为是不同的地点，“状态1”或“状态6”为“任务终点(terminal state)”。下图中火星车的起始位置为“状态4”。</li>
+<li>动作(action)：每个状态都可以执行“向左”、“向右”两种状态。</li>
+<li>奖励(reward)：到达“状态1”奖励100、到达“状态6”奖励40、其他状态奖励为0。</li>
+<li>折扣因子：$\gamma=0.5$</li>
+</ul>
+<p>【问题2】“直升机控制”：根据当前状态自动选择动作，以保证直升机的平稳运行。</p>
+<ul>
+<li>状态：直升机的空间位置。</li>
+<li>动作：如何移动直升机遥控上的控制杆。</li>
+<li>奖励：飞行平稳+1，坠毁-1000。</li>
+<li>折扣因子：$\gamma=0.99$</li>
+</ul>
+<p>【问题3】“国际象棋”【简化描述】：根据棋盘上所有棋子的位置，自动选择最佳的下一步棋。</p>
+<ul>
+<li>状态：棋盘上所有棋子的位置。</li>
+<li>动作：可能的移动方式。</li>
+<li>奖励：赢了+1，胜负未分0，输了-1。</li>
+<li>折扣因子：$\gamma=0.995$</li>
+</ul>
+<p>【问题4】“登月器”：控制登月器成功实现软着陆。</p>
+<ul>
+<li>3.1 节会介绍</li>
+</ul>
+</blockquote>
+<h2 id="2-1-状态-动作价值函数"><a href="#2-1-状态-动作价值函数" class="headerlink" title="2.1 状态-动作价值函数"></a>2.1 状态-动作价值函数</h2><p>  整个强化学习最关键的一点就是计算“状态-动作价值函数(state-action value function)”，也称为Q函数、$Q^*$、最优Q函数(optimal Q function)。“状态-动作价值函数”就是在 “当前状态s” 下，<strong>执行 “某动作a” 后</strong>所能获得的“<strong>最大回报</strong>”。也就是说，“某动作a”不一定是当前状态的最佳动作，但执行 a之后会一直执行最佳动作($\gamma=0.5$)：<br>$$<br>Q(s,a)=max(Return) \ at \ s \ after \ a<br>$$<br><img src="https://img-md-js.linjsblog.top/img/202504231011527.png" alt="img"></p>
+<p>显然，在计算出所有状态下所有动作的Q取值后，在每个状态只需选取Q取值较大的“动作”，就是“最佳动作$\pi(s)=a$“，比如上述在“状态4”，因为$Q(4,\leftarrow) &gt; Q(4,\rightarrow)$, 所以在“状态4”应该执行最佳动作 “向左←”,<br>$$<br>\textbf{Example 1:} \quad<br> Q(2, \rightarrow) = R(2) + 0.5 \max_{a’} Q(3, a’) = 0 + 0.5 \cdot 25 = 12.5<br>$$</p>
+<p>$$<br>\textbf{Example 2:} \quad  Q(4, \leftarrow) = R(4) + 0.5 \max_{a’} Q(3, a’) = 0 + 0.5 \cdot 25 = 12.5<br>$$</p>
+<h2 id="2-2-贝尔曼方程"><a href="#2-2-贝尔曼方程" class="headerlink" title="2-2 贝尔曼方程"></a>2-2 贝尔曼方程</h2><p>将前几个小节的内容总结一下，就可以给出 Q(s,a) 的计算公式——“<strong>贝尔曼方程</strong>(Bellman Equation)”，也就是在 状态 s  执行 动作 a 的最大回报=“即时奖励(immediate reward)”+下一状态的最大回报：</p>
+<blockquote>
+<ul>
+<li>$s$ : 当前状态。</li>
+<li>$a$: 在当前状态执行的动作。</li>
+<li>$R(s)$: 在当前状态得到的奖励。</li>
+<li>$s’$: 执行动作 a 后进入的的下一状态。</li>
+<li>$a’$: 在下一状态执行的动作。</li>
+<li>$\gamma$: 折扣因子(discount factor)。</li>
+</ul>
+</blockquote>
+<p>$$<br>Bellman \ Equation: \ Q(s,a) = R(s)+ \gamma \max_{a’}Q(s’,a’)<br>$$</p>
+<h2 id="2-3-随机环境-可选"><a href="#2-3-随机环境-可选" class="headerlink" title="2-3 随机环境(可选)"></a>2-3 随机环境(可选)</h2><p>本节介绍“<strong>随机马尔可夫决策过程(Stochastic Markov Decision Processes)<strong>”。和前面内容的区别是，实际中机器并不总是可靠，比如命令“火星车”从“状态3”执行“动作向左”，大多数情况都会如预期到达“状态2”，但是也可能因为岩石滑坡、沙暴、车轮打滑等小概率随机事件，导致其到达“状态4”。这种情况下，我们就需要定义“出错概率p ”，来描述到达相反状态的概率。此时，由于整个过程是随机的，我们就不能单纯地追求“最大化回报”，而是要追求“</strong>最大化回报的期望</strong>”。于是“随机环境”下的“贝尔曼方程”更改为：<br>$$<br>(Stochastic) \ Bellman \ Equation : Q(s,a)=R(s)+\gamma E[\max_{a’}Q(s’,a’)]<br>$$<br>老师在视频中给出的求解期望的方法时暴力穷举，不断模拟出所有的可能，最后用平均值表示期望。但显然还有更聪明的方法没介绍。下面是在“jupyter notebook”中的仿真，说明了“出错概率”对最佳决策的影响：</p>
+<p><img src="https://img-md-js.linjsblog.top/img/202504232212606.png" alt="img"></p>
+<p>较小的“出错概率”不会改变最佳策略。</p>
+<p><img src="https://img-md-js.linjsblog.top/img/202504232213782.png" alt="img"></p>
+<p>较大的“出错概率”会使得最佳策略完全相反，相当于反向操作火星车。</p>
+<p><img src="https://img-md-js.linjsblog.top/img/202504232213858.png" alt="img"></p>
+<p>随机越接近0.5，火星车的移动越趋于随机(不受控制)。p = 0.5 时不存在最佳策略，因为指定火星车向哪走都一样，可以看到每个状态的Q函数完全相同。</p>
+<h2 id="3-1-连续状态空间"><a href="#3-1-连续状态空间" class="headerlink" title="3-1 连续状态空间"></a>3-1 连续状态空间</h2><p>很多机器人控制的实际应用都有连续的状态空间。在之前的火星车问题中，我们将问题简化成6个状态，每个状态表示一个地点。但实际上我们想做的是控制火星车在地面上的移动，所以我们应该俯瞰火星车，将地面看成二维坐标，<strong>火星车的状态</strong>应该包括：位置$[x,y] $(二维坐标)、角度$\theta$、运动速度$[\dot{x},\dot{y}]$(两个方向的速度)、偏转速度$\dot{\theta}$共6个变量：<br>$$<br>\vec{s} = [x, y, \theta, \dot{x}, \dot{y}, \dot{\theta}]^T<br>$$<br>另外，火星车的移动可以看成是二维平面的运动，而直升机的运动则是在三维空间的运动。于是直升机的状态应该包括：位置$[x,y,z]$ 、姿态信息$[\phi,\theta,\omega]$, 位置变化速度$[\dot{x},\dot{y},\dot{z}]$、姿态变化的角速度$[\dot{\phi},\dot{\theta},\dot{\omega}]$共12个变量：<br>$$<br>\vec{s} = [x, y, z, \phi, \theta, \omega, \dot{x}, \dot{y}, \dot{z}, \dot{\phi}, \dot{\theta}, \dot{\omega}]^T<br>$$</p>
+<blockquote>
+<p>注：“姿态信息”的三维向量分别表示滚动(roll)、俯仰(pitch)、偏航(yaw)的角度，可以唯一确定刚体的姿态。</p>
+</blockquote>
+<h2 id="3-2-登月器"><a href="#3-2-登月器" class="headerlink" title="3.2 登月器"></a>3.2 登月器</h2><p>于是我们对“火星车探测”问题进行改进，来使用“登月器”这个<strong>二维连续空间</strong>问题进行举例。下面是问题介绍：</p>
+<p>【问题1】“登月器”：控制登月器的运动，使其成功“立着”降落在两个黄旗之间(如下图)。</p>
+<p><img src="https://img-md-js.linjsblog.top/img/202504241550034.gif" alt="img"></p>
+<p>状态：是二维平面的小游戏，登月器的状态包括8种变量：$\vec s=[x,y,\dot{x},\dot{y},\theta,\dot{\theta},l,r]^T$</p>
+<ol>
+<li>$[x,y]$:连续取值，表示登月器的二维坐标。</li>
+<li>$\dot{x},\dot{y}$:连续取值，表示登月器在两个方向的速度。</li>
+<li>$\theta$ :连续取值，表示登月器的偏转角度。</li>
+<li>$\dot{\theta}$ : 连续取值，表示登月器的偏转速度。</li>
+<li>$[l,r]$: 二进制取值，分别表示左、右支撑脚是否着地。帮助确认登月器是否为“倒栽葱”或者“躺着”着陆的。</li>
+</ol>
+<p>动作：包括四个动作，什么都不做/向左点火/向右点火/向下点火。</p>
+<ol>
+<li>什么都不做(nothing)，登月器由于重力自然下坠。</li>
+<li>向左点火(fire left)，点燃左推进器，登月器向右移动。</li>
+<li>向右点火(fire right)，点燃右推进器，登月器向左移动。</li>
+<li>向下点火(fire main)，点燃主推进器，减缓登月器的下降速度。</li>
+</ol>
+<p>奖励：考虑到整个着陆过程，定义以下7种奖励。前4个都是降落后判定，后3个是降落过程中持续判定</p>
+<ol>
+<li>【+100~+140】别管是“立着”/“倒栽葱”/“躺着”，只要到达两黄旗之间就给奖励。离中心越近奖励越多。</li>
+<li>【-100】不管降落在哪里，只要不是“立着”降落，就判定为“坠毁”给惩罚。</li>
+<li>【+100】不管降落在哪里，只要成功实现“立着”降落(软着陆)就给奖励。</li>
+<li>【+10】不管降落在哪里，只要有一个支撑腿着地，就+10；两个就+20。</li>
+<li>【额外奖励】降落过程中，水平方向离两黄旗中心越近就给一点小奖励。</li>
+<li>【-0.3】为了节省燃料，每点燃一次主推进器(向下点火)，就给一点惩罚。</li>
+<li>【-0.03】为了节省燃料，每点燃一次左/右推进器，就给一点惩罚。</li>
+</ol>
+<p>折扣因子：对于登月器来说，通常会令折扣因子较大, 如$\gamma$ = 0.985</p>
+<p>上述奖励函数算是一个“中等复杂”的定义，花时间仔细定义“奖励”是合理的。因为即使看上去有点复杂，也比手动确定每个状态的最佳动作要简单许多。</p>
+<h2 id="3-2-DQN算法：拟合Q函数"><a href="#3-2-DQN算法：拟合Q函数" class="headerlink" title="3-2 DQN算法：拟合Q函数"></a>3-2 DQN算法：拟合Q函数</h2><p>Q函数对于最佳动作的选择至关重要。对于离散状态空间来说，可以手动计算甚至穷举；但对于连续状态空间来说，Q 函数取值连续且几乎没有显式表达式，于是需要<strong>训练神经网络来拟合Q函数</strong>. </p>
+<p><img src="https://img-md-js.linjsblog.top/img/202504252120644.png" alt="使用神经网络拟合Q函数"></p>
+<blockquote>
+<ul>
+<li><p>输入层：12维向量，包括状态向量$\vec s$(长度为9) + 动作向量$\vec a$ (4个动作的独热码)</p>
+</li>
+<li><p>中间层：不妨定义两个中间层，每个中间层都有64个神经元</p>
+</li>
+<li><p>输出层：Q函数的输出，也就是在 状态$\vec s$ 下采取 动作$\vec a$ 所能得到的最大回报</p>
+<p><strong>注意：神经网络最开始的输出“y”并没有什么意义，只是随机初始化的参数。</strong></p>
+</li>
+</ul>
+</blockquote>
+<p>那如何得到最开始的训练集呢？答案是利用神经网络的初始化参数。比如在某个时刻 i  可以得到下面所示的“四要素”</p>
+<p>$(\vec{s}^{(i)},\vec{a}^{(i)},R(\vec s^{(i)}),\vec{s’}^{(i)})$, 根据“四要素”可以直接得到是神经网络的输入$\vec{x}^{(i)} = (\vec{s}^{(i)},\vec{a}^{(i)})$;而由于神经网络有随机初始化参数，所以可以计算出在下一状态$\vec{s’}^{(i)}$下所有的动作的Q 值，选出最大的Q便可以计算出神经网络的输出$y^{(i)}=R(\vec{s}^{(i)})+\gamma \max_{\vec a’}Q(\vec s’^{(i)},\vec a’ )$。</p>
+<p>于是就计算出来单个训练样本 $(\vec x^{(i)},\vec y^{(i)})$。不断重复这个过程(比如10000次)，便可得到大量的训练集：</p>
+<p><img src="https://img-md-js.linjsblog.top/img/202504252142109.png" alt="image-20250425214258984"></p>
+<p>和前面“有监督学习”的神经网络不同的地方在于，“强化学习”的神经网络迭代<strong>更新一次需要使用两次神经网络</strong>。<u>一次用于计算训练样本，一次用于更新参数</u>。这个训练过程虽然看起来优点玄学，但能逐渐迭代出理想参数，但显然比“有监督学习”更慢。</p>
+<hr>
+<p>DQN具体算法如下：</p>
+<ol>
+<li><p>初始化神经网络参数，作为Q函数的拟合</p>
+</li>
+<li><p>不断重复</p>
+<ol>
+<li><p>计算“四要素”。采取动作，计算 $(\vec{s}, \vec{a}, R(\vec{s}), \vec{s}’)$， 仅存储最近10000个元组。（Replay Buffer(重放缓存区)）</p>
+</li>
+<li><p>训练神经网络，迭代设定次数</p>
+<ol>
+<li><p>计算训练集。利用神经网络计算所有训练样本 $\vec{x} = (\vec{s}, \vec{a})$, $y = R(\vec{s}) + \gamma \max_{\vec{a}’} Q(\vec{s}’, \vec{a}’)$</p>
+</li>
+<li><p>训练神经网络参数。使新的神经网络 $Q_{new} \approx y$</p>
+</li>
+</ol>
+</li>
+<li><p>更新神经网络参数，$Q = Q_{new}$</p>
+</li>
+</ol>
+</li>
+</ol>
+<hr>
+<p>交给神经网络训练的参数y中一部分是随机初始化神经网络生成的，但还有一部分是包含了当前状态的信息的，所以当训练次数增多后，外部的输入信息会逐步冲刷掉初始化的随机信息，给出真正的Q函数估计</p>
+<p>虽然一开始Q是随机的，但你的R(s)是自己设置的奖励，随着迭代Q会逐渐准确</p>
+<h2 id="3-3-算法改进：改进的神经网络架构"><a href="#3-3-算法改进：改进的神经网络架构" class="headerlink" title="3-3 算法改进：改进的神经网络架构"></a>3-3 算法改进：改进的神经网络架构</h2><p>我们使用神经网络来拟合$Q(\vec s,\vec a)$. 但在上一节中，对于每个状态$\vec s$, 我们都需要推理4次来逐个计算所有动作对应的Q值，并挑出最大值。这显然很麻烦，我们可以省略这一重复性的工作，<strong>直接令神经网络输出当前状态</strong>$\vec s$<strong>下所有动作对应的$Q$值</strong> ，此时我们推理1次便可以得到当前状态$\vec s$ 所有的Q值：</p>
+<p><img src="https://img-md-js.linjsblog.top/img/202504252345464.png" alt="改进神经网络的输入和输出"></p>
+<p>按照上面这种结构改进，会使得神经网络更加高效。</p>
+<h2 id="3-4-算法改进-epsilon-贪婪策略"><a href="#3-4-算法改进-epsilon-贪婪策略" class="headerlink" title="3-4 算法改进 $\epsilon$-贪婪策略"></a>3-4 算法改进 $\epsilon$-贪婪策略</h2><p> 在强化学习中，即使算法还在学习阶段，也需要采取行动。最常见的方法是使用epsilon贪婪策略。该策略在处于某个状态时，选择最大化Q的动作，但有时会<strong>随机选择一个动作以探索</strong>。这种策略被称为epsilon贪婪政策。</p>
+<p> $\varepsilon$-贪婪策略(ε- greedy policy)可以<strong>避免神经网络永远也不会尝试某个动作</strong>。因为神经网络初始化的参数不准确，若在拟合$Q(\vec s,\vec a)$ 时总是直接选取Q值最大的动作，可能会导致某些动作永远也尝试不到(万一是好动作呢)。所以对动作的选取做出改进：</p>
+<ul>
+<li>【原始方法❌】在每一个状态选取下一个动作时，总是选取当前神经网络输出最大Q值的动作。但由于神经网络一开始的初始化参数不好，可能会导致其永远不会尝试好动作。</li>
+<li>【<em>ε</em>-贪婪策略✅】每次进行选取动作时(假设ε = 0.05)，以1−<em>ε</em> 的概率选取最大化Q值的动作 (greedy/exploitation)、以 ε 的概率随机选择动作(exploration)。在神经网络初始训练时，可以令<em>ε</em> 较大，随着训练的进行逐步减小，比如从 1.0逐步减小到 0.01 。</li>
+</ul>
+<p>上述也就是说，<em>ε</em>-贪婪策略是“贪婪(exploitation)”和“探索(exploration)”之间的折衷，通过偶尔不选取最佳策略为代价，来学习更多的信息。</p>
+<h2 id="3-5-算法改进：小批量和软更新（可选）"><a href="#3-5-算法改进：小批量和软更新（可选）" class="headerlink" title="3-5 算法改进：小批量和软更新（可选）"></a>3-5 算法改进：小批量和软更新（可选）</h2><p>  “<strong>小批量(mini-batches)<strong>”是一种用于</strong>加速神经网络训练</strong>的方法，应用该思想也可以加速“线性回归”、“逻辑回归”。假设训练集中有一亿个训练样本，此时计算代价函数时，若直接计算所有样本的均方误差会使得计算量非常庞大。所以对单次迭代过程进行改进：</p>
+<ul>
+<li>【原始方法❌】计算所有训练样本的均方误差，然后更新一小步。梯度下降方向相对准确，但计算成本非常大。</li>
+<li>【小批量✅】将一亿个训练样本拆分成1000个为一批(bitch)，然后对每一批，都计算一次均方误差并更新参数。梯度下降的过程相对“混乱”，但也会逐渐趋向代价极小点，并且计算成本大大降低。</li>
+</ul>
+<p>“<strong>软更新(soft updates)<strong>”可以避免神经网络性能突然变差，进而帮助算法</strong>更好的收敛</strong>。所以对神经网络参数的更新做出改进：</p>
+<ul>
+<li>【原始方法❌】直接更新。假设新的神经网络碰巧性能更差，那么直接更新会导致神经网络性能突然变差。</li>
+<li>【软更新✅】比如设置 $Q = 0.1Q_{new}+0.9Q$ ，可以避免“强化学习”的参数振荡或具有其他不良特性。</li>
+</ul>
+<hr>
+<p>相比于“有监督学习”，“强化学习”对于参数的选取更加苛刻，这也是为什么“强化学习”还不成熟的原因。比如“有监督学习”中，即使“学习率α ”的选取较小，可能可只是多花三倍时间进行训练；而在“强化学习”中，若“ε ”等参数选取不合适，那可能会多花上10倍甚至100倍时间进行训练。</p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        Author:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">qwq小小舒</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        Link:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://js6288.github.io/2025/04/30/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%90%B4%E6%81%A9%E8%BE%BEcourse3week3/">https://js6288.github.io/2025/04/30/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%90%B4%E6%81%A9%E8%BE%BEcourse3week3/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        Reprint policy:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    All articles in this blog are used except for special statements
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    reprint policy. If reproduced, please indicate source
+                    <a href="/about" target="_blank">qwq小小舒</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>Copied successfully, please follow the reprint policy of this article</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">more</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">
+                                    <span class="chip bg-color">人工智能</span>
+                                </a>
+                            
+                                <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">
+                                    <span class="chip bg-color">机器学习</span>
+                                </a>
+                            
+                                <a href="/tags/tensorflow/">
+                                    <span class="chip bg-color">tensorflow</span>
+                                </a>
+                            
+                                <a href="/tags/machine-learning/">
+                                    <span class="chip bg-color">machine learning</span>
+                                </a>
+                            
+                                <a href="/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/">
+                                    <span class="chip bg-color">强化学习</span>
+                                </a>
+                            
+                                <a href="/tags/RL/">
+                                    <span class="chip bg-color">RL</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay1.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;Current
+            </div>
+            <div class="card">
+                <a href="/2025/04/30/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%90%B4%E6%81%A9%E8%BE%BEcourse3week3/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="吴恩达机器学习 course3 week3 强化学习">
+                        
+                        <span class="card-title">吴恩达机器学习 course3 week3 强化学习</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-04-30
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                    机器学习
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">
+                        <span class="chip bg-color">人工智能</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">
+                        <span class="chip bg-color">机器学习</span>
+                    </a>
+                    
+                    <a href="/tags/tensorflow/">
+                        <span class="chip bg-color">tensorflow</span>
+                    </a>
+                    
+                    <a href="/tags/machine-learning/">
+                        <span class="chip bg-color">machine learning</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/">
+                        <span class="chip bg-color">强化学习</span>
+                    </a>
+                    
+                    <a href="/tags/RL/">
+                        <span class="chip bg-color">RL</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                Next&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2025/04/07/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%90%B4%E6%81%A9%E8%BE%BEcourse3week2/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="吴恩达机器学习 course3 week2 推荐系统和PCA算法">
+                        
+                        <span class="card-title">吴恩达机器学习 course3 week2 推荐系统和PCA算法</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-04-07
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                    机器学习
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">
+                        <span class="chip bg-color">人工智能</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">
+                        <span class="chip bg-color">机器学习</span>
+                    </a>
+                    
+                    <a href="/tags/tensorflow/">
+                        <span class="chip bg-color">tensorflow</span>
+                    </a>
+                    
+                    <a href="/tags/machine-learning/">
+                        <span class="chip bg-color">machine learning</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/">
+                        <span class="chip bg-color">无监督学习</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/">
+                        <span class="chip bg-color">推荐系统</span>
+                    </a>
+                    
+                    <a href="/tags/PCA/">
+                        <span class="chip bg-color">PCA</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;TOC</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$','$$'], ['\\[','\\]']],
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+        },
+        TeX: {
+            extensions: ["AMSmath.js", "AMSsymbols.js"] // 手动加载 AMS 扩展
+        }
+    });
+</script>
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2022-2025</span>
+            
+            <a href="/about" target="_blank">qwq小小舒</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            
+            <br>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;Total visits:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;Total visitors:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/js6288" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:linjingshu6288@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1279897306" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1279897306" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;Search</span>
+            <input type="search" id="searchInput" name="s" placeholder="Please enter a search keyword"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 白天和黑夜主题 -->
+<div class="stars-con">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>  
+</div>
+
+<script>
+    function switchNightMode() {
+        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
+        setTimeout(function () {
+            $('body').hasClass('DarkMode') 
+            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
+            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
+            
+            setTimeout(function () {
+            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
+                $(this).remove()
+            })
+            }, 2e3)
+        })
+    }
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+    
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
